@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+
+# Bronbestanden (561 MB aan interne Infrabel PDF protocollen & interne Word bestanden)
+Bronbestanden/
+
+# Tijdelijke scripts
+*.tmp
+.DS_Store
+Thumbs.db
