@@ -627,8 +627,8 @@
       "toegang_weg": "Stationsplein",
       "beveiliging": "Lokale capaciteit Infrabel",
       "ppgi_ref": "PPGI_1_FR_B blz. 23, 40",
-      "lat": 51.0775,
-      "lng": 2.6025
+      "lat": 51.076823,
+      "lng": 2.59434
     },
     {
       "id": "lci_kortrijk",
@@ -663,8 +663,8 @@
       "toegang_weg": "Luiksestraat",
       "beveiliging": "Geslotteerde stuitklamp met sleutel 441, slotkast Slot LCI",
       "ppgi_ref": "PPGI_1_FR_D blz. 18, 20, 24",
-      "lat": 50.825,
-      "lng": 3.268
+      "lat": 50.811864,
+      "lng": 3.23321
     },
     {
       "id": "kortrijk_vorming",
@@ -681,8 +681,8 @@
       "toegang_weg": "Zandstraat / Luiksestraat",
       "beveiliging": "Beseinde bundels, bundelplaatjes, EBP Blok 7",
       "ppgi_ref": "PPGI_1_FR_D blz. 16-17, 38-39",
-      "lat": 50.823,
-      "lng": 3.264
+      "lat": 50.817297,
+      "lng": 3.246031
     },
     {
       "id": "lauwe",
@@ -699,8 +699,8 @@
       "toegang_weg": "Spoorwegstraat",
       "beveiliging": "Lokaal protocol Infrabel",
       "ppgi_ref": "PPGI_1_FR_D blz. 25-27",
-      "lat": 50.796,
-      "lng": 3.189
+      "lat": 50.775727,
+      "lng": 3.200669
     },
     {
       "id": "poperinge",
@@ -717,8 +717,8 @@
       "toegang_weg": "Europalaan",
       "beveiliging": "Stootblokken, enkelsporige lijn exploitatie",
       "ppgi_ref": "PPGI_1_FR_D blz. 30, 38",
-      "lat": 50.854,
-      "lng": 2.738
+      "lat": 50.854157,
+      "lng": 2.739952
     }
   ],
   "bundels": [
@@ -772,8 +772,8 @@
     },
     {
       "name": "Kortrijk Vorming",
-      "lat": 50.823,
-      "lng": 3.264,
+      "lat": 50.817134,
+      "lng": 3.246589,
       "info": "Bundels A, B, C, D (L75)"
     }
   ]
