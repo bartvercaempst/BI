@@ -51,8 +51,8 @@
       "toegang_weg": "Isabellalaan / Barlenhuisstraat",
       "beveiliging": "Ontspoortong 10R, stuitklamp tussen poort en OW17, sleutel 321FR",
       "ppgi_ref": "PP-321 blz. 9, 22, 27",
-      "lat": 51.326,
-      "lng": 3.2385
+      "lat": 51.336296,
+      "lng": 3.225474
     },
     {
       "id": "ico_toy",
@@ -69,8 +69,8 @@
       "toegang_weg": "Lanceloot Blondeellaan",
       "beveiliging": "Stuitklamp met koppelslot, OW op terminal",
       "ppgi_ref": "PP-321 blz. 9, 21",
-      "lat": 51.3285,
-      "lng": 3.2205
+      "lat": 51.301401,
+      "lng": 3.244658
     },
     {
       "id": "ico1",
@@ -87,8 +87,8 @@
       "toegang_weg": "Margareta van Oostenrijkstraat nabij OW21",
       "beveiliging": "Stuitklamp tussen OW21 en wissel 532, Siemenssleutels 442/443, Wilka G*",
       "ppgi_ref": "PP-321 blz. 9, 20, 27",
-      "lat": 51.309,
-      "lng": 3.2185
+      "lat": 51.306687,
+      "lng": 3.217235
     },
     {
       "id": "ico2",
@@ -105,8 +105,8 @@
       "toegang_weg": "Margareta van Oostenrijkstraat",
       "beveiliging": "Stuitklamp linker tak wissel 502, OW Margareta van Oostenrijkstraat",
       "ppgi_ref": "PP-321 blz. 9, 20, 27",
-      "lat": 51.306,
-      "lng": 3.215
+      "lat": 51.296014,
+      "lng": 3.22717
     },
     {
       "id": "efico",
@@ -123,8 +123,8 @@
       "toegang_weg": "Margareta van Oostenrijkstraat",
       "beveiliging": "Omheining, poort, stuitklamp linker tak wissel 551",
       "ppgi_ref": "PP-321 blz. 9, 22, 36-38",
-      "lat": 51.3075,
-      "lng": 3.221
+      "lat": 51.295931,
+      "lng": 3.225249
     },
     {
       "id": "ndq",
@@ -141,8 +141,8 @@
       "toegang_weg": "Margareta van Oostenrijkstraat",
       "beveiliging": "Stuitklamp 63R linker tak wissel 552, Siemensslot 244/115, Wilka G*",
       "ppgi_ref": "PP-321 blz. 9, 22, 39-41",
-      "lat": 51.3045,
-      "lng": 3.223
+      "lat": 51.300855,
+      "lng": 3.221456
     },
     {
       "id": "spoorfuel",
@@ -195,8 +195,8 @@
       "toegang_weg": "Baron de Maerelaan / Kustlaan",
       "beveiliging": "Kleine beweging onder toezicht Blok 4",
       "ppgi_ref": "PP-311 blz. 9, 23, 49",
-      "lat": 51.324,
-      "lng": 3.201
+      "lat": 51.31277,
+      "lng": 3.189243
     },
     {
       "id": "nid_ico",
@@ -213,8 +213,8 @@
       "toegang_weg": "Koffieweg / Lanceloot Blondeellaan",
       "beveiliging": "Ontspoortong, beweegbare brug, OW70",
       "ppgi_ref": "PP-311 blz. 9, 10",
-      "lat": 51.339,
-      "lng": 3.215
+      "lat": 51.327903,
+      "lng": 3.208609
     },
     {
       "id": "po_ferries",
@@ -730,8 +730,8 @@
     },
     {
       "name": "Bundel Pelikaan",
-      "lat": 51.308,
-      "lng": 3.216,
+      "lat": 51.292613,
+      "lng": 3.228543,
       "info": "Sporen 861-875 (Zuidelijk Insteekdok)"
     },
     {
@@ -748,8 +748,8 @@
     },
     {
       "name": "Zeebrugge Vorming (Bundel A)",
-      "lat": 51.323,
-      "lng": 3.203,
+      "lat": 51.318798,
+      "lng": 3.188095,
       "info": "Sporen 521-524"
     },
     {
