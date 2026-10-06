@@ -429,8 +429,8 @@
       "toegang_weg": "Industriezone Plassendale 1",
       "beveiliging": "Telefoontoelating Blok 7, kleine beweging",
       "ppgi_ref": "PP-341 blz. 9, 31",
-      "lat": 51.2135,
-      "lng": 3.003
+      "lat": 51.215701,
+      "lng": 2.97384
     },
     {
       "id": "tilbury",
@@ -447,8 +447,8 @@
       "toegang_weg": "Benedenstuwbrug",
       "beveiliging": "Omheining, poort, bediening brug door De Vlaamse Waterweg, max 1 loc",
       "ppgi_ref": "PP-341 blz. 8, 28, 31-32",
-      "lat": 51.229,
-      "lng": 2.929
+      "lat": 51.221884,
+      "lng": 2.94307
     },
     {
       "id": "plassendale",
@@ -465,8 +465,8 @@
       "toegang_weg": "Draaibrug over kanaal Brugge-Oostende",
       "beveiliging": "Omheining, poort, spoorwegdraaibrug bediend door personeel",
       "ppgi_ref": "PP-341 blz. 8, 26, 31",
-      "lat": 51.211,
-      "lng": 2.998
+      "lat": 51.221413,
+      "lng": 2.980814
     },
     {
       "id": "oostende_vorming",
@@ -483,8 +483,8 @@
       "toegang_weg": "Vuurtorenweg / Stapelhuisstraat",
       "beveiliging": "Overgedragen aan I-O.3, Siemenssleutelprocedure",
       "ppgi_ref": "PP-341 blz. 9, 26, 33",
-      "lat": 51.222,
-      "lng": 2.946
+      "lat": 51.213544,
+      "lng": 2.963986
     },
     {
       "id": "whv_oostende",
@@ -501,8 +501,8 @@
       "toegang_weg": "Zandvoordestraat",
       "beveiliging": "Centrale aanvraag Blok 7, industriële seinpost",
       "ppgi_ref": "PP-341 blz. 9, 32-33, 66-72",
-      "lat": 51.218,
-      "lng": 2.955
+      "lat": 51.21675,
+      "lng": 2.951717
     },
     {
       "id": "alstom",
@@ -760,8 +760,8 @@
     },
     {
       "name": "Oostende Vorming",
-      "lat": 51.222,
-      "lng": 2.946,
+      "lat": 51.213363,
+      "lng": 2.965965,
       "info": "Achterhaven Oostende"
     },
     {
