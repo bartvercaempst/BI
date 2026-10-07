@@ -3267,8 +3267,14 @@ def build_map_html(locations, bundels):
       if (btn) btn.style.display = 'inline-flex';
     }});
 
+    window.addEventListener('appinstalled', (evt) => {{
+      showToast('✓ BI Generator is succesvol geïnstalleerd als app!');
+      deferredPrompt = null;
+    }});
+
     function installApp() {{
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
       const modal = document.getElementById('installGuideModal');
       const body = document.getElementById('installModalBody');
       const nativeBtn = document.getElementById('btnTriggerNativeInstall');
@@ -3284,28 +3290,92 @@ def build_map_html(locations, bundels):
         return;
       }}
 
-      if (isIOS) {{
-        body.innerHTML = `
-          <p style="margin-bottom:12px;">Installeer <strong>BI Generator</strong> direct op je iPhone of iPad als volwaardige webapp zonder Safari-adresbalk:</p>
-          <div style="background:#1e293b; padding:12px 14px; border-radius:8px; border:1px solid #334155; font-size:13px; line-height:1.6;">
-            <p>1. Tik onderaan in Safari op het <strong>Deel-icoon</strong> (het vierkantje met pijltje omhoog <span style="font-size:16px;">⎋</span>).</p>
-            <p style="margin-top:8px;">2. Scroll omlaag en tik op <strong>"Zet op beginscherm"</strong> (met het plus-icoon <span style="font-size:16px;">➕</span>).</p>
-            <p style="margin-top:8px;">3. Tik rechtsboven op <strong>"Voeg toe"</strong>.</p>
+      let content = '';
+
+      if (isStandalone) {{
+        content += `
+          <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; padding: 12px 14px; border-radius: 8px; margin-bottom: 14px; color: #a7f3d0; font-size: 13px;">
+            <strong>✓ Je gebruikt de app momenteel al!</strong><br>
+            BI Generator draait reeds als geïnstalleerde webapp in een zelfstandig venster.
           </div>
-          <p style="margin-top:12px; font-size:12px; color:#94a3b8;">De app verschijnt nu direct op je startscherm met het officiële BI icoon!</p>
         `;
-        if (nativeBtn) nativeBtn.style.display = 'none';
       }} else {{
-        body.innerHTML = `
-          <p style="margin-bottom:12px;">Installeer <strong>BI Generator</strong> op je smartphone, tablet of pc voor een volledig scherm en snelle toegang:</p>
-          <div style="background:#1e293b; padding:12px 14px; border-radius:8px; border:1px solid #334155; font-size:13px; line-height:1.6;">
-            <p>• <strong>Android (Chrome):</strong> Tik rechtsboven op de drie puntjes ⋮ en kies <em>"App installeren"</em> of <em>"Toevoegen aan startscherm"</em>.</p>
-            <p style="margin-top:8px;">• <strong>PC / Laptop (Edge/Chrome):</strong> Klik rechts in de adresbalk op het installatie-icoon ⊕ of kies <em>"BI Generator installeren"</em>.</p>
+        content += `
+          <div style="margin-bottom: 14px; font-size: 13px; color: #cbd5e1;">
+            Gebruik <strong>BI Generator</strong> als volwaardige webapp met eigen app-icoon en volledig scherm zonder browserbalken.
           </div>
         `;
-        if (nativeBtn) nativeBtn.style.display = 'none';
       }}
+
+      if (isIOS) {{
+        content += `
+          <div style="background:#1e293b; padding:12px 14px; border-radius:8px; border:1px solid #334155; font-size:13px; line-height:1.6; margin-bottom: 12px;">
+            <strong style="color: #38bdf8;">🍎 Installatie op iPhone / iPad (Safari):</strong>
+            <p style="margin-top:6px;">1. Tik onderaan in Safari op het <strong>Deel-icoon</strong> (het vierkantje met pijltje omhoog <span style="font-size:15px;">⎋</span>).</p>
+            <p style="margin-top:6px;">2. Scroll omlaag en tik op <strong>"Zet op beginscherm"</strong> (met het plus-icoon <span style="font-size:15px;">➕</span>).</p>
+            <p style="margin-top:6px;">3. Tik rechtsboven op <strong>"Voeg toe"</strong>.</p>
+          </div>
+        `;
+      }} else {{
+        content += `
+          <div style="background:#1e293b; padding:12px 14px; border-radius:8px; border:1px solid #334155; font-size:13px; line-height:1.6; margin-bottom: 12px;">
+            <strong style="color: #38bdf8;">📲 Normale Installatie:</strong>
+            <p style="margin-top:6px;">• <strong>Android (Chrome):</strong> Tik rechtsboven op de drie puntjes <strong>⋮</strong> en kies <em>"App installeren"</em> of <em>"Toevoegen aan startscherm"</em>.</p>
+            <p style="margin-top:6px;">• <strong>PC / Laptop (Edge & Chrome):</strong> Klik rechts in de adresbalk op het installatie-icoon <strong>⊕</strong> of kies via het menu <em>"BI Generator installeren"</em>.</p>
+          </div>
+        `;
+      }}
+
+      // Section specifically for "Zegt je browser 'Al geïnstalleerd'?"
+      content += `
+        <div style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); padding: 12px 14px; border-radius: 8px; font-size: 12px; line-height: 1.5; margin-bottom: 12px; color: #fde68a;">
+          <strong style="color: #fbbf24; font-size: 13px;">⚠️ Zegt de browser dat de app al geïnstalleerd is?</strong>
+          <p style="margin-top: 6px; color: #e2e8f0;">Dit gebeurt als Chrome of Edge de app eerder heeft geregistreerd op dit toestel. De browser weigert dan een tweede installatie.</p>
+          <div style="margin-top: 8px; padding-left: 4px; color: #cbd5e1;">
+            <p style="margin-bottom: 2px;"><strong style="color: #38bdf8;">1. Waar vind je hem op je toestel?</strong></p>
+            <p style="margin-bottom: 4px;">• <em>Android:</em> Veeg omhoog naar je <strong>App-lijst (App Drawer)</strong> en zoek naar <strong>BI Generator</strong> (nieuwe apps komen niet altijd automatisch op het beginscherm!). Of tik in Chrome op <strong>⋮</strong> en kies bovenaan <em>"BI Generator openen"</em>.</p>
+            <p style="margin-bottom: 8px;">• <em>PC/Laptop:</em> Druk op de <strong>Windows-toets</strong> en typ <strong>BI Generator</strong>. Of typ in Edge <code>edge://apps</code> (of Chrome <code>chrome://apps</code>).</p>
+            <p style="margin-bottom: 2px;"><strong style="color: #38bdf8;">2. Wil je hem fris opnieuw installeren?</strong></p>
+            <p style="margin-bottom: 4px;">• <em>Android:</em> Zoek het icoon in je app-lijst, houd 2 sec ingedrukt en tik op <strong>Verwijderen</strong>.</p>
+            <p>• <em>PC/Laptop:</em> Ga naar <code>edge://apps</code> of <code>chrome://apps</code>, klik op de 3 puntjes naast BI Generator en kies <strong>Verwijderen</strong>.</p>
+            <p style="margin-top: 4px; font-style: italic; color: #94a3b8;">Na verwijderen vernieuw je deze pagina en verschijnt de installatieoptie weer direct!</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: 10px;">
+          <button class="btn-modal-action" onclick="resetPwaAndCache()" style="background: #334155; font-size: 11px; padding: 8px 12px; border-color: #475569; width: 100%; justify-content: center;">
+            🔄 Reset PWA-registratie & Cache
+          </button>
+        </div>
+      `;
+
+      if (nativeBtn) nativeBtn.style.display = 'none';
+      body.innerHTML = content;
       modal.classList.add('active');
+    }}
+
+    async function resetPwaAndCache() {{
+      try {{
+        if ('serviceWorker' in navigator) {{
+          const registrations = await navigator.serviceWorker.getRegistrations();
+          for (let r of registrations) {{
+            await r.unregister();
+          }}
+        }}
+        if ('caches' in window) {{
+          const keys = await caches.keys();
+          for (let k of keys) {{
+            await caches.delete(k);
+          }}
+        }}
+        showToast('✓ Registratie & cache gewist. Pagina herlaadt...', 'success');
+        setTimeout(() => {{
+          window.location.reload(true);
+        }}, 1000);
+      }} catch (err) {{
+        console.error('Reset error:', err);
+        window.location.reload(true);
+      }}
     }}
 
     function closeInstallModal() {{

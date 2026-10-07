@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bi-generator-v1';
+const CACHE_NAME = 'bi-generator-v2';
 const CORE_ASSETS = [
   './',
   './index.html',
