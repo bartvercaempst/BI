@@ -1,4 +1,4 @@
-# DB Cargo Belgium — Satellietkaart Bedieningen & Moederbundels (West-Vlaanderen)
+# Satellietkaart Bedieningen & Moederbundels (West-Vlaanderen)
 
 Interactieve satellietkaart en inventaris van alle 40 private aansluitingen / terminals en 9 Infrabel rangeerbundels (moederbundels) in West-Vlaanderen.
 
