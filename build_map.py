@@ -1617,9 +1617,13 @@ def build_map_html(locations, bundels):
       const storedKey = localStorage.getItem('db_cargo_supabase_key');
       const fileUrl = (window.SUPABASE_CONFIG && window.SUPABASE_CONFIG.url) ? window.SUPABASE_CONFIG.url.trim() : '';
       const fileKey = (window.SUPABASE_CONFIG && window.SUPABASE_CONFIG.anonKey) ? window.SUPABASE_CONFIG.anonKey.trim() : '';
+      let rawUrl = (fileUrl || storedUrl || '').trim();
+      if (rawUrl.endsWith('/rest/v1/')) rawUrl = rawUrl.slice(0, -9);
+      if (rawUrl.endsWith('/rest/v1')) rawUrl = rawUrl.slice(0, -8);
+      if (rawUrl.endsWith('/')) rawUrl = rawUrl.slice(0, -1);
       return {{
-        url: fileUrl || storedUrl || '',
-        key: fileKey || storedKey || ''
+        url: rawUrl,
+        key: (fileKey || storedKey || '').trim()
       }};
     }}
 
