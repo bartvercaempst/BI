@@ -366,8 +366,8 @@
       "toegang_weg": "New Yorklaan",
       "beveiliging": "Stuitklamp met sleutel 334, procedure via Blok 4",
       "ppgi_ref": "PP-311 blz. 10, 26, 35",
-      "lat": 51.351,
-      "lng": 3.182,
+      "lat": 51.342194,
+      "lng": 3.187923,
       "aliases": [
         "Cosco Shipping Ports",
         "CSP Zeebrugge",
@@ -389,8 +389,8 @@
       "toegang_weg": "Pieter Troostlaan",
       "beveiliging": "Eigen stuitklamp SA PSA Zeebrugge NV",
       "ppgi_ref": "PP-311 blz. 10, 26, 40",
-      "lat": 51.3395,
-      "lng": 3.1905,
+      "lat": 51.3538,
+      "lng": 3.183675,
       "aliases": [
         "PSA Zeebrugge Container"
       ]
@@ -454,8 +454,8 @@
       "toegang_weg": "Kustlaan / Leopold II-dam",
       "beveiliging": "Kleine beweging onder Blok 4",
       "ppgi_ref": "PP-311 blz. 10, 26, 36",
-      "lat": 51.348,
-      "lng": 3.211,
+      "lat": 51.338374,
+      "lng": 3.206785,
       "aliases": [
         "Kaaispoor 851 Infrabel",
         "Zeebrugge-Kaai"
@@ -497,8 +497,8 @@
       "toegang_weg": "Industriezone Plassendale 1",
       "beveiliging": "Telefoontoelating Blok 7, kleine beweging",
       "ppgi_ref": "PP-341 blz. 9, 31",
-      "lat": 51.2135,
-      "lng": 3.003,
+      "lat": 51.216279,
+      "lng": 2.951696,
       "aliases": [
         "Proviron Chemicals Oostende"
       ]
@@ -879,8 +879,8 @@
     },
     {
       "name": "Bundel CHZ Terminal",
-      "lat": 51.348,
-      "lng": 3.189,
+      "lat": 51.332113,
+      "lng": 3.186722,
       "info": "Sporen 1-7 (Albert II Dok)"
     },
     {
