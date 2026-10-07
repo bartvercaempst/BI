@@ -137,6 +137,43 @@ def build_map_html(locations, bundels):
       background: #10b981;
       box-shadow: 0 0 6px #10b981;
     }}
+    .sync-dot.cloud {{
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
+    }}
+    #btnSupabaseCloud.connected {{
+      border-color: #38bdf8;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+    }}
+    .modal-input-group {{
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+      text-align: left;
+    }}
+    .modal-input-group label {{
+      font-size: 11px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }}
+    .modal-input-group input {{
+      background: #090d16;
+      border: 1px solid #334155;
+      color: #f1f5f9;
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      outline: none;
+      transition: border 0.15s;
+    }}
+    .modal-input-group input:focus {{
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+    }}
 
     /* Modified Coordinates Badge */
     .saved-count-pill {{
@@ -1223,10 +1260,15 @@ def build_map_html(locations, bundels):
     <!-- Right Controls: Status, Labels, Layer, Coordinates Manager -->
     <div class="header-right">
       <!-- Sync Status -->
-      <div class="sync-status-indicator" id="syncStatusBox" title="Status van opslag">
+      <div class="sync-status-indicator" id="syncStatusBox" onclick="openSupabaseModal()" title="Klik om Cloud Synchronisatie (Supabase) in te stellen" style="cursor: pointer;">
         <span class="sync-dot" id="syncStatusDot"></span>
         <span id="syncStatusText">Browser Opslag</span>
       </div>
+
+      <!-- Cloud Sync Button -->
+      <button class="btn-header-action" id="btnSupabaseCloud" onclick="openSupabaseModal()" title="Realtime Cloud Synchronisatie met collega's instellen">
+        ☁️ Cloud Sync
+      </button>
 
       <!-- Modified counter pill -->
       <div class="saved-count-pill" id="savedCountPill" style="display:none;" onclick="openExportModal()" title="Klik om opgeslagen wijzigingen te bekijken en exporteren">
@@ -1451,7 +1493,58 @@ def build_map_html(locations, bundels):
     </div>
   </div>
 
-  <!-- Leaflet JS -->
+  <!-- Modal: Supabase Cloud Instellingen -->
+  <div class="modal-backdrop" id="supabaseModal">
+    <div class="modal-box" style="width: 580px;">
+      <h2>
+        <span>☁️ Realtime Cloud Synchronisatie (Supabase)</span>
+        <button class="modal-close" onclick="closeSupabaseModal()">&times;</button>
+      </h2>
+      <div class="modal-body">
+        <p>Verbind deze app met je gratis <strong>Supabase (PostgreSQL)</strong> database om wijzigingen in coördinaten en aliassen <strong>automatisch en realtime</strong> te delen met al je collega's.</p>
+
+        <div style="margin: 14px 0; background: #1e293b; padding: 12px 14px; border-radius: 8px; border: 1px solid #334155; display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <strong>Status:</strong> <span id="supabaseModalStatusText">Niet verbonden (Lokale browser opslag)</span>
+          </div>
+          <span class="sync-dot" id="supabaseModalStatusDot"></span>
+        </div>
+
+        <div class="modal-input-group">
+          <label>Supabase Project URL</label>
+          <input type="text" id="supabaseUrlInput" placeholder="https://xyzcompany.supabase.co" spellcheck="false" />
+        </div>
+
+        <div class="modal-input-group">
+          <label>Supabase Anon Public API Key</label>
+          <input type="password" id="supabaseAnonKeyInput" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." spellcheck="false" />
+        </div>
+
+        <div style="margin-top: 10px; font-size: 12px; color: #94a3b8; background: rgba(15, 23, 42, 0.6); padding: 10px 12px; border-radius: 6px; border: 1px dashed #334155;">
+          💡 <strong>Tip voor team-samenwerking:</strong> Je kunt deze twee gegevens ook eenmalig invullen in het bestand <code>config.js</code> in je GitHub repository. Dan is elke collega die de site opent direct en automatisch verbonden!
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-modal-action btn-modal-primary" onclick="saveSupabaseSettings()">
+          🔗 Verbinding Testen & Opslaan
+        </button>
+        <button class="btn-modal-action" onclick="copySqlSetupScript()">
+          📋 Kopieer SQL Setup Script (voor Supabase SQL Editor)
+        </button>
+        <a href="supabase_setup.sql" download class="btn-modal-action" style="text-decoration:none; justify-content:center;">
+          📥 Download 'supabase_setup.sql'
+        </a>
+        <button class="btn-modal-action btn-modal-danger" id="btnDisconnectSupabase" onclick="disconnectSupabase()" style="display:none;">
+          🔌 Ontkoppel Cloud (Terug naar lokaal)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet JS & Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
@@ -1513,8 +1606,220 @@ def build_map_html(locations, bundels):
       }} catch (e) {{}}
     }}
 
-    // Check optional local Python server on port 8055
+    // ==========================================
+    // SUPABASE REALTIME CLOUD INTEGRATION
+    // ==========================================
+    let supabaseClient = null;
+    let supabaseConnected = false;
+
+    function getSupabaseConfig() {{
+      const storedUrl = localStorage.getItem('db_cargo_supabase_url');
+      const storedKey = localStorage.getItem('db_cargo_supabase_key');
+      const fileUrl = (window.SUPABASE_CONFIG && window.SUPABASE_CONFIG.url) ? window.SUPABASE_CONFIG.url.trim() : '';
+      const fileKey = (window.SUPABASE_CONFIG && window.SUPABASE_CONFIG.anonKey) ? window.SUPABASE_CONFIG.anonKey.trim() : '';
+      return {{
+        url: fileUrl || storedUrl || '',
+        key: fileKey || storedKey || ''
+      }};
+    }}
+
+    async function initSupabase() {{
+      const cfg = getSupabaseConfig();
+      if (!cfg.url || !cfg.key || !window.supabase) {{
+        setCloudDisconnectedUI();
+        return false;
+      }}
+
+      try {{
+        supabaseClient = window.supabase.createClient(cfg.url, cfg.key);
+        const {{ data, error }} = await supabaseClient.from('locations').select('id, lat, lng, aliases, is_merged, name').limit(100);
+        if (error) {{
+          console.warn('Supabase query error:', error);
+          setCloudDisconnectedUI('Fout bij verbinden met Supabase: ' + (error.message || 'Controleer instellingen'));
+          return false;
+        }}
+
+        supabaseConnected = true;
+        setCloudConnectedUI();
+
+        if (data && data.length > 0) {{
+          data.forEach(row => {{
+            const item = allItems.find(x => x.id === row.id);
+            if (item) {{
+              item.lat = row.lat;
+              item.lng = row.lng;
+              if (row.aliases && Array.isArray(row.aliases)) {{
+                item.aliases = row.aliases;
+              }}
+              if (row.is_merged) {{
+                item.is_merged = true;
+              }}
+              const itemObj = markersMap[row.id];
+              if (itemObj) {{
+                if (row.is_merged) {{
+                  map.removeLayer(itemObj.marker);
+                }} else {{
+                  itemObj.marker.setLatLng([row.lat, row.lng]);
+                }}
+              }}
+            }}
+          }});
+          handleFilter();
+        }}
+
+        subscribeSupabaseRealtime();
+        return true;
+      }} catch (err) {{
+        console.error('Supabase init error:', err);
+        setCloudDisconnectedUI();
+        return false;
+      }}
+    }}
+
+    function setCloudConnectedUI() {{
+      const dot = document.getElementById('syncStatusDot');
+      const txt = document.getElementById('syncStatusText');
+      const box = document.getElementById('syncStatusBox');
+      const btn = document.getElementById('btnSupabaseCloud');
+      const modalDot = document.getElementById('supabaseModalStatusDot');
+      const modalTxt = document.getElementById('supabaseModalStatusText');
+      const disBtn = document.getElementById('btnDisconnectSupabase');
+
+      if (dot) dot.className = 'sync-dot connected cloud';
+      if (txt) txt.textContent = 'Supabase Cloud (Live)';
+      if (box) box.title = 'Verbonden met Supabase Cloud. Wijzigingen worden realtime gesynchroniseerd!';
+      if (btn) btn.classList.add('connected');
+      if (modalDot) modalDot.className = 'sync-dot connected cloud';
+      if (modalTxt) modalTxt.textContent = '🟢 Verbonden met Supabase Cloud (Live Realtime)';
+      if (disBtn) disBtn.style.display = 'block';
+    }}
+
+    function setCloudDisconnectedUI(customMsg) {{
+      supabaseConnected = false;
+      const dot = document.getElementById('syncStatusDot');
+      const txt = document.getElementById('syncStatusText');
+      const box = document.getElementById('syncStatusBox');
+      const btn = document.getElementById('btnSupabaseCloud');
+      const modalDot = document.getElementById('supabaseModalStatusDot');
+      const modalTxt = document.getElementById('supabaseModalStatusText');
+      const disBtn = document.getElementById('btnDisconnectSupabase');
+
+      if (dot) dot.className = 'sync-dot';
+      if (txt) txt.textContent = 'Browser Opslag (Klik voor Cloud)';
+      if (box) box.title = 'Lokale browser opslag actief. Klik om Supabase cloud sync in te stellen.';
+      if (btn) btn.classList.remove('connected');
+      if (modalDot) modalDot.className = 'sync-dot';
+      if (modalTxt) modalTxt.textContent = customMsg || '⚪ Niet verbonden (Lokale browser opslag)';
+      if (disBtn) disBtn.style.display = 'none';
+    }}
+
+    function subscribeSupabaseRealtime() {{
+      if (!supabaseClient) return;
+      try {{
+        supabaseClient
+          .channel('public:locations')
+          .on('postgres_changes', {{ event: '*', schema: 'public', table: 'locations' }}, (payload) => {{
+            const row = payload.new;
+            if (!row || !row.id) return;
+
+            const item = allItems.find(x => x.id === row.id);
+            const itemObj = markersMap[row.id];
+            if (!item || !itemObj) return;
+
+            if (activeMarkerId === row.id && (isDraggingActive || isPickPointActive)) return;
+
+            const moved = (item.lat !== row.lat || item.lng !== row.lng);
+            item.lat = row.lat;
+            item.lng = row.lng;
+            if (row.aliases && Array.isArray(row.aliases)) item.aliases = row.aliases;
+
+            if (row.is_merged) {{
+              item.is_merged = true;
+              map.removeLayer(itemObj.marker);
+              showToast(`🔗 "${{row.name || item.name}}" is zojuist door een collega samengevoegd!`, 4000);
+            }} else {{
+              itemObj.marker.setLatLng([row.lat, row.lng]);
+              if (moved) {{
+                showToast(`📍 Positie van "${{item.name}}" live bijgewerkt door een collega!`, 3500);
+              }}
+            }}
+
+            handleFilter();
+            if (activeMarkerId === row.id) {{
+              document.getElementById('editLat').value = item.lat.toFixed(6);
+              document.getElementById('editLng').value = item.lng.toFixed(6);
+              renderDetailAliases(item);
+            }}
+          }})
+          .subscribe();
+      }} catch (e) {{
+        console.warn('Realtime error:', e);
+      }}
+    }}
+
+    function openSupabaseModal() {{
+      const cfg = getSupabaseConfig();
+      document.getElementById('supabaseUrlInput').value = cfg.url;
+      document.getElementById('supabaseAnonKeyInput').value = cfg.key;
+      document.getElementById('supabaseModal').classList.add('active');
+    }}
+
+    function closeSupabaseModal() {{
+      document.getElementById('supabaseModal').classList.remove('active');
+    }}
+
+    async function saveSupabaseSettings() {{
+      const url = document.getElementById('supabaseUrlInput').value.trim();
+      const key = document.getElementById('supabaseAnonKeyInput').value.trim();
+
+      if (!url || !key) {{
+        showToast('Vul zowel de Project URL als de Anon Key in.', 'warning');
+        return;
+      }}
+
+      localStorage.setItem('db_cargo_supabase_url', url);
+      localStorage.setItem('db_cargo_supabase_key', key);
+
+      showToast('Verbinding testen met Supabase...', 'info');
+      const ok = await initSupabase();
+      if (ok) {{
+        showToast('✓ Succesvol verbonden met Supabase Cloud!');
+        closeSupabaseModal();
+      }} else {{
+        showToast('Kon geen verbinding maken. Controleer URL en API Key.', 'warning');
+      }}
+    }}
+
+    function disconnectSupabase() {{
+      localStorage.removeItem('db_cargo_supabase_url');
+      localStorage.removeItem('db_cargo_supabase_key');
+      supabaseClient = null;
+      supabaseConnected = false;
+      setCloudDisconnectedUI('Verbinding verbroken. Lokale browser opslag actief.');
+      showToast('Supabase verbinding verbroken. Lokale modus actief.');
+    }}
+
+    function copySqlSetupScript() {{
+      fetch('supabase_setup.sql')
+        .then(r => {{
+          if (!r.ok) throw new Error('Kon bestand niet laden');
+          return r.text();
+        }})
+        .then(sql => {{
+          navigator.clipboard.writeText(sql).then(() => {{
+            showToast('📋 supabase_setup.sql gekopieerd naar klembord! Plak dit in Supabase SQL Editor.');
+          }});
+        }})
+        .catch(() => {{
+          showToast('Gebruik de knop "Download supabase_setup.sql" hieronder.', 'info');
+        }});
+    }}
+
+    // Check Supabase Cloud or optional local Python server
     async function checkServerStatus() {{
+      const isCloud = await initSupabase();
+      if (isCloud) return;
+
       try {{
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 1200);
@@ -1522,14 +1827,13 @@ def build_map_html(locations, bundels):
         clearTimeout(timeoutId);
         if (res.ok) {{
           serverAvailable = true;
-          document.getElementById('syncStatusDot').classList.add('connected');
+          document.getElementById('syncStatusDot').className = 'sync-dot connected';
           document.getElementById('syncStatusText').textContent = 'Server Actief (Auto-Save)';
           return;
         }}
       }} catch (e) {{}}
       serverAvailable = false;
-      document.getElementById('syncStatusDot').classList.remove('connected');
-      document.getElementById('syncStatusText').textContent = 'Browser Opslag (Actief)';
+      setCloudDisconnectedUI();
     }}
 
     // Leaflet Layers
@@ -2053,6 +2357,14 @@ def build_map_html(locations, bundels):
         allStoredAliases[target.id] = target.aliases;
         savePersistedAliases(allStoredAliases);
 
+        if (supabaseConnected && supabaseClient) {{
+          supabaseClient
+            .from('locations')
+            .update({{ aliases: target.aliases, updated_at: new Date().toISOString() }})
+            .eq('id', target.id)
+            .then();
+        }}
+
         renderDetailAliases(target);
         handleFilter();
         showToast(`✓ Synoniem "${{val}}" gekoppeld aan ${{target.name}}!`);
@@ -2069,6 +2381,14 @@ def build_map_html(locations, bundels):
       const allStoredAliases = loadPersistedAliases();
       allStoredAliases[target.id] = target.aliases;
       savePersistedAliases(allStoredAliases);
+
+      if (supabaseConnected && supabaseClient) {{
+        supabaseClient
+          .from('locations')
+          .update({{ aliases: target.aliases, updated_at: new Date().toISOString() }})
+          .eq('id', target.id)
+          .then();
+      }}
 
       renderDetailAliases(target);
       handleFilter();
@@ -2115,6 +2435,19 @@ def build_map_html(locations, bundels):
       const allStoredAliases = loadPersistedAliases();
       allStoredAliases[target.id] = target.aliases;
       savePersistedAliases(allStoredAliases);
+
+      if (supabaseConnected && supabaseClient) {{
+        supabaseClient
+          .from('locations')
+          .update({{ is_merged: true, merged_into: target.id, updated_at: new Date().toISOString() }})
+          .eq('id', otherId)
+          .then();
+        supabaseClient
+          .from('locations')
+          .update({{ aliases: target.aliases, updated_at: new Date().toISOString() }})
+          .eq('id', target.id)
+          .then();
+      }}
 
       buildMapMarkers();
       selectLocation(target.id, false);
@@ -2278,6 +2611,19 @@ def build_map_html(locations, bundels):
       document.getElementById('detailNavBtn').href = `https://www.google.com/maps/@?api=1&map_action=map&center=${{newLat}},${{newLng}}&zoom=18&basemap=satellite`;
 
       handleFilter();
+
+      // Supabase Cloud save
+      if (supabaseConnected && supabaseClient) {{
+        try {{
+          await supabaseClient
+            .from('locations')
+            .update({{ lat: newLat, lng: newLng, updated_at: new Date().toISOString() }})
+            .eq('id', activeMarkerId);
+          showToast(`✓ Positie voor ${{target.name}} realtime gesynchroniseerd naar Supabase Cloud!`);
+        }} catch (e) {{
+          console.error('Supabase save error:', e);
+        }}
+      }}
 
       let serverSaved = false;
       if (serverAvailable) {{
