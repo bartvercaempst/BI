@@ -2615,13 +2615,20 @@ def build_map_html(locations, bundels):
       // Supabase Cloud save
       if (supabaseConnected && supabaseClient) {{
         try {{
-          await supabaseClient
+          const {{ error }} = await supabaseClient
             .from('locations')
             .update({{ lat: newLat, lng: newLng, updated_at: new Date().toISOString() }})
             .eq('id', activeMarkerId);
-          showToast(`✓ Positie voor ${{target.name}} realtime gesynchroniseerd naar Supabase Cloud!`);
+          if (error) {{
+            console.error('Supabase save error:', error);
+            showToast(`⚠️ Cloud fout: ${{error.message || 'Onbekend'}}. Wel lokaal bewaard.`, 'warning');
+          }} else {{
+            showToast(`☁️✓ Positie voor ${{target.name}} realtime opgeslagen in Supabase Cloud!`);
+            return;
+          }}
         }} catch (e) {{
           console.error('Supabase save error:', e);
+          showToast(`⚠️ Cloud fout: ${{e.message}}. Wel lokaal bewaard.`, 'warning');
         }}
       }}
 
@@ -2640,7 +2647,7 @@ def build_map_html(locations, bundels):
       if (serverSaved) {{
         showToast(`✓ Positie voor ${{target.name}} opgeslagen in bestand & browser!`);
       }} else {{
-        showToast(`✓ Positie voor ${{target.name}} bewaard in browser (LocalStorage)!`);
+        showToast(`✓ Positie voor ${{target.name}} bewaard in browser (LocalStorage). 💡 Tip: Koppel via '☁️ Cloud Sync' voor serverside opslag.`);
       }}
     }}
 
