@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="rail" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <!-- Background with rounded corners -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <!-- Outer subtle border -->
+  <rect x="8" y="8" width="496" height="496" rx="104" fill="none" stroke="#38bdf8" stroke-width="6" stroke-opacity="0.3"/>
+  <!-- Railway Tracks Motif -->
+  <path d="M128 390 L200 120 M384 390 L312 120" stroke="#64748b" stroke-width="18" stroke-linecap="round"/>
+  <!-- Sleepers -->
+  <line x1="150" y1="350" x2="362" y2="350" stroke="#475569" stroke-width="16" stroke-linecap="round"/>
+  <line x1="170" y1="290" x2="342" y2="290" stroke="#475569" stroke-width="16" stroke-linecap="round"/>
+  <line x1="188" y1="230" x2="324" y2="230" stroke="#475569" stroke-width="16" stroke-linecap="round"/>
+  <line x1="204" y1="170" x2="308" y2="170" stroke="#475569" stroke-width="16" stroke-linecap="round"/>
+  <!-- Central Pin Marker with BI Text -->
+  <circle cx="256" cy="220" r="105" fill="url(#rail)"/>
+  <circle cx="256" cy="220" r="88" fill="#0f172a"/>
+  <text x="256" y="250" font-family="-apple-system, BlinkMacSystemFont, 'Nunito', 'Segoe UI', sans-serif" font-size="88" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="2">BI</text>
+  <!-- Satellite Orbit Ring -->
+  <path d="M110 220 A 146 60 45 0 1 402 220" fill="none" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" stroke-dasharray="12 16"/>
+  <!-- Satellite Icon dot -->
+  <circle cx="388" cy="150" r="14" fill="#38bdf8"/>
+</svg>

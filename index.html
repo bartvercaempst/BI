@@ -2,8 +2,20 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>BI Generator</title>
+  
+  <!-- PWA & Mobile WebApp Capabilities -->
+  <meta name="theme-color" content="#0f172a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BI Generator">
+  <meta name="application-name" content="BI Generator">
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon-192.png">
   
   <!-- Google Fonts: Nunito -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1228,20 +1240,181 @@
       background: rgba(239, 68, 68, 0.2);
     }
 
-    /* Responsive */
-    @media (max-width: 900px) {
+    /* =================================================== */
+    /* RESPONSIVE DESIGN: TABLET & GSM / SMARTPHONE        */
+    /* =================================================== */
+
+    /* Mobile Hub Carousel Bar (hidden on desktop) */
+    .mobile-hub-bar {
+      display: none;
+    }
+
+    /* Floating Mobile Navigation Pill (hidden on desktop) */
+    .mobile-nav-pill {
+      display: none;
+    }
+
+    .detail-handle {
+      display: none;
+    }
+
+    /* Tablet breakpoint (769px - 1024px) */
+    @media (max-width: 1024px) {
+      header {
+        padding: 0 12px;
+      }
       .sidebar {
-        width: 100%;
+        width: 330px;
+      }
+      .header-center {
+        gap: 6px;
+      }
+      .hub-btn {
+        min-width: 95px;
+        padding: 0 10px;
+        font-size: 11px;
+      }
+      .detail-overlay {
+        width: 360px;
+      }
+    }
+
+    /* Mobile / Smartphone breakpoint (<= 768px) */
+    @media (max-width: 768px) {
+      header {
+        height: 56px;
+        padding: 0 10px;
+      }
+      .brand {
+        gap: 8px;
+      }
+      .brand-titles h1 {
+        font-size: 15px;
+      }
+      .header-center {
+        display: none !important;
+      }
+      .header-right {
+        gap: 5px;
+      }
+      .btn-header-action {
+        padding: 0 9px;
+        font-size: 11px;
+      }
+
+      /* Show horizontal scrollable hub bar under header */
+      .mobile-hub-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 12px;
+        background: #090d16;
+        border-bottom: 1px solid #1e293b;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-shrink: 0;
+        z-index: 1000;
+      }
+      .mobile-hub-bar::-webkit-scrollbar {
+        display: none;
+      }
+      .mobile-hub-bar .hub-btn {
+        min-width: 90px;
+        height: 32px;
+        font-size: 11px;
+        padding: 0 10px;
+      }
+
+      /* Sidebar becomes full screen off-canvas */
+      .sidebar {
         position: absolute;
         top: 0;
         bottom: 0;
         left: 0;
+        width: 100%;
+        max-width: 100%;
+        z-index: 1100;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        margin-right: 0;
       }
+      .sidebar.mobile-active {
+        transform: translateX(0);
+      }
+
+      /* Detail Overlay becomes native Bottom Sheet */
       .detail-overlay {
-        width: calc(100% - 28px);
+        top: auto !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        max-height: 80vh !important;
+        border-radius: 20px 20px 0 0 !important;
+        border: 1px solid #334155 !important;
+        border-bottom: none !important;
+        padding: 12px 16px 28px 16px !important;
+        z-index: 2500 !important;
+        box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.85) !important;
       }
-      .header-center {
-        display: none;
+      .detail-handle {
+        display: block;
+        width: 44px;
+        height: 5px;
+        background: #475569;
+        border-radius: 3px;
+        margin: 0 auto 12px auto;
+      }
+
+      /* Floating Bottom Navigation Pill */
+      .mobile-nav-pill {
+        display: inline-flex;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(15, 23, 42, 0.94);
+        backdrop-filter: blur(12px);
+        border: 1px solid #334155;
+        border-radius: 30px;
+        padding: 4px;
+        z-index: 2000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        gap: 4px;
+      }
+      .mobile-nav-btn {
+        background: transparent;
+        border: none;
+        color: #94a3b8;
+        font-size: 13px;
+        font-weight: 800;
+        padding: 8px 18px;
+        border-radius: 24px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+      }
+      .mobile-nav-btn.active {
+        background: #2563eb;
+        color: white;
+        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+      }
+
+      /* Map controls position on phone */
+      .leaflet-top.leaflet-left {
+        top: 8px;
+      }
+      .leaflet-bottom.leaflet-right {
+        bottom: 74px; /* avoid floating mobile nav */
+      }
+
+      .modal-box {
+        width: 95vw !important;
+        max-width: 95vw !important;
+        padding: 18px !important;
       }
     }
   </style>
@@ -1280,8 +1453,21 @@
       <button class="btn-header-action" onclick="openExportModal()" title="Beheer & Exporteer Coördinaten">
         💾 Coördinaten
       </button>
+
+      <button class="btn-header-action" id="btnInstallPwa" onclick="installApp()" title="Installeer als webapp op smartphone, tablet of pc">
+        📲 App
+      </button>
     </div>
   </header>
+
+  <!-- Mobile Hub Jump Bar -->
+  <div class="mobile-hub-bar" id="mobileHubBar">
+    <button class="hub-btn active" onclick="zoomToHub('wvl', this)">🌐 Alles</button>
+    <button class="hub-btn" onclick="zoomToHub('zeebrugge', this)">⚓ Zeebrugge</button>
+    <button class="hub-btn" onclick="zoomToHub('oostende', this)">🚢 Oostende</button>
+    <button class="hub-btn" onclick="zoomToHub('brugge', this)">🏰 Brugge</button>
+    <button class="hub-btn" onclick="zoomToHub('kortrijk', this)">🏭 Kortrijk</button>
+  </div>
 
   <!-- Main Container -->
   <div class="main-container">
@@ -1354,6 +1540,7 @@
 
     <!-- Floating Detail Card -->
     <div class="detail-overlay" id="detailOverlay">
+      <div class="detail-handle"></div>
       <button class="detail-close" onclick="closeDetail()">&times;</button>
       <div class="detail-header">
         <div id="detailStatusPill" class="detail-status-pill badge-bi-yes">✓ BI BESCHIKBAAR</div>
@@ -1536,6 +1723,36 @@
         </a>
         <button class="btn-modal-action btn-modal-danger" id="btnDisconnectSupabase" onclick="disconnectSupabase()" style="display:none;">
           🔌 Ontkoppel Cloud (Terug naar lokaal)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Mobile Navigation Pill (Kaart vs Lijst) -->
+  <div class="mobile-nav-pill" id="mobileNavPill">
+    <button class="mobile-nav-btn active" id="btnMobMap" onclick="setMobileView('map')">
+      🗺️ Kaart
+    </button>
+    <button class="mobile-nav-btn" id="btnMobList" onclick="setMobileView('list')">
+      📋 Lijst (<span id="mobCount">39</span>)
+    </button>
+  </div>
+
+  <!-- Modal: PWA Installatie Gids -->
+  <div class="modal-backdrop" id="installGuideModal">
+    <div class="modal-box" style="width: 480px;">
+      <h2>
+        <span>📲 BI Generator App Installeren</span>
+        <button class="modal-close" onclick="closeInstallModal()">&times;</button>
+      </h2>
+      <div class="modal-body" id="installModalBody">
+      </div>
+      <div class="modal-actions" id="installModalActions">
+        <button class="btn-modal-action btn-modal-primary" id="btnTriggerNativeInstall" onclick="triggerNativeInstall()" style="display:none;">
+          📲 Nu Installeren
+        </button>
+        <button class="btn-modal-action" onclick="closeInstallModal()">
+          Begrepen / Sluiten
         </button>
       </div>
     </div>
@@ -2847,8 +3064,115 @@
       }
     }
 
+    // ==========================================
+    // PWA & MOBILE RESPONSIVE LOGIC
+    // ==========================================
+    let mobileView = 'map';
+    let deferredPrompt = null;
+
+    function setMobileView(view) {
+      mobileView = view;
+      const sidebar = document.querySelector('.sidebar');
+      const btnMap = document.getElementById('btnMobMap');
+      const btnList = document.getElementById('btnMobList');
+
+      if (view === 'map') {
+        if (sidebar) sidebar.classList.remove('mobile-active');
+        if (btnMap) btnMap.classList.add('active');
+        if (btnList) btnList.classList.remove('active');
+        if (map) {
+          setTimeout(() => map.invalidateSize(), 150);
+        }
+      } else {
+        if (sidebar) sidebar.classList.add('mobile-active');
+        if (btnMap) btnMap.classList.remove('active');
+        if (btnList) btnList.classList.add('active');
+      }
+    }
+
+    // Auto update mobCount
+    function updateMobileCount() {
+      const el = document.getElementById('mobCount');
+      if (el) {
+        el.textContent = allItems.filter(x => !x.is_bundel && !x.is_merged).length;
+      }
+    }
+
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('PWA ServiceWorker geregistreerd:', reg.scope))
+          .catch(err => console.log('SW fout (genegeerd):', err));
+      });
+    }
+
+    // PWA Install Prompt Capture
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const btn = document.getElementById('btnInstallPwa');
+      if (btn) btn.style.display = 'inline-flex';
+    });
+
+    function installApp() {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      const modal = document.getElementById('installGuideModal');
+      const body = document.getElementById('installModalBody');
+      const nativeBtn = document.getElementById('btnTriggerNativeInstall');
+
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            showToast('✓ BI Generator wordt geïnstalleerd!');
+          }
+          deferredPrompt = null;
+        });
+        return;
+      }
+
+      if (isIOS) {
+        body.innerHTML = `
+          <p style="margin-bottom:12px;">Installeer <strong>BI Generator</strong> direct op je iPhone of iPad als volwaardige webapp zonder Safari-adresbalk:</p>
+          <div style="background:#1e293b; padding:12px 14px; border-radius:8px; border:1px solid #334155; font-size:13px; line-height:1.6;">
+            <p>1. Tik onderaan in Safari op het <strong>Deel-icoon</strong> (het vierkantje met pijltje omhoog <span style="font-size:16px;">⎋</span>).</p>
+            <p style="margin-top:8px;">2. Scroll omlaag en tik op <strong>"Zet op beginscherm"</strong> (met het plus-icoon <span style="font-size:16px;">➕</span>).</p>
+            <p style="margin-top:8px;">3. Tik rechtsboven op <strong>"Voeg toe"</strong>.</p>
+          </div>
+          <p style="margin-top:12px; font-size:12px; color:#94a3b8;">De app verschijnt nu direct op je startscherm met het officiële BI icoon!</p>
+        `;
+        if (nativeBtn) nativeBtn.style.display = 'none';
+      } else {
+        body.innerHTML = `
+          <p style="margin-bottom:12px;">Installeer <strong>BI Generator</strong> op je smartphone, tablet of pc voor een volledig scherm en snelle toegang:</p>
+          <div style="background:#1e293b; padding:12px 14px; border-radius:8px; border:1px solid #334155; font-size:13px; line-height:1.6;">
+            <p>• <strong>Android (Chrome):</strong> Tik rechtsboven op de drie puntjes ⋮ en kies <em>"App installeren"</em> of <em>"Toevoegen aan startscherm"</em>.</p>
+            <p style="margin-top:8px;">• <strong>PC / Laptop (Edge/Chrome):</strong> Klik rechts in de adresbalk op het installatie-icoon ⊕ of kies <em>"BI Generator installeren"</em>.</p>
+          </div>
+        `;
+        if (nativeBtn) nativeBtn.style.display = 'none';
+      }
+      modal.classList.add('active');
+    }
+
+    function closeInstallModal() {
+      const modal = document.getElementById('installGuideModal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    // When selecting a location on mobile, automatically switch back to map
+    const origSelectLocation = selectLocation;
+    selectLocation = function(id, zoomIn) {
+      origSelectLocation(id, zoomIn);
+      if (window.innerWidth <= 768) {
+        setMobileView('map');
+      }
+    };
+
     // Initialize
     renderList(allItems);
+    updateMobileCount();
     checkServerStatus();
   </script>
 </body>
