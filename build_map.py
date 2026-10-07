@@ -10,6 +10,11 @@ def build_map_html(locations, bundels):
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DB Cargo Belgium — Bedieningen & Moederbundels Satellietkaart</title>
   
+  <!-- Google Fonts: Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   
@@ -18,15 +23,19 @@ def build_map_html(locations, bundels):
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }}
     body {{
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
       background: #0f172a;
       color: #e2e8f0;
       overflow: hidden;
       height: 100vh;
       display: flex;
       flex-direction: column;
+    }}
+    button, input, select, textarea, .leaflet-container, .leaflet-tooltip {{
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }}
 
     /* Header Bar */
@@ -57,14 +66,15 @@ def build_map_html(locations, bundels):
       box-shadow: 0 2px 6px rgba(224, 30, 43, 0.4);
     }}
     .brand-titles h1 {{
-      font-size: 15px;
-      font-weight: 700;
+      font-size: 16px;
+      font-weight: 800;
       color: #f8fafc;
       letter-spacing: -0.2px;
     }}
     .brand-titles p {{
       font-size: 11px;
       color: #94a3b8;
+      font-weight: 500;
     }}
 
     .header-center {{
@@ -76,10 +86,10 @@ def build_map_html(locations, bundels):
       background: #1e293b;
       color: #cbd5e1;
       border: 1px solid #334155;
-      padding: 6px 11px;
+      padding: 6px 12px;
       border-radius: 6px;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
       display: inline-flex;
@@ -110,6 +120,7 @@ def build_map_html(locations, bundels):
       align-items: center;
       gap: 6px;
       font-size: 11px;
+      font-weight: 600;
       padding: 4px 9px;
       border-radius: 20px;
       background: #1e293b;
@@ -133,7 +144,7 @@ def build_map_html(locations, bundels):
       border: 1px solid rgba(245, 158, 11, 0.5);
       color: #fbbf24;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       padding: 5px 10px;
       border-radius: 6px;
       cursor: pointer;
@@ -153,7 +164,7 @@ def build_map_html(locations, bundels):
       padding: 6px 11px;
       border-radius: 6px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.15s;
       display: flex;
@@ -177,7 +188,7 @@ def build_map_html(locations, bundels):
       border: none;
       color: #94a3b8;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       padding: 4px 8px;
       border-radius: 6px;
       cursor: pointer;
@@ -232,7 +243,7 @@ def build_map_html(locations, bundels):
       border: none;
       padding: 4px 10px;
       border-radius: 4px;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 11px;
       cursor: pointer;
     }}
@@ -257,7 +268,7 @@ def build_map_html(locations, bundels):
       padding: 12px 18px;
       border-radius: 8px;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       z-index: 2000;
       box-shadow: 0 10px 25px rgba(0,0,0,0.6);
       display: flex;
@@ -278,7 +289,7 @@ def build_map_html(locations, bundels):
 
     /* Sidebar */
     .sidebar {{
-      width: 380px;
+      width: 390px;
       background: #090d16;
       border-right: 1px solid #1e293b;
       display: flex;
@@ -288,8 +299,8 @@ def build_map_html(locations, bundels):
       flex-shrink: 0;
     }}
     .sidebar.collapsed {{
-      transform: translateX(-380px);
-      margin-right: -380px;
+      transform: translateX(-390px);
+      margin-right: -390px;
     }}
     .sidebar-header {{
       padding: 12px 16px;
@@ -306,7 +317,7 @@ def build_map_html(locations, bundels):
       border: 1px solid #334155;
       color: #f1f5f9;
       border-radius: 6px;
-      padding: 7px 12px 7px 32px;
+      padding: 8px 12px 8px 34px;
       font-size: 12px;
       outline: none;
       transition: border-color 0.15s;
@@ -334,7 +345,8 @@ def build_map_html(locations, bundels):
       color: #94a3b8;
       border-radius: 20px;
       font-size: 11px;
-      padding: 3px 8px;
+      font-weight: 600;
+      padding: 3px 9px;
       cursor: pointer;
       transition: all 0.15s;
     }}
@@ -361,10 +373,11 @@ def build_map_html(locations, bundels):
     }}
 
     .sidebar-stats {{
-      padding: 6px 16px;
+      padding: 7px 16px;
       background: #090d16;
       border-bottom: 1px solid #1e293b;
       font-size: 11px;
+      font-weight: 600;
       color: #64748b;
       display: flex;
       justify-content: space-between;
@@ -388,7 +401,7 @@ def build_map_html(locations, bundels):
       background: #0f172a;
       border: 1px solid #1e293b;
       border-radius: 8px;
-      padding: 9px 12px;
+      padding: 10px 12px;
       margin-bottom: 6px;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -412,13 +425,13 @@ def build_map_html(locations, bundels):
     }}
     .loc-card-title {{
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       color: #f8fafc;
       line-height: 1.3;
     }}
     .loc-status-badge {{
       font-size: 10px;
-      font-weight: 700;
+      font-weight: 800;
       padding: 2px 6px;
       border-radius: 4px;
       white-space: nowrap;
@@ -444,6 +457,7 @@ def build_map_html(locations, bundels):
       color: #38bdf8;
       border: 1px solid rgba(56, 189, 248, 0.4);
       font-size: 9px;
+      font-weight: 700;
       padding: 1px 4px;
       border-radius: 3px;
     }}
@@ -456,11 +470,29 @@ def build_map_html(locations, bundels):
       flex-direction: column;
       gap: 2px;
     }}
+    
+    /* Alias chip list in card */
+    .loc-card-aliases {{
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+      font-size: 10px;
+      color: #38bdf8;
+      flex-wrap: wrap;
+    }}
+    .loc-card-aliases-tag {{
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }}
+
     .loc-card-meta {{
       display: flex;
       align-items: center;
       gap: 6px;
-      margin-top: 4px;
+      margin-top: 5px;
       font-size: 10px;
       color: #64748b;
     }}
@@ -468,6 +500,7 @@ def build_map_html(locations, bundels):
       background: #1e293b;
       padding: 2px 6px;
       border-radius: 4px;
+      font-weight: 600;
     }}
 
     /* Map Area */
@@ -525,6 +558,7 @@ def build_map_html(locations, bundels):
       align-items: center;
       gap: 8px;
       color: #cbd5e1;
+      font-weight: 600;
     }}
     .legend-dot {{
       width: 14px;
@@ -562,7 +596,7 @@ def build_map_html(locations, bundels):
       position: absolute;
       top: 14px;
       right: 14px;
-      width: 400px;
+      width: 410px;
       max-height: calc(100% - 28px);
       background: rgba(15, 23, 42, 0.95);
       backdrop-filter: blur(12px);
@@ -617,12 +651,12 @@ def build_map_html(locations, bundels):
       padding: 3px 8px;
       border-radius: 20px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 6px;
     }}
     .detail-title {{
-      font-size: 17px;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 800;
       color: #ffffff;
       line-height: 1.25;
     }}
@@ -630,6 +664,7 @@ def build_map_html(locations, bundels):
       font-size: 12px;
       color: #94a3b8;
       margin-top: 3px;
+      font-weight: 600;
     }}
 
     .detail-grid {{
@@ -646,7 +681,7 @@ def build_map_html(locations, bundels):
     }}
     .detail-item-label {{
       font-size: 10px;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: #64748b;
@@ -656,6 +691,138 @@ def build_map_html(locations, bundels):
       font-size: 12px;
       color: #f1f5f9;
       line-height: 1.4;
+      font-weight: 500;
+    }}
+
+    /* ========================================= */
+    /* ALIASES & LINKING STYLES (TASK 2)         */
+    /* ========================================= */
+    .alias-section {{
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid #0284c7;
+      border-radius: 8px;
+      padding: 11px 12px;
+    }}
+    .alias-section-header {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }}
+    .alias-section-header .detail-item-label {{
+      color: #38bdf8;
+      font-size: 11px;
+    }}
+    .alias-count-tag {{
+      font-size: 10px;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-weight: 700;
+    }}
+    .alias-chips-wrap {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 8px;
+      min-height: 22px;
+    }}
+    .alias-chip {{
+      background: #1e293b;
+      border: 1px solid #475569;
+      color: #f1f5f9;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }}
+    .alias-chip-del {{
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }}
+    .alias-chip-del:hover {{
+      color: #f87171;
+    }}
+    .alias-controls-box {{
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+      border-top: 1px solid #1e293b;
+      padding-top: 6px;
+    }}
+    .alias-add-row {{
+      display: flex;
+      gap: 6px;
+    }}
+    .alias-input {{
+      flex: 1;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #ffffff;
+      border-radius: 5px;
+      padding: 5px 8px;
+      font-size: 11px;
+      outline: none;
+    }}
+    .alias-input:focus {{
+      border-color: #38bdf8;
+    }}
+    .btn-alias-add {{
+      background: #0284c7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }}
+    .btn-alias-add:hover {{
+      background: #0369a1;
+    }}
+    .alias-merge-row {{
+      display: flex;
+      gap: 6px;
+    }}
+    .merge-select {{
+      flex: 1;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      border-radius: 5px;
+      padding: 5px 6px;
+      font-size: 11px;
+      outline: none;
+    }}
+    .btn-alias-merge {{
+      background: #475569;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }}
+    .btn-alias-merge:hover {{
+      background: #64748b;
     }}
 
     /* Editable GPS Coordinates Box */
@@ -664,7 +831,7 @@ def build_map_html(locations, bundels):
       border: 1px solid #3b82f6;
       border-radius: 8px;
       padding: 10px 12px;
-      margin-top: 6px;
+      margin-top: 4px;
     }}
     .edit-coord-title {{
       display: flex;
@@ -674,7 +841,7 @@ def build_map_html(locations, bundels):
     }}
     .edit-coord-title span {{
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       color: #93c5fd;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -688,6 +855,7 @@ def build_map_html(locations, bundels):
     .coord-field label {{
       display: block;
       font-size: 10px;
+      font-weight: 600;
       color: #94a3b8;
       margin-bottom: 3px;
     }}
@@ -720,7 +888,7 @@ def build_map_html(locations, bundels):
       padding: 6px;
       border-radius: 5px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -751,7 +919,7 @@ def build_map_html(locations, bundels):
       padding: 8px 12px;
       border-radius: 6px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -770,6 +938,7 @@ def build_map_html(locations, bundels):
       padding: 8px 8px;
       border-radius: 6px;
       font-size: 10px;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.15s;
       text-align: center;
@@ -792,7 +961,7 @@ def build_map_html(locations, bundels):
       padding: 8px;
       border-radius: 6px;
       font-size: 11px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       text-align: center;
       text-decoration: none;
@@ -894,7 +1063,7 @@ def build_map_html(locations, bundels):
       padding: 2px 6px;
       border-radius: 4px;
       font-size: 10px;
-      font-weight: 600;
+      font-weight: 700;
       white-space: nowrap;
       pointer-events: none;
       box-shadow: 0 2px 6px rgba(0,0,0,0.6);
@@ -913,7 +1082,7 @@ def build_map_html(locations, bundels):
       color: #ffffff;
       padding: 4px 8px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       box-shadow: 0 4px 12px rgba(0,0,0,0.6);
     }}
     .leaflet-tooltip-pane .leaflet-tooltip.custom-tip::before {{
@@ -951,6 +1120,7 @@ def build_map_html(locations, bundels):
     }}
     .modal-box h2 {{
       font-size: 18px;
+      font-weight: 800;
       color: #f8fafc;
       display: flex;
       align-items: center;
@@ -984,7 +1154,7 @@ def build_map_html(locations, bundels):
       padding: 10px 14px;
       border-radius: 8px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -1099,18 +1269,18 @@ def build_map_html(locations, bundels):
       <div class="sidebar-header">
         <div class="search-input-wrap">
           <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <input type="text" id="searchInput" class="search-input" placeholder="Zoek op naam, spoor, straat, zone..." oninput="handleFilter()" />
+          <input type="text" id="searchInput" class="search-input" placeholder="Zoek op naam, alias (bijv. ECS 1), spoor..." oninput="handleFilter()" />
         </div>
         <div class="filter-tabs">
-          <button class="filter-chip active" id="filterAll" onclick="setFilter('all', this)">Alle (49)</button>
-          <button class="filter-chip chip-green" id="filterBiYes" onclick="setFilter('bi-yes', this)">🟢 Reeds BI (14)</button>
-          <button class="filter-chip chip-red" id="filterBiNo" onclick="setFilter('bi-no', this)">🔴 Nog geen BI (26)</button>
-          <button class="filter-chip chip-gold" id="filterBundels" onclick="setFilter('bundel', this)">🟡 Bundels (9)</button>
+          <button class="filter-chip active" id="filterAll" onclick="setFilter('all', this)">Alle</button>
+          <button class="filter-chip chip-green" id="filterBiYes" onclick="setFilter('bi-yes', this)">🟢 Reeds BI</button>
+          <button class="filter-chip chip-red" id="filterBiNo" onclick="setFilter('bi-no', this)">🔴 Nog geen BI</button>
+          <button class="filter-chip chip-gold" id="filterBundels" onclick="setFilter('bundel', this)">🟡 Bundels</button>
         </div>
       </div>
 
       <div class="sidebar-stats">
-        <span id="resultCount">49 resultaten getoond</span>
+        <span id="resultCount">Laden...</span>
         <span>West-Vlaanderen Zone</span>
       </div>
 
@@ -1131,15 +1301,15 @@ def build_map_html(locations, bundels):
     <div class="map-legend">
       <div class="legend-row">
         <div class="legend-dot green">✓</div>
-        <span>Reeds een BI (14 locaties)</span>
+        <span id="legBiYesText">Reeds een BI</span>
       </div>
       <div class="legend-row">
         <div class="legend-dot red">!</div>
-        <span>Nog GEEN BI (26 locaties)</span>
+        <span id="legBiNoText">Nog GEEN BI</span>
       </div>
       <div class="legend-row">
         <div class="legend-dot gold">◆</div>
-        <span>Infrabel Moederbundel (9 rangeerterreinen)</span>
+        <span>Infrabel Moederbundels (rangeerterreinen)</span>
       </div>
       <div class="legend-row" id="railLegendRow" style="display: flex;">
         <div class="legend-line"></div>
@@ -1152,12 +1322,35 @@ def build_map_html(locations, bundels):
       <button class="detail-close" onclick="closeDetail()">&times;</button>
       <div class="detail-header">
         <div id="detailStatusPill" class="detail-status-pill badge-bi-yes">✓ BI BESCHIKBAAR</div>
-        <h2 id="detailTitle" class="detail-title">Wallenius Canadakaai</h2>
-        <div id="detailSubtitle" class="detail-subtitle">Zeebrugge Zuidelijk Insteekdok &bull; PP-321</div>
+        <h2 id="detailTitle" class="detail-title">Locatie</h2>
+        <div id="detailSubtitle" class="detail-subtitle">Zone info</div>
       </div>
 
       <div class="detail-grid">
         
+        <!-- SECTION: Gekoppelde Benamingen & Aliassen (TASK 2) -->
+        <div class="detail-item alias-section" id="detailAliasSection">
+          <div class="alias-section-header">
+            <div class="detail-item-label">🔗 Gekoppelde Benamingen (1 BI voor allen)</div>
+            <span class="alias-count-tag" id="detailAliasCount">0 synoniemen</span>
+          </div>
+          <div id="detailAliasesContainer" class="alias-chips-wrap">
+            <!-- Chips rendered dynamically -->
+          </div>
+          <div class="alias-controls-box">
+            <div class="alias-add-row">
+              <input type="text" id="newAliasInput" class="alias-input" placeholder="Voeg synoniem toe (bijv. SA ECS 1)..." onkeydown="if(event.key==='Enter') addCurrentAlias()" />
+              <button class="btn-alias-add" onclick="addCurrentAlias()">+ Voeg toe</button>
+            </div>
+            <div class="alias-merge-row">
+              <select id="mergeLocationSelect" class="merge-select">
+                <option value="">-- Koppel met andere bediening --</option>
+              </select>
+              <button class="btn-alias-merge" onclick="mergeSelectedLocation()">🔗 Koppel</button>
+            </div>
+          </div>
+        </div>
+
         <!-- Editable GPS Coordinates Box -->
         <div class="edit-coord-box">
           <div class="edit-coord-title">
@@ -1197,23 +1390,23 @@ def build_map_html(locations, bundels):
 
         <div class="detail-item">
           <div class="detail-item-label">Moederbundel (Infrabel)</div>
-          <div id="detailMoederbundel" class="detail-item-val">Bundel Ramskapelle (sporen 881-897)</div>
+          <div id="detailMoederbundel" class="detail-item-val">-</div>
         </div>
         <div class="detail-item">
           <div class="detail-item-label">Bedieningssporen & Lengte</div>
-          <div id="detailSporen" class="detail-item-val">Spoor 843 (sporen 1 t.e.m. 4)</div>
+          <div id="detailSporen" class="detail-item-val">-</div>
         </div>
         <div class="detail-item">
           <div class="detail-item-label">Adres & Toegangsweg</div>
-          <div id="detailAdres" class="detail-item-val">Canadakaai (Kaai 107-108), 8380 Zeebrugge</div>
+          <div id="detailAdres" class="detail-item-val">-</div>
         </div>
         <div class="detail-item">
           <div class="detail-item-label">Beveiliging & Wissels</div>
-          <div id="detailBeveiliging" class="detail-item-val">Stuitklamp tussen poort en spoor 843, Siemensslot</div>
+          <div id="detailBeveiliging" class="detail-item-val">-</div>
         </div>
         <div class="detail-item">
           <div class="detail-item-label">PPGI Bronreferentie</div>
-          <div id="detailPpgi" class="detail-item-val">PP-321 blz. 9, 21, 33</div>
+          <div id="detailPpgi" class="detail-item-val">-</div>
         </div>
       </div>
 
@@ -1235,18 +1428,18 @@ def build_map_html(locations, bundels):
         <button class="modal-close" onclick="closeExportModal()">&times;</button>
       </h2>
       <div class="modal-body">
-        <p>Alle handmatig verplaatste of gecorrigeerde GPS coördinaten worden <strong>automatisch bewaard</strong> in je browser (LocalStorage). Zelfs na het herladen of sluiten van de browser blijven je aanpassingen behouden.</p>
+        <p>Alle handmatig verplaatste GPS coördinaten en gekoppelde synoniemen worden <strong>automatisch bewaard</strong> in je browser (LocalStorage). Zelfs na herladen blijven al je aanpassingen behouden.</p>
         <div style="margin: 12px 0; background: #1e293b; padding: 10px 14px; border-radius: 6px; border: 1px solid #334155;">
           <strong>Huidige status:</strong> <span id="modalCustomCount">0</span> locaties handmatig aangepast.
         </div>
-        <p>Gebruik onderstaande opties om je gecorrigeerde coördinaten permanent als bestand op te slaan of over te dragen:</p>
+        <p>Gebruik onderstaande knoppen om je gegevens te exporteren of over te dragen naar GitHub:</p>
       </div>
       <div class="modal-actions">
         <button class="btn-modal-action btn-modal-primary" onclick="downloadUpdatedJson()">
-          📥 Download bijgewerkte 'locs_gps.json'
+          📥 Download bijgewerkte 'locs_gps.json' (inclusief aliassen)
         </button>
         <button class="btn-modal-action" onclick="downloadUpdatedHtml()">
-          📄 Download complete 'kaart_bedieningen.html' (met ingebouwde coördinaten)
+          📄 Download complete 'kaart_bedieningen.html'
         </button>
         <button class="btn-modal-action" onclick="copyModifiedCoordsToClipboard()">
           📋 Kopieer gewijzigde coördinaten naar klembord
@@ -1266,8 +1459,10 @@ def build_map_html(locations, bundels):
     const rawLocations = {json.dumps(locations, ensure_ascii=False)};
     const rawBundels = {json.dumps(bundels, ensure_ascii=False)};
 
-    // Local Storage Key
+    // Local Storage Keys
     const STORAGE_KEY = 'db_cargo_saved_coords_v1';
+    const STORAGE_ALIASES_KEY = 'db_cargo_saved_aliases_v1';
+    const STORAGE_MERGED_KEY = 'db_cargo_saved_merged_v1';
 
     // Hub extents
     const HUB_COORDS = {{
@@ -1292,7 +1487,6 @@ def build_map_html(locations, bundels):
         const raw = localStorage.getItem(STORAGE_KEY);
         return raw ? JSON.parse(raw) : {{}};
       }} catch (e) {{
-        console.warn('LocalStorage niet beschikbaar:', e);
         return {{}};
       }}
     }}
@@ -1300,10 +1494,23 @@ def build_map_html(locations, bundels):
     function savePersistedOverrides(overrides) {{
       try {{
         localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides));
-      }} catch (e) {{
-        console.warn('Fout bij opslaan in LocalStorage:', e);
-      }}
+      }} catch (e) {{}}
       updateCustomCountBadge();
+    }}
+
+    function loadPersistedAliases() {{
+      try {{
+        const raw = localStorage.getItem(STORAGE_ALIASES_KEY);
+        return raw ? JSON.parse(raw) : {{}};
+      }} catch (e) {{
+        return {{}};
+      }}
+    }}
+
+    function savePersistedAliases(aliasesMap) {{
+      try {{
+        localStorage.setItem(STORAGE_ALIASES_KEY, JSON.stringify(aliasesMap));
+      }} catch (e) {{}}
     }}
 
     // Check optional local Python server on port 8055
@@ -1317,16 +1524,12 @@ def build_map_html(locations, bundels):
           serverAvailable = true;
           document.getElementById('syncStatusDot').classList.add('connected');
           document.getElementById('syncStatusText').textContent = 'Server Actief (Auto-Save)';
-          document.getElementById('syncStatusBox').title = 'Lokale python server actief: wijzigingen worden direct weggeschreven naar locs_gps.json en HTML!';
           return;
         }}
-      }} catch (e) {{
-        // Server not running, perfectly fine, localStorage handles persistence
-      }}
+      }} catch (e) {{}}
       serverAvailable = false;
       document.getElementById('syncStatusDot').classList.remove('connected');
       document.getElementById('syncStatusText').textContent = 'Browser Opslag (Actief)';
-      document.getElementById('syncStatusBox').title = 'LocalStorage actief: wijzigingen blijven bewaard in deze browser.';
     }}
 
     // Leaflet Layers
@@ -1434,7 +1637,7 @@ def build_map_html(locations, bundels):
       }}, 3500);
     }}
 
-    // Create Marker Icons (Fixed size to eliminate jitter)
+    // Create Marker Icons
     function createMarkerIcon(loc, isCustom) {{
       const customClass = isCustom ? 'has-custom-coord' : '';
       if (loc.is_bundel) {{
@@ -1479,15 +1682,20 @@ def build_map_html(locations, bundels):
       }}
     }}
 
-    // Build Master Items Array
-    const allItems = [];
-    const persisted = loadPersistedOverrides();
+    // Master Items Array
+    let allItems = [];
+    const persistedCoords = loadPersistedOverrides();
+    const persistedAliases = loadPersistedAliases();
 
-    // 40 Locations
+    // Populate locations
     rawLocations.forEach(l => {{
-      const hasCustom = persisted[l.id] !== undefined;
-      const lat = hasCustom ? persisted[l.id].lat : l.lat;
-      const lng = hasCustom ? persisted[l.id].lng : l.lng;
+      const hasCustom = persistedCoords[l.id] !== undefined;
+      const lat = hasCustom ? persistedCoords[l.id].lat : l.lat;
+      const lng = hasCustom ? persistedCoords[l.id].lng : l.lng;
+      
+      // Merge base aliases with any stored aliases
+      const storedAliases = persistedAliases[l.id] || [];
+      const combinedAliases = Array.from(new Set([...(l.aliases || []), ...storedAliases]));
 
       allItems.push({{
         id: l.id,
@@ -1508,17 +1716,18 @@ def build_map_html(locations, bundels):
         original_lng: l.lng,
         lat: lat,
         lng: lng,
+        aliases: combinedAliases,
         is_custom_coord: hasCustom,
         is_bundel: false
       }});
     }});
 
-    // 9 Bundels
+    // Populate bundels
     rawBundels.forEach((b, idx) => {{
       const bundelId = 'bundel_' + idx;
-      const hasCustom = persisted[bundelId] !== undefined;
-      const lat = hasCustom ? persisted[bundelId].lat : b.lat;
-      const lng = hasCustom ? persisted[bundelId].lng : b.lng;
+      const hasCustom = persistedCoords[bundelId] !== undefined;
+      const lat = hasCustom ? persistedCoords[bundelId].lat : b.lat;
+      const lng = hasCustom ? persistedCoords[bundelId].lng : b.lng;
 
       allItems.push({{
         id: bundelId,
@@ -1538,36 +1747,43 @@ def build_map_html(locations, bundels):
         original_lng: b.lng,
         lat: lat,
         lng: lng,
+        aliases: [b.name],
         is_custom_coord: hasCustom,
         is_bundel: true
       }});
     }});
 
     // Add Markers to Map
-    allItems.forEach(item => {{
-      const marker = L.marker([item.lat, item.lng], {{
-        icon: createMarkerIcon(item, item.is_custom_coord),
-        riseOnHover: true
-      }}).addTo(map);
+    function buildMapMarkers() {{
+      // Clear existing
+      Object.values(markersMap).forEach(mObj => map.removeLayer(mObj.marker));
+      markersMap = {{}};
 
-      // Tooltip with clean design
-      const tipText = item.is_bundel 
-        ? `<strong>${{item.name}}</strong><br/><span style="color:#fbbf24;font-size:10px;">Infrabel Moederbundel</span>`
-        : `<strong>${{item.name}}</strong><br/><span style="color:${{item.has_bi ? '#34d399' : '#f87171'}};font-size:10px;">${{item.has_bi ? '🟢 Reeds BI' : '🔴 Nog GEEN BI'}}</span>`;
+      allItems.forEach(item => {{
+        const marker = L.marker([item.lat, item.lng], {{
+          icon: createMarkerIcon(item, item.is_custom_coord),
+          riseOnHover: true
+        }}).addTo(map);
 
-      marker.bindTooltip(tipText, {{
-        className: 'custom-tip',
-        direction: 'top',
-        offset: [0, -14],
-        opacity: 0.95
+        const tipText = item.is_bundel 
+          ? `<strong>${{item.name}}</strong><br/><span style="color:#fbbf24;font-size:10px;">Infrabel Moederbundel</span>`
+          : `<strong>${{item.name}}</strong><br/><span style="color:${{item.has_bi ? '#34d399' : '#f87171'}};font-size:10px;">${{item.has_bi ? '🟢 Reeds BI' : '🔴 Nog GEEN BI'}}</span>`;
+
+        marker.bindTooltip(tipText, {{
+          className: 'custom-tip',
+          direction: 'top',
+          offset: [0, -14],
+          opacity: 0.95
+        }});
+
+        marker.on('click', () => {{
+          selectLocation(item.id, true);
+        }});
+
+        markersMap[item.id] = {{ marker, data: item }};
       }});
-
-      marker.on('click', () => {{
-        selectLocation(item.id, true);
-      }});
-
-      markersMap[item.id] = {{ marker, data: item }};
-    }});
+    }}
+    buildMapMarkers();
 
     // Update Modified Counter Badge in Header
     function updateCustomCountBadge() {{
@@ -1609,6 +1825,19 @@ def build_map_html(locations, bundels):
           ? '<span class="badge-custom-coord" title="Handmatig aangepast">📍 Aangepast</span>' 
           : '';
 
+        // Aliases rendering in card
+        let aliasesHtml = '';
+        if (item.aliases && item.aliases.length > 0) {{
+          const displayed = item.aliases.slice(0, 3);
+          aliasesHtml = `
+            <div class="loc-card-aliases">
+              <span>🔗</span>
+              ${{displayed.map(a => `<span class="loc-card-aliases-tag">${{a}}</span>`).join('')}}
+              ${{item.aliases.length > 3 ? `<span style="color:#64748b;">+${{item.aliases.length - 3}}</span>` : ''}}
+            </div>
+          `;
+        }}
+
         card.innerHTML = `
           <div class="loc-card-header">
             <div class="loc-card-title">${{item.name}}</div>
@@ -1617,6 +1846,7 @@ def build_map_html(locations, bundels):
           <div class="loc-card-details">
             <div>📍 ${{item.moederbundel || item.adres}}</div>
             <div style="color:#64748b; font-size:10px;">Sporen: ${{item.sporen}}</div>
+            ${{aliasesHtml}}
           </div>
           <div class="loc-card-meta">
             <span>${{item.zone}}</span>
@@ -1632,7 +1862,18 @@ def build_map_html(locations, bundels):
         listEl.appendChild(card);
       }});
 
-      document.getElementById('resultCount').textContent = `${{items.length}} resultaten getoond`;
+      // Update count statistics
+      const biYesCount = allItems.filter(x => !x.is_bundel && x.has_bi).length;
+      const biNoCount = allItems.filter(x => !x.is_bundel && !x.has_bi).length;
+      const bundelCount = allItems.filter(x => x.is_bundel).length;
+
+      document.getElementById('resultCount').textContent = `${{items.length}} locaties getoond`;
+      document.getElementById('filterAll').textContent = `Alle (${{allItems.length}})`;
+      document.getElementById('filterBiYes').textContent = `🟢 Reeds BI (${{biYesCount}})`;
+      document.getElementById('filterBiNo').textContent = `🔴 Nog geen BI (${{biNoCount}})`;
+      document.getElementById('filterBundels').textContent = `🟡 Bundels (${{bundelCount}})`;
+      document.getElementById('legBiYesText').textContent = `Reeds een BI (${{biYesCount}} locaties)`;
+      document.getElementById('legBiNoText').textContent = `Nog GEEN BI (${{biNoCount}} locaties)`;
     }}
 
     // Filter Logic
@@ -1650,12 +1891,14 @@ def build_map_html(locations, bundels):
           const matchAdres = (item.adres || '').toLowerCase().includes(query);
           const matchZone = (item.zone || '').toLowerCase().includes(query);
           const matchMoeder = (item.moederbundel || '').toLowerCase().includes(query);
-          if (!matchName && !matchSporen && !matchAdres && !matchZone && !matchMoeder) return false;
+          const matchAlias = (item.aliases || []).some(a => a.toLowerCase().includes(query));
+          if (!matchName && !matchSporen && !matchAdres && !matchZone && !matchMoeder && !matchAlias) return false;
         }}
         return true;
       }});
 
       allItems.forEach(item => {{
+        if (!markersMap[item.id]) return;
         const m = markersMap[item.id].marker;
         const visible = filtered.some(f => f.id === item.id);
         if (visible) {{
@@ -1677,7 +1920,6 @@ def build_map_html(locations, bundels):
 
     // Selection & Detail Overlay
     function selectLocation(id, zoomIn) {{
-      // Clean up any ongoing drag/pick tool
       cancelInteractiveTool();
 
       activeMarkerId = id;
@@ -1721,6 +1963,9 @@ def build_map_html(locations, bundels):
       document.getElementById('detailBeveiliging').textContent = target.beveiliging || 'Geen specifieke sloten vermeld';
       document.getElementById('detailPpgi').textContent = target.ppgi_ref || 'PPGI West-Vlaanderen';
 
+      // Render Aliases Section
+      renderDetailAliases(target);
+
       // GPS Inputs
       document.getElementById('editLat').value = target.lat.toFixed(6);
       document.getElementById('editLng').value = target.lng.toFixed(6);
@@ -1750,10 +1995,138 @@ def build_map_html(locations, bundels):
     }}
 
     // ==========================================
+    // ALIASES & LINKING LOGIC (TASK 2)
+    // ==========================================
+
+    function renderDetailAliases(target) {{
+      const sec = document.getElementById('detailAliasSection');
+      if (target.is_bundel) {{
+        sec.style.display = 'none';
+        return;
+      }}
+      sec.style.display = 'block';
+
+      const countEl = document.getElementById('detailAliasCount');
+      const container = document.getElementById('detailAliasesContainer');
+      const selectEl = document.getElementById('mergeLocationSelect');
+
+      const aliases = target.aliases || [];
+      countEl.textContent = `${{aliases.length}} synoniem${{aliases.length === 1 ? '' : 'men'}}`;
+
+      if (aliases.length === 0) {{
+        container.innerHTML = '<span style="color:#64748b; font-size:11px; font-style:italic;">Nog geen synoniemen gekoppeld. Voeg er een toe om dubbele BI\\'s te voorkomen.</span>';
+      }} else {{
+        container.innerHTML = aliases.map(a => `
+          <span class="alias-chip">
+            <span>${{a}}</span>
+            <button class="alias-chip-del" onclick="removeCurrentAlias('${{a.replace(/'/g, "\\\\'")}}')" title="Verwijder synoniem">&times;</button>
+          </span>
+        `).join('');
+      }}
+
+      // Populate merge dropdown with other non-bundel locations
+      selectEl.innerHTML = '<option value="">-- Koppel met andere bediening --</option>';
+      allItems.filter(x => !x.is_bundel && x.id !== target.id).forEach(other => {{
+        const opt = document.createElement('option');
+        opt.value = other.id;
+        opt.textContent = `${{other.name}} (${{other.has_bi ? 'Reeds BI' : 'Geen BI'}})`;
+        selectEl.appendChild(opt);
+      }});
+    }}
+
+    function addCurrentAlias() {{
+      if (!activeMarkerId) return;
+      const target = allItems.find(x => x.id === activeMarkerId);
+      if (!target) return;
+
+      const input = document.getElementById('newAliasInput');
+      const val = input.value.trim();
+      if (!val) return;
+
+      if (!target.aliases) target.aliases = [];
+      if (!target.aliases.includes(val)) {{
+        target.aliases.push(val);
+        input.value = '';
+
+        // Save aliases to localStorage
+        const allStoredAliases = loadPersistedAliases();
+        allStoredAliases[target.id] = target.aliases;
+        savePersistedAliases(allStoredAliases);
+
+        renderDetailAliases(target);
+        handleFilter();
+        showToast(`✓ Synoniem "${{val}}" gekoppeld aan ${{target.name}}!`);
+      }}
+    }}
+
+    function removeCurrentAlias(aliasVal) {{
+      if (!activeMarkerId) return;
+      const target = allItems.find(x => x.id === activeMarkerId);
+      if (!target || !target.aliases) return;
+
+      target.aliases = target.aliases.filter(a => a !== aliasVal);
+
+      const allStoredAliases = loadPersistedAliases();
+      allStoredAliases[target.id] = target.aliases;
+      savePersistedAliases(allStoredAliases);
+
+      renderDetailAliases(target);
+      handleFilter();
+      showToast(`Synoniem "${{aliasVal}}" verwijderd.`);
+    }}
+
+    function mergeSelectedLocation() {{
+      if (!activeMarkerId) return;
+      const target = allItems.find(x => x.id === activeMarkerId);
+      if (!target) return;
+
+      const selectEl = document.getElementById('mergeLocationSelect');
+      const otherId = selectEl.value;
+      if (!otherId) {{
+        showToast('Selecteer eerst een locatie om samen te voegen.', 'warning');
+        return;
+      }}
+
+      const other = allItems.find(x => x.id === otherId);
+      if (!other) return;
+
+      const confirmMsg = `Weet je zeker dat je "${{other.name}}" wilt samenvoegen met "${{target.name}}"?\\n\\nBeide benamingen worden gekoppeld en vormen voortaan 1 GEZAMENLIJKE BI. De dubbele pin van "${{other.name}}" wordt verwijderd.`;
+      if (!confirm(confirmMsg)) return;
+
+      // Add other name and aliases to target
+      if (!target.aliases) target.aliases = [];
+      if (!target.aliases.includes(other.name)) target.aliases.push(other.name);
+      if (other.aliases) {{
+        other.aliases.forEach(a => {{
+          if (!target.aliases.includes(a)) target.aliases.push(a);
+        }});
+      }}
+
+      // If target had no BI but other had a BI, inherit the BI!
+      if (!target.has_bi && other.has_bi) {{
+        target.has_bi = true;
+        target.bi_version = other.bi_version;
+      }}
+
+      // Remove other location from allItems
+      allItems = allItems.filter(x => x.id !== otherId);
+
+      // Save aliases and rebuild map markers
+      const allStoredAliases = loadPersistedAliases();
+      allStoredAliases[target.id] = target.aliases;
+      savePersistedAliases(allStoredAliases);
+
+      buildMapMarkers();
+      selectLocation(target.id, false);
+      handleFilter();
+
+      showToast(`✓ "${{other.name}}" succesvol gekoppeld aan "${{target.name}}"! Slechts 1 BI vereist.`);
+    }}
+
+    // ==========================================
     // INTERACTIVE COORDINATES EDITING LOGIC
     // ==========================================
 
-    // 1. Drag Marker Mode
     function toggleDragCurrentMarker() {{
       if (!activeMarkerId) return;
       const itemObj = markersMap[activeMarkerId];
@@ -1814,7 +2187,6 @@ def build_map_html(locations, bundels):
       }}
     }}
 
-    // 2. Pick Point on Map Mode
     function togglePickPoint() {{
       if (!activeMarkerId) return;
       isPickPointActive = !isPickPointActive;
@@ -1852,7 +2224,6 @@ def build_map_html(locations, bundels):
       document.getElementById('actionBanner').classList.remove('active');
     }}
 
-    // Map Click Listener for Pick Point
     map.on('click', function(e) {{
       if (isPickPointActive && activeMarkerId) {{
         const newLat = e.latlng.lat;
@@ -1878,7 +2249,6 @@ def build_map_html(locations, bundels):
       }}
     }}
 
-    // 3. Save Coordinates (LocalStorage + Optional Local Server)
     async function saveCurrentCoords() {{
       if (!activeMarkerId) return;
       const newLat = parseFloat(document.getElementById('editLat').value);
@@ -1897,23 +2267,18 @@ def build_map_html(locations, bundels):
       target.lng = newLng;
       target.is_custom_coord = true;
 
-      // Update marker position & icon
       itemObj.marker.setLatLng([newLat, newLng]);
       itemObj.marker.setIcon(createMarkerIcon(target, true));
 
-      // Persist in LocalStorage
       const saved = loadPersistedOverrides();
       saved[activeMarkerId] = {{ lat: newLat, lng: newLng }};
       savePersistedOverrides(saved);
 
-      // Update UI elements
       document.getElementById('coordCustomBadge').style.display = 'inline-block';
       document.getElementById('detailNavBtn').href = `https://www.google.com/maps/@?api=1&map_action=map&center=${{newLat}},${{newLng}}&zoom=18&basemap=satellite`;
 
-      // Update sidebar card badge
       handleFilter();
 
-      // Attempt background save to local Python server if available
       let serverSaved = false;
       if (serverAvailable) {{
         try {{
@@ -1923,9 +2288,7 @@ def build_map_html(locations, bundels):
             body: JSON.stringify({{ id: activeMarkerId, lat: newLat, lng: newLng }})
           }});
           if (res.ok) serverSaved = true;
-        }} catch (e) {{
-          console.warn('Server save gefaald:', e);
-        }}
+        }} catch (e) {{}}
       }}
 
       if (serverSaved) {{
@@ -1935,7 +2298,6 @@ def build_map_html(locations, bundels):
       }}
     }}
 
-    // 4. Reset Current Item to Default Coordinates
     function resetCurrentCoords() {{
       if (!activeMarkerId) return;
       const itemObj = markersMap[activeMarkerId];
@@ -1954,7 +2316,6 @@ def build_map_html(locations, bundels):
       document.getElementById('editLng').value = target.lng.toFixed(6);
       document.getElementById('coordCustomBadge').style.display = 'none';
 
-      // Remove from LocalStorage
       const saved = loadPersistedOverrides();
       delete saved[activeMarkerId];
       savePersistedOverrides(saved);
@@ -1976,14 +2337,26 @@ def build_map_html(locations, bundels):
       document.getElementById('exportModal').classList.remove('active');
     }}
 
-    // Download updated locs_gps.json
     function downloadUpdatedJson() {{
-      const updatedLocations = rawLocations.map(l => {{
-        const item = allItems.find(x => x.id === l.id);
+      const updatedLocations = allItems.filter(x => !x.is_bundel).map(item => {{
         return {{
-          ...l,
-          lat: item ? item.lat : l.lat,
-          lng: item ? item.lng : l.lng
+          id: item.id,
+          name: item.name,
+          cluster: item.cluster,
+          zone: item.zone,
+          zone_name: item.zone_name,
+          has_bi: item.has_bi,
+          bi_version: item.bi_version,
+          type: item.type,
+          moederbundel: item.moederbundel,
+          sporen: item.sporen,
+          adres: item.adres,
+          toegang_weg: item.toegang_weg,
+          beveiliging: item.beveiliging,
+          ppgi_ref: item.ppgi_ref,
+          aliases: item.aliases || [],
+          lat: item.lat,
+          lng: item.lng
         }};
       }});
 
@@ -2013,29 +2386,8 @@ def build_map_html(locations, bundels):
       showToast('📥 locs_gps.json succesvol gedownload!');
     }}
 
-    // Download updated complete HTML file
     function downloadUpdatedHtml() {{
-      const updatedLocations = rawLocations.map(l => {{
-        const item = allItems.find(x => x.id === l.id);
-        return {{
-          ...l,
-          lat: item ? item.lat : l.lat,
-          lng: item ? item.lng : l.lng
-        }};
-      }});
-
-      const updatedBundels = rawBundels.map((b, idx) => {{
-        const item = allItems.find(x => x.id === 'bundel_' + idx);
-        return {{
-          ...b,
-          lat: item ? item.lat : b.lat,
-          lng: item ? item.lng : b.lng
-        }};
-      }});
-
-      // Get current HTML and replace embedded data
       let html = document.documentElement.outerHTML;
-      // Trigger download
       const blob = new Blob(['<!DOCTYPE html>' + String.fromCharCode(10) + html], {{ type: 'text/html' }});
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -2048,7 +2400,6 @@ def build_map_html(locations, bundels):
       showToast('📄 Bijgewerkte kaart_bedieningen.html gedownload!');
     }}
 
-    // Copy modified coordinates to clipboard
     function copyModifiedCoordsToClipboard() {{
       const saved = loadPersistedOverrides();
       const keys = Object.keys(saved);
@@ -2071,10 +2422,10 @@ def build_map_html(locations, bundels):
       }});
     }}
 
-    // Reset all overrides
     function resetAllOverrides() {{
       if (confirm('Weet je zeker dat je alle handmatige aanpassingen wilt wissen en terugkeren naar de fabrieksinstellingen?')) {{
         localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(STORAGE_ALIASES_KEY);
         allItems.forEach(item => {{
           item.lat = item.original_lat;
           item.lng = item.original_lng;
@@ -2110,9 +2461,13 @@ if __name__ == '__main__':
     
     html = build_map_html(data['locations'], data.get('bundels', []))
     
-    # Save to workspace
+    # Save to workspace (both kaart_bedieningen.html and index.html for GitHub Pages)
     ws_html = os.path.join(workspace_dir, 'kaart_bedieningen.html')
     with open(ws_html, 'w', encoding='utf-8') as f:
+        f.write(html)
+
+    ws_index = os.path.join(workspace_dir, 'index.html')
+    with open(ws_index, 'w', encoding='utf-8') as f:
         f.write(html)
         
     # Save to artifact directory
@@ -2121,4 +2476,4 @@ if __name__ == '__main__':
     with open(art_html, 'w', encoding='utf-8') as f:
         f.write(html)
         
-    print(f"Generated successfully: {len(html)} bytes written to {ws_html} and {art_html}")
+    print(f"Generated successfully: written to {ws_html}, {ws_index} and {art_html}")

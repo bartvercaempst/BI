@@ -16,7 +16,13 @@
       "beveiliging": "Stuitklamp tussen poort en spoor 843, Siemensslot",
       "ppgi_ref": "PP-321 blz. 9, 21, 33",
       "lat": 51.315,
-      "lng": 3.238
+      "lng": 3.238,
+      "aliases": [
+        "CAST",
+        "Wallenius",
+        "Canadakaai",
+        "Kaai 107-108"
+      ]
     },
     {
       "id": "cdmz",
@@ -34,7 +40,11 @@
       "beveiliging": "Stuitklamp 93R, OW met Andreaskruis",
       "ppgi_ref": "PP-321 blz. 9, 21",
       "lat": 51.3115,
-      "lng": 3.231
+      "lng": 3.231,
+      "aliases": [
+        "CDMZ Ramskapelle",
+        "Car Delivery Zeebrugge"
+      ]
     },
     {
       "id": "cro_brit",
@@ -52,7 +62,12 @@
       "beveiliging": "Ontspoortong 10R, stuitklamp tussen poort en OW17, sleutel 321FR",
       "ppgi_ref": "PP-321 blz. 9, 22, 27",
       "lat": 51.336296,
-      "lng": 3.225474
+      "lng": 3.225474,
+      "aliases": [
+        "SEA-RO",
+        "Brittaniadok",
+        "Kaai 701-704"
+      ]
     },
     {
       "id": "ico_toy",
@@ -70,7 +85,11 @@
       "beveiliging": "Stuitklamp met koppelslot, OW op terminal",
       "ppgi_ref": "PP-321 blz. 9, 21",
       "lat": 51.301401,
-      "lng": 3.244658
+      "lng": 3.244658,
+      "aliases": [
+        "Hanze Terminal",
+        "Toyota Zeebrugge"
+      ]
     },
     {
       "id": "ico1",
@@ -88,7 +107,11 @@
       "beveiliging": "Stuitklamp tussen OW21 en wissel 532, Siemenssleutels 442/443, Wilka G*",
       "ppgi_ref": "PP-321 blz. 9, 20, 27",
       "lat": 51.306687,
-      "lng": 3.217235
+      "lng": 3.217235,
+      "aliases": [
+        "ICO Bastenaken 1",
+        "Bastenakenkaai Kaai 500"
+      ]
     },
     {
       "id": "ico2",
@@ -106,7 +129,10 @@
       "beveiliging": "Stuitklamp linker tak wissel 502, OW Margareta van Oostenrijkstraat",
       "ppgi_ref": "PP-321 blz. 9, 20, 27",
       "lat": 51.296014,
-      "lng": 3.22717
+      "lng": 3.22717,
+      "aliases": [
+        "ICO Bastenaken 2"
+      ]
     },
     {
       "id": "efico",
@@ -124,7 +150,8 @@
       "beveiliging": "Omheining, poort, stuitklamp linker tak wissel 551",
       "ppgi_ref": "PP-321 blz. 9, 22, 36-38",
       "lat": 51.295931,
-      "lng": 3.225249
+      "lng": 3.225249,
+      "aliases": []
     },
     {
       "id": "ndq",
@@ -142,7 +169,8 @@
       "beveiliging": "Stuitklamp 63R linker tak wissel 552, Siemensslot 244/115, Wilka G*",
       "ppgi_ref": "PP-321 blz. 9, 22, 39-41",
       "lat": 51.300855,
-      "lng": 3.221456
+      "lng": 3.221456,
+      "aliases": []
     },
     {
       "id": "spoorfuel",
@@ -160,7 +188,8 @@
       "beveiliging": "Ontspoortong 91AR, telefonische aanvraag Blok 7",
       "ppgi_ref": "PP-321 blz. 9, 21, 83-84",
       "lat": 51.3135,
-      "lng": 3.227
+      "lng": 3.227,
+      "aliases": []
     },
     {
       "id": "ecs_bl",
@@ -178,11 +207,17 @@
       "beveiliging": "Ontspoortong 96G (Zuid) & elektrische stuitklamp 55H (Noord)",
       "ppgi_ref": "PP-311 blz. 10, 23, 43",
       "lat": 51.314319,
-      "lng": 3.191335
+      "lng": 3.191335,
+      "aliases": [
+        "SA ECS2 Z",
+        "SA ECS2 N",
+        "ECS 2",
+        "Blauwe Loods Zwankendamme"
+      ]
     },
     {
       "id": "2xl_bml",
-      "name": "2XL BML (Baron de Maerelaan)",
+      "name": "2XL BML / SA ECS 1",
       "cluster": "zeebrugge",
       "zone": "PP-311",
       "zone_name": "Zeebrugge Noord / Voorhaven",
@@ -190,13 +225,18 @@
       "bi_version": "V1.5",
       "type": "Logistiek & Warehousing",
       "moederbundel": "Zeebrugge Vorming / Bundel A",
-      "sporen": "Spoor 524 (omloop- en bedieningsspoor)",
-      "adres": "Baron de Maerelaan, 8380 Zeebrugge",
+      "sporen": "Spoor 460 (loods) & Spoor 524 (omloopspoor)",
+      "adres": "Baron de Maerelaan 155, 8380 Zeebrugge",
       "toegang_weg": "Baron de Maerelaan / Kustlaan",
-      "beveiliging": "Kleine beweging onder toezicht Blok 4",
-      "ppgi_ref": "PP-311 blz. 9, 23, 49",
-      "lat": 51.31277,
-      "lng": 3.189243
+      "beveiliging": "Ontspoortong 54BG, Seinen Q524-G.4 & W460-G.4",
+      "ppgi_ref": "PP-311 blz. 9, 10, 23, 42, 49",
+      "lat": 51.312115,
+      "lng": 3.18893,
+      "aliases": [
+        "SA ECS 1",
+        "ECS 1",
+        "Baron de Maerelaan 155"
+      ]
     },
     {
       "id": "nid_ico",
@@ -214,7 +254,12 @@
       "beveiliging": "Ontspoortong, beweegbare brug, OW70",
       "ppgi_ref": "PP-311 blz. 9, 10",
       "lat": 51.327903,
-      "lng": 3.208609
+      "lng": 3.208609,
+      "aliases": [
+        "NIT",
+        "Northern Inlet Terminal",
+        "NID Westeroever"
+      ]
     },
     {
       "id": "po_ferries",
@@ -232,7 +277,12 @@
       "beveiliging": "Terminalpoort, schuifrangering met sein V-L.4",
       "ppgi_ref": "PP-311 blz. 10, 31",
       "lat": 51.336832,
-      "lng": 3.190455
+      "lng": 3.190455,
+      "aliases": [
+        "P&O Westerhoofd",
+        "P&O 501",
+        "P&O Ferries Zeebrugge"
+      ]
     },
     {
       "id": "stora",
@@ -250,7 +300,11 @@
       "beveiliging": "Aansluitspoor 803, verplicht poort openen via PSA security",
       "ppgi_ref": "PP-311 blz. 10, 68",
       "lat": 51.351281,
-      "lng": 3.17713
+      "lng": 3.17713,
+      "aliases": [
+        "PSA Breakbulk",
+        "StoraEnso"
+      ]
     },
     {
       "id": "dartline",
@@ -268,7 +322,11 @@
       "beveiliging": "OW Cat 3 (zelf sleutelen), spoor 804, wielkeggen",
       "ppgi_ref": "PP-311 blz. 10, 68",
       "lat": 51.350343,
-      "lng": 3.170285
+      "lng": 3.170285,
+      "aliases": [
+        "Herstelspoor Dartline",
+        "Dartline Zeebrugge"
+      ]
     },
     {
       "id": "cro_albert",
@@ -286,7 +344,12 @@
       "beveiliging": "Toegangspoort, konvooi splitsen t.h.v. OW",
       "ppgi_ref": "PP-311 blz. 9, 37-39",
       "lat": 51.349,
-      "lng": 3.188
+      "lng": 3.188,
+      "aliases": [
+        "SA CHZ Terminal",
+        "CHZ",
+        "Albert II Dok"
+      ]
     },
     {
       "id": "csp_term",
@@ -304,7 +367,12 @@
       "beveiliging": "Stuitklamp met sleutel 334, procedure via Blok 4",
       "ppgi_ref": "PP-311 blz. 10, 26, 35",
       "lat": 51.351,
-      "lng": 3.182
+      "lng": 3.182,
+      "aliases": [
+        "Cosco Shipping Ports",
+        "CSP Zeebrugge",
+        "Containerterminal Zeebrugge"
+      ]
     },
     {
       "id": "psa_zb",
@@ -322,7 +390,10 @@
       "beveiliging": "Eigen stuitklamp SA PSA Zeebrugge NV",
       "ppgi_ref": "PP-311 blz. 10, 26, 40",
       "lat": 51.3395,
-      "lng": 3.1905
+      "lng": 3.1905,
+      "aliases": [
+        "PSA Zeebrugge Container"
+      ]
     },
     {
       "id": "psa_hnn",
@@ -340,7 +411,11 @@
       "beveiliging": "Stuitklamp / poortbediening",
       "ppgi_ref": "PP-311 blz. 10, 31",
       "lat": 51.337,
-      "lng": 3.1925
+      "lng": 3.1925,
+      "aliases": [
+        "Hesse-Noord Natie",
+        "PSA HNN 801"
+      ]
     },
     {
       "id": "po_nsf",
@@ -358,25 +433,11 @@
       "beveiliging": "Stuitklampen SA P&O NSF",
       "ppgi_ref": "PP-311 blz. 10, 26, 35",
       "lat": 51.355,
-      "lng": 3.214
-    },
-    {
-      "id": "ecs1",
-      "name": "SA ECS 1",
-      "cluster": "zeebrugge",
-      "zone": "PP-311",
-      "zone_name": "Zeebrugge Noord / Voorhaven",
-      "has_bi": false,
-      "bi_version": null,
-      "type": "Logistiek & Overslag",
-      "moederbundel": "Bundel A / Zeebrugge Vorming",
-      "sporen": "Doodspoor 460 (via omloopspoor 524)",
-      "adres": "Kustlaan / Baron de Maerelaan, 8380 Zeebrugge",
-      "toegang_weg": "Kustlaan",
-      "beveiliging": "Ontspoortong 54BG",
-      "ppgi_ref": "PP-311 blz. 9, 10, 33, 42",
-      "lat": 51.322,
-      "lng": 3.198
+      "lng": 3.214,
+      "aliases": [
+        "North Sea Ferries",
+        "P&O NSF Spoor 851"
+      ]
     },
     {
       "id": "zb_kaai",
@@ -394,7 +455,11 @@
       "beveiliging": "Kleine beweging onder Blok 4",
       "ppgi_ref": "PP-311 blz. 10, 26, 36",
       "lat": 51.348,
-      "lng": 3.211
+      "lng": 3.211,
+      "aliases": [
+        "Kaaispoor 851 Infrabel",
+        "Zeebrugge-Kaai"
+      ]
     },
     {
       "id": "zweedse_kaai",
@@ -412,7 +477,10 @@
       "beveiliging": "Historische aansluiting L202",
       "ppgi_ref": "PP-311 blz. 1, 3",
       "lat": 51.339031,
-      "lng": 3.206935
+      "lng": 3.206935,
+      "aliases": [
+        "Zweedse Kaai Zeebrugge"
+      ]
     },
     {
       "id": "proviron",
@@ -430,7 +498,10 @@
       "beveiliging": "Telefoontoelating Blok 7, kleine beweging",
       "ppgi_ref": "PP-341 blz. 9, 31",
       "lat": 51.2135,
-      "lng": 3.003
+      "lng": 3.003,
+      "aliases": [
+        "Proviron Chemicals Oostende"
+      ]
     },
     {
       "id": "tilbury",
@@ -448,7 +519,11 @@
       "beveiliging": "Omheining, poort, bediening brug door De Vlaamse Waterweg, max 1 loc",
       "ppgi_ref": "PP-341 blz. 8, 28, 31-32",
       "lat": 51.229,
-      "lng": 2.929
+      "lng": 2.929,
+      "aliases": [
+        "Tilbury Kaai Oostende",
+        "Goederenoverslag Oostende"
+      ]
     },
     {
       "id": "plassendale",
@@ -466,7 +541,11 @@
       "beveiliging": "Omheining, poort, spoorwegdraaibrug bediend door personeel",
       "ppgi_ref": "PP-341 blz. 8, 26, 31",
       "lat": 51.211,
-      "lng": 2.998
+      "lng": 2.998,
+      "aliases": [
+        "Plassendale 1",
+        "Industrieterrein Plassendale"
+      ]
     },
     {
       "id": "oostende_vorming",
@@ -484,7 +563,10 @@
       "beveiliging": "Overgedragen aan I-O.3, Siemenssleutelprocedure",
       "ppgi_ref": "PP-341 blz. 9, 26, 33",
       "lat": 51.222,
-      "lng": 2.946
+      "lng": 2.946,
+      "aliases": [
+        "Oostende Vorming Spoor 117-118"
+      ]
     },
     {
       "id": "whv_oostende",
@@ -502,7 +584,11 @@
       "beveiliging": "Centrale aanvraag Blok 7, industriële seinpost",
       "ppgi_ref": "PP-341 blz. 9, 32-33, 66-72",
       "lat": 51.218,
-      "lng": 2.955
+      "lng": 2.955,
+      "aliases": [
+        "WHV",
+        "WET Oostende"
+      ]
     },
     {
       "id": "alstom",
@@ -520,7 +606,12 @@
       "beveiliging": "Stuitklamp, Siemenssleutel met toelating Blok 7, sleepklaar Traxx BR186",
       "ppgi_ref": "PPGI_1_FR_B blz. 18, 20-21, 42",
       "lat": 51.1915,
-      "lng": 3.2215
+      "lng": 3.2215,
+      "aliases": [
+        "Bombardier",
+        "Bombardier Transportation Brugge",
+        "Alstom Brugge"
+      ]
     },
     {
       "id": "lci_brugge",
@@ -538,7 +629,10 @@
       "beveiliging": "Stuitklamp met Siemenssleutel",
       "ppgi_ref": "PPGI_1_FR_B blz. 18, 21",
       "lat": 51.196,
-      "lng": 3.219
+      "lng": 3.219,
+      "aliases": [
+        "Logistiek Centrum Infrabel Brugge"
+      ]
     },
     {
       "id": "otwd_brugge",
@@ -556,7 +650,10 @@
       "beveiliging": "Handbediende wissels door bediende IG",
       "ppgi_ref": "PPGI_1_FR_B blz. 21, 42",
       "lat": 51.188,
-      "lng": 3.224
+      "lng": 3.224,
+      "aliases": [
+        "Onderhoudswerkplaats Infrabel Brugge"
+      ]
     },
     {
       "id": "lci_lichtervelde",
@@ -574,7 +671,10 @@
       "beveiliging": "Lokale seininrichting",
       "ppgi_ref": "PPGI_1_FR_B blz. 26",
       "lat": 51.0295,
-      "lng": 3.1435
+      "lng": 3.1435,
+      "aliases": [
+        "Logistiek Centrum Infrabel Lichtervelde"
+      ]
     },
     {
       "id": "bundel_roeselare",
@@ -592,7 +692,10 @@
       "beveiliging": "Lokale capaciteit Infrabel",
       "ppgi_ref": "PPGI_1_FR_B blz. 32",
       "lat": 50.946,
-      "lng": 3.131
+      "lng": 3.131,
+      "aliases": [
+        "Vormingsbundel Roeselare"
+      ]
     },
     {
       "id": "bundel_blankenberge",
@@ -610,7 +713,10 @@
       "beveiliging": "Beseinde bundel",
       "ppgi_ref": "PPGI_1_FR_B blz. 29, 41",
       "lat": 51.3125,
-      "lng": 3.134
+      "lng": 3.134,
+      "aliases": [
+        "Bundel M Blankenberge"
+      ]
     },
     {
       "id": "bundel_depanne",
@@ -628,7 +734,10 @@
       "beveiliging": "Lokale capaciteit Infrabel",
       "ppgi_ref": "PPGI_1_FR_B blz. 23, 40",
       "lat": 51.0775,
-      "lng": 2.6025
+      "lng": 2.6025,
+      "aliases": [
+        "Vorming De Panne"
+      ]
     },
     {
       "id": "lci_kortrijk",
@@ -646,7 +755,10 @@
       "beveiliging": "Geslotteerde stuitklamp met sleutel 433, slotkast",
       "ppgi_ref": "PPGI_1_FR_D blz. 18, 20, 23",
       "lat": 50.835,
-      "lng": 3.272
+      "lng": 3.272,
+      "aliases": [
+        "Logistiek Centrum Infrabel Kortrijk"
+      ]
     },
     {
       "id": "io3_kortrijk",
@@ -664,7 +776,10 @@
       "beveiliging": "Geslotteerde stuitklamp met sleutel 441, slotkast Slot LCI",
       "ppgi_ref": "PPGI_1_FR_D blz. 18, 20, 24",
       "lat": 50.825,
-      "lng": 3.268
+      "lng": 3.268,
+      "aliases": [
+        "I-O.3 Kortrijk"
+      ]
     },
     {
       "id": "kortrijk_vorming",
@@ -682,7 +797,11 @@
       "beveiliging": "Beseinde bundels, bundelplaatjes, EBP Blok 7",
       "ppgi_ref": "PPGI_1_FR_D blz. 16-17, 38-39",
       "lat": 50.823,
-      "lng": 3.264
+      "lng": 3.264,
+      "aliases": [
+        "Kortrijk Goederen",
+        "Kortrijk Bundels A-D"
+      ]
     },
     {
       "id": "lauwe",
@@ -700,7 +819,10 @@
       "beveiliging": "Lokaal protocol Infrabel",
       "ppgi_ref": "PPGI_1_FR_D blz. 25-27",
       "lat": 50.796,
-      "lng": 3.189
+      "lng": 3.189,
+      "aliases": [
+        "Vormingsstation Lauwe"
+      ]
     },
     {
       "id": "poperinge",
@@ -718,7 +840,10 @@
       "beveiliging": "Stootblokken, enkelsporige lijn exploitatie",
       "ppgi_ref": "PPGI_1_FR_D blz. 30, 38",
       "lat": 50.854,
-      "lng": 2.738
+      "lng": 2.738,
+      "aliases": [
+        "Poperinge Goederensporen"
+      ]
     }
   ],
   "bundels": [

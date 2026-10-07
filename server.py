@@ -88,6 +88,9 @@ class GPSRequestHandler(http.server.SimpleHTTPRequestHandler):
                     html_content = build_map.build_map_html(db['locations'], db.get('bundels', []))
                     with open(HTML_PATH, 'w', encoding='utf-8') as f:
                         f.write(html_content)
+                    index_path = os.path.join(WORKSPACE_DIR, 'index.html')
+                    with open(index_path, 'w', encoding='utf-8') as f:
+                        f.write(html_content)
                     if os.path.exists(ARTIFACT_DIR):
                         with open(ARTIFACT_HTML, 'w', encoding='utf-8') as f:
                             f.write(html_content)

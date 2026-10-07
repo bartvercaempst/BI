@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DB Cargo Belgium — Bedieningen & Moederbundels Satellietkaart</title>
   
+  <!-- Google Fonts: Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   
@@ -13,15 +18,19 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
       background: #0f172a;
       color: #e2e8f0;
       overflow: hidden;
       height: 100vh;
       display: flex;
       flex-direction: column;
+    }
+    button, input, select, textarea, .leaflet-container, .leaflet-tooltip {
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
 
     /* Header Bar */
@@ -52,14 +61,15 @@
       box-shadow: 0 2px 6px rgba(224, 30, 43, 0.4);
     }
     .brand-titles h1 {
-      font-size: 15px;
-      font-weight: 700;
+      font-size: 16px;
+      font-weight: 800;
       color: #f8fafc;
       letter-spacing: -0.2px;
     }
     .brand-titles p {
       font-size: 11px;
       color: #94a3b8;
+      font-weight: 500;
     }
 
     .header-center {
@@ -71,10 +81,10 @@
       background: #1e293b;
       color: #cbd5e1;
       border: 1px solid #334155;
-      padding: 6px 11px;
+      padding: 6px 12px;
       border-radius: 6px;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
       display: inline-flex;
@@ -105,6 +115,7 @@
       align-items: center;
       gap: 6px;
       font-size: 11px;
+      font-weight: 600;
       padding: 4px 9px;
       border-radius: 20px;
       background: #1e293b;
@@ -128,7 +139,7 @@
       border: 1px solid rgba(245, 158, 11, 0.5);
       color: #fbbf24;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       padding: 5px 10px;
       border-radius: 6px;
       cursor: pointer;
@@ -148,7 +159,7 @@
       padding: 6px 11px;
       border-radius: 6px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.15s;
       display: flex;
@@ -172,7 +183,7 @@
       border: none;
       color: #94a3b8;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       padding: 4px 8px;
       border-radius: 6px;
       cursor: pointer;
@@ -227,7 +238,7 @@
       border: none;
       padding: 4px 10px;
       border-radius: 4px;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 11px;
       cursor: pointer;
     }
@@ -252,7 +263,7 @@
       padding: 12px 18px;
       border-radius: 8px;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       z-index: 2000;
       box-shadow: 0 10px 25px rgba(0,0,0,0.6);
       display: flex;
@@ -273,7 +284,7 @@
 
     /* Sidebar */
     .sidebar {
-      width: 380px;
+      width: 390px;
       background: #090d16;
       border-right: 1px solid #1e293b;
       display: flex;
@@ -283,8 +294,8 @@
       flex-shrink: 0;
     }
     .sidebar.collapsed {
-      transform: translateX(-380px);
-      margin-right: -380px;
+      transform: translateX(-390px);
+      margin-right: -390px;
     }
     .sidebar-header {
       padding: 12px 16px;
@@ -301,7 +312,7 @@
       border: 1px solid #334155;
       color: #f1f5f9;
       border-radius: 6px;
-      padding: 7px 12px 7px 32px;
+      padding: 8px 12px 8px 34px;
       font-size: 12px;
       outline: none;
       transition: border-color 0.15s;
@@ -329,7 +340,8 @@
       color: #94a3b8;
       border-radius: 20px;
       font-size: 11px;
-      padding: 3px 8px;
+      font-weight: 600;
+      padding: 3px 9px;
       cursor: pointer;
       transition: all 0.15s;
     }
@@ -356,10 +368,11 @@
     }
 
     .sidebar-stats {
-      padding: 6px 16px;
+      padding: 7px 16px;
       background: #090d16;
       border-bottom: 1px solid #1e293b;
       font-size: 11px;
+      font-weight: 600;
       color: #64748b;
       display: flex;
       justify-content: space-between;
@@ -383,7 +396,7 @@
       background: #0f172a;
       border: 1px solid #1e293b;
       border-radius: 8px;
-      padding: 9px 12px;
+      padding: 10px 12px;
       margin-bottom: 6px;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -407,13 +420,13 @@
     }
     .loc-card-title {
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       color: #f8fafc;
       line-height: 1.3;
     }
     .loc-status-badge {
       font-size: 10px;
-      font-weight: 700;
+      font-weight: 800;
       padding: 2px 6px;
       border-radius: 4px;
       white-space: nowrap;
@@ -439,6 +452,7 @@
       color: #38bdf8;
       border: 1px solid rgba(56, 189, 248, 0.4);
       font-size: 9px;
+      font-weight: 700;
       padding: 1px 4px;
       border-radius: 3px;
     }
@@ -451,11 +465,29 @@
       flex-direction: column;
       gap: 2px;
     }
+    
+    /* Alias chip list in card */
+    .loc-card-aliases {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+      font-size: 10px;
+      color: #38bdf8;
+      flex-wrap: wrap;
+    }
+    .loc-card-aliases-tag {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
     .loc-card-meta {
       display: flex;
       align-items: center;
       gap: 6px;
-      margin-top: 4px;
+      margin-top: 5px;
       font-size: 10px;
       color: #64748b;
     }
@@ -463,6 +495,7 @@
       background: #1e293b;
       padding: 2px 6px;
       border-radius: 4px;
+      font-weight: 600;
     }
 
     /* Map Area */
@@ -520,6 +553,7 @@
       align-items: center;
       gap: 8px;
       color: #cbd5e1;
+      font-weight: 600;
     }
     .legend-dot {
       width: 14px;
@@ -557,7 +591,7 @@
       position: absolute;
       top: 14px;
       right: 14px;
-      width: 400px;
+      width: 410px;
       max-height: calc(100% - 28px);
       background: rgba(15, 23, 42, 0.95);
       backdrop-filter: blur(12px);
@@ -612,12 +646,12 @@
       padding: 3px 8px;
       border-radius: 20px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 6px;
     }
     .detail-title {
-      font-size: 17px;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 800;
       color: #ffffff;
       line-height: 1.25;
     }
@@ -625,6 +659,7 @@
       font-size: 12px;
       color: #94a3b8;
       margin-top: 3px;
+      font-weight: 600;
     }
 
     .detail-grid {
@@ -641,7 +676,7 @@
     }
     .detail-item-label {
       font-size: 10px;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: #64748b;
@@ -651,6 +686,138 @@
       font-size: 12px;
       color: #f1f5f9;
       line-height: 1.4;
+      font-weight: 500;
+    }
+
+    /* ========================================= */
+    /* ALIASES & LINKING STYLES (TASK 2)         */
+    /* ========================================= */
+    .alias-section {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid #0284c7;
+      border-radius: 8px;
+      padding: 11px 12px;
+    }
+    .alias-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .alias-section-header .detail-item-label {
+      color: #38bdf8;
+      font-size: 11px;
+    }
+    .alias-count-tag {
+      font-size: 10px;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+    .alias-chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 8px;
+      min-height: 22px;
+    }
+    .alias-chip {
+      background: #1e293b;
+      border: 1px solid #475569;
+      color: #f1f5f9;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .alias-chip-del {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .alias-chip-del:hover {
+      color: #f87171;
+    }
+    .alias-controls-box {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+      border-top: 1px solid #1e293b;
+      padding-top: 6px;
+    }
+    .alias-add-row {
+      display: flex;
+      gap: 6px;
+    }
+    .alias-input {
+      flex: 1;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #ffffff;
+      border-radius: 5px;
+      padding: 5px 8px;
+      font-size: 11px;
+      outline: none;
+    }
+    .alias-input:focus {
+      border-color: #38bdf8;
+    }
+    .btn-alias-add {
+      background: #0284c7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .btn-alias-add:hover {
+      background: #0369a1;
+    }
+    .alias-merge-row {
+      display: flex;
+      gap: 6px;
+    }
+    .merge-select {
+      flex: 1;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      border-radius: 5px;
+      padding: 5px 6px;
+      font-size: 11px;
+      outline: none;
+    }
+    .btn-alias-merge {
+      background: #475569;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .btn-alias-merge:hover {
+      background: #64748b;
     }
 
     /* Editable GPS Coordinates Box */
@@ -659,7 +826,7 @@
       border: 1px solid #3b82f6;
       border-radius: 8px;
       padding: 10px 12px;
-      margin-top: 6px;
+      margin-top: 4px;
     }
     .edit-coord-title {
       display: flex;
@@ -669,7 +836,7 @@
     }
     .edit-coord-title span {
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       color: #93c5fd;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -683,6 +850,7 @@
     .coord-field label {
       display: block;
       font-size: 10px;
+      font-weight: 600;
       color: #94a3b8;
       margin-bottom: 3px;
     }
@@ -715,7 +883,7 @@
       padding: 6px;
       border-radius: 5px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -746,7 +914,7 @@
       padding: 8px 12px;
       border-radius: 6px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -765,6 +933,7 @@
       padding: 8px 8px;
       border-radius: 6px;
       font-size: 10px;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.15s;
       text-align: center;
@@ -787,7 +956,7 @@
       padding: 8px;
       border-radius: 6px;
       font-size: 11px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       text-align: center;
       text-decoration: none;
@@ -889,7 +1058,7 @@
       padding: 2px 6px;
       border-radius: 4px;
       font-size: 10px;
-      font-weight: 600;
+      font-weight: 700;
       white-space: nowrap;
       pointer-events: none;
       box-shadow: 0 2px 6px rgba(0,0,0,0.6);
@@ -908,7 +1077,7 @@
       color: #ffffff;
       padding: 4px 8px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       box-shadow: 0 4px 12px rgba(0,0,0,0.6);
     }
     .leaflet-tooltip-pane .leaflet-tooltip.custom-tip::before {
@@ -946,6 +1115,7 @@
     }
     .modal-box h2 {
       font-size: 18px;
+      font-weight: 800;
       color: #f8fafc;
       display: flex;
       align-items: center;
@@ -979,7 +1149,7 @@
       padding: 10px 14px;
       border-radius: 8px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -1094,18 +1264,18 @@
       <div class="sidebar-header">
         <div class="search-input-wrap">
           <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <input type="text" id="searchInput" class="search-input" placeholder="Zoek op naam, spoor, straat, zone..." oninput="handleFilter()" />
+          <input type="text" id="searchInput" class="search-input" placeholder="Zoek op naam, alias (bijv. ECS 1), spoor..." oninput="handleFilter()" />
         </div>
         <div class="filter-tabs">
-          <button class="filter-chip active" id="filterAll" onclick="setFilter('all', this)">Alle (49)</button>
-          <button class="filter-chip chip-green" id="filterBiYes" onclick="setFilter('bi-yes', this)">🟢 Reeds BI (14)</button>
-          <button class="filter-chip chip-red" id="filterBiNo" onclick="setFilter('bi-no', this)">🔴 Nog geen BI (26)</button>
-          <button class="filter-chip chip-gold" id="filterBundels" onclick="setFilter('bundel', this)">🟡 Bundels (9)</button>
+          <button class="filter-chip active" id="filterAll" onclick="setFilter('all', this)">Alle</button>
+          <button class="filter-chip chip-green" id="filterBiYes" onclick="setFilter('bi-yes', this)">🟢 Reeds BI</button>
+          <button class="filter-chip chip-red" id="filterBiNo" onclick="setFilter('bi-no', this)">🔴 Nog geen BI</button>
+          <button class="filter-chip chip-gold" id="filterBundels" onclick="setFilter('bundel', this)">🟡 Bundels</button>
         </div>
       </div>
 
       <div class="sidebar-stats">
-        <span id="resultCount">49 resultaten getoond</span>
+        <span id="resultCount">Laden...</span>
         <span>West-Vlaanderen Zone</span>
       </div>
 
@@ -1126,15 +1296,15 @@
     <div class="map-legend">
       <div class="legend-row">
         <div class="legend-dot green">✓</div>
-        <span>Reeds een BI (14 locaties)</span>
+        <span id="legBiYesText">Reeds een BI</span>
       </div>
       <div class="legend-row">
         <div class="legend-dot red">!</div>
-        <span>Nog GEEN BI (26 locaties)</span>
+        <span id="legBiNoText">Nog GEEN BI</span>
       </div>
       <div class="legend-row">
         <div class="legend-dot gold">◆</div>
-        <span>Infrabel Moederbundel (9 rangeerterreinen)</span>
+        <span>Infrabel Moederbundels (rangeerterreinen)</span>
       </div>
       <div class="legend-row" id="railLegendRow" style="display: flex;">
         <div class="legend-line"></div>
@@ -1147,12 +1317,35 @@
       <button class="detail-close" onclick="closeDetail()">&times;</button>
       <div class="detail-header">
         <div id="detailStatusPill" class="detail-status-pill badge-bi-yes">✓ BI BESCHIKBAAR</div>
-        <h2 id="detailTitle" class="detail-title">Wallenius Canadakaai</h2>
-        <div id="detailSubtitle" class="detail-subtitle">Zeebrugge Zuidelijk Insteekdok &bull; PP-321</div>
+        <h2 id="detailTitle" class="detail-title">Locatie</h2>
+        <div id="detailSubtitle" class="detail-subtitle">Zone info</div>
       </div>
 
       <div class="detail-grid">
         
+        <!-- SECTION: Gekoppelde Benamingen & Aliassen (TASK 2) -->
+        <div class="detail-item alias-section" id="detailAliasSection">
+          <div class="alias-section-header">
+            <div class="detail-item-label">🔗 Gekoppelde Benamingen (1 BI voor allen)</div>
+            <span class="alias-count-tag" id="detailAliasCount">0 synoniemen</span>
+          </div>
+          <div id="detailAliasesContainer" class="alias-chips-wrap">
+            <!-- Chips rendered dynamically -->
+          </div>
+          <div class="alias-controls-box">
+            <div class="alias-add-row">
+              <input type="text" id="newAliasInput" class="alias-input" placeholder="Voeg synoniem toe (bijv. SA ECS 1)..." onkeydown="if(event.key==='Enter') addCurrentAlias()" />
+              <button class="btn-alias-add" onclick="addCurrentAlias()">+ Voeg toe</button>
+            </div>
+            <div class="alias-merge-row">
+              <select id="mergeLocationSelect" class="merge-select">
+                <option value="">-- Koppel met andere bediening --</option>
+              </select>
+              <button class="btn-alias-merge" onclick="mergeSelectedLocation()">🔗 Koppel</button>
+            </div>
+          </div>
+        </div>
+
         <!-- Editable GPS Coordinates Box -->
         <div class="edit-coord-box">
           <div class="edit-coord-title">
@@ -1192,23 +1385,23 @@
 
         <div class="detail-item">
           <div class="detail-item-label">Moederbundel (Infrabel)</div>
-          <div id="detailMoederbundel" class="detail-item-val">Bundel Ramskapelle (sporen 881-897)</div>
+          <div id="detailMoederbundel" class="detail-item-val">-</div>
         </div>
         <div class="detail-item">
           <div class="detail-item-label">Bedieningssporen & Lengte</div>
-          <div id="detailSporen" class="detail-item-val">Spoor 843 (sporen 1 t.e.m. 4)</div>
+          <div id="detailSporen" class="detail-item-val">-</div>
         </div>
         <div class="detail-item">
           <div class="detail-item-label">Adres & Toegangsweg</div>
-          <div id="detailAdres" class="detail-item-val">Canadakaai (Kaai 107-108), 8380 Zeebrugge</div>
+          <div id="detailAdres" class="detail-item-val">-</div>
         </div>
         <div class="detail-item">
           <div class="detail-item-label">Beveiliging & Wissels</div>
-          <div id="detailBeveiliging" class="detail-item-val">Stuitklamp tussen poort en spoor 843, Siemensslot</div>
+          <div id="detailBeveiliging" class="detail-item-val">-</div>
         </div>
         <div class="detail-item">
           <div class="detail-item-label">PPGI Bronreferentie</div>
-          <div id="detailPpgi" class="detail-item-val">PP-321 blz. 9, 21, 33</div>
+          <div id="detailPpgi" class="detail-item-val">-</div>
         </div>
       </div>
 
@@ -1230,18 +1423,18 @@
         <button class="modal-close" onclick="closeExportModal()">&times;</button>
       </h2>
       <div class="modal-body">
-        <p>Alle handmatig verplaatste of gecorrigeerde GPS coördinaten worden <strong>automatisch bewaard</strong> in je browser (LocalStorage). Zelfs na het herladen of sluiten van de browser blijven je aanpassingen behouden.</p>
+        <p>Alle handmatig verplaatste GPS coördinaten en gekoppelde synoniemen worden <strong>automatisch bewaard</strong> in je browser (LocalStorage). Zelfs na herladen blijven al je aanpassingen behouden.</p>
         <div style="margin: 12px 0; background: #1e293b; padding: 10px 14px; border-radius: 6px; border: 1px solid #334155;">
           <strong>Huidige status:</strong> <span id="modalCustomCount">0</span> locaties handmatig aangepast.
         </div>
-        <p>Gebruik onderstaande opties om je gecorrigeerde coördinaten permanent als bestand op te slaan of over te dragen:</p>
+        <p>Gebruik onderstaande knoppen om je gegevens te exporteren of over te dragen naar GitHub:</p>
       </div>
       <div class="modal-actions">
         <button class="btn-modal-action btn-modal-primary" onclick="downloadUpdatedJson()">
-          📥 Download bijgewerkte 'locs_gps.json'
+          📥 Download bijgewerkte 'locs_gps.json' (inclusief aliassen)
         </button>
         <button class="btn-modal-action" onclick="downloadUpdatedHtml()">
-          📄 Download complete 'kaart_bedieningen.html' (met ingebouwde coördinaten)
+          📄 Download complete 'kaart_bedieningen.html'
         </button>
         <button class="btn-modal-action" onclick="copyModifiedCoordsToClipboard()">
           📋 Kopieer gewijzigde coördinaten naar klembord
@@ -1258,11 +1451,13 @@
 
   <script>
     // Embedded Base Data
-    const rawLocations = [{"id": "wal_can", "name": "Wallenius Canadakaai (CAST)", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": true, "bi_version": "V2.2", "type": "Automotive / RoRo Terminal", "moederbundel": "Bundel Ramskapelle", "sporen": "Spoor 843 (sporen 1 t.e.m. 4)", "adres": "Canadakaai (Kaai 107-108), 8380 Zeebrugge", "toegang_weg": "Barlenhuisstraat / Alfred Ronsestraat", "beveiliging": "Stuitklamp tussen poort en spoor 843, Siemensslot", "ppgi_ref": "PP-321 blz. 9, 21, 33", "lat": 51.315, "lng": 3.238}, {"id": "cdmz", "name": "CDMZ (Car Delivery & Maintenance Zeebrugge)", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": true, "bi_version": "V1.2", "type": "Automotive Terminal", "moederbundel": "Bundel Ramskapelle", "sporen": "Spoor 898 (sporen 1 en 2, lengte 340m)", "adres": "Alfred Ronsestraat / Barlenhuisstraat (Kaai 101-102), 8380 Zeebrugge", "toegang_weg": "Alfred Ronsestraat", "beveiliging": "Stuitklamp 93R, OW met Andreaskruis", "ppgi_ref": "PP-321 blz. 9, 21", "lat": 51.3115, "lng": 3.231}, {"id": "cro_brit", "name": "C.RO Brittaniadok (SEA-RO)", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": true, "bi_version": "V2.2", "type": "RoRo / Automotive Terminal", "moederbundel": "Bundel Ramskapelle", "sporen": "Spoor 872 (kaaien 701-704)", "adres": "Brittaniadok, 8380 Zeebrugge", "toegang_weg": "Isabellalaan / Barlenhuisstraat", "beveiliging": "Ontspoortong 10R, stuitklamp tussen poort en OW17, sleutel 321FR", "ppgi_ref": "PP-321 blz. 9, 22, 27", "lat": 51.336296, "lng": 3.225474}, {"id": "ico_toy", "name": "ICO Hanze Toyota", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": true, "bi_version": "V2.0", "type": "Automotive Terminal", "moederbundel": "Bundel Ramskapelle", "sporen": "Spoor 879 (sporen 1 t.e.m. 3, ~325m)", "adres": "Hanzedok (Kaaien 501-504), 8380 Zeebrugge", "toegang_weg": "Lanceloot Blondeellaan", "beveiliging": "Stuitklamp met koppelslot, OW op terminal", "ppgi_ref": "PP-321 blz. 9, 21", "lat": 51.301401, "lng": 3.244658}, {"id": "ico1", "name": "Bastenakenkaai ICO 1", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": true, "bi_version": "V1.5", "type": "Automotive / Multipurpose", "moederbundel": "Bundel Pelikaan", "sporen": "Sporen 21 t.e.m. 24 (kopsporen ~320m)", "adres": "Bastenakenkaai (Kaai 201-205), Margareta van Oostenrijkstraat, 8380 Zeebrugge", "toegang_weg": "Margareta van Oostenrijkstraat nabij OW21", "beveiliging": "Stuitklamp tussen OW21 en wissel 532, Siemenssleutels 442/443, Wilka G*", "ppgi_ref": "PP-321 blz. 9, 20, 27", "lat": 51.306687, "lng": 3.217235}, {"id": "ico2", "name": "Bastenakenkaai ICO 2", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": true, "bi_version": "V1.2", "type": "Automotive / Multipurpose", "moederbundel": "Bundel Pelikaan", "sporen": "Sporen 31 t.e.m. 34", "adres": "Bastenakenkaai (Kaai 206-209), Margareta van Oostenrijkstraat, 8380 Zeebrugge", "toegang_weg": "Margareta van Oostenrijkstraat", "beveiliging": "Stuitklamp linker tak wissel 502, OW Margareta van Oostenrijkstraat", "ppgi_ref": "PP-321 blz. 9, 20, 27", "lat": 51.296014, "lng": 3.22717}, {"id": "efico", "name": "SA Efico (Koffieterminal)", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": false, "bi_version": null, "type": "Commodities / Koffie Terminal", "moederbundel": "Bundel Pelikaan", "sporen": "Via spoor 871", "adres": "Margareta van Oostenrijkstraat 14, 8380 Zeebrugge", "toegang_weg": "Margareta van Oostenrijkstraat", "beveiliging": "Omheining, poort, stuitklamp linker tak wissel 551", "ppgi_ref": "PP-321 blz. 9, 22, 36-38", "lat": 51.295931, "lng": 3.225249}, {"id": "ndq", "name": "SA NDQ (NDQ Logistics)", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": false, "bi_version": null, "type": "Logistieke Terminal", "moederbundel": "Bundel Pelikaan", "sporen": "Via spoor 871", "adres": "Margareta van Oostenrijkstraat, 8380 Zeebrugge", "toegang_weg": "Margareta van Oostenrijkstraat", "beveiliging": "Stuitklamp 63R linker tak wissel 552, Siemensslot 244/115, Wilka G*", "ppgi_ref": "PP-321 blz. 9, 22, 39-41", "lat": 51.300855, "lng": 3.221456}, {"id": "spoorfuel", "name": "Spoorfuelinstallatie G&V", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": false, "bi_version": null, "type": "Tractiebrandstof / Tankinstallatie", "moederbundel": "Bundel Ramskapelle", "sporen": "Doodspoor 899 (lengte 110m nuttig)", "adres": "Barlenhuisstraat (Bundel Ramskapelle), 8380 Zeebrugge", "toegang_weg": "Barlenhuisstraat", "beveiliging": "Ontspoortong 91AR, telefonische aanvraag Blok 7", "ppgi_ref": "PP-321 blz. 9, 21, 83-84", "lat": 51.3135, "lng": 3.227}, {"id": "ecs_bl", "name": "ECS 2XL Blauwe Loods", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "V3.1", "type": "Dry Cargo & Logistiek", "moederbundel": "Bundel Zwankendamme", "sporen": "Sporen 135 & 358 (SA ECS2 Z en ECS2 N)", "adres": "Wulfsberge / Lanceloot Blondeellaan, 8380 Zeebrugge (Zwankendamme)", "toegang_weg": "Wulfsberge", "beveiliging": "Ontspoortong 96G (Zuid) & elektrische stuitklamp 55H (Noord)", "ppgi_ref": "PP-311 blz. 10, 23, 43", "lat": 51.314319, "lng": 3.191335}, {"id": "2xl_bml", "name": "2XL BML (Baron de Maerelaan)", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "V1.5", "type": "Logistiek & Warehousing", "moederbundel": "Zeebrugge Vorming / Bundel A", "sporen": "Spoor 524 (omloop- en bedieningsspoor)", "adres": "Baron de Maerelaan, 8380 Zeebrugge", "toegang_weg": "Baron de Maerelaan / Kustlaan", "beveiliging": "Kleine beweging onder toezicht Blok 4", "ppgi_ref": "PP-311 blz. 9, 23, 49", "lat": 51.31277, "lng": 3.189243}, {"id": "nid_ico", "name": "NID ICO Northern Inlet Terminal", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "V2.0", "type": "Automotive / RoRo Terminal", "moederbundel": "Terminal NID (Noordelijk Insteekdok)", "sporen": "Sporen 4 & 5 Westeroever Achterkaai", "adres": "Noordelijk Insteekdok (Kaaien 405-410), 8380 Zeebrugge", "toegang_weg": "Koffieweg / Lanceloot Blondeellaan", "beveiliging": "Ontspoortong, beweegbare brug, OW70", "ppgi_ref": "PP-311 blz. 9, 10", "lat": 51.327903, "lng": 3.208609}, {"id": "po_ferries", "name": "P&O Ferries (P&O 501 / Zuid)", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "V1.9", "type": "Ferry / RoRo Terminal", "moederbundel": "Voorhaven-West / CHZ", "sporen": "Spoor 501 (Westerhoofd)", "adres": "Doverlaan / Westerhoofd (Buitenhaven), 8380 Zeebrugge", "toegang_weg": "Doverlaan", "beveiliging": "Terminalpoort, schuifrangering met sein V-L.4", "ppgi_ref": "PP-311 blz. 10, 31", "lat": 51.336832, "lng": 3.190455}, {"id": "stora", "name": "Stora Enso (PSA Breakbulk)", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "V1.3", "type": "Papier & Bosbouw Logistiek", "moederbundel": "Voorhaven-West", "sporen": "Sporen 1 & 2 (via aansluitspoor 803)", "adres": "Caxtonweg (tussen Albert II-dok en Wielingendok), 8380 Zeebrugge", "toegang_weg": "Caxtonweg", "beveiliging": "Aansluitspoor 803, verplicht poort openen via PSA security", "ppgi_ref": "PP-311 blz. 10, 68", "lat": 51.351281, "lng": 3.17713}, {"id": "dartline", "name": "Herstelspoor Dartline", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "V1.1", "type": "Wagonherstelling & Spooronderhoud", "moederbundel": "Voorhaven-West", "sporen": "Sporen 1 t.e.m. 3 (operationeel 617m, 612m, 623m)", "adres": "Caxtonweg (naast Stora Enso), 8380 Zeebrugge", "toegang_weg": "Caxtonweg", "beveiliging": "OW Cat 3 (zelf sleutelen), spoor 804, wielkeggen", "ppgi_ref": "PP-311 blz. 10, 68", "lat": 51.350343, "lng": 3.170285}, {"id": "cro_albert", "name": "C.Ro Ports Albert II Dok", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "Draft V1.0", "type": "RoRo & Multipurpose Terminal", "moederbundel": "Bundel CHZ Terminal", "sporen": "Sporen 3 & 5 (CHZ)", "adres": "New Yorklaan / Albert II-dok, 8380 Zeebrugge", "toegang_weg": "New Yorklaan", "beveiliging": "Toegangspoort, konvooi splitsen t.h.v. OW", "ppgi_ref": "PP-311 blz. 9, 37-39", "lat": 51.349, "lng": 3.188}, {"id": "csp_term", "name": "SA CSP Terminal NV (Cosco)", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": false, "bi_version": null, "type": "Deepsea Container Terminal", "moederbundel": "Zeebrugge Kaai / Voorhaven", "sporen": "Via spoor 851", "adres": "New Yorklaan / Albert II-dok (Wielingendok), 8380 Zeebrugge", "toegang_weg": "New Yorklaan", "beveiliging": "Stuitklamp met sleutel 334, procedure via Blok 4", "ppgi_ref": "PP-311 blz. 10, 26, 35", "lat": 51.351, "lng": 3.182}, {"id": "psa_zb", "name": "SA PSA Zeebrugge NV (Container)", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": false, "bi_version": null, "type": "Container Terminal", "moederbundel": "Voorhaven-West / Strand", "sporen": "Spoor 871", "adres": "Pieter Troostlaan (Kaai 871), 8380 Zeebrugge", "toegang_weg": "Pieter Troostlaan", "beveiliging": "Eigen stuitklamp SA PSA Zeebrugge NV", "ppgi_ref": "PP-311 blz. 10, 26, 40", "lat": 51.3395, "lng": 3.1905}, {"id": "psa_hnn", "name": "SA PSA - HNN", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": false, "bi_version": null, "type": "Multipurpose Terminal", "moederbundel": "Voorhaven-West", "sporen": "Spoor 801", "adres": "Pieter Troostlaan (Kaai 801), 8380 Zeebrugge", "toegang_weg": "Pieter Troostlaan", "beveiliging": "Stuitklamp / poortbediening", "ppgi_ref": "PP-311 blz. 10, 31", "lat": 51.337, "lng": 3.1925}, {"id": "po_nsf", "name": "SA P&O - NSF (North Sea Ferries)", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": false, "bi_version": null, "type": "Ferry Veerboot Terminal", "moederbundel": "Zeebrugge Kaai", "sporen": "Via spoor 851 (verbindingen Brugge & spoor 5-6 zee)", "adres": "Leopold II-dam (Kaai 851), 8380 Zeebrugge", "toegang_weg": "Leopold II-dam", "beveiliging": "Stuitklampen SA P&O NSF", "ppgi_ref": "PP-311 blz. 10, 26, 35", "lat": 51.355, "lng": 3.214}, {"id": "ecs1", "name": "SA ECS 1", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": false, "bi_version": null, "type": "Logistiek & Overslag", "moederbundel": "Bundel A / Zeebrugge Vorming", "sporen": "Doodspoor 460 (via omloopspoor 524)", "adres": "Kustlaan / Baron de Maerelaan, 8380 Zeebrugge", "toegang_weg": "Kustlaan", "beveiliging": "Ontspoortong 54BG", "ppgi_ref": "PP-311 blz. 9, 10, 33, 42", "lat": 51.322, "lng": 3.198}, {"id": "zb_kaai", "name": "Zeebrugge Kaai (Infrabel)", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": false, "bi_version": null, "type": "Openbare Kades & Spoorlijn", "moederbundel": "Zeebrugge Kaai", "sporen": "Spoor 851", "adres": "Centrale havenkades spoor 851, 8380 Zeebrugge", "toegang_weg": "Kustlaan / Leopold II-dam", "beveiliging": "Kleine beweging onder Blok 4", "ppgi_ref": "PP-311 blz. 10, 26, 36", "lat": 51.348, "lng": 3.211}, {"id": "zweedse_kaai", "name": "Zweedse Kaai", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": false, "bi_version": null, "type": "Autoterminal / Historische Kades", "moederbundel": "Lijn 202 / Verbindingsdok", "sporen": "Kaaisporen Zweedse Kaai", "adres": "Zweedse Kaai / Verbindingsdok, 8380 Zeebrugge", "toegang_weg": "Kustlaan", "beveiliging": "Historische aansluiting L202", "ppgi_ref": "PP-311 blz. 1, 3", "lat": 51.339031, "lng": 3.206935}, {"id": "proviron", "name": "SA Proviron (Chemicals)", "cluster": "oostende", "zone": "PP-341", "zone_name": "Oostende & Plassendale", "has_bi": false, "bi_version": null, "type": "Chemie / Tankwagens", "moederbundel": "Oostende Vorming", "sporen": "Spoor 151", "adres": "George Stephensonstraat / Karperstraat, 8400 Oostende", "toegang_weg": "Industriezone Plassendale 1", "beveiliging": "Telefoontoelating Blok 7, kleine beweging", "ppgi_ref": "PP-341 blz. 9, 31", "lat": 51.2135, "lng": 3.003}, {"id": "tilbury", "name": "Tilbury (Goederenoverslag)", "cluster": "oostende", "zone": "PP-341", "zone_name": "Oostende & Plassendale", "has_bi": false, "bi_version": null, "type": "Goederen / Bulk & Stukgoed", "moederbundel": "Handelsdok Oostende", "sporen": "Sporen 1 & 2 (via spoor 254)", "adres": "Vergunningenstraat / Sloepenstraat / Molendorpkaai, 8400 Oostende", "toegang_weg": "Benedenstuwbrug", "beveiliging": "Omheining, poort, bediening brug door De Vlaamse Waterweg, max 1 loc", "ppgi_ref": "PP-341 blz. 8, 28, 31-32", "lat": 51.229, "lng": 2.929}, {"id": "plassendale", "name": "Bundel Plassendale 1", "cluster": "oostende", "zone": "PP-341", "zone_name": "Oostende & Plassendale", "has_bi": false, "bi_version": null, "type": "Goederen Laad- & Losbundel", "moederbundel": "Plassendale 1", "sporen": "Sporen 3 & 4 (via doodspoor 150/153)", "adres": "Zandvoordestraat / Oudenburgsesteenweg, 8400 Oostende", "toegang_weg": "Draaibrug over kanaal Brugge-Oostende", "beveiliging": "Omheining, poort, spoorwegdraaibrug bediend door personeel", "ppgi_ref": "PP-341 blz. 8, 26, 31", "lat": 51.211, "lng": 2.998}, {"id": "oostende_vorming", "name": "Oostende Vorming (117-118)", "cluster": "oostende", "zone": "PP-341", "zone_name": "Oostende & Plassendale", "has_bi": false, "bi_version": null, "type": "Openbare Laad-/Lossporen", "moederbundel": "Bundel Vorming", "sporen": "Sporen 117 en 118", "adres": "Achterhaven Oostende (corridor Lijn 50A), 8400 Oostende", "toegang_weg": "Vuurtorenweg / Stapelhuisstraat", "beveiliging": "Overgedragen aan I-O.3, Siemenssleutelprocedure", "ppgi_ref": "PP-341 blz. 9, 26, 33", "lat": 51.222, "lng": 2.946}, {"id": "whv_oostende", "name": "WHV Oostende & Bundel WET", "cluster": "oostende", "zone": "PP-341", "zone_name": "Oostende & Plassendale", "has_bi": false, "bi_version": null, "type": "Tractiewerkplaats & Onderhoud", "moederbundel": "Werkplaats Tractie", "sporen": "Spoor 253 en proefspoor 25kV", "adres": "Zandvoordestraat / Vuurtorenweg, 8400 Oostende", "toegang_weg": "Zandvoordestraat", "beveiliging": "Centrale aanvraag Blok 7, industriële seinpost", "ppgi_ref": "PP-341 blz. 9, 32-33, 66-72", "lat": 51.218, "lng": 2.955}, {"id": "alstom", "name": "SA Alstom (voorheen Bombardier)", "cluster": "brugge", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": true, "bi_version": "V1.3", "type": "Treinbouw & Fabrieksaansluiting", "moederbundel": "Station Brugge / Bundel U", "sporen": "Spoor 675 / 676", "adres": "Vaartdijkstraat 5, 8200 Brugge (Sint-Michiels)", "toegang_weg": "Vaartdijkstraat langs kanaal Gent-Brugge", "beveiliging": "Stuitklamp, Siemenssleutel met toelating Blok 7, sleepklaar Traxx BR186", "ppgi_ref": "PPGI_1_FR_B blz. 18, 20-21, 42", "lat": 51.1915, "lng": 3.2215}, {"id": "lci_brugge", "name": "LCI Brugge (Logistiek Centrum Infrabel)", "cluster": "brugge", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": false, "bi_version": null, "type": "Infrabel Werfbasis / Spoorbouw", "moederbundel": "Station Brugge", "sporen": "Spoor 3", "adres": "Hendrik Brugmansstraat, 8000 Brugge", "toegang_weg": "Hendrik Brugmansstraat nabij station Brugge", "beveiliging": "Stuitklamp met Siemenssleutel", "ppgi_ref": "PPGI_1_FR_B blz. 18, 21", "lat": 51.196, "lng": 3.219}, {"id": "otwd_brugge", "name": "OTWD Brugge (Werkplaats Infrabel)", "cluster": "brugge", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": false, "bi_version": null, "type": "Werkplaatsdomein Infrabel", "moederbundel": "Station Brugge", "sporen": "Spoor 638", "adres": "Ten Briele / Kuringenstraat, 8200 Brugge (Sint-Michiels)", "toegang_weg": "Ten Briele", "beveiliging": "Handbediende wissels door bediende IG", "ppgi_ref": "PPGI_1_FR_B blz. 21, 42", "lat": 51.188, "lng": 3.224}, {"id": "lci_lichtervelde", "name": "LCI Lichtervelde", "cluster": "centraal", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": false, "bi_version": null, "type": "Infrabel Spoorbouw & Knooppunt", "moederbundel": "Knooppunt L66 / L73", "sporen": "Bundel LCI Lichtervelde", "adres": "Statiestraat / Spoorweglaan, 8810 Lichtervelde", "toegang_weg": "Statiestraat", "beveiliging": "Lokale seininrichting", "ppgi_ref": "PPGI_1_FR_B blz. 26", "lat": 51.0295, "lng": 3.1435}, {"id": "bundel_roeselare", "name": "Bundel Roeselare", "cluster": "centraal", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": false, "bi_version": null, "type": "Goederenbundel", "moederbundel": "Lijn 66", "sporen": "Bundelsporen Roeselare", "adres": "Beversesteenweg / Spoorweglaan, 8800 Roeselare", "toegang_weg": "Beversesteenweg", "beveiliging": "Lokale capaciteit Infrabel", "ppgi_ref": "PPGI_1_FR_B blz. 32", "lat": 50.946, "lng": 3.131}, {"id": "bundel_blankenberge", "name": "Bundel Blankenberge (Bundel M)", "cluster": "kust", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": false, "bi_version": null, "type": "Wijkbundel Goederen/Reizigers", "moederbundel": "Lijn 51", "sporen": "Sporen 811 t.e.m. 816 en 820", "adres": "Spoorleggerstraat / Kerkstraat, 8370 Blankenberge", "toegang_weg": "Spoorleggerstraat", "beveiliging": "Beseinde bundel", "ppgi_ref": "PPGI_1_FR_B blz. 29, 41", "lat": 51.3125, "lng": 3.134}, {"id": "bundel_depanne", "name": "Bundel De Panne", "cluster": "kust", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": false, "bi_version": null, "type": "Uitwijk- en Vormingsbundel", "moederbundel": "Lijn 73", "sporen": "Bundelsporen De Panne", "adres": "Stationsplein 9, 8660 De Panne / Adinkerke", "toegang_weg": "Stationsplein", "beveiliging": "Lokale capaciteit Infrabel", "ppgi_ref": "PPGI_1_FR_B blz. 23, 40", "lat": 51.0775, "lng": 2.6025}, {"id": "lci_kortrijk", "name": "LCI Kortrijk (Logistiek Centrum Infrabel)", "cluster": "kortrijk", "zone": "FR/D", "zone_name": "Actiezone Kortrijk FR/D", "has_bi": false, "bi_version": null, "type": "Infrabel Werfbasis / Spoorbouw", "moederbundel": "Station Kortrijk", "sporen": "Doodsporen 266 en 267", "adres": "Minister Liebaertlaan, 8500 Kortrijk", "toegang_weg": "Minister Liebaertlaan", "beveiliging": "Geslotteerde stuitklamp met sleutel 433, slotkast", "ppgi_ref": "PPGI_1_FR_D blz. 18, 20, 23", "lat": 50.835, "lng": 3.272}, {"id": "io3_kortrijk", "name": "Aansluiting I-O.3 Kortrijk", "cluster": "kortrijk", "zone": "FR/D", "zone_name": "Actiezone Kortrijk FR/D", "has_bi": false, "bi_version": null, "type": "Technische Spooraansluiting", "moederbundel": "Station Kortrijk", "sporen": "Doodspoor 363", "adres": "Luiksestraat / spoorcorridor, 8500 Kortrijk", "toegang_weg": "Luiksestraat", "beveiliging": "Geslotteerde stuitklamp met sleutel 441, slotkast Slot LCI", "ppgi_ref": "PPGI_1_FR_D blz. 18, 20, 24", "lat": 50.825, "lng": 3.268}, {"id": "kortrijk_vorming", "name": "Kortrijk Goederen / Vorming", "cluster": "kortrijk", "zone": "FR/D", "zone_name": "Actiezone Kortrijk FR/D", "has_bi": false, "bi_version": null, "type": "Centrale Rangeer- & Vormingsbundel", "moederbundel": "Lijn 75", "sporen": "Bundels A (357-360), B (227-239), C (221-226), D (251-260)", "adres": "Luiksestraat / Zandstraat / Schaapsdreef, 8500 Kortrijk", "toegang_weg": "Zandstraat / Luiksestraat", "beveiliging": "Beseinde bundels, bundelplaatjes, EBP Blok 7", "ppgi_ref": "PPGI_1_FR_D blz. 16-17, 38-39", "lat": 50.823, "lng": 3.264}, {"id": "lauwe", "name": "Bundel Lauwe", "cluster": "kortrijk", "zone": "FR/D", "zone_name": "Actiezone Kortrijk FR/D", "has_bi": false, "bi_version": null, "type": "Wijkbundel Goederen", "moederbundel": "Lijn 75", "sporen": "Sporen bundel Lauwe", "adres": "Spoorwegstraat, 8930 Lauwe (Menen)", "toegang_weg": "Spoorwegstraat", "beveiliging": "Lokaal protocol Infrabel", "ppgi_ref": "PPGI_1_FR_D blz. 25-27", "lat": 50.796, "lng": 3.189}, {"id": "poperinge", "name": "Poperinge Goederen", "cluster": "zuidwest", "zone": "FR/D", "zone_name": "Actiezone Kortrijk FR/D", "has_bi": false, "bi_version": null, "type": "Eindpunt Goederensporen", "moederbundel": "Lijn 69", "sporen": "Sporen 4 (654) en 5 (655)", "adres": "Europalaan, 8970 Poperinge", "toegang_weg": "Europalaan", "beveiliging": "Stootblokken, enkelsporige lijn exploitatie", "ppgi_ref": "PPGI_1_FR_D blz. 30, 38", "lat": 50.854, "lng": 2.738}];
+    const rawLocations = [{"id": "wal_can", "name": "Wallenius Canadakaai (CAST)", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": true, "bi_version": "V2.2", "type": "Automotive / RoRo Terminal", "moederbundel": "Bundel Ramskapelle", "sporen": "Spoor 843 (sporen 1 t.e.m. 4)", "adres": "Canadakaai (Kaai 107-108), 8380 Zeebrugge", "toegang_weg": "Barlenhuisstraat / Alfred Ronsestraat", "beveiliging": "Stuitklamp tussen poort en spoor 843, Siemensslot", "ppgi_ref": "PP-321 blz. 9, 21, 33", "lat": 51.315, "lng": 3.238, "aliases": ["CAST", "Wallenius", "Canadakaai", "Kaai 107-108"]}, {"id": "cdmz", "name": "CDMZ (Car Delivery & Maintenance Zeebrugge)", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": true, "bi_version": "V1.2", "type": "Automotive Terminal", "moederbundel": "Bundel Ramskapelle", "sporen": "Spoor 898 (sporen 1 en 2, lengte 340m)", "adres": "Alfred Ronsestraat / Barlenhuisstraat (Kaai 101-102), 8380 Zeebrugge", "toegang_weg": "Alfred Ronsestraat", "beveiliging": "Stuitklamp 93R, OW met Andreaskruis", "ppgi_ref": "PP-321 blz. 9, 21", "lat": 51.3115, "lng": 3.231, "aliases": ["CDMZ Ramskapelle", "Car Delivery Zeebrugge"]}, {"id": "cro_brit", "name": "C.RO Brittaniadok (SEA-RO)", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": true, "bi_version": "V2.2", "type": "RoRo / Automotive Terminal", "moederbundel": "Bundel Ramskapelle", "sporen": "Spoor 872 (kaaien 701-704)", "adres": "Brittaniadok, 8380 Zeebrugge", "toegang_weg": "Isabellalaan / Barlenhuisstraat", "beveiliging": "Ontspoortong 10R, stuitklamp tussen poort en OW17, sleutel 321FR", "ppgi_ref": "PP-321 blz. 9, 22, 27", "lat": 51.336296, "lng": 3.225474, "aliases": ["SEA-RO", "Brittaniadok", "Kaai 701-704"]}, {"id": "ico_toy", "name": "ICO Hanze Toyota", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": true, "bi_version": "V2.0", "type": "Automotive Terminal", "moederbundel": "Bundel Ramskapelle", "sporen": "Spoor 879 (sporen 1 t.e.m. 3, ~325m)", "adres": "Hanzedok (Kaaien 501-504), 8380 Zeebrugge", "toegang_weg": "Lanceloot Blondeellaan", "beveiliging": "Stuitklamp met koppelslot, OW op terminal", "ppgi_ref": "PP-321 blz. 9, 21", "lat": 51.301401, "lng": 3.244658, "aliases": ["Hanze Terminal", "Toyota Zeebrugge"]}, {"id": "ico1", "name": "Bastenakenkaai ICO 1", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": true, "bi_version": "V1.5", "type": "Automotive / Multipurpose", "moederbundel": "Bundel Pelikaan", "sporen": "Sporen 21 t.e.m. 24 (kopsporen ~320m)", "adres": "Bastenakenkaai (Kaai 201-205), Margareta van Oostenrijkstraat, 8380 Zeebrugge", "toegang_weg": "Margareta van Oostenrijkstraat nabij OW21", "beveiliging": "Stuitklamp tussen OW21 en wissel 532, Siemenssleutels 442/443, Wilka G*", "ppgi_ref": "PP-321 blz. 9, 20, 27", "lat": 51.306687, "lng": 3.217235, "aliases": ["ICO Bastenaken 1", "Bastenakenkaai Kaai 500"]}, {"id": "ico2", "name": "Bastenakenkaai ICO 2", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": true, "bi_version": "V1.2", "type": "Automotive / Multipurpose", "moederbundel": "Bundel Pelikaan", "sporen": "Sporen 31 t.e.m. 34", "adres": "Bastenakenkaai (Kaai 206-209), Margareta van Oostenrijkstraat, 8380 Zeebrugge", "toegang_weg": "Margareta van Oostenrijkstraat", "beveiliging": "Stuitklamp linker tak wissel 502, OW Margareta van Oostenrijkstraat", "ppgi_ref": "PP-321 blz. 9, 20, 27", "lat": 51.296014, "lng": 3.22717, "aliases": ["ICO Bastenaken 2"]}, {"id": "efico", "name": "SA Efico (Koffieterminal)", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": false, "bi_version": null, "type": "Commodities / Koffie Terminal", "moederbundel": "Bundel Pelikaan", "sporen": "Via spoor 871", "adres": "Margareta van Oostenrijkstraat 14, 8380 Zeebrugge", "toegang_weg": "Margareta van Oostenrijkstraat", "beveiliging": "Omheining, poort, stuitklamp linker tak wissel 551", "ppgi_ref": "PP-321 blz. 9, 22, 36-38", "lat": 51.295931, "lng": 3.225249, "aliases": []}, {"id": "ndq", "name": "SA NDQ (NDQ Logistics)", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": false, "bi_version": null, "type": "Logistieke Terminal", "moederbundel": "Bundel Pelikaan", "sporen": "Via spoor 871", "adres": "Margareta van Oostenrijkstraat, 8380 Zeebrugge", "toegang_weg": "Margareta van Oostenrijkstraat", "beveiliging": "Stuitklamp 63R linker tak wissel 552, Siemensslot 244/115, Wilka G*", "ppgi_ref": "PP-321 blz. 9, 22, 39-41", "lat": 51.300855, "lng": 3.221456, "aliases": []}, {"id": "spoorfuel", "name": "Spoorfuelinstallatie G&V", "cluster": "zeebrugge", "zone": "PP-321", "zone_name": "Zeebrugge Zuidelijk Insteekdok", "has_bi": false, "bi_version": null, "type": "Tractiebrandstof / Tankinstallatie", "moederbundel": "Bundel Ramskapelle", "sporen": "Doodspoor 899 (lengte 110m nuttig)", "adres": "Barlenhuisstraat (Bundel Ramskapelle), 8380 Zeebrugge", "toegang_weg": "Barlenhuisstraat", "beveiliging": "Ontspoortong 91AR, telefonische aanvraag Blok 7", "ppgi_ref": "PP-321 blz. 9, 21, 83-84", "lat": 51.3135, "lng": 3.227, "aliases": []}, {"id": "ecs_bl", "name": "ECS 2XL Blauwe Loods", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "V3.1", "type": "Dry Cargo & Logistiek", "moederbundel": "Bundel Zwankendamme", "sporen": "Sporen 135 & 358 (SA ECS2 Z en ECS2 N)", "adres": "Wulfsberge / Lanceloot Blondeellaan, 8380 Zeebrugge (Zwankendamme)", "toegang_weg": "Wulfsberge", "beveiliging": "Ontspoortong 96G (Zuid) & elektrische stuitklamp 55H (Noord)", "ppgi_ref": "PP-311 blz. 10, 23, 43", "lat": 51.314319, "lng": 3.191335, "aliases": ["SA ECS2 Z", "SA ECS2 N", "ECS 2", "Blauwe Loods Zwankendamme"]}, {"id": "2xl_bml", "name": "2XL BML / SA ECS 1", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "V1.5", "type": "Logistiek & Warehousing", "moederbundel": "Zeebrugge Vorming / Bundel A", "sporen": "Spoor 460 (loods) & Spoor 524 (omloopspoor)", "adres": "Baron de Maerelaan 155, 8380 Zeebrugge", "toegang_weg": "Baron de Maerelaan / Kustlaan", "beveiliging": "Ontspoortong 54BG, Seinen Q524-G.4 & W460-G.4", "ppgi_ref": "PP-311 blz. 9, 10, 23, 42, 49", "lat": 51.312115, "lng": 3.18893, "aliases": ["SA ECS 1", "ECS 1", "Baron de Maerelaan 155"]}, {"id": "nid_ico", "name": "NID ICO Northern Inlet Terminal", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "V2.0", "type": "Automotive / RoRo Terminal", "moederbundel": "Terminal NID (Noordelijk Insteekdok)", "sporen": "Sporen 4 & 5 Westeroever Achterkaai", "adres": "Noordelijk Insteekdok (Kaaien 405-410), 8380 Zeebrugge", "toegang_weg": "Koffieweg / Lanceloot Blondeellaan", "beveiliging": "Ontspoortong, beweegbare brug, OW70", "ppgi_ref": "PP-311 blz. 9, 10", "lat": 51.327903, "lng": 3.208609, "aliases": ["NIT", "Northern Inlet Terminal", "NID Westeroever"]}, {"id": "po_ferries", "name": "P&O Ferries (P&O 501 / Zuid)", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "V1.9", "type": "Ferry / RoRo Terminal", "moederbundel": "Voorhaven-West / CHZ", "sporen": "Spoor 501 (Westerhoofd)", "adres": "Doverlaan / Westerhoofd (Buitenhaven), 8380 Zeebrugge", "toegang_weg": "Doverlaan", "beveiliging": "Terminalpoort, schuifrangering met sein V-L.4", "ppgi_ref": "PP-311 blz. 10, 31", "lat": 51.336832, "lng": 3.190455, "aliases": ["P&O Westerhoofd", "P&O 501", "P&O Ferries Zeebrugge"]}, {"id": "stora", "name": "Stora Enso (PSA Breakbulk)", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "V1.3", "type": "Papier & Bosbouw Logistiek", "moederbundel": "Voorhaven-West", "sporen": "Sporen 1 & 2 (via aansluitspoor 803)", "adres": "Caxtonweg (tussen Albert II-dok en Wielingendok), 8380 Zeebrugge", "toegang_weg": "Caxtonweg", "beveiliging": "Aansluitspoor 803, verplicht poort openen via PSA security", "ppgi_ref": "PP-311 blz. 10, 68", "lat": 51.351281, "lng": 3.17713, "aliases": ["PSA Breakbulk", "StoraEnso"]}, {"id": "dartline", "name": "Herstelspoor Dartline", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "V1.1", "type": "Wagonherstelling & Spooronderhoud", "moederbundel": "Voorhaven-West", "sporen": "Sporen 1 t.e.m. 3 (operationeel 617m, 612m, 623m)", "adres": "Caxtonweg (naast Stora Enso), 8380 Zeebrugge", "toegang_weg": "Caxtonweg", "beveiliging": "OW Cat 3 (zelf sleutelen), spoor 804, wielkeggen", "ppgi_ref": "PP-311 blz. 10, 68", "lat": 51.350343, "lng": 3.170285, "aliases": ["Herstelspoor Dartline", "Dartline Zeebrugge"]}, {"id": "cro_albert", "name": "C.Ro Ports Albert II Dok", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": true, "bi_version": "Draft V1.0", "type": "RoRo & Multipurpose Terminal", "moederbundel": "Bundel CHZ Terminal", "sporen": "Sporen 3 & 5 (CHZ)", "adres": "New Yorklaan / Albert II-dok, 8380 Zeebrugge", "toegang_weg": "New Yorklaan", "beveiliging": "Toegangspoort, konvooi splitsen t.h.v. OW", "ppgi_ref": "PP-311 blz. 9, 37-39", "lat": 51.349, "lng": 3.188, "aliases": ["SA CHZ Terminal", "CHZ", "Albert II Dok"]}, {"id": "csp_term", "name": "SA CSP Terminal NV (Cosco)", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": false, "bi_version": null, "type": "Deepsea Container Terminal", "moederbundel": "Zeebrugge Kaai / Voorhaven", "sporen": "Via spoor 851", "adres": "New Yorklaan / Albert II-dok (Wielingendok), 8380 Zeebrugge", "toegang_weg": "New Yorklaan", "beveiliging": "Stuitklamp met sleutel 334, procedure via Blok 4", "ppgi_ref": "PP-311 blz. 10, 26, 35", "lat": 51.351, "lng": 3.182, "aliases": ["Cosco Shipping Ports", "CSP Zeebrugge", "Containerterminal Zeebrugge"]}, {"id": "psa_zb", "name": "SA PSA Zeebrugge NV (Container)", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": false, "bi_version": null, "type": "Container Terminal", "moederbundel": "Voorhaven-West / Strand", "sporen": "Spoor 871", "adres": "Pieter Troostlaan (Kaai 871), 8380 Zeebrugge", "toegang_weg": "Pieter Troostlaan", "beveiliging": "Eigen stuitklamp SA PSA Zeebrugge NV", "ppgi_ref": "PP-311 blz. 10, 26, 40", "lat": 51.3395, "lng": 3.1905, "aliases": ["PSA Zeebrugge Container"]}, {"id": "psa_hnn", "name": "SA PSA - HNN", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": false, "bi_version": null, "type": "Multipurpose Terminal", "moederbundel": "Voorhaven-West", "sporen": "Spoor 801", "adres": "Pieter Troostlaan (Kaai 801), 8380 Zeebrugge", "toegang_weg": "Pieter Troostlaan", "beveiliging": "Stuitklamp / poortbediening", "ppgi_ref": "PP-311 blz. 10, 31", "lat": 51.337, "lng": 3.1925, "aliases": ["Hesse-Noord Natie", "PSA HNN 801"]}, {"id": "po_nsf", "name": "SA P&O - NSF (North Sea Ferries)", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": false, "bi_version": null, "type": "Ferry Veerboot Terminal", "moederbundel": "Zeebrugge Kaai", "sporen": "Via spoor 851 (verbindingen Brugge & spoor 5-6 zee)", "adres": "Leopold II-dam (Kaai 851), 8380 Zeebrugge", "toegang_weg": "Leopold II-dam", "beveiliging": "Stuitklampen SA P&O NSF", "ppgi_ref": "PP-311 blz. 10, 26, 35", "lat": 51.355, "lng": 3.214, "aliases": ["North Sea Ferries", "P&O NSF Spoor 851"]}, {"id": "zb_kaai", "name": "Zeebrugge Kaai (Infrabel)", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": false, "bi_version": null, "type": "Openbare Kades & Spoorlijn", "moederbundel": "Zeebrugge Kaai", "sporen": "Spoor 851", "adres": "Centrale havenkades spoor 851, 8380 Zeebrugge", "toegang_weg": "Kustlaan / Leopold II-dam", "beveiliging": "Kleine beweging onder Blok 4", "ppgi_ref": "PP-311 blz. 10, 26, 36", "lat": 51.348, "lng": 3.211, "aliases": ["Kaaispoor 851 Infrabel", "Zeebrugge-Kaai"]}, {"id": "zweedse_kaai", "name": "Zweedse Kaai", "cluster": "zeebrugge", "zone": "PP-311", "zone_name": "Zeebrugge Noord / Voorhaven", "has_bi": false, "bi_version": null, "type": "Autoterminal / Historische Kades", "moederbundel": "Lijn 202 / Verbindingsdok", "sporen": "Kaaisporen Zweedse Kaai", "adres": "Zweedse Kaai / Verbindingsdok, 8380 Zeebrugge", "toegang_weg": "Kustlaan", "beveiliging": "Historische aansluiting L202", "ppgi_ref": "PP-311 blz. 1, 3", "lat": 51.339031, "lng": 3.206935, "aliases": ["Zweedse Kaai Zeebrugge"]}, {"id": "proviron", "name": "SA Proviron (Chemicals)", "cluster": "oostende", "zone": "PP-341", "zone_name": "Oostende & Plassendale", "has_bi": false, "bi_version": null, "type": "Chemie / Tankwagens", "moederbundel": "Oostende Vorming", "sporen": "Spoor 151", "adres": "George Stephensonstraat / Karperstraat, 8400 Oostende", "toegang_weg": "Industriezone Plassendale 1", "beveiliging": "Telefoontoelating Blok 7, kleine beweging", "ppgi_ref": "PP-341 blz. 9, 31", "lat": 51.2135, "lng": 3.003, "aliases": ["Proviron Chemicals Oostende"]}, {"id": "tilbury", "name": "Tilbury (Goederenoverslag)", "cluster": "oostende", "zone": "PP-341", "zone_name": "Oostende & Plassendale", "has_bi": false, "bi_version": null, "type": "Goederen / Bulk & Stukgoed", "moederbundel": "Handelsdok Oostende", "sporen": "Sporen 1 & 2 (via spoor 254)", "adres": "Vergunningenstraat / Sloepenstraat / Molendorpkaai, 8400 Oostende", "toegang_weg": "Benedenstuwbrug", "beveiliging": "Omheining, poort, bediening brug door De Vlaamse Waterweg, max 1 loc", "ppgi_ref": "PP-341 blz. 8, 28, 31-32", "lat": 51.229, "lng": 2.929, "aliases": ["Tilbury Kaai Oostende", "Goederenoverslag Oostende"]}, {"id": "plassendale", "name": "Bundel Plassendale 1", "cluster": "oostende", "zone": "PP-341", "zone_name": "Oostende & Plassendale", "has_bi": false, "bi_version": null, "type": "Goederen Laad- & Losbundel", "moederbundel": "Plassendale 1", "sporen": "Sporen 3 & 4 (via doodspoor 150/153)", "adres": "Zandvoordestraat / Oudenburgsesteenweg, 8400 Oostende", "toegang_weg": "Draaibrug over kanaal Brugge-Oostende", "beveiliging": "Omheining, poort, spoorwegdraaibrug bediend door personeel", "ppgi_ref": "PP-341 blz. 8, 26, 31", "lat": 51.211, "lng": 2.998, "aliases": ["Plassendale 1", "Industrieterrein Plassendale"]}, {"id": "oostende_vorming", "name": "Oostende Vorming (117-118)", "cluster": "oostende", "zone": "PP-341", "zone_name": "Oostende & Plassendale", "has_bi": false, "bi_version": null, "type": "Openbare Laad-/Lossporen", "moederbundel": "Bundel Vorming", "sporen": "Sporen 117 en 118", "adres": "Achterhaven Oostende (corridor Lijn 50A), 8400 Oostende", "toegang_weg": "Vuurtorenweg / Stapelhuisstraat", "beveiliging": "Overgedragen aan I-O.3, Siemenssleutelprocedure", "ppgi_ref": "PP-341 blz. 9, 26, 33", "lat": 51.222, "lng": 2.946, "aliases": ["Oostende Vorming Spoor 117-118"]}, {"id": "whv_oostende", "name": "WHV Oostende & Bundel WET", "cluster": "oostende", "zone": "PP-341", "zone_name": "Oostende & Plassendale", "has_bi": false, "bi_version": null, "type": "Tractiewerkplaats & Onderhoud", "moederbundel": "Werkplaats Tractie", "sporen": "Spoor 253 en proefspoor 25kV", "adres": "Zandvoordestraat / Vuurtorenweg, 8400 Oostende", "toegang_weg": "Zandvoordestraat", "beveiliging": "Centrale aanvraag Blok 7, industriële seinpost", "ppgi_ref": "PP-341 blz. 9, 32-33, 66-72", "lat": 51.218, "lng": 2.955, "aliases": ["WHV", "WET Oostende"]}, {"id": "alstom", "name": "SA Alstom (voorheen Bombardier)", "cluster": "brugge", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": true, "bi_version": "V1.3", "type": "Treinbouw & Fabrieksaansluiting", "moederbundel": "Station Brugge / Bundel U", "sporen": "Spoor 675 / 676", "adres": "Vaartdijkstraat 5, 8200 Brugge (Sint-Michiels)", "toegang_weg": "Vaartdijkstraat langs kanaal Gent-Brugge", "beveiliging": "Stuitklamp, Siemenssleutel met toelating Blok 7, sleepklaar Traxx BR186", "ppgi_ref": "PPGI_1_FR_B blz. 18, 20-21, 42", "lat": 51.1915, "lng": 3.2215, "aliases": ["Bombardier", "Bombardier Transportation Brugge", "Alstom Brugge"]}, {"id": "lci_brugge", "name": "LCI Brugge (Logistiek Centrum Infrabel)", "cluster": "brugge", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": false, "bi_version": null, "type": "Infrabel Werfbasis / Spoorbouw", "moederbundel": "Station Brugge", "sporen": "Spoor 3", "adres": "Hendrik Brugmansstraat, 8000 Brugge", "toegang_weg": "Hendrik Brugmansstraat nabij station Brugge", "beveiliging": "Stuitklamp met Siemenssleutel", "ppgi_ref": "PPGI_1_FR_B blz. 18, 21", "lat": 51.196, "lng": 3.219, "aliases": ["Logistiek Centrum Infrabel Brugge"]}, {"id": "otwd_brugge", "name": "OTWD Brugge (Werkplaats Infrabel)", "cluster": "brugge", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": false, "bi_version": null, "type": "Werkplaatsdomein Infrabel", "moederbundel": "Station Brugge", "sporen": "Spoor 638", "adres": "Ten Briele / Kuringenstraat, 8200 Brugge (Sint-Michiels)", "toegang_weg": "Ten Briele", "beveiliging": "Handbediende wissels door bediende IG", "ppgi_ref": "PPGI_1_FR_B blz. 21, 42", "lat": 51.188, "lng": 3.224, "aliases": ["Onderhoudswerkplaats Infrabel Brugge"]}, {"id": "lci_lichtervelde", "name": "LCI Lichtervelde", "cluster": "centraal", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": false, "bi_version": null, "type": "Infrabel Spoorbouw & Knooppunt", "moederbundel": "Knooppunt L66 / L73", "sporen": "Bundel LCI Lichtervelde", "adres": "Statiestraat / Spoorweglaan, 8810 Lichtervelde", "toegang_weg": "Statiestraat", "beveiliging": "Lokale seininrichting", "ppgi_ref": "PPGI_1_FR_B blz. 26", "lat": 51.0295, "lng": 3.1435, "aliases": ["Logistiek Centrum Infrabel Lichtervelde"]}, {"id": "bundel_roeselare", "name": "Bundel Roeselare", "cluster": "centraal", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": false, "bi_version": null, "type": "Goederenbundel", "moederbundel": "Lijn 66", "sporen": "Bundelsporen Roeselare", "adres": "Beversesteenweg / Spoorweglaan, 8800 Roeselare", "toegang_weg": "Beversesteenweg", "beveiliging": "Lokale capaciteit Infrabel", "ppgi_ref": "PPGI_1_FR_B blz. 32", "lat": 50.946, "lng": 3.131, "aliases": ["Vormingsbundel Roeselare"]}, {"id": "bundel_blankenberge", "name": "Bundel Blankenberge (Bundel M)", "cluster": "kust", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": false, "bi_version": null, "type": "Wijkbundel Goederen/Reizigers", "moederbundel": "Lijn 51", "sporen": "Sporen 811 t.e.m. 816 en 820", "adres": "Spoorleggerstraat / Kerkstraat, 8370 Blankenberge", "toegang_weg": "Spoorleggerstraat", "beveiliging": "Beseinde bundel", "ppgi_ref": "PPGI_1_FR_B blz. 29, 41", "lat": 51.3125, "lng": 3.134, "aliases": ["Bundel M Blankenberge"]}, {"id": "bundel_depanne", "name": "Bundel De Panne", "cluster": "kust", "zone": "FR/B", "zone_name": "Actiezone Brugge FR/B", "has_bi": false, "bi_version": null, "type": "Uitwijk- en Vormingsbundel", "moederbundel": "Lijn 73", "sporen": "Bundelsporen De Panne", "adres": "Stationsplein 9, 8660 De Panne / Adinkerke", "toegang_weg": "Stationsplein", "beveiliging": "Lokale capaciteit Infrabel", "ppgi_ref": "PPGI_1_FR_B blz. 23, 40", "lat": 51.0775, "lng": 2.6025, "aliases": ["Vorming De Panne"]}, {"id": "lci_kortrijk", "name": "LCI Kortrijk (Logistiek Centrum Infrabel)", "cluster": "kortrijk", "zone": "FR/D", "zone_name": "Actiezone Kortrijk FR/D", "has_bi": false, "bi_version": null, "type": "Infrabel Werfbasis / Spoorbouw", "moederbundel": "Station Kortrijk", "sporen": "Doodsporen 266 en 267", "adres": "Minister Liebaertlaan, 8500 Kortrijk", "toegang_weg": "Minister Liebaertlaan", "beveiliging": "Geslotteerde stuitklamp met sleutel 433, slotkast", "ppgi_ref": "PPGI_1_FR_D blz. 18, 20, 23", "lat": 50.835, "lng": 3.272, "aliases": ["Logistiek Centrum Infrabel Kortrijk"]}, {"id": "io3_kortrijk", "name": "Aansluiting I-O.3 Kortrijk", "cluster": "kortrijk", "zone": "FR/D", "zone_name": "Actiezone Kortrijk FR/D", "has_bi": false, "bi_version": null, "type": "Technische Spooraansluiting", "moederbundel": "Station Kortrijk", "sporen": "Doodspoor 363", "adres": "Luiksestraat / spoorcorridor, 8500 Kortrijk", "toegang_weg": "Luiksestraat", "beveiliging": "Geslotteerde stuitklamp met sleutel 441, slotkast Slot LCI", "ppgi_ref": "PPGI_1_FR_D blz. 18, 20, 24", "lat": 50.825, "lng": 3.268, "aliases": ["I-O.3 Kortrijk"]}, {"id": "kortrijk_vorming", "name": "Kortrijk Goederen / Vorming", "cluster": "kortrijk", "zone": "FR/D", "zone_name": "Actiezone Kortrijk FR/D", "has_bi": false, "bi_version": null, "type": "Centrale Rangeer- & Vormingsbundel", "moederbundel": "Lijn 75", "sporen": "Bundels A (357-360), B (227-239), C (221-226), D (251-260)", "adres": "Luiksestraat / Zandstraat / Schaapsdreef, 8500 Kortrijk", "toegang_weg": "Zandstraat / Luiksestraat", "beveiliging": "Beseinde bundels, bundelplaatjes, EBP Blok 7", "ppgi_ref": "PPGI_1_FR_D blz. 16-17, 38-39", "lat": 50.823, "lng": 3.264, "aliases": ["Kortrijk Goederen", "Kortrijk Bundels A-D"]}, {"id": "lauwe", "name": "Bundel Lauwe", "cluster": "kortrijk", "zone": "FR/D", "zone_name": "Actiezone Kortrijk FR/D", "has_bi": false, "bi_version": null, "type": "Wijkbundel Goederen", "moederbundel": "Lijn 75", "sporen": "Sporen bundel Lauwe", "adres": "Spoorwegstraat, 8930 Lauwe (Menen)", "toegang_weg": "Spoorwegstraat", "beveiliging": "Lokaal protocol Infrabel", "ppgi_ref": "PPGI_1_FR_D blz. 25-27", "lat": 50.796, "lng": 3.189, "aliases": ["Vormingsstation Lauwe"]}, {"id": "poperinge", "name": "Poperinge Goederen", "cluster": "zuidwest", "zone": "FR/D", "zone_name": "Actiezone Kortrijk FR/D", "has_bi": false, "bi_version": null, "type": "Eindpunt Goederensporen", "moederbundel": "Lijn 69", "sporen": "Sporen 4 (654) en 5 (655)", "adres": "Europalaan, 8970 Poperinge", "toegang_weg": "Europalaan", "beveiliging": "Stootblokken, enkelsporige lijn exploitatie", "ppgi_ref": "PPGI_1_FR_D blz. 30, 38", "lat": 50.854, "lng": 2.738, "aliases": ["Poperinge Goederensporen"]}];
     const rawBundels = [{"name": "Bundel Ramskapelle", "lat": 51.3125, "lng": 3.2255, "info": "Sporen 881-897 (Zuidelijk Insteekdok)"}, {"name": "Bundel Pelikaan", "lat": 51.292613, "lng": 3.228543, "info": "Sporen 861-875 (Zuidelijk Insteekdok)"}, {"name": "Bundel Zwankendamme", "lat": 51.306043, "lng": 3.191378, "info": "Sporen 101-110"}, {"name": "Bundel Voorhaven-West", "lat": 51.340854, "lng": 3.176165, "info": "Sporen 700-717"}, {"name": "Zeebrugge Vorming (Bundel A)", "lat": 51.318798, "lng": 3.188095, "info": "Sporen 521-524"}, {"name": "Bundel CHZ Terminal", "lat": 51.348, "lng": 3.189, "info": "Sporen 1-7 (Albert II Dok)"}, {"name": "Oostende Vorming", "lat": 51.222, "lng": 2.946, "info": "Achterhaven Oostende"}, {"name": "Station Brugge / Bundel U", "lat": 51.194, "lng": 3.221, "info": "Centrale as L50A/L66"}, {"name": "Kortrijk Vorming", "lat": 50.823, "lng": 3.264, "info": "Bundels A, B, C, D (L75)"}];
 
-    // Local Storage Key
+    // Local Storage Keys
     const STORAGE_KEY = 'db_cargo_saved_coords_v1';
+    const STORAGE_ALIASES_KEY = 'db_cargo_saved_aliases_v1';
+    const STORAGE_MERGED_KEY = 'db_cargo_saved_merged_v1';
 
     // Hub extents
     const HUB_COORDS = {
@@ -1287,7 +1482,6 @@
         const raw = localStorage.getItem(STORAGE_KEY);
         return raw ? JSON.parse(raw) : {};
       } catch (e) {
-        console.warn('LocalStorage niet beschikbaar:', e);
         return {};
       }
     }
@@ -1295,10 +1489,23 @@
     function savePersistedOverrides(overrides) {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides));
-      } catch (e) {
-        console.warn('Fout bij opslaan in LocalStorage:', e);
-      }
+      } catch (e) {}
       updateCustomCountBadge();
+    }
+
+    function loadPersistedAliases() {
+      try {
+        const raw = localStorage.getItem(STORAGE_ALIASES_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function savePersistedAliases(aliasesMap) {
+      try {
+        localStorage.setItem(STORAGE_ALIASES_KEY, JSON.stringify(aliasesMap));
+      } catch (e) {}
     }
 
     // Check optional local Python server on port 8055
@@ -1312,16 +1519,12 @@
           serverAvailable = true;
           document.getElementById('syncStatusDot').classList.add('connected');
           document.getElementById('syncStatusText').textContent = 'Server Actief (Auto-Save)';
-          document.getElementById('syncStatusBox').title = 'Lokale python server actief: wijzigingen worden direct weggeschreven naar locs_gps.json en HTML!';
           return;
         }
-      } catch (e) {
-        // Server not running, perfectly fine, localStorage handles persistence
-      }
+      } catch (e) {}
       serverAvailable = false;
       document.getElementById('syncStatusDot').classList.remove('connected');
       document.getElementById('syncStatusText').textContent = 'Browser Opslag (Actief)';
-      document.getElementById('syncStatusBox').title = 'LocalStorage actief: wijzigingen blijven bewaard in deze browser.';
     }
 
     // Leaflet Layers
@@ -1429,7 +1632,7 @@
       }, 3500);
     }
 
-    // Create Marker Icons (Fixed size to eliminate jitter)
+    // Create Marker Icons
     function createMarkerIcon(loc, isCustom) {
       const customClass = isCustom ? 'has-custom-coord' : '';
       if (loc.is_bundel) {
@@ -1474,15 +1677,20 @@
       }
     }
 
-    // Build Master Items Array
-    const allItems = [];
-    const persisted = loadPersistedOverrides();
+    // Master Items Array
+    let allItems = [];
+    const persistedCoords = loadPersistedOverrides();
+    const persistedAliases = loadPersistedAliases();
 
-    // 40 Locations
+    // Populate locations
     rawLocations.forEach(l => {
-      const hasCustom = persisted[l.id] !== undefined;
-      const lat = hasCustom ? persisted[l.id].lat : l.lat;
-      const lng = hasCustom ? persisted[l.id].lng : l.lng;
+      const hasCustom = persistedCoords[l.id] !== undefined;
+      const lat = hasCustom ? persistedCoords[l.id].lat : l.lat;
+      const lng = hasCustom ? persistedCoords[l.id].lng : l.lng;
+      
+      // Merge base aliases with any stored aliases
+      const storedAliases = persistedAliases[l.id] || [];
+      const combinedAliases = Array.from(new Set([...(l.aliases || []), ...storedAliases]));
 
       allItems.push({
         id: l.id,
@@ -1503,17 +1711,18 @@
         original_lng: l.lng,
         lat: lat,
         lng: lng,
+        aliases: combinedAliases,
         is_custom_coord: hasCustom,
         is_bundel: false
       });
     });
 
-    // 9 Bundels
+    // Populate bundels
     rawBundels.forEach((b, idx) => {
       const bundelId = 'bundel_' + idx;
-      const hasCustom = persisted[bundelId] !== undefined;
-      const lat = hasCustom ? persisted[bundelId].lat : b.lat;
-      const lng = hasCustom ? persisted[bundelId].lng : b.lng;
+      const hasCustom = persistedCoords[bundelId] !== undefined;
+      const lat = hasCustom ? persistedCoords[bundelId].lat : b.lat;
+      const lng = hasCustom ? persistedCoords[bundelId].lng : b.lng;
 
       allItems.push({
         id: bundelId,
@@ -1533,36 +1742,43 @@
         original_lng: b.lng,
         lat: lat,
         lng: lng,
+        aliases: [b.name],
         is_custom_coord: hasCustom,
         is_bundel: true
       });
     });
 
     // Add Markers to Map
-    allItems.forEach(item => {
-      const marker = L.marker([item.lat, item.lng], {
-        icon: createMarkerIcon(item, item.is_custom_coord),
-        riseOnHover: true
-      }).addTo(map);
+    function buildMapMarkers() {
+      // Clear existing
+      Object.values(markersMap).forEach(mObj => map.removeLayer(mObj.marker));
+      markersMap = {};
 
-      // Tooltip with clean design
-      const tipText = item.is_bundel 
-        ? `<strong>${item.name}</strong><br/><span style="color:#fbbf24;font-size:10px;">Infrabel Moederbundel</span>`
-        : `<strong>${item.name}</strong><br/><span style="color:${item.has_bi ? '#34d399' : '#f87171'};font-size:10px;">${item.has_bi ? '🟢 Reeds BI' : '🔴 Nog GEEN BI'}</span>`;
+      allItems.forEach(item => {
+        const marker = L.marker([item.lat, item.lng], {
+          icon: createMarkerIcon(item, item.is_custom_coord),
+          riseOnHover: true
+        }).addTo(map);
 
-      marker.bindTooltip(tipText, {
-        className: 'custom-tip',
-        direction: 'top',
-        offset: [0, -14],
-        opacity: 0.95
+        const tipText = item.is_bundel 
+          ? `<strong>${item.name}</strong><br/><span style="color:#fbbf24;font-size:10px;">Infrabel Moederbundel</span>`
+          : `<strong>${item.name}</strong><br/><span style="color:${item.has_bi ? '#34d399' : '#f87171'};font-size:10px;">${item.has_bi ? '🟢 Reeds BI' : '🔴 Nog GEEN BI'}</span>`;
+
+        marker.bindTooltip(tipText, {
+          className: 'custom-tip',
+          direction: 'top',
+          offset: [0, -14],
+          opacity: 0.95
+        });
+
+        marker.on('click', () => {
+          selectLocation(item.id, true);
+        });
+
+        markersMap[item.id] = { marker, data: item };
       });
-
-      marker.on('click', () => {
-        selectLocation(item.id, true);
-      });
-
-      markersMap[item.id] = { marker, data: item };
-    });
+    }
+    buildMapMarkers();
 
     // Update Modified Counter Badge in Header
     function updateCustomCountBadge() {
@@ -1604,6 +1820,19 @@
           ? '<span class="badge-custom-coord" title="Handmatig aangepast">📍 Aangepast</span>' 
           : '';
 
+        // Aliases rendering in card
+        let aliasesHtml = '';
+        if (item.aliases && item.aliases.length > 0) {
+          const displayed = item.aliases.slice(0, 3);
+          aliasesHtml = `
+            <div class="loc-card-aliases">
+              <span>🔗</span>
+              ${displayed.map(a => `<span class="loc-card-aliases-tag">${a}</span>`).join('')}
+              ${item.aliases.length > 3 ? `<span style="color:#64748b;">+${item.aliases.length - 3}</span>` : ''}
+            </div>
+          `;
+        }
+
         card.innerHTML = `
           <div class="loc-card-header">
             <div class="loc-card-title">${item.name}</div>
@@ -1612,6 +1841,7 @@
           <div class="loc-card-details">
             <div>📍 ${item.moederbundel || item.adres}</div>
             <div style="color:#64748b; font-size:10px;">Sporen: ${item.sporen}</div>
+            ${aliasesHtml}
           </div>
           <div class="loc-card-meta">
             <span>${item.zone}</span>
@@ -1627,7 +1857,18 @@
         listEl.appendChild(card);
       });
 
-      document.getElementById('resultCount').textContent = `${items.length} resultaten getoond`;
+      // Update count statistics
+      const biYesCount = allItems.filter(x => !x.is_bundel && x.has_bi).length;
+      const biNoCount = allItems.filter(x => !x.is_bundel && !x.has_bi).length;
+      const bundelCount = allItems.filter(x => x.is_bundel).length;
+
+      document.getElementById('resultCount').textContent = `${items.length} locaties getoond`;
+      document.getElementById('filterAll').textContent = `Alle (${allItems.length})`;
+      document.getElementById('filterBiYes').textContent = `🟢 Reeds BI (${biYesCount})`;
+      document.getElementById('filterBiNo').textContent = `🔴 Nog geen BI (${biNoCount})`;
+      document.getElementById('filterBundels').textContent = `🟡 Bundels (${bundelCount})`;
+      document.getElementById('legBiYesText').textContent = `Reeds een BI (${biYesCount} locaties)`;
+      document.getElementById('legBiNoText').textContent = `Nog GEEN BI (${biNoCount} locaties)`;
     }
 
     // Filter Logic
@@ -1645,12 +1886,14 @@
           const matchAdres = (item.adres || '').toLowerCase().includes(query);
           const matchZone = (item.zone || '').toLowerCase().includes(query);
           const matchMoeder = (item.moederbundel || '').toLowerCase().includes(query);
-          if (!matchName && !matchSporen && !matchAdres && !matchZone && !matchMoeder) return false;
+          const matchAlias = (item.aliases || []).some(a => a.toLowerCase().includes(query));
+          if (!matchName && !matchSporen && !matchAdres && !matchZone && !matchMoeder && !matchAlias) return false;
         }
         return true;
       });
 
       allItems.forEach(item => {
+        if (!markersMap[item.id]) return;
         const m = markersMap[item.id].marker;
         const visible = filtered.some(f => f.id === item.id);
         if (visible) {
@@ -1672,7 +1915,6 @@
 
     // Selection & Detail Overlay
     function selectLocation(id, zoomIn) {
-      // Clean up any ongoing drag/pick tool
       cancelInteractiveTool();
 
       activeMarkerId = id;
@@ -1716,6 +1958,9 @@
       document.getElementById('detailBeveiliging').textContent = target.beveiliging || 'Geen specifieke sloten vermeld';
       document.getElementById('detailPpgi').textContent = target.ppgi_ref || 'PPGI West-Vlaanderen';
 
+      // Render Aliases Section
+      renderDetailAliases(target);
+
       // GPS Inputs
       document.getElementById('editLat').value = target.lat.toFixed(6);
       document.getElementById('editLng').value = target.lng.toFixed(6);
@@ -1745,10 +1990,138 @@
     }
 
     // ==========================================
+    // ALIASES & LINKING LOGIC (TASK 2)
+    // ==========================================
+
+    function renderDetailAliases(target) {
+      const sec = document.getElementById('detailAliasSection');
+      if (target.is_bundel) {
+        sec.style.display = 'none';
+        return;
+      }
+      sec.style.display = 'block';
+
+      const countEl = document.getElementById('detailAliasCount');
+      const container = document.getElementById('detailAliasesContainer');
+      const selectEl = document.getElementById('mergeLocationSelect');
+
+      const aliases = target.aliases || [];
+      countEl.textContent = `${aliases.length} synoniem${aliases.length === 1 ? '' : 'men'}`;
+
+      if (aliases.length === 0) {
+        container.innerHTML = '<span style="color:#64748b; font-size:11px; font-style:italic;">Nog geen synoniemen gekoppeld. Voeg er een toe om dubbele BI\'s te voorkomen.</span>';
+      } else {
+        container.innerHTML = aliases.map(a => `
+          <span class="alias-chip">
+            <span>${a}</span>
+            <button class="alias-chip-del" onclick="removeCurrentAlias('${a.replace(/'/g, "\\'")}')" title="Verwijder synoniem">&times;</button>
+          </span>
+        `).join('');
+      }
+
+      // Populate merge dropdown with other non-bundel locations
+      selectEl.innerHTML = '<option value="">-- Koppel met andere bediening --</option>';
+      allItems.filter(x => !x.is_bundel && x.id !== target.id).forEach(other => {
+        const opt = document.createElement('option');
+        opt.value = other.id;
+        opt.textContent = `${other.name} (${other.has_bi ? 'Reeds BI' : 'Geen BI'})`;
+        selectEl.appendChild(opt);
+      });
+    }
+
+    function addCurrentAlias() {
+      if (!activeMarkerId) return;
+      const target = allItems.find(x => x.id === activeMarkerId);
+      if (!target) return;
+
+      const input = document.getElementById('newAliasInput');
+      const val = input.value.trim();
+      if (!val) return;
+
+      if (!target.aliases) target.aliases = [];
+      if (!target.aliases.includes(val)) {
+        target.aliases.push(val);
+        input.value = '';
+
+        // Save aliases to localStorage
+        const allStoredAliases = loadPersistedAliases();
+        allStoredAliases[target.id] = target.aliases;
+        savePersistedAliases(allStoredAliases);
+
+        renderDetailAliases(target);
+        handleFilter();
+        showToast(`✓ Synoniem "${val}" gekoppeld aan ${target.name}!`);
+      }
+    }
+
+    function removeCurrentAlias(aliasVal) {
+      if (!activeMarkerId) return;
+      const target = allItems.find(x => x.id === activeMarkerId);
+      if (!target || !target.aliases) return;
+
+      target.aliases = target.aliases.filter(a => a !== aliasVal);
+
+      const allStoredAliases = loadPersistedAliases();
+      allStoredAliases[target.id] = target.aliases;
+      savePersistedAliases(allStoredAliases);
+
+      renderDetailAliases(target);
+      handleFilter();
+      showToast(`Synoniem "${aliasVal}" verwijderd.`);
+    }
+
+    function mergeSelectedLocation() {
+      if (!activeMarkerId) return;
+      const target = allItems.find(x => x.id === activeMarkerId);
+      if (!target) return;
+
+      const selectEl = document.getElementById('mergeLocationSelect');
+      const otherId = selectEl.value;
+      if (!otherId) {
+        showToast('Selecteer eerst een locatie om samen te voegen.', 'warning');
+        return;
+      }
+
+      const other = allItems.find(x => x.id === otherId);
+      if (!other) return;
+
+      const confirmMsg = `Weet je zeker dat je "${other.name}" wilt samenvoegen met "${target.name}"?\n\nBeide benamingen worden gekoppeld en vormen voortaan 1 GEZAMENLIJKE BI. De dubbele pin van "${other.name}" wordt verwijderd.`;
+      if (!confirm(confirmMsg)) return;
+
+      // Add other name and aliases to target
+      if (!target.aliases) target.aliases = [];
+      if (!target.aliases.includes(other.name)) target.aliases.push(other.name);
+      if (other.aliases) {
+        other.aliases.forEach(a => {
+          if (!target.aliases.includes(a)) target.aliases.push(a);
+        });
+      }
+
+      // If target had no BI but other had a BI, inherit the BI!
+      if (!target.has_bi && other.has_bi) {
+        target.has_bi = true;
+        target.bi_version = other.bi_version;
+      }
+
+      // Remove other location from allItems
+      allItems = allItems.filter(x => x.id !== otherId);
+
+      // Save aliases and rebuild map markers
+      const allStoredAliases = loadPersistedAliases();
+      allStoredAliases[target.id] = target.aliases;
+      savePersistedAliases(allStoredAliases);
+
+      buildMapMarkers();
+      selectLocation(target.id, false);
+      handleFilter();
+
+      showToast(`✓ "${other.name}" succesvol gekoppeld aan "${target.name}"! Slechts 1 BI vereist.`);
+    }
+
+    // ==========================================
     // INTERACTIVE COORDINATES EDITING LOGIC
     // ==========================================
 
-    // 1. Drag Marker Mode
     function toggleDragCurrentMarker() {
       if (!activeMarkerId) return;
       const itemObj = markersMap[activeMarkerId];
@@ -1809,7 +2182,6 @@
       }
     }
 
-    // 2. Pick Point on Map Mode
     function togglePickPoint() {
       if (!activeMarkerId) return;
       isPickPointActive = !isPickPointActive;
@@ -1847,7 +2219,6 @@
       document.getElementById('actionBanner').classList.remove('active');
     }
 
-    // Map Click Listener for Pick Point
     map.on('click', function(e) {
       if (isPickPointActive && activeMarkerId) {
         const newLat = e.latlng.lat;
@@ -1873,7 +2244,6 @@
       }
     }
 
-    // 3. Save Coordinates (LocalStorage + Optional Local Server)
     async function saveCurrentCoords() {
       if (!activeMarkerId) return;
       const newLat = parseFloat(document.getElementById('editLat').value);
@@ -1892,23 +2262,18 @@
       target.lng = newLng;
       target.is_custom_coord = true;
 
-      // Update marker position & icon
       itemObj.marker.setLatLng([newLat, newLng]);
       itemObj.marker.setIcon(createMarkerIcon(target, true));
 
-      // Persist in LocalStorage
       const saved = loadPersistedOverrides();
       saved[activeMarkerId] = { lat: newLat, lng: newLng };
       savePersistedOverrides(saved);
 
-      // Update UI elements
       document.getElementById('coordCustomBadge').style.display = 'inline-block';
       document.getElementById('detailNavBtn').href = `https://www.google.com/maps/@?api=1&map_action=map&center=${newLat},${newLng}&zoom=18&basemap=satellite`;
 
-      // Update sidebar card badge
       handleFilter();
 
-      // Attempt background save to local Python server if available
       let serverSaved = false;
       if (serverAvailable) {
         try {
@@ -1918,9 +2283,7 @@
             body: JSON.stringify({ id: activeMarkerId, lat: newLat, lng: newLng })
           });
           if (res.ok) serverSaved = true;
-        } catch (e) {
-          console.warn('Server save gefaald:', e);
-        }
+        } catch (e) {}
       }
 
       if (serverSaved) {
@@ -1930,7 +2293,6 @@
       }
     }
 
-    // 4. Reset Current Item to Default Coordinates
     function resetCurrentCoords() {
       if (!activeMarkerId) return;
       const itemObj = markersMap[activeMarkerId];
@@ -1949,7 +2311,6 @@
       document.getElementById('editLng').value = target.lng.toFixed(6);
       document.getElementById('coordCustomBadge').style.display = 'none';
 
-      // Remove from LocalStorage
       const saved = loadPersistedOverrides();
       delete saved[activeMarkerId];
       savePersistedOverrides(saved);
@@ -1971,14 +2332,26 @@
       document.getElementById('exportModal').classList.remove('active');
     }
 
-    // Download updated locs_gps.json
     function downloadUpdatedJson() {
-      const updatedLocations = rawLocations.map(l => {
-        const item = allItems.find(x => x.id === l.id);
+      const updatedLocations = allItems.filter(x => !x.is_bundel).map(item => {
         return {
-          ...l,
-          lat: item ? item.lat : l.lat,
-          lng: item ? item.lng : l.lng
+          id: item.id,
+          name: item.name,
+          cluster: item.cluster,
+          zone: item.zone,
+          zone_name: item.zone_name,
+          has_bi: item.has_bi,
+          bi_version: item.bi_version,
+          type: item.type,
+          moederbundel: item.moederbundel,
+          sporen: item.sporen,
+          adres: item.adres,
+          toegang_weg: item.toegang_weg,
+          beveiliging: item.beveiliging,
+          ppgi_ref: item.ppgi_ref,
+          aliases: item.aliases || [],
+          lat: item.lat,
+          lng: item.lng
         };
       });
 
@@ -2008,29 +2381,8 @@
       showToast('📥 locs_gps.json succesvol gedownload!');
     }
 
-    // Download updated complete HTML file
     function downloadUpdatedHtml() {
-      const updatedLocations = rawLocations.map(l => {
-        const item = allItems.find(x => x.id === l.id);
-        return {
-          ...l,
-          lat: item ? item.lat : l.lat,
-          lng: item ? item.lng : l.lng
-        };
-      });
-
-      const updatedBundels = rawBundels.map((b, idx) => {
-        const item = allItems.find(x => x.id === 'bundel_' + idx);
-        return {
-          ...b,
-          lat: item ? item.lat : b.lat,
-          lng: item ? item.lng : b.lng
-        };
-      });
-
-      // Get current HTML and replace embedded data
       let html = document.documentElement.outerHTML;
-      // Trigger download
       const blob = new Blob(['<!DOCTYPE html>' + String.fromCharCode(10) + html], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -2043,7 +2395,6 @@
       showToast('📄 Bijgewerkte kaart_bedieningen.html gedownload!');
     }
 
-    // Copy modified coordinates to clipboard
     function copyModifiedCoordsToClipboard() {
       const saved = loadPersistedOverrides();
       const keys = Object.keys(saved);
@@ -2066,10 +2417,10 @@
       });
     }
 
-    // Reset all overrides
     function resetAllOverrides() {
       if (confirm('Weet je zeker dat je alle handmatige aanpassingen wilt wissen en terugkeren naar de fabrieksinstellingen?')) {
         localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(STORAGE_ALIASES_KEY);
         allItems.forEach(item => {
           item.lat = item.original_lat;
           item.lng = item.original_lng;
