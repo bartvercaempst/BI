@@ -9,6 +9,6 @@
 // ==============================================================
 
 window.SUPABASE_CONFIG = {
-  url: "",      // Bijv: "https://xyzcompany.supabase.co"
-  anonKey: ""   // Bijv: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  url: "https://vuxkdpkicelttaeazofd.supabase.co/rest/v1/",      // Bijv: "https://xyzcompany.supabase.co"
+  anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1eGtkcGtpY2VsdHRhZWF6b2ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEzNzE4NzEsImV4cCI6MjEwNjk0Nzg3MX0.ju2dnHAvJGzPK94BEVlvrTZMdQlr5OpC7LLpCMLwykM"   // Bijv: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 };
