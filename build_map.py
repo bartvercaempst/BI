@@ -1579,6 +1579,24 @@ def build_map_html(locations, bundels):
         z-index: 400 !important;
       }}
 
+      /* Action banner styling on mobile */
+      .action-banner {{
+        top: 10px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        padding: 8px 12px !important;
+        font-size: 11px !important;
+        gap: 8px !important;
+        max-width: 94vw !important;
+        width: max-content !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+        z-index: 2200 !important;
+      }}
+      .action-banner span {{
+        line-height: 1.3;
+      }}
+
       .modal-box {{
         width: 95vw !important;
         max-width: 95vw !important;
@@ -1734,7 +1752,7 @@ def build_map_html(locations, bundels):
     <!-- Floating Drag Action Banner -->
     <div class="action-banner" id="actionBanner">
       <span id="actionBannerText">📍 Sleep de marker naar het gewenste spoor op de satelliet en klik op <strong>'Positie Opslaan'</strong>.</span>
-      <button class="action-banner-btn" onclick="saveCurrentCoords()">💾 Nu Opslaan</button>
+      <button class="action-banner-btn" id="actionBannerSaveBtn" onclick="saveCurrentCoords()">💾 Nu Opslaan</button>
       <button class="action-banner-cancel" onclick="cancelInteractiveTool()">Annuleren</button>
     </div>
 
@@ -3007,12 +3025,14 @@ def build_map_html(locations, bundels):
       const itemObj = markersMap[activeMarkerId];
       if (!itemObj) return;
       const marker = itemObj.marker;
+      const overlay = document.getElementById('detailOverlay');
 
       isDraggingActive = !isDraggingActive;
       const btn = document.getElementById('btnDragMarker');
       const btnText = document.getElementById('btnDragText');
       const banner = document.getElementById('actionBanner');
       const bannerText = document.getElementById('actionBannerText');
+      const saveBtn = document.getElementById('actionBannerSaveBtn');
 
       if (isDraggingActive) {{
         if (isPickPointActive) disablePickPoint();
@@ -3020,8 +3040,12 @@ def build_map_html(locations, bundels):
         btn.classList.add('active');
         btnText.textContent = 'Verslepen Actief...';
         
+        // Sluit het detailkader zodat de gebruiker het volledige scherm heeft om te slepen
+        overlay.classList.remove('active');
+
         banner.classList.add('active');
-        bannerText.innerHTML = `📍 <strong>${{itemObj.data.name}}</strong>: Sleep de marker naar de exacte positie op de satelliet en klik op <strong>'Positie Opslaan'</strong>.`;
+        if (saveBtn) saveBtn.style.display = 'inline-block';
+        bannerText.innerHTML = `📍 <strong>${{itemObj.data.name}}</strong>: Sleep de marker naar de gewenste positie en klik op <strong>'Nu Opslaan'</strong>.`;
 
         const el = marker.getElement();
         if (el) el.classList.add('is-being-dragged');
@@ -3030,6 +3054,7 @@ def build_map_html(locations, bundels):
         marker.on('dragend', onMarkerDragEnd);
       }} else {{
         disableDrag();
+        overlay.classList.add('active');
       }}
     }}
 
@@ -3064,11 +3089,13 @@ def build_map_html(locations, bundels):
 
     function togglePickPoint() {{
       if (!activeMarkerId) return;
+      const overlay = document.getElementById('detailOverlay');
       isPickPointActive = !isPickPointActive;
       const btn = document.getElementById('btnPickPoint');
       const btnText = document.getElementById('btnPickText');
       const banner = document.getElementById('actionBanner');
       const bannerText = document.getElementById('actionBannerText');
+      const saveBtn = document.getElementById('actionBannerSaveBtn');
 
       if (isPickPointActive) {{
         if (isDraggingActive) disableDrag();
@@ -3076,11 +3103,16 @@ def build_map_html(locations, bundels):
         btnText.textContent = 'Prikken Actief...';
         document.getElementById('map').style.cursor = 'crosshair';
 
+        // Sluit het detailkader tijdelijk zodat de gebruiker direct vrij kan prikken op de kaart
+        overlay.classList.remove('active');
+
         const itemObj = markersMap[activeMarkerId];
         banner.classList.add('active');
-        bannerText.innerHTML = `📍 Klik ergens op de satellietkaart om de nieuwe positie van <strong>${{itemObj.data.name}}</strong> vast te leggen.`;
+        if (saveBtn) saveBtn.style.display = 'none';
+        bannerText.innerHTML = `📍 <strong>${{itemObj.data.name}}</strong>: Tik op de kaart op het juiste spoor.`;
       }} else {{
         disablePickPoint();
+        overlay.classList.add('active');
       }}
     }}
 
@@ -3097,6 +3129,9 @@ def build_map_html(locations, bundels):
       disableDrag();
       disablePickPoint();
       document.getElementById('actionBanner').classList.remove('active');
+      if (activeMarkerId) {{
+        document.getElementById('detailOverlay').classList.add('active');
+      }}
     }}
 
     map.on('click', function(e) {{
@@ -3110,7 +3145,13 @@ def build_map_html(locations, bundels):
         itemObj.marker.setLatLng([newLat, newLng]);
 
         disablePickPoint();
-        showToast('📍 Positie geplaatst op kaart. Klik op "Positie Opslaan" om te bevestigen.');
+        document.getElementById('actionBanner').classList.remove('active');
+
+        // Heropen het detailkader automatisch zodat de nieuwe coördinaten en 'Positie Opslaan' knop zichtbaar zijn
+        const overlay = document.getElementById('detailOverlay');
+        overlay.classList.add('active');
+
+        showToast('📍 Nieuwe positie gekozen! Klik nu op "Positie Opslaan" om te bevestigen.');
       }}
     }});
 
@@ -3135,6 +3176,7 @@ def build_map_html(locations, bundels):
       }}
 
       cancelInteractiveTool();
+      document.getElementById('detailOverlay').classList.add('active');
 
       const itemObj = markersMap[activeMarkerId];
       const target = itemObj.data;
