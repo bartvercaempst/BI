@@ -303,8 +303,8 @@
       "toegang_weg": "New Yorklaan",
       "beveiliging": "Stuitklamp met sleutel 334, procedure via Blok 4",
       "ppgi_ref": "PP-311 blz. 10, 26, 35",
-      "lat": 51.351,
-      "lng": 3.182
+      "lat": 51.342194,
+      "lng": 3.187923
     },
     {
       "id": "psa_zb",
@@ -321,8 +321,8 @@
       "toegang_weg": "Pieter Troostlaan",
       "beveiliging": "Eigen stuitklamp SA PSA Zeebrugge NV",
       "ppgi_ref": "PP-311 blz. 10, 26, 40",
-      "lat": 51.3395,
-      "lng": 3.1905
+      "lat": 51.3538,
+      "lng": 3.183675
     },
     {
       "id": "psa_hnn",
@@ -411,8 +411,8 @@
       "toegang_weg": "Kustlaan",
       "beveiliging": "Historische aansluiting L202",
       "ppgi_ref": "PP-311 blz. 1, 3",
-      "lat": 51.339031,
-      "lng": 3.206935
+      "lat": 51.338374,
+      "lng": 3.206785
     },
     {
       "id": "proviron",
@@ -501,8 +501,8 @@
       "toegang_weg": "Zandvoordestraat",
       "beveiliging": "Centrale aanvraag Blok 7, industriële seinpost",
       "ppgi_ref": "PP-341 blz. 9, 32-33, 66-72",
-      "lat": 51.21675,
-      "lng": 2.951717
+      "lat": 51.216279,
+      "lng": 2.951696
     },
     {
       "id": "alstom",
@@ -754,8 +754,8 @@
     },
     {
       "name": "Bundel CHZ Terminal",
-      "lat": 51.348,
-      "lng": 3.189,
+      "lat": 51.332113,
+      "lng": 3.186722,
       "info": "Sporen 1-7 (Albert II Dok)"
     },
     {
