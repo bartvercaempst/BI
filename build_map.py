@@ -37,11 +37,19 @@ def build_map_html(locations, bundels):
       padding: 0;
       font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }}
+    html {{
+      width: 100%;
+      height: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }}
     body {{
       font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
       background: #0f172a;
       color: #e2e8f0;
       overflow: hidden;
+      width: 100%;
+      max-width: 100vw;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -54,18 +62,23 @@ def build_map_html(locations, bundels):
     header {{
       background: #090d16;
       border-bottom: 1px solid #1e293b;
-      height: 64px;
-      padding: 0 18px;
+      height: 60px;
+      padding: 0 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       z-index: 1000;
       flex-shrink: 0;
+      width: 100%;
+      max-width: 100vw;
+      box-sizing: border-box;
+      overflow: hidden;
     }}
     .brand {{
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      flex-shrink: 0;
     }}
     .app-logo {{
       background: #2563eb;
@@ -76,26 +89,28 @@ def build_map_html(locations, bundels):
       border-radius: 6px;
       letter-spacing: 0.5px;
       box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
+      flex-shrink: 0;
     }}
     .brand-titles h1 {{
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 800;
       color: #f8fafc;
       letter-spacing: -0.2px;
       line-height: 1;
+      white-space: nowrap;
     }}
 
     .header-center {{
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: nowrap;
     }}
     .hub-btn {{
       background: #1e293b;
       color: #cbd5e1;
       border: 1px solid #334155;
-      padding: 0 14px;
+      padding: 0 12px;
       border-radius: 6px;
       font-size: 12px;
       font-weight: 700;
@@ -104,10 +119,10 @@ def build_map_html(locations, bundels):
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 5px;
       white-space: nowrap;
-      min-width: 110px;
-      height: 36px;
+      min-width: 90px;
+      height: 34px;
       box-sizing: border-box;
     }}
     .hub-btn:hover {{
@@ -126,6 +141,7 @@ def build_map_html(locations, bundels):
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-shrink: 0;
     }}
 
     /* Server sync indicator */
@@ -221,8 +237,11 @@ def build_map_html(locations, bundels):
       transition: all 0.15s;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
       box-sizing: border-box;
+      white-space: nowrap;
+      flex-shrink: 0;
     }}
     .btn-header-action:hover {{
       background: #334155;
@@ -244,6 +263,7 @@ def build_map_html(locations, bundels):
       border-radius: 6px;
       border: 1px solid #334155;
       gap: 2px;
+      flex-shrink: 0;
     }}
     .layer-opt {{
       background: transparent;
@@ -258,6 +278,9 @@ def build_map_html(locations, bundels):
       transition: all 0.15s;
       display: inline-flex;
       align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }}
     .layer-opt:hover {{
       color: #e2e8f0;
@@ -1266,18 +1289,64 @@ def build_map_html(locations, bundels):
     /* Tablet breakpoint (769px - 1024px) */
     @media (max-width: 1024px) {{
       header {{
+        height: 56px;
         padding: 0 12px;
       }}
-      .sidebar {{
-        width: 330px;
+      .brand {{
+        gap: 8px;
       }}
+      .brand-titles h1 {{
+        font-size: 15px;
+      }}
+      /* Move hub buttons to the mobile-hub-bar so top header never overflows */
       .header-center {{
+        display: none !important;
+      }}
+      .mobile-hub-bar {{
+        display: flex !important;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        background: #090d16;
+        border-bottom: 1px solid #1e293b;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-shrink: 0;
+        z-index: 1000;
+        width: 100%;
+        box-sizing: border-box;
+      }}
+      .mobile-hub-bar::-webkit-scrollbar {{
+        display: none;
+      }}
+      .mobile-hub-bar .hub-btn {{
+        min-width: 88px;
+        height: 32px;
+        font-size: 11px;
+        padding: 0 10px;
+      }}
+      .header-right {{
         gap: 6px;
       }}
-      .hub-btn {{
-        min-width: 95px;
+      .btn-header-action {{
+        height: 34px;
         padding: 0 10px;
         font-size: 11px;
+        gap: 5px;
+      }}
+      .layer-selector {{
+        height: 34px;
+        padding: 2px;
+      }}
+      .layer-opt {{
+        font-size: 11px;
+        padding: 0 8px;
+        height: 28px;
+        gap: 3px;
+      }}
+      .sidebar {{
+        width: 320px;
       }}
       .detail-overlay {{
         width: 360px;
@@ -1287,48 +1356,35 @@ def build_map_html(locations, bundels):
     /* Mobile / Smartphone breakpoint (<= 768px) */
     @media (max-width: 768px) {{
       header {{
-        height: 56px;
+        height: 52px;
         padding: 0 10px;
       }}
       .brand {{
         gap: 8px;
       }}
-      .brand-titles h1 {{
-        font-size: 15px;
+      .app-logo {{
+        font-size: 12px;
+        padding: 4px 8px;
       }}
-      .header-center {{
-        display: none !important;
+      .brand-titles h1 {{
+        font-size: 14px;
       }}
       .header-right {{
         gap: 5px;
       }}
       .btn-header-action {{
-        padding: 0 9px;
-        font-size: 11px;
-      }}
-
-      /* Show horizontal scrollable hub bar under header */
-      .mobile-hub-bar {{
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 7px 12px;
-        background: #090d16;
-        border-bottom: 1px solid #1e293b;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        flex-shrink: 0;
-        z-index: 1000;
-      }}
-      .mobile-hub-bar::-webkit-scrollbar {{
-        display: none;
-      }}
-      .mobile-hub-bar .hub-btn {{
-        min-width: 90px;
         height: 32px;
+        padding: 0 8px;
         font-size: 11px;
-        padding: 0 10px;
+      }}
+      .layer-selector {{
+        height: 32px;
+        padding: 2px;
+      }}
+      .layer-opt {{
+        font-size: 10.5px;
+        padding: 0 6px;
+        height: 26px;
       }}
 
       /* Sidebar becomes full screen off-canvas */
@@ -1422,6 +1478,93 @@ def build_map_html(locations, bundels):
         padding: 18px !important;
       }}
     }}
+
+    /* GSM / Smartphone Compact Header (<= 640px) */
+    @media (max-width: 640px) {{
+      header {{
+        height: 50px;
+        padding: 0 8px;
+      }}
+      .brand {{
+        gap: 6px;
+      }}
+      .app-logo {{
+        font-size: 11px;
+        padding: 3px 6px;
+        border-radius: 4px;
+      }}
+      .brand-titles h1 {{
+        font-size: 13px;
+        font-weight: 800;
+      }}
+      .header-right {{
+        gap: 4px;
+      }}
+      /* Hide button text on mobile, convert to square icon buttons */
+      .btn-header-action .btn-text {{
+        display: none !important;
+      }}
+      .btn-header-action {{
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        padding: 0 !important;
+        justify-content: center;
+        border-radius: 6px;
+        font-size: 14px;
+      }}
+      .layer-selector {{
+        height: 32px;
+        padding: 2px;
+        gap: 2px;
+      }}
+      .layer-opt {{
+        font-size: 10px;
+        padding: 0 6px;
+        height: 26px;
+      }}
+    }}
+
+    /* Compact Smartphones (<= 480px, e.g. iPhone standard / portrait) */
+    @media (max-width: 480px) {{
+      .layer-text {{
+        display: none !important;
+      }}
+      .layer-opt {{
+        padding: 0 6px;
+        font-size: 12px;
+      }}
+      .layer-selector {{
+        padding: 2px;
+      }}
+    }}
+
+    /* Extra narrow screens (<= 380px, e.g. iPhone SE 1st gen, small Android) */
+    @media (max-width: 380px) {{
+      header {{
+        padding: 0 6px;
+        height: 48px;
+      }}
+      .brand-titles h1 {{
+        font-size: 12px;
+      }}
+      .app-logo {{
+        font-size: 10px;
+        padding: 2px 5px;
+      }}
+      .btn-header-action {{
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+        font-size: 13px;
+      }}
+      .layer-selector {{
+        height: 30px;
+      }}
+      .header-right {{
+        gap: 3px;
+      }}
+    }}
   </style>
 </head>
 <body class="show-labels">
@@ -1447,20 +1590,24 @@ def build_map_html(locations, bundels):
     <!-- Right Controls: Layer, Sporen, Coördinaten -->
     <div class="header-right">
       <div class="layer-selector">
-        <button class="layer-opt active" id="btnLayerSat" onclick="setBaseLayer('sat')">🛰️ Satelliet</button>
-        <button class="layer-opt" id="btnLayerStreet" onclick="setBaseLayer('street')">🗺️ Kaart</button>
+        <button class="layer-opt active" id="btnLayerSat" onclick="setBaseLayer('sat')" title="Satellietweergave">
+          <span class="layer-icon">🛰️</span><span class="layer-text"> Satelliet</span>
+        </button>
+        <button class="layer-opt" id="btnLayerStreet" onclick="setBaseLayer('street')" title="Stratenkaart (OpenStreetMap)">
+          <span class="layer-icon">🗺️</span><span class="layer-text"> Kaart</span>
+        </button>
       </div>
 
       <button class="btn-header-action active" id="btnLayerRail" onclick="toggleRailLayer()" title="Spoorlijnen & infrastructuur aan/uit">
-        🚆 Sporen
+        <span class="btn-icon">🚆</span><span class="btn-text"> Sporen</span>
       </button>
 
       <button class="btn-header-action" onclick="openExportModal()" title="Beheer & Exporteer Coördinaten">
-        💾 Coördinaten
+        <span class="btn-icon">💾</span><span class="btn-text"> Coördinaten</span>
       </button>
 
       <button class="btn-header-action" id="btnInstallPwa" onclick="installApp()" title="Installeer als webapp op smartphone, tablet of pc">
-        📲 App
+        <span class="btn-icon">📲</span><span class="btn-text"> App</span>
       </button>
     </div>
   </header>
