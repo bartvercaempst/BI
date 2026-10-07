@@ -119,7 +119,7 @@ class GPSRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 def main():
     with socketserver.TCPServer(('', PORT), GPSRequestHandler) as httpd:
-        print(f"DB Cargo GPS Kaart Server gestart op http://localhost:{PORT}")
+        print(f"BI Generator Server gestart op http://localhost:{PORT}")
         print("Wijzigingen in coördinaten worden automatisch direct opgeslagen naar:")
         print(f" -> {JSON_PATH}")
         print(f" -> {HTML_PATH}")

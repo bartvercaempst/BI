@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DB Cargo Belgium — Bedieningen & Moederbundels Satellietkaart</title>
+  <title>BI Generator</title>
   
   <!-- Google Fonts: Nunito -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,46 +50,48 @@
       align-items: center;
       gap: 12px;
     }
-    .db-logo {
-      background: #e01e2b;
+    .app-logo {
+      background: #2563eb;
       color: white;
-      font-weight: 900;
-      font-size: 14px;
-      padding: 4px 9px;
-      border-radius: 4px;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 5px 10px;
+      border-radius: 6px;
       letter-spacing: 0.5px;
-      box-shadow: 0 2px 6px rgba(224, 30, 43, 0.4);
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
     }
     .brand-titles h1 {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 800;
       color: #f8fafc;
       letter-spacing: -0.2px;
-    }
-    .brand-titles p {
-      font-size: 11px;
-      color: #94a3b8;
-      font-weight: 500;
+      line-height: 1;
     }
 
     .header-center {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      flex-wrap: nowrap;
     }
     .hub-btn {
       background: #1e293b;
       color: #cbd5e1;
       border: 1px solid #334155;
-      padding: 6px 12px;
+      padding: 0 14px;
       border-radius: 6px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+      min-width: 110px;
+      height: 36px;
+      box-sizing: border-box;
     }
     .hub-btn:hover {
       background: #334155;
@@ -97,10 +99,10 @@
       border-color: #64748b;
     }
     .hub-btn.active {
-      background: #e01e2b;
+      background: #2563eb;
       color: #ffffff;
-      border-color: #e01e2b;
-      box-shadow: 0 0 10px rgba(224, 30, 43, 0.4);
+      border-color: #3b82f6;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.35);
     }
 
     .header-right {
@@ -193,46 +195,59 @@
       background: #1e293b;
       color: #cbd5e1;
       border: 1px solid #334155;
-      padding: 6px 11px;
+      padding: 0 12px;
+      height: 36px;
       border-radius: 6px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.15s;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
+      box-sizing: border-box;
     }
     .btn-header-action:hover {
       background: #334155;
       color: white;
     }
+    .btn-header-action.active {
+      background: rgba(37, 99, 235, 0.2);
+      border-color: #3b82f6;
+      color: #93c5fd;
+    }
 
     .layer-selector {
-      display: flex;
+      display: inline-flex;
+      align-items: center;
       background: #1e293b;
       padding: 3px;
-      border-radius: 8px;
+      height: 36px;
+      box-sizing: border-box;
+      border-radius: 6px;
       border: 1px solid #334155;
+      gap: 2px;
     }
     .layer-opt {
       background: transparent;
       border: none;
       color: #94a3b8;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
-      padding: 4px 8px;
-      border-radius: 6px;
+      padding: 0 10px;
+      height: 28px;
+      border-radius: 4px;
       cursor: pointer;
       transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
     }
     .layer-opt:hover {
       color: #e2e8f0;
     }
     .layer-opt.active {
-      background: #0ea5e9;
-      color: #ffffff;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+      background: #2563eb;
+      color: white;
     }
 
     /* Main Container */
@@ -1236,52 +1251,35 @@
   <!-- Top Header Navigation -->
   <header>
     <div class="brand">
-      <span class="db-logo">DB</span>
+      <span class="app-logo">BI</span>
       <div class="brand-titles">
-        <h1>DB Cargo Belgium — West-Vlaanderen Bedieningen</h1>
-        <p>Satellietkaart met Private Aansluitingen & Moederbundels</p>
+        <h1>BI Generator</h1>
       </div>
     </div>
 
     <!-- Quick Hub Jump Buttons -->
     <div class="header-center">
-      <button class="hub-btn active" onclick="zoomToHub('wvl', this)">🌐 Heel West-Vlaanderen</button>
-      <button class="hub-btn" onclick="zoomToHub('zeebrugge', this)">⚓ Zeebrugge Haven</button>
-      <button class="hub-btn" onclick="zoomToHub('oostende', this)">🌊 Oostende & Plassendale</button>
-      <button class="hub-btn" onclick="zoomToHub('brugge', this)">🏰 Brugge & Roeselare</button>
-      <button class="hub-btn" onclick="zoomToHub('kortrijk', this)">🏭 Kortrijk & Lauwe</button>
+      <button class="hub-btn active" onclick="zoomToHub('wvl', this)">🌐 Alles</button>
+      <button class="hub-btn" onclick="zoomToHub('zeebrugge', this)">⚓ Zeebrugge</button>
+      <button class="hub-btn" onclick="zoomToHub('oostende', this)">🚢 Oostende</button>
+      <button class="hub-btn" onclick="zoomToHub('brugge', this)">🏰 Brugge</button>
+      <button class="hub-btn" onclick="zoomToHub('kortrijk', this)">🏭 Kortrijk</button>
     </div>
 
-    <!-- Right Controls: Status, Labels, Layer, Coordinates Manager -->
+    <!-- Right Controls: Layer, Sporen, Coördinaten -->
     <div class="header-right">
-      <!-- Sync Status -->
-      <div class="sync-status-indicator" id="syncStatusBox" onclick="openSupabaseModal()" title="Klik om Cloud Synchronisatie (Supabase) in te stellen" style="cursor: pointer;">
-        <span class="sync-dot" id="syncStatusDot"></span>
-        <span id="syncStatusText">Browser Opslag</span>
-      </div>
-
-      <!-- Cloud Sync Button -->
-      <button class="btn-header-action" id="btnSupabaseCloud" onclick="openSupabaseModal()" title="Realtime Cloud Synchronisatie met collega's instellen">
-        ☁️ Cloud Sync
-      </button>
-
-      <!-- Modified counter pill -->
-      <div class="saved-count-pill" id="savedCountPill" style="display:none;" onclick="openExportModal()" title="Klik om opgeslagen wijzigingen te bekijken en exporteren">
-        ✏️ <span id="savedCountNum">0</span> gewijzigd
-      </div>
-
-      <!-- Export / Manager Button -->
-      <button class="btn-header-action" onclick="openExportModal()" title="Beheer & Exporteer Coördinaten">
-        💾 Coördinaten Beheer
-      </button>
-
-      <button id="toggleLabelsBtn" class="btn-header-action active" onclick="toggleLabels()">🏷️ Labels Aan</button>
-
       <div class="layer-selector">
         <button class="layer-opt active" id="btnLayerSat" onclick="setBaseLayer('sat')">🛰️ Satelliet</button>
-        <button class="layer-opt active" id="btnLayerRail" onclick="toggleRailLayer()">🚆 Sporen</button>
         <button class="layer-opt" id="btnLayerStreet" onclick="setBaseLayer('street')">🗺️ Kaart</button>
       </div>
+
+      <button class="btn-header-action active" id="btnLayerRail" onclick="toggleRailLayer()" title="Spoorlijnen & infrastructuur aan/uit">
+        🚆 Sporen
+      </button>
+
+      <button class="btn-header-action" onclick="openExportModal()" title="Beheer & Exporteer Coördinaten">
+        💾 Coördinaten
+      </button>
     </div>
   </header>
 
@@ -1900,9 +1898,9 @@
       maxZoom: 19
     });
 
-    const streetLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{y}/{x}{r}.png', {
+    const streetLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      attribution: '&copy; CartoDB &copy; OpenStreetMap'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
     });
 
     const railLayer = L.tileLayer('https://{s}.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png', {
@@ -2815,7 +2813,7 @@
         return;
       }
 
-      let text = 'DB Cargo Belgium - Gewijzigde GPS Coördinaten:\n\n';
+      let text = 'BI Generator - Gewijzigde GPS Coördinaten:\n\n';
       keys.forEach(k => {
         const item = allItems.find(x => x.id === k);
         const name = item ? item.name : k;

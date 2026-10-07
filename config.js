@@ -1,5 +1,5 @@
 // ==============================================================
-// Supabase Cloud Configuratie voor DB Cargo BI Generator
+// Supabase Cloud Configuratie voor BI Generator
 // ==============================================================
 // Vul hieronder je Supabase Project URL en Anon Public Key in om 
 // realtime cloudsynchronisatie tussen collega's te activeren.

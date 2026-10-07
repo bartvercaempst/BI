@@ -43,7 +43,7 @@ Deze repository is geconfigureerd met `index.html` in de hoofdmap.
    ```bash
    git init
    git add .
-   git commit -m "Eerste versie interactieve satellietkaart DB Cargo"
+   git commit -m "Eerste versie interactieve satellietkaart BI Generator"
    git branch -M main
    git remote add origin https://github.com/<GEBRUIKERSNAAM>/<REPO-NAAM>.git
    git push -u origin main
