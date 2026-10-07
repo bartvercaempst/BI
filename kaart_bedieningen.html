@@ -622,7 +622,7 @@
       position: absolute;
       bottom: 20px;
       left: 20px;
-      background: rgba(15, 23, 42, 0.88);
+      background: rgba(15, 23, 42, 0.92);
       backdrop-filter: blur(8px);
       border: 1px solid #334155;
       border-radius: 8px;
@@ -634,6 +634,14 @@
       gap: 6px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.5);
       pointer-events: auto;
+    }
+    .legend-header {
+      display: none;
+    }
+    .legend-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
     .legend-row {
       display: flex;
@@ -671,6 +679,29 @@
       height: 4px;
       border-radius: 2px;
       background: #eab308;
+    }
+
+    /* Leaflet Attribution Dark & Compact Styling */
+    .leaflet-container .leaflet-control-attribution {
+      background: rgba(15, 23, 42, 0.82) !important;
+      color: #64748b !important;
+      font-size: 9px !important;
+      line-height: 1.3 !important;
+      padding: 2px 8px !important;
+      border-radius: 4px 0 0 0 !important;
+      backdrop-filter: blur(4px);
+      margin: 0 !important;
+      border-top: 1px solid rgba(51, 65, 85, 0.4);
+      border-left: 1px solid rgba(51, 65, 85, 0.4);
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.3);
+    }
+    .leaflet-container .leaflet-control-attribution a {
+      color: #94a3b8 !important;
+      text-decoration: none !important;
+    }
+    .leaflet-container .leaflet-control-attribution a:hover {
+      color: #38bdf8 !important;
+      text-decoration: underline !important;
     }
 
     /* Floating Detail Card */
@@ -1425,19 +1456,20 @@
 
       /* Floating Bottom Navigation Pill */
       .mobile-nav-pill {
-        display: inline-flex;
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(15, 23, 42, 0.94);
-        backdrop-filter: blur(12px);
-        border: 1px solid #334155;
-        border-radius: 30px;
-        padding: 4px;
-        z-index: 2000;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-        gap: 4px;
+        display: inline-flex !important;
+        position: fixed !important;
+        bottom: 18px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        background: rgba(15, 23, 42, 0.95) !important;
+        backdrop-filter: blur(12px) !important;
+        border: 1px solid #334155 !important;
+        border-radius: 30px !important;
+        padding: 4px !important;
+        z-index: 1500 !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75) !important;
+        gap: 4px !important;
+        white-space: nowrap !important;
       }
       .mobile-nav-btn {
         background: transparent;
@@ -1445,26 +1477,101 @@
         color: #94a3b8;
         font-size: 13px;
         font-weight: 800;
-        padding: 8px 18px;
+        padding: 7px 16px;
         border-radius: 24px;
         cursor: pointer;
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 6px;
         transition: all 0.2s;
+        white-space: nowrap !important;
+        line-height: 1;
       }
       .mobile-nav-btn.active {
         background: #2563eb;
         color: white;
-        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+        box-shadow: 0 2px 10px rgba(37, 99, 235, 0.45);
+      }
+      .mob-pill-badge {
+        background: rgba(255, 255, 255, 0.22);
+        color: white;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 2px 7px;
+        border-radius: 12px;
+        display: inline-block;
+        line-height: 1.2;
+      }
+      .mobile-nav-btn:not(.active) .mob-pill-badge {
+        background: #334155;
+        color: #cbd5e1;
       }
 
-      /* Map controls position on phone */
-      .leaflet-top.leaflet-left {
-        top: 8px;
+      /* Map controls & Legend position on phone */
+      .map-legend {
+        bottom: 76px !important;
+        left: 12px !important;
+        max-width: calc(100vw - 24px) !important;
+        z-index: 1200 !important;
+        padding: 0 !important;
+        background: rgba(15, 23, 42, 0.94) !important;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.6) !important;
+        border: 1px solid #334155 !important;
+        border-radius: 8px !important;
+      }
+      .legend-header {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: 800;
+        color: #cbd5e1;
+        gap: 8px;
+        user-select: none;
+      }
+      .legend-header:hover {
+        color: #ffffff;
+      }
+      .legend-header-icon {
+        font-size: 9px;
+        color: #94a3b8;
+        transition: transform 0.2s ease;
+      }
+      .legend-body {
+        display: none !important;
+        padding: 4px 12px 10px 12px;
+        border-top: 1px solid #1e293b;
+      }
+      .map-legend.open .legend-body {
+        display: flex !important;
+      }
+      .map-legend.open .legend-header-icon {
+        transform: rotate(180deg);
+      }
+
+      /* Zoom controls position on phone */
+      .leaflet-control-zoom {
+        margin-bottom: 76px !important;
+        margin-right: 12px !important;
       }
       .leaflet-bottom.leaflet-right {
-        bottom: 74px; /* avoid floating mobile nav */
+        bottom: 0 !important;
+      }
+      .leaflet-control-attribution {
+        position: fixed !important;
+        bottom: 0 !important;
+        right: 0 !important;
+        font-size: 8px !important;
+        max-width: 170px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        background: rgba(9, 13, 22, 0.85) !important;
+        padding: 1px 6px !important;
+        z-index: 400 !important;
       }
 
       .modal-box {
@@ -1666,22 +1773,28 @@
     <div id="map"></div>
 
     <!-- Map Legend -->
-    <div class="map-legend">
-      <div class="legend-row">
-        <div class="legend-dot green">✓</div>
-        <span id="legBiYesText">Reeds een BI</span>
+    <div class="map-legend" id="mapLegend">
+      <div class="legend-header" id="legendHeader" onclick="toggleMobLegend()">
+        <span class="legend-header-title">ℹ️ Legende</span>
+        <span class="legend-header-icon" id="legendHeaderIcon">▲</span>
       </div>
-      <div class="legend-row">
-        <div class="legend-dot red">!</div>
-        <span id="legBiNoText">Nog GEEN BI</span>
-      </div>
-      <div class="legend-row">
-        <div class="legend-dot gold">◆</div>
-        <span>Infrabel Moederbundels (rangeerterreinen)</span>
-      </div>
-      <div class="legend-row" id="railLegendRow" style="display: flex;">
-        <div class="legend-line"></div>
-        <span>OpenRailwayMap spoorweginfrastructuur</span>
+      <div class="legend-body" id="legendBody">
+        <div class="legend-row">
+          <div class="legend-dot green">✓</div>
+          <span id="legBiYesText">Reeds een BI</span>
+        </div>
+        <div class="legend-row">
+          <div class="legend-dot red">!</div>
+          <span id="legBiNoText">Nog GEEN BI</span>
+        </div>
+        <div class="legend-row">
+          <div class="legend-dot gold">◆</div>
+          <span>Infrabel Moederbundels</span>
+        </div>
+        <div class="legend-row" id="railLegendRow" style="display: flex;">
+          <div class="legend-line"></div>
+          <span>OpenRailwayMap spoorlijnen</span>
+        </div>
       </div>
     </div>
 
@@ -1878,10 +1991,11 @@
   <!-- Floating Mobile Navigation Pill (Kaart vs Lijst) -->
   <div class="mobile-nav-pill" id="mobileNavPill">
     <button class="mobile-nav-btn active" id="btnMobMap" onclick="setMobileView('map')">
-      🗺️ Kaart
+      <span>🗺️ Kaart</span>
     </button>
     <button class="mobile-nav-btn" id="btnMobList" onclick="setMobileView('list')">
-      📋 Lijst (<span id="mobCount">39</span>)
+      <span>📋 Lijst</span>
+      <span class="mob-pill-badge" id="mobCount">39</span>
     </button>
   </div>
 
@@ -2255,7 +2369,7 @@
     // Leaflet Layers
     const esriSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       maxZoom: 19,
-      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics'
+      attribution: '&copy; Esri, Maxar'
     });
 
     const esriLabels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
@@ -2264,12 +2378,12 @@
 
     const streetLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OSM</a>'
     });
 
     const railLayer = L.tileLayer('https://{s}.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      attribution: 'Map style: &copy; OpenRailwayMap'
+      attribution: '&copy; <a href="https://www.openrailwaymap.org" target="_blank">OpenRailwayMap</a>'
     });
 
     // Initialize Map
@@ -2277,10 +2391,17 @@
       center: [51.15, 3.12],
       zoom: 10,
       layers: [esriSatellite, esriLabels, railLayer],
-      zoomControl: false
+      zoomControl: false,
+      attributionControl: true
     });
 
+    map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank">Leaflet</a>');
     L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+    function toggleMobLegend() {
+      const leg = document.getElementById('mapLegend');
+      if (leg) leg.classList.toggle('open');
+    }
 
     let railLayerActive = true;
     let baseMode = 'sat';
