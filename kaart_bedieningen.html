@@ -1298,9 +1298,414 @@
     /* RESPONSIVE DESIGN: TABLET & GSM / SMARTPHONE        */
     /* =================================================== */
 
-    /* Mobile Hub Carousel Bar (hidden on desktop) */
-    .mobile-hub-bar {
+    /* Hamburger Menu Button (Mobile & Tablet) */
+    .hamburger-btn {
       display: none;
+      width: 38px;
+      height: 38px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      z-index: 1001;
+    }
+    .hamburger-btn:hover, .hamburger-btn:active {
+      background: #334155;
+      border-color: #64748b;
+    }
+    .hamburger-btn.active {
+      background: #2563eb;
+      border-color: #3b82f6;
+    }
+    .hamburger-line {
+      width: 18px;
+      height: 2px;
+      background: #cbd5e1;
+      border-radius: 2px;
+      transition: all 0.25s ease;
+      transform-origin: center;
+    }
+    .hamburger-btn.active .hamburger-line:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+      background: #ffffff;
+    }
+    .hamburger-btn.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .hamburger-btn.active .hamburger-line:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+      background: #ffffff;
+    }
+
+    /* Mobile Drawer Backdrop */
+    .mobile-drawer-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 3400;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .mobile-drawer-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Mobile Drawer Panel */
+    .mobile-menu-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 320px;
+      max-width: 86vw;
+      background: #0b1120;
+      border-left: 1px solid #1e293b;
+      box-shadow: -10px 0 35px rgba(0, 0, 0, 0.85);
+      z-index: 3500;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-menu-drawer.active {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      height: 56px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1e293b;
+      background: #0f172a;
+      flex-shrink: 0;
+    }
+    .drawer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .drawer-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #f8fafc;
+    }
+    .drawer-close-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      line-height: 1;
+      transition: all 0.15s;
+    }
+    .drawer-close-btn:hover {
+      background: #334155;
+      color: #ffffff;
+    }
+
+    .drawer-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .drawer-content::-webkit-scrollbar {
+      width: 4px;
+    }
+    .drawer-content::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 2px;
+    }
+
+    .drawer-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .drawer-section-title {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #64748b;
+      padding: 0 2px;
+    }
+
+    /* Layer Switcher inside Drawer */
+    .drawer-layer-toggle-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .drawer-layer-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      padding: 10px 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      transition: all 0.15s;
+      text-align: center;
+      font-family: inherit;
+    }
+    .drawer-layer-btn:hover {
+      background: #334155;
+      color: #ffffff;
+    }
+    .drawer-layer-btn.active {
+      background: rgba(37, 99, 235, 0.2);
+      border-color: #3b82f6;
+      color: #93c5fd;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.25);
+    }
+    .drawer-layer-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+    .drawer-layer-name {
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .drawer-layer-sub {
+      font-size: 9.5px;
+      color: #64748b;
+    }
+    .drawer-layer-btn.active .drawer-layer-sub {
+      color: #93c5fd;
+    }
+
+    /* Rail Toggle Row */
+    .drawer-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .drawer-toggle-row:hover {
+      background: #334155;
+    }
+    .drawer-toggle-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .drawer-toggle-icon {
+      font-size: 16px;
+    }
+    .drawer-toggle-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+    .drawer-toggle-sub {
+      font-size: 10px;
+      color: #94a3b8;
+    }
+    .drawer-switch {
+      width: 38px;
+      height: 22px;
+      background: #334155;
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.2s ease;
+      flex-shrink: 0;
+    }
+    .drawer-switch.active {
+      background: #2563eb;
+    }
+    .drawer-switch-thumb {
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+    .drawer-switch.active .drawer-switch-thumb {
+      transform: translateX(16px);
+    }
+
+    /* Hub Jump Grid inside Drawer */
+    .drawer-hub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .drawer-hub-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      padding: 9px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+      text-align: left;
+      font-family: inherit;
+    }
+    .drawer-hub-btn.full-width {
+      grid-column: span 2;
+    }
+    .drawer-hub-btn:hover {
+      background: #334155;
+      color: white;
+    }
+    .drawer-hub-btn.active {
+      background: #2563eb;
+      border-color: #3b82f6;
+      color: white;
+      box-shadow: 0 0 8px rgba(37, 99, 235, 0.35);
+    }
+
+    /* Action Buttons in Drawer */
+    .drawer-action-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      box-sizing: border-box;
+      gap: 10px;
+      transition: all 0.15s;
+      color: #f1f5f9;
+      font-family: inherit;
+    }
+    .drawer-action-row:hover {
+      background: #334155;
+      border-color: #64748b;
+    }
+    .drawer-action-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .drawer-action-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .drawer-action-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .drawer-action-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+    .drawer-action-sub {
+      font-size: 10px;
+      color: #94a3b8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .drawer-action-badge {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      color: #fbbf24;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .drawer-chevron {
+      color: #64748b;
+      font-size: 15px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    /* Legend List in Drawer */
+    .drawer-legend-list {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .drawer-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+
+    /* Drawer Footer */
+    .drawer-footer {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid #1e293b;
+      text-align: center;
+    }
+    .drawer-footer-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748b;
+    }
+    .drawer-footer-sub {
+      font-size: 10px;
+      color: #475569;
+    }
+
+    /* Mobile Hub Carousel Bar (hidden on desktop & mobile when using hamburger) */
+    .mobile-hub-bar {
+      display: none !important;
     }
 
     /* Floating Mobile Navigation Pill (hidden on desktop) */
@@ -1315,8 +1720,9 @@
     /* Tablet breakpoint (769px - 1024px) */
     @media (max-width: 1024px) {
       header {
-        height: 56px;
-        padding: 0 12px;
+        height: 54px;
+        padding: 0 14px;
+        justify-content: space-between;
       }
       .brand {
         gap: 8px;
@@ -1324,52 +1730,17 @@
       .brand-titles h1 {
         font-size: 15px;
       }
-      /* Move hub buttons to the mobile-hub-bar so top header never overflows */
       .header-center {
         display: none !important;
       }
-      .mobile-hub-bar {
-        display: flex !important;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 12px;
-        background: #090d16;
-        border-bottom: 1px solid #1e293b;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        flex-shrink: 0;
-        z-index: 1000;
-        width: 100%;
-        box-sizing: border-box;
-      }
-      .mobile-hub-bar::-webkit-scrollbar {
-        display: none;
-      }
-      .mobile-hub-bar .hub-btn {
-        min-width: 88px;
-        height: 32px;
-        font-size: 11px;
-        padding: 0 10px;
-      }
       .header-right {
-        gap: 6px;
+        display: none !important;
       }
-      .btn-header-action {
-        height: 34px;
-        padding: 0 10px;
-        font-size: 11px;
-        gap: 5px;
+      .mobile-hub-bar {
+        display: none !important;
       }
-      .layer-selector {
-        height: 34px;
-        padding: 2px;
-      }
-      .layer-opt {
-        font-size: 11px;
-        padding: 0 8px;
-        height: 28px;
-        gap: 3px;
+      .hamburger-btn {
+        display: flex !important;
       }
       .sidebar {
         width: 320px;
@@ -1383,7 +1754,8 @@
     @media (max-width: 768px) {
       header {
         height: 52px;
-        padding: 0 10px;
+        padding: 0 12px;
+        justify-content: space-between;
       }
       .brand {
         gap: 8px;
@@ -1395,22 +1767,17 @@
       .brand-titles h1 {
         font-size: 14px;
       }
+      .header-center {
+        display: none !important;
+      }
       .header-right {
-        gap: 5px;
+        display: none !important;
       }
-      .btn-header-action {
-        height: 32px;
-        padding: 0 8px;
-        font-size: 11px;
+      .mobile-hub-bar {
+        display: none !important;
       }
-      .layer-selector {
-        height: 32px;
-        padding: 2px;
-      }
-      .layer-opt {
-        font-size: 10.5px;
-        padding: 0 6px;
-        height: 26px;
+      .hamburger-btn {
+        display: flex !important;
       }
 
       /* Sidebar becomes full screen off-canvas */
@@ -1603,7 +1970,7 @@
     @media (max-width: 640px) {
       header {
         height: 50px;
-        padding: 0 8px;
+        padding: 0 10px;
       }
       .brand {
         gap: 6px;
@@ -1614,56 +1981,27 @@
         border-radius: 4px;
       }
       .brand-titles h1 {
-        font-size: 13px;
-        font-weight: 800;
-      }
-      .header-right {
-        gap: 4px;
-      }
-      /* Hide button text on mobile, convert to square icon buttons */
-      .btn-header-action .btn-text {
-        display: none !important;
-      }
-      .btn-header-action {
-        width: 32px;
-        height: 32px;
-        min-width: 32px;
-        padding: 0 !important;
-        justify-content: center;
-        border-radius: 6px;
         font-size: 14px;
-      }
-      .layer-selector {
-        height: 32px;
-        padding: 2px;
-        gap: 2px;
-      }
-      .layer-opt {
-        font-size: 10px;
-        padding: 0 6px;
-        height: 26px;
+        font-weight: 800;
       }
     }
 
     /* Compact Smartphones (<= 480px, e.g. iPhone standard / portrait) */
     @media (max-width: 480px) {
-      .layer-text {
-        display: none !important;
+      header {
+        height: 48px;
+        padding: 0 10px;
       }
-      .layer-opt {
-        padding: 0 6px;
-        font-size: 12px;
-      }
-      .layer-selector {
-        padding: 2px;
+      .brand-titles h1 {
+        font-size: 13px;
       }
     }
 
     /* Extra narrow screens (<= 380px, e.g. iPhone SE 1st gen, small Android) */
     @media (max-width: 380px) {
       header {
-        padding: 0 6px;
-        height: 48px;
+        padding: 0 8px;
+        height: 46px;
       }
       .brand-titles h1 {
         font-size: 12px;
@@ -1672,17 +2010,9 @@
         font-size: 10px;
         padding: 2px 5px;
       }
-      .btn-header-action {
-        width: 30px;
-        height: 30px;
-        min-width: 30px;
-        font-size: 13px;
-      }
-      .layer-selector {
-        height: 30px;
-      }
-      .header-right {
-        gap: 3px;
+      .hamburger-btn {
+        width: 34px;
+        height: 34px;
       }
     }
   </style>
@@ -1700,11 +2030,11 @@
 
     <!-- Quick Hub Jump Buttons -->
     <div class="header-center">
-      <button class="hub-btn active" onclick="zoomToHub('wvl', this)">🌐 Alles</button>
-      <button class="hub-btn" onclick="zoomToHub('zeebrugge', this)">⚓ Zeebrugge</button>
-      <button class="hub-btn" onclick="zoomToHub('oostende', this)">🚢 Oostende</button>
-      <button class="hub-btn" onclick="zoomToHub('brugge', this)">🏰 Brugge</button>
-      <button class="hub-btn" onclick="zoomToHub('kortrijk', this)">🏭 Kortrijk</button>
+      <button class="hub-btn active" data-hub="wvl" onclick="zoomToHub('wvl', this)">🌐 Alles</button>
+      <button class="hub-btn" data-hub="zeebrugge" onclick="zoomToHub('zeebrugge', this)">⚓ Zeebrugge</button>
+      <button class="hub-btn" data-hub="oostende" onclick="zoomToHub('oostende', this)">🚢 Oostende</button>
+      <button class="hub-btn" data-hub="brugge" onclick="zoomToHub('brugge', this)">🏰 Brugge</button>
+      <button class="hub-btn" data-hub="kortrijk" onclick="zoomToHub('kortrijk', this)">🏭 Kortrijk</button>
     </div>
 
     <!-- Right Controls: Layer, Sporen, Coördinaten -->
@@ -1730,15 +2060,154 @@
         <span class="btn-icon">📲</span><span class="btn-text"> App</span>
       </button>
     </div>
+
+    <!-- Hamburger Menu Button (Mobile & Tablet) -->
+    <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu" title="Menu openen">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
   </header>
 
-  <!-- Mobile Hub Jump Bar -->
+  <!-- Mobile Hub Jump Bar (fallback) -->
   <div class="mobile-hub-bar" id="mobileHubBar">
     <button class="hub-btn active" onclick="zoomToHub('wvl', this)">🌐 Alles</button>
     <button class="hub-btn" onclick="zoomToHub('zeebrugge', this)">⚓ Zeebrugge</button>
     <button class="hub-btn" onclick="zoomToHub('oostende', this)">🚢 Oostende</button>
     <button class="hub-btn" onclick="zoomToHub('brugge', this)">🏰 Brugge</button>
     <button class="hub-btn" onclick="zoomToHub('kortrijk', this)">🏭 Kortrijk</button>
+  </div>
+
+  <!-- Mobile Navigation Drawer Overlay & Backdrop -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop" onclick="closeMobileMenu()"></div>
+  <div class="mobile-menu-drawer" id="mobileMenuDrawer">
+    <div class="drawer-header">
+      <div class="drawer-brand">
+        <span class="app-logo">BI</span>
+        <span class="drawer-title">Menu</span>
+      </div>
+      <button class="drawer-close-btn" onclick="closeMobileMenu()" aria-label="Sluit menu">&times;</button>
+    </div>
+
+    <div class="drawer-content">
+      <!-- Sectie 1: Kaartlagen & Weergave -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">KAARTWEERGAVE & INFRASTRUCTUUR</div>
+        <div class="drawer-layer-toggle-group">
+          <button class="drawer-layer-btn active" id="mobBtnLayerSat" onclick="setBaseLayer('sat'); closeMobileMenu();">
+            <span class="drawer-layer-icon">🛰️</span>
+            <span class="drawer-layer-name">Satelliet</span>
+            <span class="drawer-layer-sub">Esri Clarity</span>
+          </button>
+          <button class="drawer-layer-btn" id="mobBtnLayerStreet" onclick="setBaseLayer('street'); closeMobileMenu();">
+            <span class="drawer-layer-icon">🗺️</span>
+            <span class="drawer-layer-name">Stratenkaart</span>
+            <span class="drawer-layer-sub">OpenStreetMap</span>
+          </button>
+        </div>
+
+        <div class="drawer-toggle-row" onclick="toggleRailLayer()">
+          <div class="drawer-toggle-info">
+            <span class="drawer-toggle-icon">🚆</span>
+            <div>
+              <div class="drawer-toggle-label">Spoorlijnen Tonen</div>
+              <div class="drawer-toggle-sub">OpenRailwayMap overlay</div>
+            </div>
+          </div>
+          <div class="drawer-switch active" id="mobSwitchRail">
+            <div class="drawer-switch-thumb"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sectie 2: Snelle Hub Sprongen -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">SNEL NAAR HUB / ZONE</div>
+        <div class="drawer-hub-grid">
+          <button class="drawer-hub-btn full-width active" data-hub="wvl" onclick="zoomToHub('wvl', this); closeMobileMenu();">
+            <span>🌐</span> Alles (West-Vlaanderen)
+          </button>
+          <button class="drawer-hub-btn" data-hub="zeebrugge" onclick="zoomToHub('zeebrugge', this); closeMobileMenu();">
+            <span>⚓</span> Zeebrugge Haven
+          </button>
+          <button class="drawer-hub-btn" data-hub="oostende" onclick="zoomToHub('oostende', this); closeMobileMenu();">
+            <span>🚢</span> Oostende Haven
+          </button>
+          <button class="drawer-hub-btn" data-hub="brugge" onclick="zoomToHub('brugge', this); closeMobileMenu();">
+            <span>🏰</span> Brugge Station
+          </button>
+          <button class="drawer-hub-btn" data-hub="kortrijk" onclick="zoomToHub('kortrijk', this); closeMobileMenu();">
+            <span>🏭</span> Kortrijk Zone
+          </button>
+        </div>
+      </div>
+
+      <!-- Sectie 3: Beheer & Functies -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">BEHEER & FUNCTIES</div>
+        <button class="drawer-action-row" onclick="closeMobileMenu(); openExportModal();">
+          <div class="drawer-action-left">
+            <span class="drawer-action-icon">💾</span>
+            <div class="drawer-action-text">
+              <span class="drawer-action-title">Coördinaten & Back-up</span>
+              <span class="drawer-action-sub">Exporteren, overdragen of downloaden</span>
+            </div>
+          </div>
+          <span class="drawer-action-badge" id="mobCustomBadge" style="display:none;">0</span>
+        </button>
+
+        <button class="drawer-action-row" onclick="closeMobileMenu(); openSupabaseModal();">
+          <div class="drawer-action-left">
+            <span class="drawer-action-icon">☁️</span>
+            <div class="drawer-action-text">
+              <span class="drawer-action-title">Cloud Synchronisatie</span>
+              <span class="drawer-action-sub" id="mobCloudStatus">Lokale browser opslag</span>
+            </div>
+          </div>
+          <span class="sync-dot" id="mobSyncDot"></span>
+        </button>
+
+        <button class="drawer-action-row" onclick="closeMobileMenu(); installApp();">
+          <div class="drawer-action-left">
+            <span class="drawer-action-icon">📲</span>
+            <div class="drawer-action-text">
+              <span class="drawer-action-title">Webapp Installeren (PWA)</span>
+              <span class="drawer-action-sub">Installeer op smartphone of tablet</span>
+            </div>
+          </div>
+          <span class="drawer-chevron">›</span>
+        </button>
+      </div>
+
+      <!-- Sectie 4: Legende -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">LEGENDE OVERZICHT</div>
+        <div class="drawer-legend-list">
+          <div class="drawer-legend-item">
+            <div class="legend-dot green">✓</div>
+            <span>Reeds een BI beschikbaar</span>
+          </div>
+          <div class="drawer-legend-item">
+            <div class="legend-dot red">!</div>
+            <span>Nog GEEN BI beschikbaar</span>
+          </div>
+          <div class="drawer-legend-item">
+            <div class="legend-dot gold">◆</div>
+            <span>Infrabel Moederbundels</span>
+          </div>
+          <div class="drawer-legend-item">
+            <div class="legend-line"></div>
+            <span>OpenRailwayMap spoorlijnen</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drawer Footer -->
+      <div class="drawer-footer">
+        <div class="drawer-footer-title">BI Generator v2.0</div>
+        <div class="drawer-footer-sub">39 Bedieningen & Vormingsbundels</div>
+      </div>
+    </div>
   </div>
 
   <!-- Main Container -->
@@ -2183,6 +2652,8 @@
       const modalDot = document.getElementById('supabaseModalStatusDot');
       const modalTxt = document.getElementById('supabaseModalStatusText');
       const disBtn = document.getElementById('btnDisconnectSupabase');
+      const mobDot = document.getElementById('mobSyncDot');
+      const mobCloudStatus = document.getElementById('mobCloudStatus');
 
       if (dot) dot.className = 'sync-dot connected cloud';
       if (txt) txt.textContent = 'Supabase Cloud (Live)';
@@ -2191,6 +2662,8 @@
       if (modalDot) modalDot.className = 'sync-dot connected cloud';
       if (modalTxt) modalTxt.textContent = '🟢 Verbonden met Supabase Cloud (Live Realtime)';
       if (disBtn) disBtn.style.display = 'block';
+      if (mobDot) mobDot.className = 'sync-dot connected cloud';
+      if (mobCloudStatus) mobCloudStatus.textContent = 'Supabase Cloud (Live Realtime)';
     }
 
     function setCloudDisconnectedUI(customMsg) {
@@ -2202,6 +2675,8 @@
       const modalDot = document.getElementById('supabaseModalStatusDot');
       const modalTxt = document.getElementById('supabaseModalStatusText');
       const disBtn = document.getElementById('btnDisconnectSupabase');
+      const mobDot = document.getElementById('mobSyncDot');
+      const mobCloudStatus = document.getElementById('mobCloudStatus');
 
       if (dot) dot.className = 'sync-dot';
       if (txt) txt.textContent = 'Browser Opslag (Klik voor Cloud)';
@@ -2210,6 +2685,8 @@
       if (modalDot) modalDot.className = 'sync-dot';
       if (modalTxt) modalTxt.textContent = customMsg || '⚪ Niet verbonden (Lokale browser opslag)';
       if (disBtn) disBtn.style.display = 'none';
+      if (mobDot) mobDot.className = 'sync-dot';
+      if (mobCloudStatus) mobCloudStatus.textContent = 'Lokale browser opslag';
     }
 
     function subscribeSupabaseRealtime() {
@@ -2426,8 +2903,15 @@
 
     function setBaseLayer(mode) {
       baseMode = mode;
-      document.getElementById('btnLayerSat').classList.toggle('active', mode === 'sat');
-      document.getElementById('btnLayerStreet').classList.toggle('active', mode === 'street');
+      const btnSat = document.getElementById('btnLayerSat');
+      const btnStreet = document.getElementById('btnLayerStreet');
+      if (btnSat) btnSat.classList.toggle('active', mode === 'sat');
+      if (btnStreet) btnStreet.classList.toggle('active', mode === 'street');
+
+      const mobSat = document.getElementById('mobBtnLayerSat');
+      const mobStreet = document.getElementById('mobBtnLayerStreet');
+      if (mobSat) mobSat.classList.toggle('active', mode === 'sat');
+      if (mobStreet) mobStreet.classList.toggle('active', mode === 'street');
 
       if (mode === 'sat') {
         map.removeLayer(streetLayer);
@@ -2446,8 +2930,10 @@
       railLayerActive = !railLayerActive;
       const btn = document.getElementById('btnLayerRail');
       const legRow = document.getElementById('railLegendRow');
-      btn.classList.toggle('active', railLayerActive);
-      legRow.style.display = railLayerActive ? 'flex' : 'none';
+      const mobSwitch = document.getElementById('mobSwitchRail');
+      if (btn) btn.classList.toggle('active', railLayerActive);
+      if (legRow) legRow.style.display = railLayerActive ? 'flex' : 'none';
+      if (mobSwitch) mobSwitch.classList.toggle('active', railLayerActive);
 
       if (railLayerActive) {
         map.addLayer(railLayer);
@@ -2471,7 +2957,13 @@
     }
 
     function zoomToHub(hubKey, btn) {
-      document.querySelectorAll('.hub-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.hub-btn, .drawer-hub-btn').forEach(b => {
+        if (b.getAttribute('data-hub') === hubKey || (b.textContent && b.textContent.toLowerCase().includes(hubKey))) {
+          b.classList.add('active');
+        } else {
+          b.classList.remove('active');
+        }
+      });
       if (btn) btn.classList.add('active');
       const hub = HUB_COORDS[hubKey];
       if (hub) {
@@ -2651,12 +3143,17 @@
       const badge = document.getElementById('savedCountPill');
       const num = document.getElementById('savedCountNum');
       const modalCount = document.getElementById('modalCustomCount');
+      const mobBadge = document.getElementById('mobCustomBadge');
 
       if (modalCount) modalCount.textContent = count;
       if (num) num.textContent = count;
 
       if (badge) {
         badge.style.display = count > 0 ? 'flex' : 'none';
+      }
+      if (mobBadge) {
+        mobBadge.textContent = count;
+        mobBadge.style.display = count > 0 ? 'inline-block' : 'none';
       }
     }
     updateCustomCountBadge();
@@ -3377,6 +3874,28 @@
     // ==========================================
     // PWA & MOBILE RESPONSIVE LOGIC
     // ==========================================
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobileMenuDrawer');
+      const backdrop = document.getElementById('mobileDrawerBackdrop');
+      const btn = document.getElementById('hamburgerBtn');
+      if (drawer) drawer.classList.toggle('active');
+      if (backdrop) backdrop.classList.toggle('active');
+      if (btn) btn.classList.toggle('active');
+    }
+
+    function closeMobileMenu() {
+      const drawer = document.getElementById('mobileMenuDrawer');
+      const backdrop = document.getElementById('mobileDrawerBackdrop');
+      const btn = document.getElementById('hamburgerBtn');
+      if (drawer) drawer.classList.remove('active');
+      if (backdrop) backdrop.classList.remove('active');
+      if (btn) btn.classList.remove('active');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMobileMenu();
+    });
+
     let mobileView = 'map';
     let deferredPrompt = null;
 
