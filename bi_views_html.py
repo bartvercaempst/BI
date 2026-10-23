@@ -37,14 +37,14 @@ def get_bi_styles():
       flex-shrink: 0;
     }
     .nav-tab-btn {
-      background: #1e293b;
-      color: #94a3b8;
-      border: 1px solid #334155;
+      background: #162032;
+      color: #ffffff;
+      border: 1.5px solid #475569;
       padding: 0 14px;
       height: 36px;
       border-radius: 8px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -53,15 +53,15 @@ def get_bi_styles():
       white-space: nowrap;
     }
     .nav-tab-btn:hover {
-      background: #334155;
-      color: #f8fafc;
-      border-color: #475569;
+      background: #25334d;
+      color: #ffffff;
+      border-color: #94a3b8;
     }
     .nav-tab-btn.active {
       background: #2563eb;
       color: #ffffff;
-      border-color: #3b82f6;
-      box-shadow: 0 0 12px rgba(37, 99, 235, 0.45);
+      border-color: #93c5fd;
+      box-shadow: 0 0 14px rgba(37, 99, 235, 0.6);
     }
     .nav-tab-btn .tab-badge {
       background: #ef4444;
@@ -85,13 +85,13 @@ def get_bi_styles():
       margin-bottom: 14px;
     }
     .drawer-tab-btn {
-      background: #1e293b;
-      color: #cbd5e1;
-      border: 1px solid #334155;
+      background: #162032;
+      color: #ffffff;
+      border: 1.5px solid #475569;
       padding: 12px 14px;
       border-radius: 8px;
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
       text-align: left;
       cursor: pointer;
       display: flex;
@@ -100,13 +100,15 @@ def get_bi_styles():
       transition: all 0.15s ease;
     }
     .drawer-tab-btn:hover {
-      background: #334155;
+      background: #25334d;
       color: #ffffff;
+      border-color: #94a3b8;
     }
     .drawer-tab-btn.active {
       background: #2563eb;
       color: #ffffff;
-      border-color: #3b82f6;
+      border-color: #93c5fd;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.45);
     }
 
     /* ======================================================== */
@@ -175,12 +177,12 @@ def get_bi_styles():
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      background: #0f172a;
-      border: 1px solid #334155;
+      background: #0d1424;
+      border: 2px solid #334155;
       padding: 12px 18px;
       border-radius: 10px;
       margin-bottom: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
       flex-shrink: 0;
     }
     .bi-selector-group {
@@ -192,28 +194,28 @@ def get_bi_styles():
     }
     .bi-selector-label {
       font-size: 13px;
-      font-weight: 800;
-      color: #94a3b8;
+      font-weight: 900;
+      color: #ffffff;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     .bi-select-dropdown {
-      background: #1e293b;
-      border: 1px solid #475569;
-      color: #f8fafc;
+      background: #131c2e;
+      border: 2px solid #475569;
+      color: #ffffff;
       padding: 8px 14px;
       border-radius: 6px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       outline: none;
       cursor: pointer;
       min-width: 280px;
       max-width: 100%;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
     .bi-select-dropdown:focus {
       border-color: #38bdf8;
-      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.35);
     }
     .bi-toolbar-actions {
       display: flex;
@@ -224,7 +226,7 @@ def get_bi_styles():
     .btn-bi-primary {
       background: #2563eb;
       color: #ffffff;
-      border: 1px solid #3b82f6;
+      border: 1.5px solid #60a5fa;
       padding: 8px 14px;
       border-radius: 6px;
       font-size: 12px;
@@ -233,16 +235,18 @@ def get_bi_styles():
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
       transition: all 0.2s;
     }
     .btn-bi-primary:hover {
       background: #1d4ed8;
+      border-color: #93c5fd;
       transform: translateY(-1px);
     }
     .btn-bi-success {
       background: #059669;
       color: #ffffff;
-      border: 1px solid #10b981;
+      border: 1.5px solid #34d399;
       padding: 8px 14px;
       border-radius: 6px;
       font-size: 12px;
@@ -251,20 +255,22 @@ def get_bi_styles():
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      box-shadow: 0 2px 8px rgba(5, 150, 105, 0.4);
       transition: all 0.2s;
     }
     .btn-bi-success:hover {
       background: #047857;
+      border-color: #6ee7b7;
       transform: translateY(-1px);
     }
     .btn-bi-secondary {
-      background: #334155;
-      color: #e2e8f0;
-      border: 1px solid #475569;
+      background: #1e293b;
+      color: #ffffff;
+      border: 1.5px solid #475569;
       padding: 8px 12px;
       border-radius: 6px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -272,14 +278,15 @@ def get_bi_styles():
       transition: all 0.2s;
     }
     .btn-bi-secondary:hover {
-      background: #475569;
+      background: #334155;
       color: #ffffff;
+      border-color: #94a3b8;
     }
 
     /* 5-Level Cascading Hierarchy Breadcrumbs */
     .bi-breadcrumbs-wrap {
-      background: #0f172a;
-      border: 1px solid #334155;
+      background: #0d1424;
+      border: 2px solid #334155;
       padding: 10px 16px;
       border-radius: 10px;
       margin-bottom: 20px;
@@ -288,7 +295,7 @@ def get_bi_styles():
     .bi-breadcrumbs-title {
       font-size: 11px;
       font-weight: 800;
-      color: #94a3b8;
+      color: #ffffff;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       margin-bottom: 8px;
@@ -303,8 +310,8 @@ def get_bi_styles():
       flex-wrap: wrap;
     }
     .bi-crumb-card {
-      background: #1e293b;
-      border: 1px solid #334155;
+      background: #131d31;
+      border: 1.5px solid #475569;
       padding: 6px 10px;
       border-radius: 6px;
       cursor: pointer;
@@ -315,7 +322,7 @@ def get_bi_styles():
     }
     .bi-crumb-card:hover {
       border-color: #38bdf8;
-      background: #243247;
+      background: #1e2c45;
       transform: translateY(-1px);
     }
     .bi-crumb-level {
@@ -326,15 +333,15 @@ def get_bi_styles():
     }
     .bi-crumb-name {
       font-size: 12px;
-      font-weight: 700;
-      color: #f8fafc;
+      font-weight: 800;
+      color: #ffffff;
       display: flex;
       align-items: center;
       gap: 4px;
     }
     .bi-crumb-arrow {
-      color: #64748b;
-      font-weight: 800;
+      color: #94a3b8;
+      font-weight: 900;
       font-size: 14px;
     }
 
@@ -635,8 +642,8 @@ def get_bi_styles():
     /* PPGI REVIEWER VIEW STYLES                                */
     /* ======================================================== */
     .ppgi-audit-banner {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      border: 1px solid #334155;
+      background: #0d1424;
+      border: 2px solid #334155;
       border-radius: 12px;
       padding: 20px 24px;
       margin-bottom: 20px;
@@ -644,6 +651,7 @@ def get_bi_styles():
       flex-direction: column;
       gap: 16px;
       flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
     }
     .ppgi-banner-header {
       display: flex;
@@ -654,13 +662,14 @@ def get_bi_styles():
     }
     .ppgi-banner-title h2 {
       font-size: 20px;
-      font-weight: 800;
-      color: #f8fafc;
+      font-weight: 900;
+      color: #ffffff;
       margin-bottom: 4px;
     }
     .ppgi-banner-title p {
       font-size: 13px;
-      color: #94a3b8;
+      color: #cbd5e1;
+      font-weight: 600;
     }
     .ppgi-metrics-grid {
       display: grid;
@@ -668,8 +677,8 @@ def get_bi_styles():
       gap: 12px;
     }
     .ppgi-metric-card {
-      background: #131c2e;
-      border: 1px solid #1e293b;
+      background: #131d31;
+      border: 1.5px solid #334155;
       padding: 12px 16px;
       border-radius: 8px;
       text-align: center;
@@ -677,12 +686,12 @@ def get_bi_styles():
     .ppgi-metric-val {
       font-size: 24px;
       font-weight: 900;
-      color: #f8fafc;
+      color: #ffffff;
     }
     .ppgi-metric-label {
       font-size: 11px;
-      font-weight: 700;
-      color: #64748b;
+      font-weight: 800;
+      color: #94a3b8;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }

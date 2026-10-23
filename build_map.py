@@ -77,8 +77,8 @@ def build_map_html(locations, bundels):
 
     /* Header Bar */
     header {{
-      background: #090d16;
-      border-bottom: 1px solid #1e293b;
+      background: #0a0f1d;
+      border-bottom: 2px solid #334155;
       height: 60px;
       padding: 0 16px;
       display: flex;
@@ -100,18 +100,18 @@ def build_map_html(locations, bundels):
     .app-logo {{
       background: #2563eb;
       color: white;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 13px;
       padding: 5px 10px;
       border-radius: 6px;
       letter-spacing: 0.5px;
-      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.45);
       flex-shrink: 0;
     }}
     .brand-titles h1 {{
       font-size: 16px;
-      font-weight: 800;
-      color: #f8fafc;
+      font-weight: 900;
+      color: #ffffff;
       letter-spacing: -0.2px;
       line-height: 1;
       white-space: nowrap;
@@ -124,13 +124,13 @@ def build_map_html(locations, bundels):
       flex-wrap: nowrap;
     }}
     .hub-btn {{
-      background: #1e293b;
-      color: #cbd5e1;
-      border: 1px solid #334155;
+      background: #162032;
+      color: #ffffff;
+      border: 1.5px solid #475569;
       padding: 0 12px;
       border-radius: 6px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       transition: all 0.15s ease;
       display: inline-flex;
@@ -143,15 +143,15 @@ def build_map_html(locations, bundels):
       box-sizing: border-box;
     }}
     .hub-btn:hover {{
-      background: #334155;
+      background: #25334d;
       color: #ffffff;
-      border-color: #64748b;
+      border-color: #94a3b8;
     }}
     .hub-btn.active {{
       background: #2563eb;
       color: #ffffff;
-      border-color: #3b82f6;
-      box-shadow: 0 0 10px rgba(37, 99, 235, 0.35);
+      border-color: #93c5fd;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.55);
     }}
 
     .header-right {{
@@ -167,12 +167,12 @@ def build_map_html(locations, bundels):
       align-items: center;
       gap: 6px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       padding: 4px 9px;
       border-radius: 20px;
-      background: #1e293b;
-      border: 1px solid #334155;
-      color: #94a3b8;
+      background: #162032;
+      border: 1.5px solid #475569;
+      color: #cbd5e1;
     }}
     .sync-dot {{
       width: 7px;
@@ -202,33 +202,34 @@ def build_map_html(locations, bundels):
     }}
     .modal-input-group label {{
       font-size: 11px;
-      font-weight: 700;
-      color: #94a3b8;
+      font-weight: 800;
+      color: #cbd5e1;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }}
     .modal-input-group input {{
       background: #090d16;
-      border: 1px solid #334155;
-      color: #f1f5f9;
+      border: 1.5px solid #475569;
+      color: #ffffff;
       padding: 9px 12px;
       border-radius: 6px;
       font-size: 13px;
+      font-weight: 600;
       outline: none;
       transition: border 0.15s;
     }}
     .modal-input-group input:focus {{
       border-color: #38bdf8;
-      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
     }}
 
     /* Modified Coordinates Badge */
     .saved-count-pill {{
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.5);
-      color: #fbbf24;
+      background: rgba(245, 158, 11, 0.2);
+      border: 1.5px solid #f59e0b;
+      color: #fde047;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       padding: 5px 10px;
       border-radius: 6px;
       cursor: pointer;
@@ -238,18 +239,18 @@ def build_map_html(locations, bundels):
       transition: all 0.15s;
     }}
     .saved-count-pill:hover {{
-      background: rgba(245, 158, 11, 0.25);
+      background: rgba(245, 158, 11, 0.3);
     }}
 
     .btn-header-action {{
-      background: #1e293b;
-      color: #cbd5e1;
-      border: 1px solid #334155;
+      background: #162032;
+      color: #ffffff;
+      border: 1.5px solid #475569;
       padding: 0 12px;
       height: 36px;
       border-radius: 6px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       transition: all 0.15s;
       display: inline-flex;
@@ -261,33 +262,35 @@ def build_map_html(locations, bundels):
       flex-shrink: 0;
     }}
     .btn-header-action:hover {{
-      background: #334155;
+      background: #25334d;
       color: white;
+      border-color: #94a3b8;
     }}
     .btn-header-action.active {{
-      background: rgba(37, 99, 235, 0.2);
-      border-color: #3b82f6;
-      color: #93c5fd;
+      background: #1d4ed8;
+      border-color: #93c5fd;
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.45);
     }}
 
     .layer-selector {{
       display: inline-flex;
       align-items: center;
-      background: #1e293b;
+      background: #131c2e;
       padding: 3px;
       height: 36px;
       box-sizing: border-box;
       border-radius: 6px;
-      border: 1px solid #334155;
+      border: 1.5px solid #475569;
       gap: 2px;
       flex-shrink: 0;
     }}
     .layer-opt {{
       background: transparent;
       border: none;
-      color: #94a3b8;
+      color: #cbd5e1;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       padding: 0 10px;
       height: 28px;
       border-radius: 4px;
@@ -300,11 +303,13 @@ def build_map_html(locations, bundels):
       flex-shrink: 0;
     }}
     .layer-opt:hover {{
-      color: #e2e8f0;
+      color: #ffffff;
+      background: #1e293b;
     }}
     .layer-opt.active {{
       background: #2563eb;
-      color: white;
+      color: #ffffff;
+      font-weight: 800;
     }}
 
     /* Main Container */
@@ -394,8 +399,8 @@ def build_map_html(locations, bundels):
     /* Sidebar */
     .sidebar {{
       width: 390px;
-      background: #090d16;
-      border-right: 1px solid #1e293b;
+      background: #0a0f1d;
+      border-right: 2px solid #334155;
       display: flex;
       flex-direction: column;
       z-index: 900;
@@ -408,7 +413,7 @@ def build_map_html(locations, bundels):
     }}
     .sidebar-header {{
       padding: 12px 16px;
-      border-bottom: 1px solid #1e293b;
+      border-bottom: 2px solid #334155;
       background: #0f172a;
     }}
     .search-input-wrap {{
@@ -417,24 +422,29 @@ def build_map_html(locations, bundels):
     }}
     .search-input {{
       width: 100%;
-      background: #1e293b;
-      border: 1px solid #334155;
-      color: #f1f5f9;
+      background: #131c2e;
+      border: 1.5px solid #475569;
+      color: #ffffff;
       border-radius: 6px;
       padding: 8px 12px 8px 34px;
       font-size: 12px;
+      font-weight: 600;
       outline: none;
       transition: border-color 0.15s;
     }}
+    .search-input::placeholder {{
+      color: #94a3b8;
+    }}
     .search-input:focus {{
       border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.35);
     }}
     .search-icon {{
       position: absolute;
       left: 10px;
       top: 50%;
       transform: translateY(-50%);
-      color: #64748b;
+      color: #94a3b8;
       pointer-events: none;
     }}
 
@@ -444,45 +454,50 @@ def build_map_html(locations, bundels):
       flex-wrap: wrap;
     }}
     .filter-chip {{
-      background: #1e293b;
-      border: 1px solid #334155;
-      color: #94a3b8;
+      background: #162032;
+      border: 1.5px solid #475569;
+      color: #f1f5f9;
       border-radius: 20px;
       font-size: 11px;
-      font-weight: 600;
-      padding: 3px 9px;
+      font-weight: 800;
+      padding: 3px 10px;
       cursor: pointer;
       transition: all 0.15s;
     }}
     .filter-chip:hover {{
-      background: #334155;
-      color: #e2e8f0;
+      background: #25334d;
+      color: #ffffff;
+      border-color: #94a3b8;
     }}
     .filter-chip.active {{
       background: #2563eb;
       color: #ffffff;
-      border-color: #2563eb;
+      border-color: #93c5fd;
+      box-shadow: 0 0 8px rgba(37, 99, 235, 0.45);
     }}
     .filter-chip.chip-green.active {{
       background: #059669;
-      border-color: #059669;
+      border-color: #34d399;
+      box-shadow: 0 0 8px rgba(5, 150, 105, 0.45);
     }}
     .filter-chip.chip-red.active {{
       background: #dc2626;
-      border-color: #dc2626;
+      border-color: #f87171;
+      box-shadow: 0 0 8px rgba(220, 38, 38, 0.45);
     }}
     .filter-chip.chip-gold.active {{
       background: #d97706;
-      border-color: #d97706;
+      border-color: #fde047;
+      box-shadow: 0 0 8px rgba(217, 119, 6, 0.45);
     }}
 
     .sidebar-stats {{
-      padding: 7px 16px;
-      background: #090d16;
-      border-bottom: 1px solid #1e293b;
+      padding: 8px 16px;
+      background: #0d1424;
+      border-bottom: 2px solid #334155;
       font-size: 11px;
-      font-weight: 600;
-      color: #64748b;
+      font-weight: 700;
+      color: #cbd5e1;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -497,28 +512,29 @@ def build_map_html(locations, bundels):
       width: 6px;
     }}
     .locations-list::-webkit-scrollbar-thumb {{
-      background: #334155;
+      background: #475569;
       border-radius: 3px;
     }}
 
     .loc-card {{
-      background: #0f172a;
-      border: 1px solid #1e293b;
+      background: #131d31;
+      border: 1.5px solid #334155;
       border-radius: 8px;
       padding: 10px 12px;
       margin-bottom: 6px;
       cursor: pointer;
       transition: all 0.15s ease;
       position: relative;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
     }}
     .loc-card:hover {{
       border-color: #475569;
-      background: #1e293b;
+      background: #1a2742;
     }}
     .loc-card.selected {{
-      border-color: #38bdf8;
-      background: #1e293b;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+      border: 2px solid #38bdf8;
+      background: #1a2742;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.45);
     }}
     .loc-card-header {{
       display: flex;
@@ -528,9 +544,9 @@ def build_map_html(locations, bundels):
       margin-bottom: 4px;
     }}
     .loc-card-title {{
-      font-size: 13px;
-      font-weight: 700;
-      color: #f8fafc;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #ffffff;
       line-height: 1.3;
     }}
     .loc-status-badge {{
@@ -542,33 +558,34 @@ def build_map_html(locations, bundels):
       flex-shrink: 0;
     }}
     .badge-bi-yes {{
-      background: rgba(16, 185, 129, 0.15);
+      background: rgba(16, 185, 129, 0.2);
       color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.4);
+      border: 1px solid #10b981;
     }}
     .badge-bi-no {{
-      background: rgba(239, 68, 68, 0.15);
+      background: rgba(239, 68, 68, 0.2);
       color: #f87171;
-      border: 1px solid rgba(239, 68, 68, 0.4);
+      border: 1px solid #ef4444;
     }}
     .badge-bundel {{
-      background: rgba(245, 158, 11, 0.15);
+      background: rgba(245, 158, 11, 0.2);
       color: #fbbf24;
-      border: 1px solid rgba(245, 158, 11, 0.4);
+      border: 1px solid #f59e0b;
     }}
     .badge-custom-coord {{
-      background: rgba(56, 189, 248, 0.15);
+      background: rgba(56, 189, 248, 0.2);
       color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.4);
+      border: 1px solid #38bdf8;
       font-size: 9px;
-      font-weight: 700;
+      font-weight: 800;
       padding: 1px 4px;
       border-radius: 3px;
     }}
 
     .loc-card-details {{
-      font-size: 11px;
-      color: #94a3b8;
+      font-size: 11.5px;
+      color: #cbd5e1;
+      font-weight: 600;
       line-height: 1.4;
       display: flex;
       flex-direction: column;
@@ -586,10 +603,12 @@ def build_map_html(locations, bundels):
       flex-wrap: wrap;
     }}
     .loc-card-aliases-tag {{
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
       padding: 1px 5px;
       border-radius: 3px;
+      font-weight: 700;
     }}
 
     .loc-card-meta {{
@@ -598,13 +617,15 @@ def build_map_html(locations, bundels):
       gap: 6px;
       margin-top: 5px;
       font-size: 10px;
-      color: #64748b;
+      color: #94a3b8;
     }}
     .loc-card-meta span {{
-      background: #1e293b;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #cbd5e1;
       padding: 2px 6px;
       border-radius: 4px;
-      font-weight: 600;
+      font-weight: 700;
     }}
 
     /* Map Area */
@@ -621,8 +642,8 @@ def build_map_html(locations, bundels):
       left: 14px;
       z-index: 800;
       background: #0f172a;
-      border: 1px solid #334155;
-      color: #cbd5e1;
+      border: 1.5px solid #475569;
+      color: #ffffff;
       width: 34px;
       height: 34px;
       border-radius: 8px;
@@ -630,13 +651,13 @@ def build_map_html(locations, bundels):
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
       transition: all 0.15s;
     }}
     .sidebar-toggle:hover {{
       background: #1e293b;
       color: white;
-      border-color: #64748b;
+      border-color: #94a3b8;
     }}
 
     /* Floating Legend */
@@ -644,9 +665,9 @@ def build_map_html(locations, bundels):
       position: absolute;
       bottom: 20px;
       left: 20px;
-      background: rgba(15, 23, 42, 0.92);
+      background: rgba(15, 23, 42, 0.96);
       backdrop-filter: blur(8px);
-      border: 1px solid #334155;
+      border: 2px solid #334155;
       border-radius: 8px;
       padding: 10px 14px;
       z-index: 800;
@@ -654,7 +675,7 @@ def build_map_html(locations, bundels):
       display: flex;
       flex-direction: column;
       gap: 6px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
       pointer-events: auto;
     }}
     .legend-header {{
@@ -669,8 +690,8 @@ def build_map_html(locations, bundels):
       display: flex;
       align-items: center;
       gap: 8px;
-      color: #cbd5e1;
-      font-weight: 600;
+      color: #ffffff;
+      font-weight: 700;
     }}
     .legend-dot {{
       width: 14px;
@@ -705,20 +726,20 @@ def build_map_html(locations, bundels):
 
     /* Leaflet Attribution Dark & Compact Styling */
     .leaflet-container .leaflet-control-attribution {{
-      background: rgba(15, 23, 42, 0.82) !important;
-      color: #64748b !important;
+      background: rgba(15, 23, 42, 0.92) !important;
+      color: #94a3b8 !important;
       font-size: 9px !important;
       line-height: 1.3 !important;
       padding: 2px 8px !important;
       border-radius: 4px 0 0 0 !important;
       backdrop-filter: blur(4px);
       margin: 0 !important;
-      border-top: 1px solid rgba(51, 65, 85, 0.4);
-      border-left: 1px solid rgba(51, 65, 85, 0.4);
-      box-shadow: 0 -2px 6px rgba(0,0,0,0.3);
+      border-top: 1.5px solid #334155;
+      border-left: 1.5px solid #334155;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.4);
     }}
     .leaflet-container .leaflet-control-attribution a {{
-      color: #94a3b8 !important;
+      color: #cbd5e1 !important;
       text-decoration: none !important;
     }}
     .leaflet-container .leaflet-control-attribution a:hover {{
@@ -733,13 +754,13 @@ def build_map_html(locations, bundels):
       right: 14px;
       width: 410px;
       max-height: calc(100% - 28px);
-      background: rgba(15, 23, 42, 0.95);
+      background: #0f172a;
       backdrop-filter: blur(12px);
-      border: 1px solid #334155;
+      border: 2px solid #334155;
       border-radius: 12px;
       padding: 18px;
       z-index: 850;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      box-shadow: 0 16px 45px rgba(0,0,0,0.75);
       display: none;
       flex-direction: column;
       overflow-y: auto;
@@ -759,8 +780,8 @@ def build_map_html(locations, bundels):
       top: 14px;
       right: 14px;
       background: #1e293b;
-      border: 1px solid #334155;
-      color: #94a3b8;
+      border: 1.5px solid #475569;
+      color: #ffffff;
       width: 26px;
       height: 26px;
       border-radius: 6px;
@@ -791,15 +812,15 @@ def build_map_html(locations, bundels):
     }}
     .detail-title {{
       font-size: 18px;
-      font-weight: 800;
+      font-weight: 900;
       color: #ffffff;
       line-height: 1.25;
     }}
     .detail-subtitle {{
       font-size: 12px;
-      color: #94a3b8;
+      color: #cbd5e1;
       margin-top: 3px;
-      font-weight: 600;
+      font-weight: 700;
     }}
 
     .detail-grid {{
@@ -809,24 +830,24 @@ def build_map_html(locations, bundels):
       margin-top: 10px;
     }}
     .detail-item {{
-      background: rgba(30, 41, 59, 0.7);
-      border: 1px solid #334155;
+      background: #131d31;
+      border: 1.5px solid #334155;
       border-radius: 8px;
       padding: 9px 12px;
     }}
     .detail-item-label {{
-      font-size: 10px;
+      font-size: 10.5px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: #64748b;
+      color: #38bdf8;
       margin-bottom: 3px;
     }}
     .detail-item-val {{
-      font-size: 12px;
-      color: #f1f5f9;
+      font-size: 12.5px;
+      color: #ffffff;
       line-height: 1.4;
-      font-weight: 500;
+      font-weight: 600;
     }}
 
     /* ========================================= */
@@ -1325,8 +1346,8 @@ def build_map_html(locations, bundels):
       display: none;
       width: 38px;
       height: 38px;
-      background: #1e293b;
-      border: 1px solid #334155;
+      background: #162032;
+      border: 1.5px solid #475569;
       border-radius: 8px;
       flex-direction: column;
       align-items: center;
@@ -1339,17 +1360,17 @@ def build_map_html(locations, bundels):
       z-index: 1001;
     }}
     .hamburger-btn:hover, .hamburger-btn:active {{
-      background: #334155;
-      border-color: #64748b;
+      background: #25334d;
+      border-color: #94a3b8;
     }}
     .hamburger-btn.active {{
       background: #2563eb;
-      border-color: #3b82f6;
+      border-color: #93c5fd;
     }}
     .hamburger-line {{
       width: 18px;
       height: 2px;
-      background: #cbd5e1;
+      background: #ffffff;
       border-radius: 2px;
       transition: all 0.25s ease;
       transform-origin: center;
@@ -1395,8 +1416,8 @@ def build_map_html(locations, bundels):
       bottom: 0;
       width: 320px;
       max-width: 86vw;
-      background: #0b1120;
-      border-left: 1px solid #1e293b;
+      background: #090d16;
+      border-left: 2px solid #334155;
       box-shadow: -10px 0 35px rgba(0, 0, 0, 0.85);
       z-index: 3500;
       display: flex;
@@ -1414,7 +1435,7 @@ def build_map_html(locations, bundels):
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #1e293b;
+      border-bottom: 2px solid #334155;
       background: #0f172a;
       flex-shrink: 0;
     }}
@@ -1425,13 +1446,13 @@ def build_map_html(locations, bundels):
     }}
     .drawer-title {{
       font-size: 15px;
-      font-weight: 800;
-      color: #f8fafc;
+      font-weight: 900;
+      color: #ffffff;
     }}
     .drawer-close-btn {{
       background: #1e293b;
-      border: 1px solid #334155;
-      color: #94a3b8;
+      border: 1.5px solid #475569;
+      color: #ffffff;
       width: 32px;
       height: 32px;
       border-radius: 6px;
@@ -1474,7 +1495,7 @@ def build_map_html(locations, bundels):
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      color: #64748b;
+      color: #94a3b8;
       padding: 0 2px;
     }}
 
@@ -1485,9 +1506,9 @@ def build_map_html(locations, bundels):
       gap: 8px;
     }}
     .drawer-layer-btn {{
-      background: #1e293b;
-      border: 1px solid #334155;
-      color: #cbd5e1;
+      background: #162032;
+      border: 1.5px solid #475569;
+      color: #ffffff;
       padding: 10px 8px;
       border-radius: 8px;
       cursor: pointer;
@@ -1501,14 +1522,15 @@ def build_map_html(locations, bundels):
       font-family: inherit;
     }}
     .drawer-layer-btn:hover {{
-      background: #334155;
+      background: #25334d;
       color: #ffffff;
+      border-color: #94a3b8;
     }}
     .drawer-layer-btn.active {{
-      background: rgba(37, 99, 235, 0.2);
-      border-color: #3b82f6;
-      color: #93c5fd;
-      box-shadow: 0 0 10px rgba(37, 99, 235, 0.25);
+      background: #2563eb;
+      border-color: #93c5fd;
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.35);
     }}
     .drawer-layer-icon {{
       font-size: 18px;
@@ -1531,8 +1553,8 @@ def build_map_html(locations, bundels):
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #1e293b;
-      border: 1px solid #334155;
+      background: #162032;
+      border: 1.5px solid #475569;
       border-radius: 8px;
       padding: 10px 12px;
       cursor: pointer;
@@ -1540,7 +1562,8 @@ def build_map_html(locations, bundels):
       user-select: none;
     }}
     .drawer-toggle-row:hover {{
-      background: #334155;
+      background: #25334d;
+      border-color: #94a3b8;
     }}
     .drawer-toggle-info {{
       display: flex;
@@ -1593,13 +1616,13 @@ def build_map_html(locations, bundels):
       gap: 6px;
     }}
     .drawer-hub-btn {{
-      background: #1e293b;
-      border: 1px solid #334155;
-      color: #cbd5e1;
+      background: #162032;
+      border: 1.5px solid #475569;
+      color: #ffffff;
       padding: 9px 10px;
       border-radius: 6px;
       font-size: 11.5px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -1612,14 +1635,15 @@ def build_map_html(locations, bundels):
       grid-column: span 2;
     }}
     .drawer-hub-btn:hover {{
-      background: #334155;
+      background: #25334d;
       color: white;
+      border-color: #94a3b8;
     }}
     .drawer-hub-btn.active {{
       background: #2563eb;
-      border-color: #3b82f6;
+      border-color: #93c5fd;
       color: white;
-      box-shadow: 0 0 8px rgba(37, 99, 235, 0.35);
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.45);
     }}
 
     /* Action Buttons in Drawer */
@@ -1627,8 +1651,8 @@ def build_map_html(locations, bundels):
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #1e293b;
-      border: 1px solid #334155;
+      background: #162032;
+      border: 1.5px solid #475569;
       border-radius: 8px;
       padding: 10px 12px;
       cursor: pointer;
@@ -1637,12 +1661,12 @@ def build_map_html(locations, bundels):
       box-sizing: border-box;
       gap: 10px;
       transition: all 0.15s;
-      color: #f1f5f9;
+      color: #ffffff;
       font-family: inherit;
     }}
     .drawer-action-row:hover {{
-      background: #334155;
-      border-color: #64748b;
+      background: #25334d;
+      border-color: #94a3b8;
     }}
     .drawer-action-left {{
       display: flex;
@@ -1662,20 +1686,20 @@ def build_map_html(locations, bundels):
     }}
     .drawer-action-title {{
       font-size: 12px;
-      font-weight: 700;
-      color: #f1f5f9;
+      font-weight: 800;
+      color: #ffffff;
     }}
     .drawer-action-sub {{
       font-size: 10px;
-      color: #94a3b8;
+      color: #cbd5e1;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }}
     .drawer-action-badge {{
-      background: rgba(245, 158, 11, 0.2);
-      border: 1px solid rgba(245, 158, 11, 0.5);
-      color: #fbbf24;
+      background: rgba(245, 158, 11, 0.25);
+      border: 1px solid #f59e0b;
+      color: #fde047;
       font-size: 10px;
       font-weight: 800;
       padding: 2px 7px;
@@ -1683,7 +1707,7 @@ def build_map_html(locations, bundels):
       flex-shrink: 0;
     }}
     .drawer-chevron {{
-      color: #64748b;
+      color: #94a3b8;
       font-size: 15px;
       font-weight: bold;
       flex-shrink: 0;
@@ -1691,8 +1715,8 @@ def build_map_html(locations, bundels):
 
     /* Legend List in Drawer */
     .drawer-legend-list {{
-      background: rgba(30, 41, 59, 0.6);
-      border: 1px solid #334155;
+      background: #131d31;
+      border: 1.5px solid #334155;
       border-radius: 8px;
       padding: 10px 12px;
       display: flex;
@@ -1704,8 +1728,8 @@ def build_map_html(locations, bundels):
       align-items: center;
       gap: 8px;
       font-size: 11px;
-      color: #cbd5e1;
-      font-weight: 600;
+      color: #ffffff;
+      font-weight: 700;
     }}
 
     /* Drawer Footer */
@@ -1850,20 +1874,20 @@ def build_map_html(locations, bundels):
         bottom: 18px !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-        background: rgba(15, 23, 42, 0.95) !important;
+        background: rgba(15, 23, 42, 0.98) !important;
         backdrop-filter: blur(12px) !important;
-        border: 1px solid #334155 !important;
+        border: 2px solid #475569 !important;
         border-radius: 30px !important;
         padding: 4px !important;
         z-index: 1500 !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75) !important;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.85) !important;
         gap: 4px !important;
         white-space: nowrap !important;
       }}
       .mobile-nav-btn {{
         background: transparent;
         border: none;
-        color: #94a3b8;
+        color: #cbd5e1;
         font-size: 13px;
         font-weight: 800;
         padding: 7px 16px;
@@ -1880,10 +1904,10 @@ def build_map_html(locations, bundels):
       .mobile-nav-btn.active {{
         background: #2563eb;
         color: white;
-        box-shadow: 0 2px 10px rgba(37, 99, 235, 0.45);
+        box-shadow: 0 2px 12px rgba(37, 99, 235, 0.6);
       }}
       .mob-pill-badge {{
-        background: rgba(255, 255, 255, 0.22);
+        background: rgba(255, 255, 255, 0.25);
         color: white;
         font-size: 11px;
         font-weight: 800;
@@ -1894,7 +1918,7 @@ def build_map_html(locations, bundels):
       }}
       .mobile-nav-btn:not(.active) .mob-pill-badge {{
         background: #334155;
-        color: #cbd5e1;
+        color: #ffffff;
       }}
 
       /* Map controls & Legend position on phone */
@@ -1904,35 +1928,35 @@ def build_map_html(locations, bundels):
         max-width: calc(100vw - 24px) !important;
         z-index: 1200 !important;
         padding: 0 !important;
-        background: rgba(15, 23, 42, 0.94) !important;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.6) !important;
-        border: 1px solid #334155 !important;
+        background: rgba(15, 23, 42, 0.98) !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.7) !important;
+        border: 2px solid #334155 !important;
         border-radius: 8px !important;
       }}
       .legend-header {{
         display: flex !important;
         align-items: center;
         justify-content: space-between;
-        padding: 6px 12px;
+        padding: 8px 12px;
         cursor: pointer;
         font-size: 11px;
         font-weight: 800;
-        color: #cbd5e1;
+        color: #ffffff;
         gap: 8px;
         user-select: none;
       }}
       .legend-header:hover {{
-        color: #ffffff;
+        color: #38bdf8;
       }}
       .legend-header-icon {{
         font-size: 9px;
-        color: #94a3b8;
+        color: #cbd5e1;
         transition: transform 0.2s ease;
       }}
       .legend-body {{
         display: none !important;
-        padding: 4px 12px 10px 12px;
-        border-top: 1px solid #1e293b;
+        padding: 6px 12px 10px 12px;
+        border-top: 1.5px solid #334155;
       }}
       .map-legend.open .legend-body {{
         display: flex !important;
