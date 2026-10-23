@@ -4027,8 +4027,11 @@ def build_map_html(locations, bundels):
     // PWA Service Worker Registration
     if ('serviceWorker' in navigator) {{
       window.addEventListener('load', () => {{
-        navigator.serviceWorker.register('./sw.js')
-          .then(reg => console.log('PWA ServiceWorker geregistreerd:', reg.scope))
+        navigator.serviceWorker.register('./sw.js?v=3')
+          .then(reg => {{
+            reg.update();
+            console.log('PWA ServiceWorker geregistreerd:', reg.scope);
+          }})
           .catch(err => console.log('SW fout (genegeerd):', err));
       }});
     }}

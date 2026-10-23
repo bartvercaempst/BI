@@ -1,7 +1,8 @@
-const CACHE_NAME = 'bi-generator-v2';
+const CACHE_NAME = 'bi-generator-v3';
 const CORE_ASSETS = [
   './',
   './index.html',
+  './kaart_bedieningen.html',
   './manifest.json',
   './config.js',
   './locs_gps.json',
@@ -22,7 +23,7 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Activate: clean up old caches
+// Activate: clean up old caches immediately
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -34,11 +35,11 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch: network first with cache fallback
+// Fetch: NETWORK FIRST for HTML & navigation, Cache fallback for offline
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // For map tile services or external APIs, fetch directly
+  // For external services, fetch directly
   if (
     url.hostname.includes('arcgisonline.com') ||
     url.hostname.includes('openstreetmap.org') ||
@@ -48,21 +49,42 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // App shell: cache with network fallback
+  // HTML Navigation or Documents: Network First so updates are seen immediately!
+  const isHtml = event.request.mode === 'navigate' ||
+                 (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html')) ||
+                 url.pathname.endsWith('.html') ||
+                 url.pathname.endsWith('/');
+
+  if (isHtml) {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const clone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          return caches.match(event.request).then((cached) => cached || caches.match('./index.html'));
+        })
+    );
+    return;
+  }
+
+  // Static Assets (icons, manifest): Stale-while-revalidate
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        // Fetch in background to keep cache fresh
-        fetch(event.request)
-          .then((networkResponse) => {
-            if (networkResponse && networkResponse.status === 200) {
-              caches.open(CACHE_NAME).then((cache) => cache.put(event.request, networkResponse));
-            }
-          })
-          .catch(() => {});
-        return cachedResponse;
-      }
-      return fetch(event.request);
+      const fetchPromise = fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, networkResponse.clone()));
+          }
+          return networkResponse;
+        })
+        .catch(() => cachedResponse);
+
+      return cachedResponse || fetchPromise;
     })
   );
 });
