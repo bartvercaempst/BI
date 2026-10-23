@@ -1,0 +1,783 @@
+"""
+Hierarchical Source Data Model & PPGI Comparison Engine for BI Generator
+Niveaus:
+  Niveau 1: Bedrijf / Operator (DB Cargo Belgium)
+  Niveau 2: Regio (West-Vlaanderen)
+  Niveau 3: Zone / Hub (Zeebrugge, Brugge, Oostende, Kortrijk)
+  Niveau 4: Deelzone / Moederbundel (Ramskapelle, Pelikaan, Zwankendamme, etc.)
+  Niveau 5: Terminal / Private Aansluiting (CRO Brittaniadok, Wallenius Canadakaai, etc.)
+"""
+
+import os
+import json
+
+LEVEL_1_OPERATOR = {
+    "id": "dbc_be",
+    "naam": "DB Cargo Belgium",
+    "logo_tekst": "DB Cargo",
+    "autorisatie_functionaris": "Head of Cargo Management",
+    "autorisatie_ingangsdatum": "Onmiddellijk",
+    "goedkeuring_systeem": "Digitaal via Zenya",
+    "doel": "Het beschrijven van een uniforme en veilige werkwijze voor bedieningen van private spooraansluitingen en bundels.",
+    "gebruikersgroep": "Alle medewerkers buitendienst (Treinbestuurders & Rangeerders/Schouwers + omkadering + hulpondernemingen) die de bediening uitvoeren.",
+    "contacten": [
+        {"dienst": "NOC Shiftleader", "rol": "Real-time Operations", "telefoon": "+32 3 545 02 33"},
+        {"dienst": "NOC Dispatch Zeebrugge", "rol": "Lokale Shunting Dispatcher", "telefoon": "+32 50 33 03 25"}
+    ],
+    "noodcontacten": [
+        {"dienst": "Hulpdiensten (Calamiteiten)", "rol": "Algemeen noodnummer", "telefoon": "112"},
+        {"dienst": "Brandweer", "rol": "Noodgeval", "telefoon": "112"},
+        {"dienst": "Politie / Spoorwegpolitie", "rol": "Interventie", "telefoon": "101 of 112"},
+        {"dienst": "Infrabel Rode Telefoon", "rol": "Noodcentrale Infrabel", "telefoon": "+32 2 525 91 40"},
+        {"dienst": "Infrabel Oranje Telefoon", "rol": "RID Incidenten & Meldingen", "telefoon": "+32 2 528 81 50"}
+    ],
+    "algemene_veiligheidsregels": [
+        "Persoonlijke beschermingsmiddelen (PBM): Fluohesje, veiligheidsschoenen S3, veiligheidsbril en werkhandschoenen zijn te allen tijde verplicht.",
+        "Stormprotocol: Indien stormweer actief is of aangekondigd wordt, dient men rekening te houden met een minimum hellingswaarde van 6 ‰ voor het berekenen van de immobilisatiekracht. Alle voertuigen moeten onderling gekoppeld zijn.",
+        "Kleine bewegingen: Alle bewegingen op aansluitingen en bundels gebeuren in 'kleine beweging' met maximale waakzaamheid.",
+        "Wisselbediening: Steeds controleren van tongligging en vergrendeling van handwissels vóór overschrijding."
+    ]
+}
+
+LEVEL_2_REGIO = {
+    "west_vlaanderen": {
+        "id": "west_vlaanderen",
+        "naam": "West-Vlaanderen (Area North-West)",
+        "infrabel_district": "Infrabel Operations Area North-West",
+        "permanentie_ito": "+32 50 30 22 23",
+        "traffic_officer_nw": "+32 9 241 28 68",
+        "ssp_zone": "Zone Brugge / Kust"
+    }
+}
+
+LEVEL_3_ZONES = {
+    "zeebrugge": {
+        "id": "zeebrugge",
+        "regio_id": "west_vlaanderen",
+        "naam": "Haven Zeebrugge",
+        "centraal_seinhuis": "Infrabel Blok 7 Zeebrugge",
+        "seinhuis_contacten": [
+            {"dienst": "Traffic Controller (Blok 7)", "rol": "Trein- en rangeerdienst", "telefoon": "+32 50 30 25 11"},
+            {"dienst": "Safety Controller (Blok 7)", "rol": "Veiligheid & Buitendienst", "telefoon": "+32 50 30 25 09"},
+            {"dienst": "Safety Supervisor (Blok 7)", "rol": "Supervisie Zeebrugge", "telefoon": "+32 50 30 25 00"},
+            {"dienst": "Traffic Officer (Blok 6)", "rol": "Bovenlokaal beheer NW", "telefoon": "+32 9 241 28 68"},
+            {"dienst": "Mailbox Blok 7 Infrabel", "rol": "Schriftelijke overdrachten", "telefoon": "rdc.nw.blok7@infrabel.be"}
+        ],
+        "havenautoriteit": {
+            "naam": "Havenkapiteinsdienst Port of Antwerp-Bruges",
+            "telefoon": "+32 50 54 32 40",
+            "vhf_kanalen": "VHF 71 (Havenoperaties) / VHF 74 (Sluis & Dokken)"
+        },
+        "zone_risicos": [
+            "Transmigranten: Mogelijke aanwezigheid van transmigranten in het havengebied. Waakzaamheid bij stilstand en spoorpoorten.",
+            "Havenverkeer: Intensief vrachtwagen- en terminalverkeer over spooroverwegen.",
+            "Zeehavenwind: Verhoogde kans op zware windstoten; strikte controle van wielkeggen en handremmen."
+        ],
+        "zone_snelheden": {
+            "havenlijnen": "Max 20 km/u op havenverbindingslijnen (L202, L202A, L202B)",
+            "aansluitingen": "Max 10 km/u op private spooraansluitingen",
+            "kaden": "Stapvoets (max 5 km/u) langs laadkaden en in loodsen"
+        }
+    },
+    "brugge": {
+        "id": "brugge",
+        "regio_id": "west_vlaanderen",
+        "naam": "Zone Brugge",
+        "centraal_seinhuis": "Seinzaal Brugge (FR/B)",
+        "seinhuis_contacten": [
+            {"dienst": "Traffic Controller Brugge", "rol": "Treindienst", "telefoon": "+32 50 30 24 11"},
+            {"dienst": "Safety Controller Brugge", "rol": "Rangeerdienst", "telefoon": "+32 50 30 24 09"}
+        ],
+        "havenautoriteit": None,
+        "zone_risicos": ["Druk reizigers- en goederenverkeer op hoofdlijn L50A / L51"],
+        "zone_snelheden": {
+            "havenlijnen": "Max 20 km/u op bundelsporen",
+            "aansluitingen": "Max 10 km/u op aansluitingen",
+            "kaden": "Stapvoets"
+        }
+    },
+    "oostende": {
+        "id": "oostende",
+        "regio_id": "west_vlaanderen",
+        "naam": "Zone Oostende",
+        "centraal_seinhuis": "Seinzaal Oostende (Blok 4)",
+        "seinhuis_contacten": [
+            {"dienst": "Traffic Controller Oostende", "rol": "Treinverkeer", "telefoon": "+32 59 56 24 11"}
+        ],
+        "havenautoriteit": None,
+        "zone_risicos": ["Kustwind en zoutafzetting op contactleiding"],
+        "zone_snelheden": {
+            "havenlijnen": "Max 20 km/u op bundelsporen",
+            "aansluitingen": "Max 10 km/u op aansluitingen",
+            "kaden": "Stapvoets"
+        }
+    },
+    "kortrijk": {
+        "id": "kortrijk",
+        "regio_id": "west_vlaanderen",
+        "naam": "Zone Kortrijk",
+        "centraal_seinhuis": "Seinzaal Kortrijk (FR/D)",
+        "seinhuis_contacten": [
+            {"dienst": "Traffic Controller Kortrijk", "rol": "Rangeer- en goederendienst", "telefoon": "+32 56 24 24 11"}
+        ],
+        "havenautoriteit": None,
+        "zone_risicos": ["Grensregio verkeer L75"],
+        "zone_snelheden": {
+            "havenlijnen": "Max 20 km/u op bundelsporen",
+            "aansluitingen": "Max 10 km/u op aansluitingen",
+            "kaden": "Stapvoets"
+        }
+    }
+}
+
+LEVEL_4_MOEDERBUNDELS = {
+    "ramskapelle": {
+        "id": "ramskapelle",
+        "zone_id": "zeebrugge",
+        "naam": "Bundel Ramskapelle",
+        "ppgi_referentie": "PP-321-Brugge (Actiezone Zeebrugge Zuidelijk Insteekdok, Versie 37.0 - 17/10/2025)",
+        "ssp_referentie": "SSP Zone Brugge blz. 16 & 17",
+        "beseind": True,
+        "seinen_info": "Beseinde bundel uitgerust met grote stopseinen (o.a. ND-R.7) en rangeerpaaltjes.",
+        "bovenleiding_info": "Hoofdzakelijk uitgerust met volledige bovenleiding. Spoor 844 (Lijn 202B) is maar gedeeltelijk uitgerust met bovenleiding (einde aangeduid met bord).",
+        "tankinstallatie": "Spoorfuelinstallatie G&V op spoor 899 (beveiligd door ontspoortong 91AR).",
+        "parkeergelegenheid": [
+            "Aan de tankinstallatie G&V",
+            "Aan de Alfred Ronsestraat",
+            "Aan het voormalige kantoor van Lineas",
+            "Langs de bundelsporen"
+        ],
+        "cameras": "24/7 camerabewaking beheerd door Infrabel.",
+        "schuifrangering": "Toegelaten richting Brugge via spoor 880 (doodspoor) mits toelating van Blok 7.",
+        "bundel_sporen": [
+            {"spoor": "Sporen 881 t.e.m. 897", "type": "Beseinde bundelsporen", "beveiliging": "Seinen ND-R"},
+            {"spoor": "Spoor 842 & 844", "type": "Verbindingssporen L202B", "beveiliging": "Seinen"},
+            {"spoor": "Spoor 880", "type": "Doodspoor schuifrangering", "beveiliging": "Stootjuk"},
+            {"spoor": "Spoor 899", "type": "G&V Spoorfuelinstallatie", "beveiliging": "Ontspoortong 91AR"},
+            {"spoor": "Spoor 898", "type": "Los- en laadkaaien CdMZ", "beveiliging": "Stuitklamp"},
+            {"spoor": "Spoor 843", "type": "Toegang Bundel Cast (Canadakaai)", "beveiliging": "Stuitklamp"},
+            {"spoor": "Spoor 872", "type": "Toegang SA C-RO Brittaniadok", "beveiliging": "Stuitklamp 321 + Ontspoortong 10R"},
+            {"spoor": "Spoor 879", "type": "Toegang Bundel Toyota", "beveiliging": "Elektrische stuitklamp"}
+        ],
+        "overwegen_tracé": [
+            {"naam": "Overweg 15", "lijn": "L202B", "type": "Automatische overweg", "beveiliging": "Ontspoortong 10R opwaarts"},
+            {"naam": "Overweg 17 (Sas)", "lijn": "L202B", "type": "Manueel bediend via slotkast", "beveiliging": "Stuitklamp 321"}
+        ]
+    },
+    "pelikaan": {
+        "id": "pelikaan",
+        "zone_id": "zeebrugge",
+        "naam": "Bundel Pelikaan",
+        "ppgi_referentie": "PP-321-Brugge (Actiezone Zeebrugge Zuidelijk Insteekdok, Versie 37.0 - 17/10/2025)",
+        "ssp_referentie": "SSP Zone Brugge",
+        "beseind": True,
+        "seinen_info": "Beseinde bundel sporen 861 t.e.m. 871.",
+        "bovenleiding_info": "Volledig uitgerust met bovenleiding.",
+        "tankinstallatie": "Geen eigen tankinstallatie; gebruik tankspoor Ramskapelle.",
+        "parkeergelegenheid": ["Parkeerzone Pelikaanstraat / Kaai 100-reeks"],
+        "cameras": "Infrabel camerabewaking.",
+        "schuifrangering": "Rangeerbewegingen via spoor 860 en 875 (doodsporen).",
+        "bundel_sporen": [
+            {"spoor": "Sporen 861 t.e.m. 871", "type": "Bundelsporen (verlengd v36.0)", "beveiliging": "Seinen"},
+            {"spoor": "Spoor 860 & 875", "type": "Doodsporen", "beveiliging": "Stootjuk"},
+            {"spoor": "Wissel 521", "type": "Aansluiting SA ICO 1", "beveiliging": "Stuitklamp"},
+            {"spoor": "Wissel 502", "type": "Aansluiting SA ICO 2", "beveiliging": "Stuitklamp (koppelslot verplaatst v36.0)"},
+            {"spoor": "Wissel 551 & 552", "type": "Aansluiting SA Efico & SA NDQ", "beveiliging": "Stuitklamp"}
+        ],
+        "overwegen_tracé": []
+    },
+    "zwankendamme": {
+        "id": "zwankendamme",
+        "zone_id": "zeebrugge",
+        "naam": "Bundel Zwankendamme",
+        "ppgi_referentie": "PP-311-Brugge (Actiezone Zeebrugge, Deel 1)",
+        "ssp_referentie": "SSP Zeebrugge",
+        "beseind": True,
+        "seinen_info": "Vormings- en vertrekbundel Zeebrugge.",
+        "bovenleiding_info": "Volledig geëlektrificeerd.",
+        "tankinstallatie": "Aanwezig in vorming.",
+        "parkeergelegenheid": ["Loods Zwankendamme / Stationsomgeving"],
+        "cameras": "Infrabel cameratoezicht.",
+        "schuifrangering": "Uitgebreide heuvel- en rangeerinstallaties.",
+        "bundel_sporen": [],
+        "overwegen_tracé": []
+    },
+    "voorhaven_west": {
+        "id": "voorhaven_west",
+        "zone_id": "zeebrugge",
+        "naam": "Bundel Voorhaven-West",
+        "ppgi_referentie": "PP-311-Brugge (Actiezone Zeebrugge Voorhaven)",
+        "ssp_referentie": "SSP Zeebrugge",
+        "beseind": True,
+        "seinen_info": "Seinen Voorhaven L202.",
+        "bovenleiding_info": "Grotendeels geëlektrificeerd.",
+        "tankinstallatie": "Geen.",
+        "parkeergelegenheid": ["Kielbankstraat / Kustlaan"],
+        "cameras": "Haven- en Infrabel camera's.",
+        "schuifrangering": "Rangeerbewegingen via bundelhals.",
+        "bundel_sporen": [],
+        "overwegen_tracé": []
+    },
+    "nid": {
+        "id": "nid",
+        "zone_id": "zeebrugge",
+        "naam": "Bundel NID (Noordelijk Insteekdok)",
+        "ppgi_referentie": "PP-311-Brugge (Actiezone Zeebrugge, Deel 1)",
+        "ssp_referentie": "SSP Zeebrugge",
+        "beseind": True,
+        "seinen_info": "Beseinde bundel sporen 1 t.e.m. 5.",
+        "bovenleiding_info": "Gedeeltelijke bovenleiding.",
+        "tankinstallatie": "Geen.",
+        "parkeergelegenheid": ["NID Kaaiweg"],
+        "cameras": "Havenbewaking.",
+        "schuifrangering": "Kleine beweging via Zwankendamme.",
+        "bundel_sporen": [
+            {"spoor": "Spoor 1", "type": "NID Spoor", "lengte": "354m"},
+            {"spoor": "Spoor 2", "type": "NID Spoor", "lengte": "537m"},
+            {"spoor": "Spoor 3", "type": "NID Spoor", "lengte": "598m"},
+            {"spoor": "Spoor 4", "type": "NID Spoor", "lengte": "507m"},
+            {"spoor": "Spoor 5", "type": "NID Spoor", "lengte": "540m"}
+        ],
+        "overwegen_tracé": []
+    },
+    "brugge_vorming": {
+        "id": "brugge_vorming",
+        "zone_id": "brugge",
+        "naam": "Bundels Brugge (Vorming & Bundel M)",
+        "ppgi_referentie": "PPGI_1_FR_B_Brugge (Versie 1.0 - 12/06/2026)",
+        "ssp_referentie": "SSP Brugge",
+        "beseind": True,
+        "seinen_info": "Beseinde rangeerbundels L50A / L51.",
+        "bovenleiding_info": "Volledig geëlektrificeerd.",
+        "tankinstallatie": "Aanwezig te Brugge.",
+        "parkeergelegenheid": ["Stationsomgeving Brugge / Spoorwegstraat"],
+        "cameras": "Infrabel cameratoezicht.",
+        "schuifrangering": "Toegelaten conform seinzaal Brugge.",
+        "bundel_sporen": [],
+        "overwegen_tracé": []
+    },
+    "plassendale": {
+        "id": "plassendale",
+        "zone_id": "oostende",
+        "naam": "Bundel Plassendale 1",
+        "ppgi_referentie": "PP-341-Brugge (Actiezone Oostende, Versie 25.0)",
+        "ssp_referentie": "SSP Oostende",
+        "beseind": True,
+        "seinen_info": "Beseinde bundel L50A.",
+        "bovenleiding_info": "Bovenleiding aanwezig.",
+        "tankinstallatie": "Oostende.",
+        "parkeergelegenheid": ["Industrieterrein Plassendale"],
+        "cameras": "Toezicht aanwezig.",
+        "schuifrangering": "Kleine beweging.",
+        "bundel_sporen": [],
+        "overwegen_tracé": []
+    },
+    "kortrijk_vorming": {
+        "id": "kortrijk_vorming",
+        "zone_id": "kortrijk",
+        "naam": "Bundels Kortrijk (Vorming & Goederen)",
+        "ppgi_referentie": "PPGI_1_FR_D_Kortrijk (Versie 2.0 - 18/09/2026)",
+        "ssp_referentie": "SSP Kortrijk",
+        "beseind": True,
+        "seinen_info": "Seinzaal Kortrijk.",
+        "bovenleiding_info": "Geëlektrificeerd L75.",
+        "tankinstallatie": "Kortrijk.",
+        "parkeergelegenheid": ["Kortrijk Goederenkoer"],
+        "cameras": "Infrabel toezicht.",
+        "schuifrangering": "Rangeerregels Kortrijk.",
+        "bundel_sporen": [],
+        "overwegen_tracé": []
+    }
+}
+
+# Detailed terminal definitions
+LEVEL_5_DETAILED_TERMINALS = {
+    "cro_brit": {
+        "id": "cro_brit",
+        "moederbundel_id": "ramskapelle",
+        "naam": "C.RO Brittaniadok (SEA-RO)",
+        "klant": "C.RO Ports Zeebrugge / SEA-RO",
+        "documentcode": "DB Cargo/België/Bedieningsinstructie CRO Brittaniadok Ramskapelle",
+        "huidige_versie": "2.2",
+        "versie_datum": "08-05-2026",
+        "vorige_versies": [
+            {"versie": "2.0", "datum": "19-05-2021", "wijziging": "Eerste publicatie van het document conform uniforme lay-out."},
+            {"versie": "2.1", "datum": "31-01-2022", "wijziging": "Wijzigen werkwijze poortbediening en aanpassen nieuwe lay-out."},
+            {"versie": "2.2", "datum": "08-05-2026", "wijziging": "Inhoudelijke aanpassing na RI&E punten 4.2.2.4 en 7.3.3. Toevoeging: Punt 3 Wat te doen bij calamiteiten."}
+        ],
+        "auteurs": "Krist Verstraete; Maikel Vanzieleghem / Bart Vercaempst",
+        "bron_referentie": "PP-321-Brugge (Zeebrugge Zuidelijk Insteekdok, Versie 37.0) & SSP Zone Brugge",
+        "adres": "Gustave Van Nieuwenhuysestraat, Zeebrugge (Kaai 500-reeks)",
+        "bereikbaarheid": {
+            "trein": "Bereikbaar via L202B, Bundel Ramskapelle, spoor 872",
+            "auto": "Gustave Van Nieuwenhuysestraat, Zeebrugge (parkeren aan Ramskapelle of kade)"
+        },
+        "contacten_klant": [
+            {"dienst": "CRO Security / Poort 24/7", "rol": "Poortbediening & Nood sweep", "telefoon": "+32 50 55 78 35"},
+            {"dienst": "CRO Kaaiverantwoordelijke", "rol": "Operationeel toezicht", "telefoon": "+32 50 55 78 11"}
+        ],
+        "infrastructuur": {
+            "toegangsspoor": "Spoor 872 via wissel 321 vanaf L202B",
+            "terminal_sporen": "Sporen 1 & 2 op kaai Brittaniadok",
+            "beveiliging_infrabel": "Stuitklamp 321 met Siemensslot 321FR (Siemenskast nabij OW 17 afgesloten met Wilka G*) + Ontspoortong 10R bij sein ND-R.7",
+            "laadkade": "Automotive Ro-Ro kade SEA-RO",
+            "richting_lading": "Auto's op treinen moeten volgens order van dispatcher staan (standaard: autolichten kant kust bij plaatsing)."
+        },
+        "specifieke_risicos": [
+            "Bovenleidingsgrens: Spoor 844 L202B is slechts deels geëlektrificeerd. Let op uitschakelbord.",
+            "Overweg 17 (Sas): Manueel te bedienen overweg nabij de poort. Steeds stoppen voor bord 'STOP'.",
+            "Stuitklamp: Stuitklamp 321 ligt tussen OW 17 en de poort. Vergewis je dat deze ontgrendeld en opengelegd is vóór binnenrijden.",
+            "Poortalarm: Poort sluit automatisch na doorgang met voorafgaande zoemer (ongeveer 10 seconden)."
+        ],
+        "bedieningstijden": "24/7, niet gespecificeerd, op verzoek van de klant.",
+        "procedures": {
+            "procedure_1_toegang": [
+                {"stap": 1, "titel": "Rit aanvragen", "beschrijving": "De bediende DB vraagt bij Infrabel Blok 7 toelating voor een rit van bundel Ramskapelle naar SA C-RO (spoor 872)."},
+                {"stap": 2, "titel": "Stilstand voor STOP", "beschrijving": "De beweging rijdt via L202B en stopt vóór het bord 'STOP' opwaarts van overweg 17."},
+                {"stap": 3, "titel": "Siemensslot & Stuitklamp", "beschrijving": "Bediende DB begeeft zich naar de slotkast (50m verder), vraagt slot 321FR via de telefoondoorgave aan Blok 7, neemt sleutel 321 uit het Siemensslot en legt stuitklamp 321 open."},
+                {"stap": 4, "titel": "Overweg 17 bedienen", "beschrijving": "Bediende activeert manueel overweg 17 via de sleutelkast."},
+                {"stap": 5, "titel": "Poort openen", "beschrijving": "Bediende neemt telefonisch contact op met CRO Security (+32 50 55 78 35) om de spoorpoort te openen."},
+                {"stap": 6, "titel": "Binnenrijden & Beveiligen", "beschrijving": "Beweging rijdt de terminal binnen. Na binnenkomst stuitklamp 321 terug dichtleggen en vergrendelen. Sleutel 321 terug in het Siemensslot steken en naar rechts draaien om te vergrendelen. Overweg manueel deactiveren. Poort sluit met geluidssignaal."}
+            ],
+            "procedure_2_rangering_spoor_872": [
+                {"stap": 1, "titel": "Toelating & Poort", "beschrijving": "Voor rangeringen van SA C-RO tot op spoor 872 laat de bediende de poort openen door CRO Security."},
+                {"stap": 2, "titel": "Slot aanvragen Blok 7", "beschrijving": "Meld je via de slottelefoon aan bij Blok 7 en vraag slot 321FR om rangeringen uit te voeren tussen de terminal en spoor 872. OPGELET: Tijdens rangeringen zijn ritten naar Ramskapelle verboden!"},
+                {"stap": 3, "titel": "OW 17 & Stuitklamp", "beschrijving": "Activeer OW 17 en leg stuitklamp 321 open met sleutel 321."},
+                {"stap": 4, "titel": "Rangering uitvoeren", "beschrijving": "Voer de rangering uit. Beëindig de rangering ALTIJD op de spooraansluiting C-RO, nooit op spoor 872."},
+                {"stap": 5, "titel": "Vergrendeling herstellen", "beschrijving": "Sluit de stuitklamp, vergrendel sleutel 321 in het Siemensslot (naar rechts draaien) en geef slot 321FR terug aan Blok 7."}
+            ],
+            "procedure_3_verlaten": [
+                {"stap": 1, "titel": "Poort laten openen", "beschrijving": "Bediende DB laat de spoorpoort openen door de security van CRO."},
+                {"stap": 2, "titel": "Stuitklamp openleggen", "beschrijving": "Vraag slot 321FR bij Blok 7, neem sleutel 321 en leg de stuitklamp open. Activeer OW 17."},
+                {"stap": 3, "titel": "Buitenrijden & Hervergrendelen", "beschrijving": "De beweging rijdt de aansluiting buiten. Sluit stuitklamp 321, steek sleutel 321 terug in Siemensslot en draai naar rechts. Deactiveer OW 17."},
+                {"stap": 4, "titel": "Aanmelden aan sein ND-R.7", "beschrijving": "Bediende meldt de trein aan bij Blok 7 aan groot stopsein ND-R.7 voor de terugrit naar bundel Ramskapelle."}
+            ]
+        }
+    },
+    "wal_can": {
+        "id": "wal_can",
+        "moederbundel_id": "ramskapelle",
+        "naam": "Wallenius Canadakaai (CAST)",
+        "klant": "Wallenius Wilhelmsen Solutions / CAST",
+        "documentcode": "DB Cargo/België/Cast (Canadakaai/Wallenius)",
+        "huidige_versie": "2.2",
+        "versie_datum": "05-03-2025",
+        "vorige_versies": [
+            {"versie": "1.0", "datum": "28-10-2021", "wijziging": "Eerste publicatie van het document."},
+            {"versie": "1.1", "datum": "29-10-2021", "wijziging": "Redactionele aanpassingen."},
+            {"versie": "2.0", "datum": "01-10-2022", "wijziging": "Plaatsen elektrische stuitklamp bundel Cast."},
+            {"versie": "2.1", "datum": "06-09-2023", "wijziging": "Aanpassen spoorbezetting en contactgegevens."},
+            {"versie": "2.2", "datum": "05-03-2025", "wijziging": "Update veiligheidsmaatregelen en poortprocedure Canadakaai."}
+        ],
+        "auteurs": "Bart VERCAEMPST Teamleader DBC.BE",
+        "bron_referentie": "PP-321-Brugge (Zeebrugge Zuidelijk Insteekdok) & SSP Zone Brugge",
+        "adres": "Canadakaai, Zeebrugge (Kaai 100-reeks)",
+        "bereikbaarheid": {
+            "trein": "Bereikbaar via L202B, Bundel Ramskapelle, spoor 843",
+            "auto": "Canadakaai, Zeebrugge"
+        },
+        "contacten_klant": [
+            {"dienst": "Wallenius Dispatch / Terminal", "rol": "Kaaiplanning", "telefoon": "+32 50 54 22 11"},
+            {"dienst": "Wallenius Security", "rol": "Poort & Bewaking", "telefoon": "+32 50 54 22 22"}
+        ],
+        "infrastructuur": {
+            "toegangsspoor": "Spoor 843 (Bundel Cast)",
+            "terminal_sporen": "Sporen 1 t.e.m. 4",
+            "beveiliging_infrabel": "Stuitklamp spoor 843",
+            "laadkade": "Automotive terminal Wallenius",
+            "richting_lading": "Auto's conform opgave van dispatcher."
+        },
+        "specifieke_risicos": [
+            "Aanrijden poort Canadakaai: Poort moet visueel gecontroleerd worden op volledige opening.",
+            "Gevaar ontsporing einde bediening op kop van de bundel.",
+            "Autoverkeer tussen sporen 2 & 3: Veelvuldige verplaatsing van auto's over de sporen door kade-arbeiders."
+        ],
+        "bedieningstijden": "24/7 op aanvraag van klant.",
+        "procedures": {
+            "procedure_1_toegang": [
+                {"stap": 1, "titel": "Rit aanvragen", "beschrijving": "Rit aanvragen bij Blok 7 van Ramskapelle naar spoor 843."},
+                {"stap": 2, "titel": "Stuitklamp & Poort", "beschrijving": "Stuitklamp ontgrendelen en poort openen in samenspraak met Wallenius security."},
+                {"stap": 3, "titel": "Plaatsen wagens", "beschrijving": "Wagens plaatsen op aangewezen spoor (1 t.e.m. 4), ontkoppelen en immobiliseren."}
+            ]
+        }
+    },
+    "dartline": {
+        "id": "dartline",
+        "moederbundel_id": "voorhaven_west",
+        "naam": "Herstelspoor Dartline",
+        "klant": "CLDN / Dartline Herstelsporen",
+        "documentcode": "DB Cargo/België/Bedieningsinstructie Herstelsporen Dartline v1.1",
+        "huidige_versie": "1.1",
+        "versie_datum": "14-04-2026",
+        "vorige_versies": [
+            {"versie": "1.0", "datum": "20-01-2020", "wijziging": "Aanmaak bedieningsinstructie."},
+            {"versie": "1.1", "datum": "14-04-2026", "wijziging": "Nieuwe opmaak + volledige herinventarisering van de risico's."}
+        ],
+        "auteurs": "Stephane VERSCHUEREN; Bart VERCAEMPST; Maikel VANZIELEGHEM",
+        "bron_referentie": "Plaatselijk Protocol 311 - Deel 1 - Zeebrugge (NID)",
+        "adres": "Kielbankstraat / Kustlaan, Zeebrugge",
+        "bereikbaarheid": {
+            "trein": "Bereikbaar via L202, Bundel Voorhaven-West",
+            "auto": "Kielbankstraat, Zeebrugge"
+        },
+        "contacten_klant": [
+            {"dienst": "CLDN Werkplaats / Dartline", "rol": "Herstelspoor Verantwoordelijke", "telefoon": "+32 50 55 92 11"}
+        ],
+        "infrastructuur": {
+            "toegangsspoor": "Spoor Voorhaven-West",
+            "terminal_sporen": "Herstelsporen 1 & 2",
+            "beveiliging_infrabel": "Handwissels en stopblokken",
+            "laadkade": "Wagonherstelplaats met mobiele hefvijzels",
+            "richting_lading": "NVT (Wagonherstellingen)"
+        },
+        "specifieke_risicos": [
+            "Einde van het spoor: Let op stootblokken.",
+            "Overweg 3de categorie: Verplicht beveiligen.",
+            "Mobiele hefvijzels: Vergewis je van vrije doorgang en profielruimte.",
+            "Mogelijke aanwezigheid van transmigranten rond de werkplaats."
+        ],
+        "bedieningstijden": "Dagdienst / op afroep.",
+        "procedures": {
+            "procedure_1_toegang": [
+                {"stap": 1, "titel": "Toegang & Vrijgave", "beschrijving": "Afstemmen met werkleider Dartline en spoorprofiel controleren."},
+                {"stap": 2, "titel": "Plaatsen defecte wagens", "beschrijving": "Wagens voorzichtig opduwen, klemmen plaatsen en ontkoppelen."}
+            ]
+        }
+    },
+    "nid_ico": {
+        "id": "nid_ico",
+        "moederbundel_id": "nid",
+        "naam": "NID ICO Northern Inlet Terminal",
+        "klant": "International Car Operators (ICO)",
+        "documentcode": "DB Cargo/België/Bedieningsinstructie Zeebrugge NID ICO Northern Inlet Terminal V2.0",
+        "huidige_versie": "2.0",
+        "versie_datum": "19-02-2026",
+        "vorige_versies": [
+            {"versie": "1.0", "datum": "12-04-2021", "wijziging": "Aanmaak bedieningsinstructie."},
+            {"versie": "2.0", "datum": "19-02-2026", "wijziging": "Aanpassing 5.4.1 t.e.m. 5.4.3 op basis van wijzigingen PPGI v29.0."}
+        ],
+        "auteurs": "Bart VERCAEMPST Teamleader DBC.BE",
+        "bron_referentie": "PP-311-Brugge (Actiezone Zeebrugge NID)",
+        "adres": "Westeroever / NID, Zeebrugge",
+        "bereikbaarheid": {
+            "trein": "Bereikbaar vanaf Bundel Zwankendamme via spoor 382 naar Bundel NID",
+            "auto": "Kaai 100-reeks, Zeebrugge"
+        },
+        "contacten_klant": [
+            {"dienst": "ICO Dispatch NID", "rol": "Kaaiplanning", "telefoon": "+32 50 54 39 11"},
+            {"dienst": "ICO Security Poort NID", "rol": "Toegangscontrole", "telefoon": "+32 50 54 39 20"}
+        ],
+        "infrastructuur": {
+            "toegangsspoor": "Spoor 382 vanaf Zwankendamme",
+            "terminal_sporen": "Sporen 4 & 5 (lengte 507m en 540m) of 11 & 12",
+            "beveiliging_infrabel": "Ontspoortong en beweegbare brug",
+            "laadkade": "Automotive Terminal Westeroever",
+            "richting_lading": "Autolichten dienen kant KUST te staan bij vertrek vanuit Zwankendamme!"
+        },
+        "specifieke_risicos": [
+            "Druk bereden overweg NID.",
+            "Ontspoortong en beweegbare brug.",
+            "Vertrek ALTIJD vanuit bundel Zwankendamme, NOOIT vanuit de vorming!"
+        ],
+        "bedieningstijden": "24/7 volgens dispatcher planning.",
+        "procedures": {
+            "procedure_1_toegang": [
+                {"stap": 1, "titel": "Vertrek Zwankendamme", "beschrijving": "Elke beweging voor NID vertrekt vanuit bundel Zwankendamme. Autolichten controleren: moeten kant KUST staan."},
+                {"stap": 2, "titel": "Spoorverificatie", "beschrijving": "Vergewis je op welke sporen de trein geplaatst moet worden (sporen 4&5 of 11&12)."},
+                {"stap": 3, "titel": "Beweegbare brug & Ontspoortong", "beschrijving": "Controleer de seinstand en brugvergrendeling alvorens op te rijden."}
+            ]
+        }
+    }
+}
+
+
+def get_all_terminal_summaries():
+    """Load all 39 locations from locs_gps.json and enrich them with hierarchical mappings."""
+    workspace_dir = os.path.dirname(os.path.abspath(__file__))
+    json_path = os.path.join(workspace_dir, "locs_gps.json")
+    if not os.path.exists(json_path):
+        json_path = os.path.expandvars(r"%TEMP%\locs_gps.json")
+    
+    with open(json_path, encoding="utf-8") as f:
+        locs_data = json.load(f)
+
+    terminals = []
+    for loc in locs_data["locations"]:
+        lid = loc["id"]
+        # Determine mother bundle key
+        mb_name = (loc.get("moederbundel") or "").lower()
+        if "ramskapelle" in mb_name:
+            mb_key = "ramskapelle"
+        elif "pelikaan" in mb_name:
+            mb_key = "pelikaan"
+        elif "zwankendamme" in mb_name:
+            mb_key = "zwankendamme"
+        elif "voorhaven" in mb_name:
+            mb_key = "voorhaven_west"
+        elif "nid" in mb_name:
+            mb_key = "nid"
+        elif "plassendale" in mb_name or "oostende" in mb_name:
+            mb_key = "plassendale"
+        elif "brugge" in mb_name or loc.get("zone") == "FR/B":
+            mb_key = "brugge_vorming"
+        elif "kortrijk" in mb_name or loc.get("zone") == "FR/D":
+            mb_key = "kortrijk_vorming"
+        else:
+            mb_key = "zwankendamme"
+
+        terminals.append({
+            "id": lid,
+            "naam": loc["name"],
+            "cluster": loc.get("cluster"),
+            "zone": loc.get("zone"),
+            "moederbundel_id": mb_key,
+            "moederbundel_naam": loc.get("moederbundel"),
+            "sporen": loc.get("sporen"),
+            "adres": loc.get("adres"),
+            "toegang_weg": loc.get("toegang_weg"),
+            "beveiliging": loc.get("beveiliging"),
+            "ppgi_ref": loc.get("ppgi_ref"),
+            "has_bi": loc.get("has_bi"),
+            "bi_version": loc.get("bi_version"),
+            "is_detailed": lid in LEVEL_5_DETAILED_TERMINALS
+        })
+    return terminals
+
+
+def resolve_bi(terminal_id):
+    """
+    Assemble complete uniform BI by cascading levels:
+    Level 1 (Operator) -> Level 2 (Regio) -> Level 3 (Zone) -> Level 4 (Moederbundel) -> Level 5 (Terminal)
+    """
+    operator = LEVEL_1_OPERATOR
+    regio = LEVEL_2_REGIO["west_vlaanderen"]
+
+    # Check if we have an explicit detailed terminal
+    if terminal_id in LEVEL_5_DETAILED_TERMINALS:
+        terminal = LEVEL_5_DETAILED_TERMINALS[terminal_id]
+        moederbundel = LEVEL_4_MOEDERBUNDELS.get(terminal["moederbundel_id"], LEVEL_4_MOEDERBUNDELS["ramskapelle"])
+        zone = LEVEL_3_ZONES.get(moederbundel.get("zone_id", "zeebrugge"), LEVEL_3_ZONES["zeebrugge"])
+    else:
+        # Resolve dynamically from locs_gps.json
+        summaries = {t["id"]: t for t in get_all_terminal_summaries()}
+        loc = summaries.get(terminal_id)
+        if not loc:
+            return None
+        
+        moederbundel = LEVEL_4_MOEDERBUNDELS.get(loc["moederbundel_id"], LEVEL_4_MOEDERBUNDELS["zwankendamme"])
+        zone = LEVEL_3_ZONES.get(moederbundel.get("zone_id", "zeebrugge"), LEVEL_3_ZONES["zeebrugge"])
+        
+        terminal = {
+            "id": loc["id"],
+            "moederbundel_id": loc["moederbundel_id"],
+            "naam": loc["naam"],
+            "klant": loc["naam"],
+            "documentcode": f"DB Cargo/België/Bedieningsinstructie {loc['naam']}",
+            "huidige_versie": loc.get("bi_version") or "1.0",
+            "versie_datum": "23-10-2026",
+            "vorige_versies": [
+                {"versie": loc.get("bi_version") or "1.0", "datum": "23-10-2026", "wijziging": "Generatie conform uniforme hiërarchische structuur."}
+            ],
+            "auteurs": "Bart VERCAEMPST Teamleader DBC.BE",
+            "bron_referentie": f"{loc.get('ppgi_ref') or moederbundel.get('ppgi_referentie')} & {moederbundel.get('ssp_referentie')}",
+            "adres": loc.get("adres") or f"{loc['naam']}, West-Vlaanderen",
+            "bereikbaarheid": {
+                "trein": f"Bereikbaar via {moederbundel.get('naam')} ({loc.get('sporen')})",
+                "auto": loc.get("toegang_weg") or loc.get("adres")
+            },
+            "contacten_klant": [
+                {"dienst": f"Terminal Planning {loc['naam']}", "rol": "Kaaiverantwoordelijke", "telefoon": "+32 50 xx xx xx"}
+            ],
+            "infrastructuur": {
+                "toegangsspoor": f"Toegangsspoor vanaf {moederbundel.get('naam')}",
+                "terminal_sporen": loc.get("sporen") or "Bedieningssporen",
+                "beveiliging_infrabel": loc.get("beveiliging") or "Stuitklamp / Handwissel",
+                "laadkade": "Bedienings- en laadsporen",
+                "richting_lading": "Conform planning van dispatcher."
+            },
+            "specifieke_risicos": [
+                f"Beveiliging: {loc.get('beveiliging') or 'Stuitklamp / wissel controleren vóór berijden.'}",
+                "Profielruimte: Let op obstakels en laadkaden langs de sporen."
+            ],
+            "bedieningstijden": "Op aanvraag van de klant.",
+            "procedures": {
+                "procedure_1_toegang": [
+                    {"stap": 1, "titel": "Rit aanvragen", "beschrijving": f"Rit aanvragen bij {zone.get('centraal_seinhuis')} naar de aansluiting."},
+                    {"stap": 2, "titel": "Beveiliging ontgrendelen", "beschrijving": f"Beveiliging ({loc.get('beveiliging')}) ontgrendelen en poort openen."},
+                    {"stap": 3, "titel": "Plaatsen wagens", "beschrijving": "Wagens plaatsen op aangewezen spoor, afkoppelen en immobiliseren."}
+                ]
+            }
+        }
+
+    # Aggregate contacts hierarchically
+    all_realtime_contacts = []
+    # Level 1: Operator
+    for c in operator.get("contacten", []):
+        all_realtime_contacts.append({**c, "niveau": "Niveau 1: Operator (DB Cargo)"})
+    # Level 3: Seinhuis
+    for c in zone.get("seinhuis_contacten", []):
+        all_realtime_contacts.append({**c, "niveau": f"Niveau 3: Seinhuis ({zone.get('centraal_seinhuis')})"})
+    # Level 3: Havenautoriteit
+    if zone.get("havenautoriteit"):
+        ha = zone["havenautoriteit"]
+        all_realtime_contacts.append({"dienst": ha["naam"], "rol": "Havenautoriteit", "telefoon": f"{ha['telefoon']} ({ha['vhf_kanalen']})", "niveau": "Niveau 3: Zone Haven"})
+    # Level 5: Terminal
+    for c in terminal.get("contacten_klant", []):
+        all_realtime_contacts.append({**c, "niveau": f"Niveau 5: Terminal ({terminal['naam']})"})
+
+    # Aggregate emergency contacts
+    all_noodcontacten = []
+    for c in operator.get("noodcontacten", []):
+        all_noodcontacten.append({**c, "niveau": "Niveau 1: Landelijk / Operator"})
+    if regio.get("permanentie_ito"):
+        all_noodcontacten.append({"dienst": "Permanentie I-TO Infrabel Area NW", "rol": "Infrabel Noodopvolging", "telefoon": regio["permanentie_ito"], "niveau": "Niveau 2: Regio West-Vlaanderen"})
+
+    # Aggregate risks
+    all_risicos = []
+    for r in operator.get("algemene_veiligheidsregels", []):
+        all_risicos.append({"type": "Bedrijfsvoorschrift", "omschrijving": r, "bron": "Niveau 1: DB Cargo Belgium"})
+    for r in zone.get("zone_risicos", []):
+        all_risicos.append({"type": "Zonerisico", "omschrijving": r, "bron": f"Niveau 3: Zone {zone.get('naam')}"})
+    for r in terminal.get("specifieke_risicos", []):
+        all_risicos.append({"type": "Terminal-specifiek risico", "omschrijving": r, "bron": f"Niveau 5: {terminal.get('naam')}"})
+
+    assembled_bi = {
+        "terminal_id": terminal["id"],
+        "metadata": {
+            "documentcode": terminal["documentcode"],
+            "titel": f"Bedieningsinstructie {terminal['naam']}",
+            "terminal_naam": terminal["naam"],
+            "moederbundel_naam": moederbundel.get("naam", ""),
+            "zone_naam": zone.get("naam", ""),
+            "regio_naam": regio.get("naam", ""),
+            "huidige_versie": terminal["huidige_versie"],
+            "versie_datum": terminal["versie_datum"],
+            "auteurs": terminal["auteurs"],
+            "autorisatie_functionaris": operator["autorisatie_functionaris"],
+            "autorisatie_ingangsdatum": operator["autorisatie_ingangsdatum"],
+            "goedkeuring_systeem": operator["goedkeuring_systeem"],
+            "bron_referentie": terminal["bron_referentie"],
+            "gebruikersgroep": operator["gebruikersgroep"]
+        },
+        "hierarchie_levels": {
+            "level_1_operator": {"naam": operator["naam"], "code": operator["id"]},
+            "level_2_regio": {"naam": regio["naam"], "code": regio["id"]},
+            "level_3_zone": {"naam": zone["naam"], "code": zone["id"], "seinhuis": zone.get("centraal_seinhuis")},
+            "level_4_moederbundel": {"naam": moederbundel["naam"], "code": moederbundel["id"], "ppgi": moederbundel.get("ppgi_referentie")},
+            "level_5_terminal": {"naam": terminal["naam"], "code": terminal["id"]}
+        },
+        "versiebeheer": terminal.get("vorige_versies", []),
+        "contactpersonen": {
+            "realtime": all_realtime_contacts,
+            "calamiteiten": all_noodcontacten
+        },
+        "installaties": {
+            "situering": {
+                "adres": terminal["adres"],
+                "bereikbaarheid": terminal["bereikbaarheid"]
+            },
+            "moederbundel": {
+                "naam": moederbundel.get("naam"),
+                "ppgi_referentie": moederbundel.get("ppgi_referentie"),
+                "ssp_referentie": moederbundel.get("ssp_referentie"),
+                "beseind": moederbundel.get("beseind"),
+                "seinen_info": moederbundel.get("seinen_info"),
+                "bovenleiding_info": moederbundel.get("bovenleiding_info"),
+                "tankinstallatie": moederbundel.get("tankinstallatie"),
+                "parkeergelegenheid": moederbundel.get("parkeergelegenheid"),
+                "sporen": moederbundel.get("bundel_sporen", []),
+                "overwegen": moederbundel.get("overwegen_tracé", [])
+            },
+            "terminal": terminal.get("infrastructuur", {})
+        },
+        "veiligheid_en_risicos": all_risicos,
+        "plaatselijke_regelgeving": {
+            "snelheden": {
+                "bundel": zone.get("zone_snelheden", {}).get("havenlijnen", "Max 20 km/u"),
+                "aansluiting": zone.get("zone_snelheden", {}).get("aansluitingen", "Max 10 km/u"),
+                "laadkade": zone.get("zone_snelheden", {}).get("kaden", "Stapvoets")
+            },
+            "bedieningstijden": terminal.get("bedieningstijden", "24/7 op aanvraag"),
+            "immobilisatie": "Minimum 6 ‰ hellingswaarde hanteren bij aangekondigd stormweer. Voertuigen onderling gekoppeld.",
+            "remproeven": "Volledige remproef na samenstelling, vereenvoudigde remproef na afhaling/aangroei."
+        },
+        "procedures": terminal.get("procedures", {})
+    }
+    return assembled_bi
+
+
+# ============================================================
+# PPGI vs BI REVIEWER & AUDIT PROPOSAL ENGINE
+# ============================================================
+PPGI_REVIEW_PROPOSALS = [
+    {
+        "id": "PROP-2026-001",
+        "titel": "Formalisering van 3 afzonderlijke procedures C-RO (spoor 872)",
+        "urgentie": "HOOG",
+        "urgentie_badge": "danger",
+        "bron_document": "PP-321-Brugge (Zeebrugge Zuidelijk Insteekdok, Versie 37.0 - 17/10/2025)",
+        "bron_sectie": "Rubriek 1.3.3.2: Bediening SA C-RO, blz. 30-32 (wijziging v36.0 & v37.0)",
+        "niveau": "Niveau 5: Terminal (CRO Brittaniadok)",
+        "huidige_waarde_bi": "De huidige BI v2.2 combineert de toegang en uithaling in een algemeen stappenplan, maar benoemt de specifieke tussentijdse rangeringen op spoor 872 niet als formele procedure.",
+        "voorgestelde_waarde_ppgi": "Infrabel schrijft in v37.0 strikt 3 afzonderlijke procedures voor: 1. Toegang tot SA C-RO, 2. Rangering van/naar C-RO tot op spoor 872, 3. Verlaten van SA C-RO.",
+        "motivering": "Na een veiligheidsincident op spoor 872 heeft Infrabel in v36.0 en v37.0 de rangeringen formeel gereglementeerd. De BI moet hier 100% mee stroken om sancties of onveilige situaties te vermijden.",
+        "status": "Aanbevolen voor implementatie in v2.3",
+        "toegepast": False
+    },
+    {
+        "id": "PROP-2026-002",
+        "titel": "Rijverbod naar Ramskapelle tijdens rangeringen spoor 872",
+        "urgentie": "HOOG",
+        "urgentie_badge": "danger",
+        "bron_document": "PP-321-Brugge Versie 37.0 (17/10/2025)",
+        "bron_sectie": "Rubriek 1.3.3.2, blz. 32",
+        "niveau": "Niveau 5: Terminal (CRO Brittaniadok)",
+        "huidige_waarde_bi": "Geen expliciet verbod op gelijktijdige ritten van/naar Ramskapelle vermeld in Hoofdstuk 5 of 7.",
+        "voorgestelde_waarde_ppgi": "Voeg verplichte waarschuwing toe: 'Opgelet! Tijdens het uitvoeren van rangeringen van/naar C-RO tot op spoor 872 zijn ritten van en naar Bundel Ramskapelle niet toegelaten.' En: 'De rangering moet altijd beëindigd worden op de spooraansluiting, NOOIT op het spoor 872.'",
+        "motivering": "Essentiële Infrabel-veiligheidsclausule om flankaanrijdingen en onbedoelde rijweginschakelingen te voorkomen.",
+        "status": "Aanbevolen voor implementatie in v2.3",
+        "toegepast": False
+    },
+    {
+        "id": "PROP-2026-003",
+        "titel": "Verplichte Siemensslot hervergrendeling (naar rechts draaien)",
+        "urgentie": "MEDIUM",
+        "urgentie_badge": "warning",
+        "bron_document": "PP-321-Brugge Versie 37.0",
+        "bron_sectie": "Rubriek 1.3.3.2, Stappenplan blz. 31 & 32",
+        "niveau": "Niveau 4: Moederbundel Ramskapelle & Niveau 5",
+        "huidige_waarde_bi": "BI vermeldt 'sleutel 321 terug vergrendelen in slotkast'.",
+        "voorgestelde_waarde_ppgi": "Specificeer exact: 'Sleutel 321 terugplaatsen in het Siemensslot en naar RECHTS draaien. Dit vergrendelt de sleutel, waarna Blok 7 het slot 321FR terugkrijgt.'",
+        "motivering": "Voorkomt dat machinisten of rangeerders de sleutel insteken zonder naar rechts te draaien, waardoor Blok 7 de seinvergrendeling niet kan vrijgeven.",
+        "status": "Aanbevolen voor implementatie in v2.3",
+        "toegepast": False
+    },
+    {
+        "id": "PROP-2026-004",
+        "titel": "Toevoeging officiële Mailbox Blok 7 & Slottelefoons POC",
+        "urgentie": "MEDIUM",
+        "urgentie_badge": "warning",
+        "bron_document": "PP-321-Brugge Versie 34.0 & 35.0",
+        "bron_sectie": "Rubriek 1.4.1 & 1.9, blz. 4 & 48",
+        "niveau": "Niveau 3: Zone Zeebrugge (Gedeeld voor ALLE BI's)",
+        "huidige_waarde_bi": "Alleen vaste telefoonnummers van Blok 7 opgenomen; geen e-mailadres voor formele wagenoverdrachten.",
+        "voorgestelde_waarde_ppgi": "Toevoegen van mailbox 'rdc.nw.blok7@infrabel.be' en specifieke POC voor slotcommunicatie aan Niveau 3 brongegevens.",
+        "motivering": "Infrabel eist dat schriftelijke meldingen en documenten over wagenoverdracht (template bijlage 1.11) digitaal worden verzonden.",
+        "status": "Aanbevolen voor implementatie op Zoneniveau",
+        "toegepast": False
+    },
+    {
+        "id": "PROP-2026-005",
+        "titel": "Opname Ontspoortong 10R bij sein ND-R.7",
+        "urgentie": "INFO",
+        "urgentie_badge": "info",
+        "bron_document": "PP-321-Brugge Versie 37.0",
+        "bron_sectie": "Rubriek 1.3.3.2, blz. 30",
+        "niveau": "Niveau 4: Moederbundel Ramskapelle",
+        "huidige_waarde_bi": "Alleen stuitklamp 321 vermeld als beveiligingstoestel.",
+        "voorgestelde_waarde_ppgi": "Infrastructuurfiche aanvullen met: 'Tussen groot stopsein ND-R.7 en OW15, L202B, ligt ontspoortong 10R.'",
+        "motivering": "Verhoogt het situatiebewustzijn van treinbestuurders bij het naderen van sein ND-R.7 bij de terugrit.",
+        "status": "Aanbevolen voor implementatie op Moederbundelniveau",
+        "toegepast": False
+    }
+]

@@ -2,8 +2,25 @@ import json
 import os
 import sys
 
+workspace_dir = os.path.dirname(os.path.abspath(__file__))
+if workspace_dir not in sys.path:
+    sys.path.insert(0, workspace_dir)
+import bi_hierarchical_data as bhd
+import bi_views_html as bvh
+
 def build_map_html(locations, bundels):
-    return f'''<!DOCTYPE html>
+    resolved_bis = { loc['id']: bhd.resolve_bi(loc['id']) for loc in locations }
+    hierarchical_levels = {
+        'operator': bhd.LEVEL_1_OPERATOR,
+        'regio': bhd.LEVEL_2_REGIO,
+        'zones': bhd.LEVEL_3_ZONES,
+        'moederbundels': bhd.LEVEL_4_MOEDERBUNDELS,
+        'terminals': bhd.LEVEL_5_DETAILED_TERMINALS
+    }
+    ppgi_proposals = bhd.PPGI_REVIEW_PROPOSALS
+    detailed_terminals = bhd.LEVEL_5_DETAILED_TERMINALS
+
+    html = f'''<!DOCTYPE html>
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
@@ -2020,6 +2037,7 @@ def build_map_html(locations, bundels):
         height: 34px;
       }}
     }}
+    <!-- __BI_STYLES__ -->
   </style>
 </head>
 <body class="show-labels">
@@ -2031,6 +2049,20 @@ def build_map_html(locations, bundels):
       <div class="brand-titles">
         <h1>BI Generator</h1>
       </div>
+    </div>
+
+    <!-- Main Top Navigation Tabs -->
+    <div class="header-main-tabs">
+      <button class="nav-tab-btn active" id="tabBtnMap" onclick="switchMainTab('map')" title="Interactieve satellietkaart met private aansluitingen">
+        <span>🗺️</span><span class="tab-label"> Kaart & Bedieningen</span>
+      </button>
+      <button class="nav-tab-btn" id="tabBtnBi" onclick="switchMainTab('bi')" title="Genereer een uniforme Bedieningsinstructie (BI) en exporteer als PDF">
+        <span>📄</span><span class="tab-label"> BI Generator & PDF</span>
+      </button>
+      <button class="nav-tab-btn" id="tabBtnPpgi" onclick="switchMainTab('ppgi')" title="Vergelijk recentste BI met officiële Infrabel PPGI documenten">
+        <span>🔍</span><span class="tab-label"> PPGI Vergelijker</span>
+        <span class="tab-badge" id="ppgiBadgeCount">5</span>
+      </button>
     </div>
 
     <!-- Quick Hub Jump Buttons -->
@@ -2095,6 +2127,25 @@ def build_map_html(locations, bundels):
     </div>
 
     <div class="drawer-content">
+      <!-- Sectie 0: Hoofdweergave Switcher -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">HOOFDWEERGAVE</div>
+        <div class="drawer-view-selector">
+          <button class="drawer-tab-btn active" id="mobTabMap" onclick="switchMainTab('map'); closeMobileMenu();">
+            <span>🗺️ Kaart & Bedieningen</span>
+            <span class="drawer-chevron">›</span>
+          </button>
+          <button class="drawer-tab-btn" id="mobTabBi" onclick="switchMainTab('bi'); closeMobileMenu();">
+            <span>📄 BI Generator & PDF Export</span>
+            <span class="drawer-chevron">›</span>
+          </button>
+          <button class="drawer-tab-btn" id="mobTabPpgi" onclick="switchMainTab('ppgi'); closeMobileMenu();">
+            <span>🔍 PPGI Vergelijker (5 Voorstellen)</span>
+            <span class="drawer-chevron">›</span>
+          </button>
+        </div>
+      </div>
+
       <!-- Sectie 1: Kaartlagen & Weergave -->
       <div class="drawer-section">
         <div class="drawer-section-title">KAARTWEERGAVE & INFRASTRUCTUUR</div>
@@ -2217,6 +2268,9 @@ def build_map_html(locations, bundels):
 
   <!-- Main Container -->
   <div class="main-container">
+    
+    <!-- View 1: Leaflet Map & Sidebar Container -->
+    <div id="mapView">
     
     <!-- Floating Drag Action Banner -->
     <div class="action-banner" id="actionBanner">
@@ -2385,6 +2439,9 @@ def build_map_html(locations, bundels):
       </div>
 
       <div class="detail-actions">
+        <button id="btnOpenBiFromDetail" class="btn-action-primary" onclick="openBiForActiveLocation()" style="margin-bottom:8px; width:100%; justify-content:center; background:#2563eb; color:white; border:1px solid #3b82f6; padding:10px 14px; border-radius:6px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:8px;">
+          <span>📄</span> Bekijk Volledige Bedieningsinstructie (BI)
+        </button>
         <a id="detailNavBtn" href="#" target="_blank" class="btn-action-secondary">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
           Open in Google Maps Satelliet
@@ -2392,7 +2449,11 @@ def build_map_html(locations, bundels):
       </div>
     </div>
 
-  </div>
+    </div><!-- End #mapView -->
+
+    <!-- __BI_HTML_MARKUP__ -->
+
+  </div><!-- End .main-container -->
 
   <!-- Modal: Export & Coördinaten Beheer -->
   <div class="modal-backdrop" id="exportModal">
@@ -2480,14 +2541,20 @@ def build_map_html(locations, bundels):
     </div>
   </div>
 
-  <!-- Floating Mobile Navigation Pill (Kaart vs Lijst) -->
+  <!-- Floating Mobile Navigation Pill (Kaart, Lijst, BI, PPGI) -->
   <div class="mobile-nav-pill" id="mobileNavPill">
-    <button class="mobile-nav-btn active" id="btnMobMap" onclick="setMobileView('map')">
+    <button class="mobile-nav-btn active" id="btnMobMap" onclick="switchMainTab('map'); setMobileView('map');">
       <span>🗺️ Kaart</span>
     </button>
-    <button class="mobile-nav-btn" id="btnMobList" onclick="setMobileView('list')">
+    <button class="mobile-nav-btn" id="btnMobList" onclick="switchMainTab('map'); setMobileView('list');">
       <span>📋 Lijst</span>
       <span class="mob-pill-badge" id="mobCount">39</span>
+    </button>
+    <button class="mobile-nav-btn" id="btnMobBi" onclick="switchMainTab('bi');">
+      <span>📄 BI Doc</span>
+    </button>
+    <button class="mobile-nav-btn" id="btnMobPpgi" onclick="switchMainTab('ppgi');">
+      <span>🔍 PPGI</span>
     </button>
   </div>
 
@@ -2520,6 +2587,7 @@ def build_map_html(locations, bundels):
     // Embedded Base Data
     const rawLocations = {json.dumps(locations, ensure_ascii=False)};
     const rawBundels = {json.dumps(bundels, ensure_ascii=False)};
+
 
     // Local Storage Keys
     const STORAGE_KEY = 'db_cargo_saved_coords_v1';
@@ -4078,10 +4146,39 @@ def build_map_html(locations, bundels):
     renderList(allItems);
     updateMobileCount();
     checkServerStatus();
+
+    // __BI_DATA_AND_JAVASCRIPT__
+
+    // Initialize BI tabs & review proposals
+    populateBiSelectDropdown();
+    renderPpgiProposals();
   </script>
 </body>
 </html>
 '''
+
+    # Post-process HTML replacements
+    html = html.replace('<!-- __BI_STYLES__ -->', bvh.get_bi_styles())
+    html = html.replace('<!-- __BI_HTML_MARKUP__ -->', bvh.get_bi_html_markup(locations))
+
+    js_data = (
+        f"const rawResolvedBIs = {json.dumps(resolved_bis, ensure_ascii=False)};\n"
+        f"const rawHierarchicalLevels = {json.dumps(hierarchical_levels, ensure_ascii=False)};\n"
+        f"const rawPpgiProposals = {json.dumps(ppgi_proposals, ensure_ascii=False)};\n"
+        f"const rawDetailedTerminals = {json.dumps(detailed_terminals, ensure_ascii=False)};\n"
+    )
+    js_helper = """
+    function openBiForActiveLocation() {
+      if (activeMarkerId) {
+        currentSelectedBiTerminalId = activeMarkerId;
+        switchMainTab('bi');
+      }
+    }
+    """
+    bi_js_payload = js_data + "\n" + js_helper + "\n" + bvh.get_bi_javascript()
+    html = html.replace('// __BI_DATA_AND_JAVASCRIPT__', bi_js_payload)
+
+    return html
 
 if __name__ == '__main__':
     workspace_dir = r'd:\Users\BKU\BartVercaempst\OneDrive - Deutsche Bahn\Documents\26-AI-Projecten\BI Generator'
