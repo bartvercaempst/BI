@@ -553,6 +553,79 @@ def get_bi_styles():
       padding: 0 !important;
     }
 
+    /* Spooroverzicht Badges (Word & PDF High Contrast) */
+    .spoor-badge-elec-yes {
+      background-color: #dcfce7 !important;
+      color: #14532d !important;
+      border: 1px solid #86efac !important;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 8.5pt;
+      display: inline-block;
+    }
+    .spoor-badge-elec-no {
+      background-color: #f1f5f9 !important;
+      color: #334155 !important;
+      border: 1px solid #cbd5e1 !important;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 8.5pt;
+      display: inline-block;
+    }
+    .spoor-badge-elec-part {
+      background-color: #fef3c7 !important;
+      color: #78350f !important;
+      border: 1px solid #fcd34d !important;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 8.5pt;
+      display: inline-block;
+    }
+    .spoor-badge-helling-ok {
+      background-color: #f0f9ff !important;
+      color: #0369a1 !important;
+      border: 1px solid #bae6fd !important;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 8.5pt;
+      display: inline-block;
+    }
+    .spoor-badge-helling-warn {
+      background-color: #fee2e2 !important;
+      color: #991b1b !important;
+      border: 1.5px solid #dc2626 !important;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 900;
+      font-size: 8.5pt;
+      display: inline-block;
+    }
+    .spoor-badge-deadend-yes {
+      background-color: #fef2f2 !important;
+      color: #991b1b !important;
+      border: 1px solid #fecaca !important;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 8.5pt;
+      display: inline-block;
+    }
+    .spoor-badge-deadend-no {
+      background-color: #f0fdf4 !important;
+      color: #166534 !important;
+      border: 1px solid #bbf7d0 !important;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 8.5pt;
+      display: inline-block;
+    }
+
+
     /* Stappen Tabel (Bedieningsstappen 7.4.2 & 7.4.4) */
     .bi-step-table {
       width: 100%;
@@ -1572,6 +1645,111 @@ def get_bi_javascript():
       }}
 
       // Inhoudstafel HTML
+      
+      // Spooroverzicht Moederbundel Table (4.2)
+      const mbTracks = (bi.installaties && bi.installaties.moederbundel && bi.installaties.moederbundel.spooroverzicht) || [];
+      let mbSpoorTableHtml = '';
+      if (mbTracks.length > 0) {{
+        mbSpoorTableHtml = `
+          <div style="margin: 14px 0 18px 0;">
+            <p class="bi-p" style="margin-bottom: 6px;"><strong>Tabel 4.2: Spooroverzicht Moederbundel ${{bi.installaties.moederbundel.naam}}</strong></p>
+            <table class="bi-word-table">
+              <thead>
+                <tr>
+                  <th style="width: 14%;">Spoor</th>
+                  <th style="width: 15%; text-align:center;">Bovenleiding</th>
+                  <th style="width: 13%; text-align:right;">LTL (Technisch)</th>
+                  <th style="width: 13%; text-align:right;">LOL (Nuttig)</th>
+                  <th style="width: 17%; text-align:center;">Hellingsgraad</th>
+                  <th style="width: 11%; text-align:center;">Doodspoor</th>
+                  <th>Functie & Bestemming</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${{mbTracks.map(t => `
+                  <tr>
+                    <td><strong>${{t.spoor}}</strong></td>
+                    <td style="text-align:center;">
+                      <span class="${{(t.bovenleiding || '').includes('Ja') ? 'spoor-badge-elec-yes' : ((t.bovenleiding || '').includes('Deels') ? 'spoor-badge-elec-part' : 'spoor-badge-elec-no')}}">
+                        ${{t.bovenleiding || 'Nee'}}
+                      </span>
+                    </td>
+                    <td style="text-align:right; font-family:Consolas,monospace;">${{t.ltl || '-'}}</td>
+                    <td style="text-align:right; font-family:Consolas,monospace; font-weight:bold; color:#0f172a;">${{t.lol || '-'}}</td>
+                    <td style="text-align:center;">
+                      <span class="${{((t.helling || '').includes('Sterke') || (t.helling || '').includes('schaats')) ? 'spoor-badge-helling-warn' : 'spoor-badge-helling-ok'}}">
+                        ${{t.helling || '0-1 mm/m'}}
+                      </span>
+                    </td>
+                    <td style="text-align:center;">
+                      <span class="${{t.doodspoor === 'Ja' ? 'spoor-badge-deadend-yes' : 'spoor-badge-deadend-no'}}">
+                        ${{t.doodspoor || 'Nee'}}
+                      </span>
+                    </td>
+                    <td>${{t.functie || '-'}}</td>
+                  </tr>
+                `).join('')}}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }}
+
+      // Spooroverzicht Terminal Table (4.3.1)
+      const termTracks = (infra && infra.spooroverzicht) || [];
+      let termSpoorTableHtml = '';
+      if (termTracks.length > 0) {{
+        termSpoorTableHtml = `
+          <div style="margin: 14px 0 18px 0;">
+            <p class="bi-p" style="margin-bottom: 6px;"><strong>Tabel 4.3.1: Spooroverzicht & Lengtes Aansluiting ${{bi.metadata.terminal_naam}}</strong></p>
+            <table class="bi-word-table">
+              <thead>
+                <tr>
+                  <th style="width: 15%;">Spoor</th>
+                  <th style="width: 25%;">Bestemming / Lading</th>
+                  <th style="width: 14%; text-align:center;">Bovenleiding</th>
+                  <th style="width: 15%; text-align:right;">Lengte (LOL / LTL)</th>
+                  <th style="width: 16%; text-align:center;">Hellingsgraad</th>
+                  <th style="width: 10%; text-align:center;">Doodspoor</th>
+                  <th>Beveiliging & Opmerkingen</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${{termTracks.map(t => `
+                  <tr>
+                    <td><strong>${{t.spoor}}</strong></td>
+                    <td>${{t.bestemming || '-'}}</td>
+                    <td style="text-align:center;">
+                      <span class="${{(t.bovenleiding || '').includes('Ja') ? 'spoor-badge-elec-yes' : 'spoor-badge-elec-no'}}">
+                        ${{t.bovenleiding || 'Nee'}}
+                      </span>
+                    </td>
+                    <td style="text-align:right; font-family:Consolas,monospace; font-weight:bold;">${{t.lol || t.ltl || '-'}}</td>
+                    <td style="text-align:center;">
+                      <span class="${{((t.helling || '').includes('Sterke') || (t.helling || '').includes('daling')) ? 'spoor-badge-helling-warn' : 'spoor-badge-helling-ok'}}">
+                        ${{t.helling || infra.hellingsgraad || '0-1 mm/m'}}
+                      </span>
+                    </td>
+                    <td style="text-align:center;">
+                      <span class="${{t.doodspoor === 'Ja' ? 'spoor-badge-deadend-yes' : 'spoor-badge-deadend-no'}}">
+                        ${{t.doodspoor || 'Ja'}}
+                      </span>
+                    </td>
+                    <td>${{t.opmerkingen || '-'}}</td>
+                  </tr>
+                `).join('')}}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }}
+
+      const hellingWarningHtml = (infra && infra.helling_waarschuwing) ? `
+        <div class="bi-word-callout bi-callout-warning" style="border-left: 5px solid #dc2626; background: #fef2f2; color: #991b1b; padding: 12px 16px; margin: 14px 0; border-radius: 4px; font-size: 10pt; line-height: 1.5;">
+          ${{infra.helling_waarschuwing}}
+        </div>
+      ` : '';
+
       const tocHtml = `
         <div class="bi-toc-list">
           <a class="bi-toc-item level-1" href="#sec1"><span>1  Doel en Identificatie document</span><span>4</span></a>
@@ -1591,7 +1769,7 @@ def get_bi_javascript():
           <a class="bi-toc-item level-3" href="#sec4_1_2"><span>4.1.2  Parkeergelegenheid & toegang</span><span>7</span></a>
           <a class="bi-toc-item level-2" href="#sec4_2"><span>4.2  Bundel ${{bi.installaties.moederbundel.naam}}</span><span>8</span></a>
           <a class="bi-toc-item level-2" href="#sec4_3"><span>4.3  Aansluiting ${{bi.metadata.terminal_naam}}</span><span>12</span></a>
-          <a class="bi-toc-item level-3" href="#sec4_3_1"><span>4.3.1  Sporen op de aansluiting</span><span>12</span></a>
+          <a class="bi-toc-item level-3" href="#sec4_3_1"><span>4.3.1  Sporen, Lengtes en Hellingsgraad op de aansluiting</span><span>12</span></a>
           <a class="bi-toc-item level-3" href="#sec4_3_2"><span>4.3.2  Richting van de auto’s op de trein</span><span>12</span></a>
           <a class="bi-toc-item level-3" href="#sec4_3_3"><span>4.3.3  Beveiliging van de aansluiting</span><span>12</span></a>
           <a class="bi-toc-item level-3" href="#sec4_3_4"><span>4.3.4  SSP</span><span>12</span></a>
@@ -1759,7 +1937,7 @@ def get_bi_javascript():
           </div>
 
           <div id="sec4_2">
-            <h3 class="bi-h2">4.2  ${{bi.installaties.moederbundel.naam}}</h3>
+            <h3 class="bi-h2">4.2  Bundel ${{bi.installaties.moederbundel.naam}} (incl. Spooroverzicht & Lengtes)</h3>
             <p class="bi-p"><strong>Beschrijving van de installaties:</strong></p>
             <ul style="padding-left: 22px; font-size: 10pt; line-height: 1.5; margin-bottom: 10px;">
               <li>${{bi.installaties.moederbundel.beseind ? 'Is een beseinde bundel uitgerust met seinen' : 'Niet-beseinde bundel / exploitatie goederensporen'}} (${{bi.installaties.moederbundel.seinen_info || 'seininrichting Infrabel'}});</li>
@@ -1768,10 +1946,9 @@ def get_bi_javascript():
               <li>Camerabewaking & toezicht: ${{bi.installaties.moederbundel.cameras || 'Toezicht Infrabel'}}.</li>
             </ul>
 
-            ${{terminalId === 'cro_brit' ? `
-              <p class="bi-p"><strong>Weetje lengte sporen:</strong></p>
-              <p class="bi-p">Bundel Ramskapelle bestaat uit 8 lange sporen (881 t.e.m. 888) en 7 korte sporen (889 t.e.m. 895) om treinen te ontvangen en af te stellen.</p>
+            ${{mbSpoorTableHtml}}
 
+            ${{terminalId === 'cro_brit' ? `
               <p class="bi-p"><strong>Schuifrangering kant Brugge:</strong></p>
               <p class="bi-p">Op lijn 202B is de mogelijkheid voorzien tot een schuifrangering tussen de sporen 857 en 858. Deze schuifrangering maakt het mogelijk om bij een rangering met terugrit naar de bundel met een stel langer dan 150m (locomotief inbegrepen) het sein KC-R.7 open te zetten, zodat de reisweg tussen de bundel en sein IC-R.7 kan worden vrijgemaakt.</p>
             ` : `
@@ -1784,21 +1961,18 @@ def get_bi_javascript():
             <h3 class="bi-h2">4.3  Aansluiting ${{bi.metadata.terminal_naam}}</h3>
             
             <div id="sec4_3_1">
-              <h4 class="bi-h3">4.3.1  Sporen op de aansluiting</h4>
-              ${{terminalId === 'cro_brit' ? `
-                <p class="bi-p">Er bevinden zich 8 operationele sporen op de aansluiting (genummerd van links naar rechts bij binnenrijden):</p>
-                <ul style="padding-left: 22px; font-size: 10pt; line-height: 1.5; margin-bottom: 10px;">
-                  <li>Spoor 1 & 2: voorzien voor containers (lengte 520m)</li>
-                  <li>Spoor 3 & 4: voorzien voor containers (lengte 565m)</li>
-                  <li>Spoor 5 & 6: voorzien voor automotive / auto's (lengte 315m)</li>
-                  <li>Spoor 7: voorzien voor automotive (lengte 372m)</li>
-                  <li>Spoor 8: voorzien voor automotive (lengte 424m)</li>
-                </ul>
-              ` : `
-                <p class="bi-p"><strong>Toegangsspoor:</strong> ${{infra.toegangsspoor || `Toegang vanaf ${{bi.installaties.moederbundel.naam}}`}}</p>
-                <p class="bi-p"><strong>Bedieningssporen:</strong> ${{infra.terminal_sporen || 'Bedienings- en laadsporen ter plaatse'}}</p>
-                <p class="bi-p"><strong>Laad- en loskade:</strong> ${{infra.laadkade || 'Bedieningssporen'}}</p>
-              `}}
+              <h4 class="bi-h3">4.3.1  Sporen, Lengtes en Hellingsgraad op de aansluiting</h4>
+              <p class="bi-p"><strong>Toegangsspoor:</strong> ${{infra.toegangsspoor || `Toegang vanaf ${{bi.installaties.moederbundel.naam}}`}}</p>
+              <p class="bi-p"><strong>Bedieningssporen:</strong> ${{infra.terminal_sporen || 'Bedienings- en laadsporen ter plaatse'}}</p>
+              <p class="bi-p"><strong>Nominale hellingsgraad van de aansluiting:</strong> <strong>${{infra.hellingsgraad || '0-1 mm/m (vlak)'}}</strong></p>
+              
+              ${{hellingWarningHtml}}
+
+              ${{termSpoorTableHtml}}
+
+              <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px 14px; margin: 12px 0; font-size: 9pt; color: #334155;">
+                <strong>🌬️ Veiligheidsvoorschrift Hellingsgraad & Stormweer (Infrabel / DB Cargo):</strong> Conform Infrabel reglementering (PPGI & AR/RG) geldt bij aangekondigde storm of ontruiming steeds een minimale hellingswaarde van <strong>6 ‰</strong> voor de berekening van de immobilisatie van wagens, ongeacht de nominale hellingsgraad van het spoor.
+              </div>
             </div>
 
             ${{terminalId === 'cro_brit' ? `

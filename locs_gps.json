@@ -22,6 +22,50 @@
         "Wallenius",
         "Canadakaai",
         "Kaai 107-108"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 1",
+          "bestemming": "Automotive / Ro-Ro",
+          "bovenleiding": "Nee",
+          "ltl": "438 m",
+          "lol": "418 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Kaai 107-108"
+        },
+        {
+          "spoor": "Spoor 2",
+          "bestemming": "Automotive / Ro-Ro",
+          "bovenleiding": "Nee",
+          "ltl": "400 m",
+          "lol": "380 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Kaai 107-108"
+        },
+        {
+          "spoor": "Spoor 3",
+          "bestemming": "Automotive / Ro-Ro",
+          "bovenleiding": "Nee",
+          "ltl": "370 m",
+          "lol": "350 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Kaai 107-108"
+        },
+        {
+          "spoor": "Spoor 4",
+          "bestemming": "Automotive / Ro-Ro",
+          "bovenleiding": "Nee",
+          "ltl": "370 m",
+          "lol": "350 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Kaai 107-108"
+        }
       ]
     },
     {
@@ -44,6 +88,30 @@
       "aliases": [
         "CDMZ Ramskapelle",
         "Car Delivery Zeebrugge"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 1",
+          "bestemming": "Car Delivery & Maintenance",
+          "bovenleiding": "Nee",
+          "ltl": "380 m",
+          "lol": "360 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Toegang via spoor 898"
+        },
+        {
+          "spoor": "Spoor 2",
+          "bestemming": "Car Delivery & Maintenance",
+          "bovenleiding": "Nee",
+          "ltl": "380 m",
+          "lol": "360 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Toegang via spoor 898"
+        }
       ]
     },
     {
@@ -67,6 +135,90 @@
         "SEA-RO",
         "Brittaniadok",
         "Kaai 701-704"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 1",
+          "bestemming": "Containers SEA-RO",
+          "bovenleiding": "Nee (diesel)",
+          "ltl": "540 m",
+          "lol": "520 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Stootjuk aan kadezijde"
+        },
+        {
+          "spoor": "Spoor 2",
+          "bestemming": "Containers SEA-RO",
+          "bovenleiding": "Nee (diesel)",
+          "ltl": "540 m",
+          "lol": "520 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Stootjuk aan kadezijde"
+        },
+        {
+          "spoor": "Spoor 3",
+          "bestemming": "Containers SEA-RO",
+          "bovenleiding": "Nee (diesel)",
+          "ltl": "585 m",
+          "lol": "565 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Stootjuk aan kadezijde"
+        },
+        {
+          "spoor": "Spoor 4",
+          "bestemming": "Containers SEA-RO",
+          "bovenleiding": "Nee (diesel)",
+          "ltl": "585 m",
+          "lol": "565 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Stootjuk aan kadezijde"
+        },
+        {
+          "spoor": "Spoor 5",
+          "bestemming": "Automotive (Auto's)",
+          "bovenleiding": "Nee (diesel)",
+          "ltl": "335 m",
+          "lol": "315 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Neuzen gericht naar zee (kust) bij plaatsing"
+        },
+        {
+          "spoor": "Spoor 6",
+          "bestemming": "Automotive (Auto's)",
+          "bovenleiding": "Nee (diesel)",
+          "ltl": "335 m",
+          "lol": "315 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Neuzen gericht naar zee (kust) bij plaatsing"
+        },
+        {
+          "spoor": "Spoor 7",
+          "bestemming": "Automotive (Auto's)",
+          "bovenleiding": "Nee (diesel)",
+          "ltl": "392 m",
+          "lol": "372 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Neuzen gericht naar zee (kust) bij plaatsing"
+        },
+        {
+          "spoor": "Spoor 8",
+          "bestemming": "Automotive (Auto's)",
+          "bovenleiding": "Nee (diesel)",
+          "ltl": "444 m",
+          "lol": "424 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Neuzen gericht naar zee (kust) bij plaatsing"
+        }
       ]
     },
     {
@@ -89,6 +241,50 @@
       "aliases": [
         "Hanze Terminal",
         "Toyota Zeebrugge"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 1",
+          "bestemming": "Hanze Toyota Automotive",
+          "bovenleiding": "Nee",
+          "ltl": "345 m",
+          "lol": "325 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Hanze Kaai 100-reeks"
+        },
+        {
+          "spoor": "Spoor 2",
+          "bestemming": "Hanze Toyota Automotive",
+          "bovenleiding": "Nee",
+          "ltl": "345 m",
+          "lol": "325 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Hanze Kaai 100-reeks"
+        },
+        {
+          "spoor": "Spoor 3",
+          "bestemming": "Hanze Toyota Automotive",
+          "bovenleiding": "Nee",
+          "ltl": "345 m",
+          "lol": "325 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Hanze Kaai 100-reeks"
+        },
+        {
+          "spoor": "Spoor 879",
+          "bestemming": "Aansluitingsspoor Toyota",
+          "bovenleiding": "Deels",
+          "ltl": "292 m",
+          "lol": "272 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Elektrische stuitklamp"
+        }
       ]
     },
     {
@@ -111,6 +307,50 @@
       "aliases": [
         "ICO Bastenaken 1",
         "Bastenakenkaai Kaai 500"
+      ],
+      "helling": "0-1 ‰ (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 21",
+          "bestemming": "Automotive Bastenakenkaai 1",
+          "bovenleiding": "Nee",
+          "ltl": "340 m",
+          "lol": "320 m",
+          "helling": "0-1 ‰ (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Toegang via wissel 521"
+        },
+        {
+          "spoor": "Spoor 22",
+          "bestemming": "Automotive Bastenakenkaai 1",
+          "bovenleiding": "Nee",
+          "ltl": "340 m",
+          "lol": "320 m",
+          "helling": "0-1 ‰ (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Toegang via wissel 521"
+        },
+        {
+          "spoor": "Spoor 23",
+          "bestemming": "Automotive Bastenakenkaai 1",
+          "bovenleiding": "Nee",
+          "ltl": "340 m",
+          "lol": "320 m",
+          "helling": "0-1 ‰ (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Toegang via wissel 521"
+        },
+        {
+          "spoor": "Spoor 24",
+          "bestemming": "Automotive Bastenakenkaai 1",
+          "bovenleiding": "Nee",
+          "ltl": "340 m",
+          "lol": "320 m",
+          "helling": "0-1 ‰ (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Toegang via wissel 521"
+        }
       ]
     },
     {
@@ -132,6 +372,50 @@
       "lng": 3.22717,
       "aliases": [
         "ICO Bastenaken 2"
+      ],
+      "helling": "0-1 ‰ (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor A",
+          "bestemming": "Automotive Bastenakenkaai 2",
+          "bovenleiding": "Nee",
+          "ltl": "620 m",
+          "lol": "600 m",
+          "helling": "0-1 ‰ (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Toegang via wissel 502"
+        },
+        {
+          "spoor": "Spoor B",
+          "bestemming": "Automotive Bastenakenkaai 2",
+          "bovenleiding": "Nee",
+          "ltl": "580 m",
+          "lol": "560 m",
+          "helling": "0-1 ‰ (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Toegang via wissel 502"
+        },
+        {
+          "spoor": "Spoor C",
+          "bestemming": "Automotive Bastenakenkaai 2",
+          "bovenleiding": "Nee",
+          "ltl": "520 m",
+          "lol": "500 m",
+          "helling": "0-1 ‰ (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Toegang via wissel 502"
+        },
+        {
+          "spoor": "Spoor D",
+          "bestemming": "Automotive Bastenakenkaai 2",
+          "bovenleiding": "Nee",
+          "ltl": "450 m",
+          "lol": "430 m",
+          "helling": "0-1 ‰ (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Toegang via wissel 502"
+        }
       ]
     },
     {
@@ -151,7 +435,31 @@
       "ppgi_ref": "PP-321 blz. 9, 22, 36-38",
       "lat": 51.295931,
       "lng": 3.225249,
-      "aliases": []
+      "aliases": [],
+      "helling": "0-1 ‰ (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 1",
+          "bestemming": "Koffieterminal Efico",
+          "bovenleiding": "Nee",
+          "ltl": "260 m",
+          "lol": "240 m",
+          "helling": "0-1 ‰ (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Wissel 551"
+        },
+        {
+          "spoor": "Spoor 2",
+          "bestemming": "Koffieterminal Efico",
+          "bovenleiding": "Nee",
+          "ltl": "260 m",
+          "lol": "240 m",
+          "helling": "0-1 ‰ (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Wissel 551"
+        }
+      ]
     },
     {
       "id": "ndq",
@@ -170,7 +478,21 @@
       "ppgi_ref": "PP-321 blz. 9, 22, 39-41",
       "lat": 51.300855,
       "lng": 3.221456,
-      "aliases": []
+      "aliases": [],
+      "helling": "0-1 ‰ (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 1",
+          "bestemming": "NDQ Logistics",
+          "bovenleiding": "Nee",
+          "ltl": "280 m",
+          "lol": "260 m",
+          "helling": "0-1 ‰ (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Wissel 552"
+        }
+      ]
     },
     {
       "id": "spoorfuel",
@@ -189,7 +511,21 @@
       "ppgi_ref": "PP-321 blz. 9, 21, 83-84",
       "lat": 51.3135,
       "lng": 3.227,
-      "aliases": []
+      "aliases": [],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 899",
+          "bestemming": "G&V Spoorfuel Tankinstallatie",
+          "bovenleiding": "Nee",
+          "ltl": "130 m",
+          "lol": "110 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Beveiligd met ontspoortong 91AR"
+        }
+      ]
     },
     {
       "id": "ecs_bl",
@@ -213,6 +549,30 @@
         "SA ECS2 N",
         "ECS 2",
         "Blauwe Loods Zwankendamme"
+      ],
+      "helling": "<1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 358",
+          "bestemming": "ECS 2XL Blauwe Loods",
+          "bovenleiding": "Nee",
+          "ltl": "360 m",
+          "lol": "340 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Binnenbediening loods"
+        },
+        {
+          "spoor": "Spoor 135",
+          "bestemming": "Sasspoor naar Blauwe Loods",
+          "bovenleiding": "Nee",
+          "ltl": "360 m",
+          "lol": "340 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Ontspoortong 96G"
+        }
       ]
     },
     {
@@ -236,6 +596,30 @@
         "SA ECS 1",
         "ECS 1",
         "Baron de Maerelaan 155"
+      ],
+      "helling": "<1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 460",
+          "bestemming": "2XL BML / ECS 1",
+          "bovenleiding": "Nee",
+          "ltl": "380 m",
+          "lol": "360 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Stootjuk"
+        },
+        {
+          "spoor": "Wissel 524",
+          "bestemming": "Omloopspoor ECS 1",
+          "bovenleiding": "Ja",
+          "ltl": "610 m",
+          "lol": "590 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Omlooplocomotief"
+        }
       ]
     },
     {
@@ -259,6 +643,40 @@
         "NIT",
         "Northern Inlet Terminal",
         "NID Westeroever"
+      ],
+      "helling": "<1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 10",
+          "bestemming": "Aanvoerspoor NID",
+          "bovenleiding": "Nee",
+          "ltl": "644 m",
+          "lol": "624 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Doorgang naar kophelling"
+        },
+        {
+          "spoor": "Spoor 11",
+          "bestemming": "ICO 3 Laadhelling",
+          "bovenleiding": "Nee",
+          "ltl": "340 m",
+          "lol": "320 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Laadhelling auto's"
+        },
+        {
+          "spoor": "Spoor 12",
+          "bestemming": "ICO 3 Laadhelling",
+          "bovenleiding": "Nee",
+          "ltl": "340 m",
+          "lol": "320 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Laadhelling auto's"
+        }
       ]
     },
     {
@@ -282,6 +700,20 @@
         "P&O Westerhoofd",
         "P&O 501",
         "P&O Ferries Zeebrugge"
+      ],
+      "helling": "<1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "P&O Sporen",
+          "bestemming": "P&O Ferries (501 / Zuid)",
+          "bovenleiding": "Nee",
+          "ltl": "380 m",
+          "lol": "360 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Voorhaven Kaai 501"
+        }
       ]
     },
     {
@@ -304,6 +736,30 @@
       "aliases": [
         "PSA Breakbulk",
         "StoraEnso"
+      ],
+      "helling": "<1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 1",
+          "bestemming": "Stora Enso / PSA Breakbulk (binnen)",
+          "bovenleiding": "Nee",
+          "ltl": "320 m",
+          "lol": "300 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Plaatsingsspoor binnen loods"
+        },
+        {
+          "spoor": "Spoor 2",
+          "bestemming": "Stora Enso (buiten)",
+          "bovenleiding": "Nee",
+          "ltl": "320 m",
+          "lol": "300 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Uithaalspoor getrokken beweging"
+        }
       ]
     },
     {
@@ -326,6 +782,40 @@
       "aliases": [
         "Herstelspoor Dartline",
         "Dartline Zeebrugge"
+      ],
+      "helling": "<1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Dartline 1",
+          "bestemming": "Herstelspoor Dartline",
+          "bovenleiding": "Nee",
+          "ltl": "637 m",
+          "lol": "617 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Herstelling en opstelling"
+        },
+        {
+          "spoor": "Dartline 2",
+          "bestemming": "Herstelspoor Dartline",
+          "bovenleiding": "Nee",
+          "ltl": "632 m",
+          "lol": "612 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Herstelling en opstelling"
+        },
+        {
+          "spoor": "Dartline 3",
+          "bestemming": "Herstelspoor Dartline",
+          "bovenleiding": "Nee",
+          "ltl": "643 m",
+          "lol": "623 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Herstelling en opstelling"
+        }
       ]
     },
     {
@@ -349,6 +839,20 @@
         "SA CHZ Terminal",
         "CHZ",
         "Albert II Dok"
+      ],
+      "helling": "<1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Kaaisporen Albert II Dok",
+          "bestemming": "C.RO Albert II Dok Ro-Ro",
+          "bovenleiding": "Nee",
+          "ltl": "450 m",
+          "lol": "430 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Haven Zeebrugge"
+        }
       ]
     },
     {
@@ -372,6 +876,20 @@
         "Cosco Shipping Ports",
         "CSP Zeebrugge",
         "Containerterminal Zeebrugge"
+      ],
+      "helling": "<1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Cosco Sporen",
+          "bestemming": "CSP Terminal Containerkade",
+          "bovenleiding": "Nee",
+          "ltl": "600 m",
+          "lol": "580 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Haven Zeebrugge"
+        }
       ]
     },
     {
@@ -393,6 +911,20 @@
       "lng": 3.183675,
       "aliases": [
         "PSA Zeebrugge Container"
+      ],
+      "helling": "<1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "PSA Sporen",
+          "bestemming": "PSA Zeebrugge Containertracks",
+          "bovenleiding": "Nee",
+          "ltl": "550 m",
+          "lol": "530 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Haven Zeebrugge"
+        }
       ]
     },
     {
@@ -415,6 +947,20 @@
       "aliases": [
         "Hesse-Noord Natie",
         "PSA HNN 801"
+      ],
+      "helling": "<1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "PSA HNN Sporen",
+          "bestemming": "PSA HNN Kaaisporen",
+          "bovenleiding": "Nee",
+          "ltl": "500 m",
+          "lol": "480 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Haven Zeebrugge"
+        }
       ]
     },
     {
@@ -437,6 +983,20 @@
       "aliases": [
         "North Sea Ferries",
         "P&O NSF Spoor 851"
+      ],
+      "helling": "<1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "NSF Sporen",
+          "bestemming": "North Sea Ferries Kade",
+          "bovenleiding": "Nee",
+          "ltl": "350 m",
+          "lol": "330 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Haven Zeebrugge"
+        }
       ]
     },
     {
@@ -459,6 +1019,20 @@
       "aliases": [
         "Kaaispoor 851 Infrabel",
         "Zeebrugge-Kaai"
+      ],
+      "helling": "<1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 851",
+          "bestemming": "Zeebrugge Kaai (Infrabel)",
+          "bovenleiding": "Nee",
+          "ltl": "340 m",
+          "lol": "320 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Havenkaaispoor"
+        }
       ]
     },
     {
@@ -480,6 +1054,20 @@
       "lng": 3.206935,
       "aliases": [
         "Zweedse Kaai Zeebrugge"
+      ],
+      "helling": "<1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 1 & 2",
+          "bestemming": "Zweedse Kaai",
+          "bovenleiding": "Nee",
+          "ltl": "320 m",
+          "lol": "300 m",
+          "helling": "<1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Kaaibediening"
+        }
       ]
     },
     {
@@ -501,6 +1089,20 @@
       "lng": 2.951696,
       "aliases": [
         "Proviron Chemicals Oostende"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Proviron Spoor",
+          "bestemming": "Chemicaliën overslag Proviron",
+          "bovenleiding": "Nee",
+          "ltl": "300 m",
+          "lol": "280 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Veiligheidsafsluiting chemie"
+        }
       ]
     },
     {
@@ -523,6 +1125,30 @@
       "aliases": [
         "Tilbury Kaai Oostende",
         "Goederenoverslag Oostende"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 1",
+          "bestemming": "Tilbury Goederenoverslag",
+          "bovenleiding": "Nee",
+          "ltl": "330 m",
+          "lol": "310 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Stootblok"
+        },
+        {
+          "spoor": "Spoor 2",
+          "bestemming": "Tilbury Goederenoverslag",
+          "bovenleiding": "Nee",
+          "ltl": "330 m",
+          "lol": "310 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Stootblok"
+        }
       ]
     },
     {
@@ -545,6 +1171,30 @@
       "aliases": [
         "Plassendale 1",
         "Industrieterrein Plassendale"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 3",
+          "bestemming": "Laad- en losspoor Plassendale",
+          "bovenleiding": "Nee",
+          "ltl": "498 m",
+          "lol": "478 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Industrieterrein"
+        },
+        {
+          "spoor": "Spoor 4",
+          "bestemming": "Laad- en losspoor Plassendale",
+          "bovenleiding": "Nee",
+          "ltl": "498 m",
+          "lol": "478 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Industrieterrein"
+        }
       ]
     },
     {
@@ -566,6 +1216,30 @@
       "lng": 2.946,
       "aliases": [
         "Oostende Vorming Spoor 117-118"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 114",
+          "bestemming": "Ontvangstspoor goederen",
+          "bovenleiding": "Ja",
+          "ltl": "600 m",
+          "lol": "580 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Ontvangst treinen"
+        },
+        {
+          "spoor": "Spoor 117-118",
+          "bestemming": "I-O.3 Oostende Vorming",
+          "bovenleiding": "Nee",
+          "ltl": "360 m",
+          "lol": "340 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Laad- en losspoor"
+        }
       ]
     },
     {
@@ -588,6 +1262,20 @@
       "aliases": [
         "WHV",
         "WET Oostende"
+      ],
+      "helling": "1 mm/m",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Bundel WET",
+          "bestemming": "WHV Oostende & Bundel WET",
+          "bovenleiding": "Ja",
+          "ltl": "280-350 m",
+          "lol": "260-330 m",
+          "helling": "1 mm/m",
+          "doodspoor": "Deels",
+          "opmerkingen": "Werkplaatssporen"
+        }
       ]
     },
     {
@@ -611,6 +1299,30 @@
         "Bombardier",
         "Bombardier Transportation Brugge",
         "Alstom Brugge"
+      ],
+      "helling": "Sterke daling naar station Brugge (ca. 4-5 mm/m)",
+      "helling_waarschuwing": "⚠️ KRITIEK VEILIGHEIDSVOORSCHRIFT: De aansluitingssporen van Alstom hellen sterk af in de richting van het reizigersstation Brugge! Bij het ontkoppelen en plaatsen van spoorvoertuigen moeten de schroefremmen krachtig worden aangedraaid én is het plaatsen van een wielblockschaats (schaats) aan de afwaartse zijde WETTELIJK VERPLICHT om ontlopen van materieel te verhinderen!",
+      "spoor_details": [
+        {
+          "spoor": "Spoor 675",
+          "bestemming": "SA Alstom Fabrieksspoor",
+          "bovenleiding": "Nee",
+          "ltl": "ca. 200 m",
+          "lol": "ca. 180 m",
+          "helling": "Sterke daling naar station Brugge",
+          "doodspoor": "Ja",
+          "opmerkingen": "Schaats en handremmen verplicht tegen ontlopen!"
+        },
+        {
+          "spoor": "Spoor 676",
+          "bestemming": "SA Alstom Testspoor",
+          "bovenleiding": "Nee",
+          "ltl": "ca. 180 m",
+          "lol": "ca. 160 m",
+          "helling": "Sterke daling naar station Brugge",
+          "doodspoor": "Ja",
+          "opmerkingen": "Schaats verplicht"
+        }
       ]
     },
     {
@@ -632,6 +1344,20 @@
       "lng": 3.219,
       "aliases": [
         "Logistiek Centrum Infrabel Brugge"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "LCI Sporen 1-2",
+          "bestemming": "Infrabel Logistiek Centrum Brugge",
+          "bovenleiding": "Nee",
+          "ltl": "220 m",
+          "lol": "200 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Infrabel logistiek materieel"
+        }
       ]
     },
     {
@@ -653,6 +1379,20 @@
       "lng": 3.224,
       "aliases": [
         "Onderhoudswerkplaats Infrabel Brugge"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "OTWD Werkplaatssporen",
+          "bestemming": "Infrabel Werkplaats Brugge",
+          "bovenleiding": "Deels",
+          "ltl": "250 m",
+          "lol": "230 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Werkplaats"
+        }
       ]
     },
     {
@@ -674,6 +1414,20 @@
       "lng": 3.1435,
       "aliases": [
         "Logistiek Centrum Infrabel Lichtervelde"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "LCI Spoor",
+          "bestemming": "Infrabel Logistiek Lichtervelde",
+          "bovenleiding": "Nee",
+          "ltl": "200 m",
+          "lol": "180 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "L66"
+        }
       ]
     },
     {
@@ -695,6 +1449,50 @@
       "lng": 3.131,
       "aliases": [
         "Vormingsbundel Roeselare"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 1",
+          "bestemming": "Vorming Roeselare",
+          "bovenleiding": "Ja",
+          "ltl": "520 m",
+          "lol": "500 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Seinzaal Brugge"
+        },
+        {
+          "spoor": "Spoor 2",
+          "bestemming": "Vorming Roeselare",
+          "bovenleiding": "Ja",
+          "ltl": "500 m",
+          "lol": "480 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Seinzaal Brugge"
+        },
+        {
+          "spoor": "Spoor 3",
+          "bestemming": "Vorming Roeselare",
+          "bovenleiding": "Ja",
+          "ltl": "480 m",
+          "lol": "460 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Seinzaal Brugge"
+        },
+        {
+          "spoor": "Spoor 4",
+          "bestemming": "Vorming Roeselare",
+          "bovenleiding": "Ja",
+          "ltl": "480 m",
+          "lol": "460 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Seinzaal Brugge"
+        }
       ]
     },
     {
@@ -716,6 +1514,20 @@
       "lng": 3.134,
       "aliases": [
         "Bundel M Blankenberge"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Bundel M",
+          "bestemming": "Opstelbundel M Blankenberge",
+          "bovenleiding": "Ja",
+          "ltl": "340 m",
+          "lol": "320 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "L51"
+        }
       ]
     },
     {
@@ -737,6 +1549,20 @@
       "lng": 2.6025,
       "aliases": [
         "Vorming De Panne"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 1 & 2",
+          "bestemming": "Grenssporen De Panne",
+          "bovenleiding": "Nee",
+          "ltl": "270 m",
+          "lol": "250 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "L73"
+        }
       ]
     },
     {
@@ -758,6 +1584,20 @@
       "lng": 3.272,
       "aliases": [
         "Logistiek Centrum Infrabel Kortrijk"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "LCI Spoor",
+          "bestemming": "Infrabel Logistiek Kortrijk",
+          "bovenleiding": "Nee",
+          "ltl": "220 m",
+          "lol": "200 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "L75"
+        }
       ]
     },
     {
@@ -779,6 +1619,20 @@
       "lng": 3.268,
       "aliases": [
         "I-O.3 Kortrijk"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor I-O.3",
+          "bestemming": "Bedieningsspoor I-O.3 Kortrijk",
+          "bovenleiding": "Ja",
+          "ltl": "380 m",
+          "lol": "360 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Industriespoor"
+        }
       ]
     },
     {
@@ -801,6 +1655,20 @@
       "aliases": [
         "Kortrijk Goederen",
         "Kortrijk Bundels A-D"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Bundelsporen 1-8",
+          "bestemming": "Goederenbundel Kortrijk",
+          "bovenleiding": "Ja",
+          "ltl": "450-650 m",
+          "lol": "430-630 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Seinzaal Kortrijk"
+        }
       ]
     },
     {
@@ -822,6 +1690,20 @@
       "lng": 3.189,
       "aliases": [
         "Vormingsstation Lauwe"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 1 & 2",
+          "bestemming": "Vormingsspoor Lauwe",
+          "bovenleiding": "Ja",
+          "ltl": "500 m",
+          "lol": "480 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "L75"
+        }
       ]
     },
     {
@@ -843,6 +1725,50 @@
       "lng": 2.738,
       "aliases": [
         "Poperinge Goederensporen"
+      ],
+      "helling": "0-1 mm/m (vlak)",
+      "helling_waarschuwing": null,
+      "spoor_details": [
+        {
+          "spoor": "Spoor 4 (654)",
+          "bestemming": "Goederenoverslag Poperinge",
+          "bovenleiding": "Ja (3kV)",
+          "ltl": "322 m",
+          "lol": "302 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Vrije laadkoer"
+        },
+        {
+          "spoor": "Spoor 5 (655)",
+          "bestemming": "Goederenoverslag Poperinge",
+          "bovenleiding": "Ja (3kV)",
+          "ltl": "322 m",
+          "lol": "302 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Vrije laadkoer"
+        },
+        {
+          "spoor": "Spoor 681",
+          "bestemming": "Kopspoor Poperinge",
+          "bovenleiding": "Ja (3kV)",
+          "ltl": "94 m",
+          "lol": "74 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Ja",
+          "opmerkingen": "Stootjuk"
+        },
+        {
+          "spoor": "Spoor 121",
+          "bestemming": "Rangeersas L69",
+          "bovenleiding": "Ja (3kV)",
+          "ltl": "308 m",
+          "lol": "288 m",
+          "helling": "0-1 mm/m (vlak)",
+          "doodspoor": "Nee",
+          "opmerkingen": "Sas tussen P-O.3 en stopbord"
+        }
       ]
     }
   ],

@@ -850,6 +850,61 @@ def build_map_html(locations, bundels):
       font-weight: 600;
     }}
 
+    .gradient-badge {{
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 800;
+    }}
+    .badge-gradient-ok {{
+      background: rgba(14, 165, 233, 0.2);
+      color: #38bdf8;
+      border: 1px solid #0284c7;
+    }}
+    .badge-gradient-warn {{
+      background: rgba(239, 68, 68, 0.25);
+      color: #f87171;
+      border: 1.5px solid #ef4444;
+    }}
+    .detail-helling-alert {{
+      background: rgba(220, 38, 38, 0.2);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      line-height: 1.4;
+      font-weight: 700;
+      margin: 6px 0 8px 0;
+    }}
+    .detail-track-table {{
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      font-size: 11px;
+    }}
+    .detail-track-table th {{
+      background: #1e293b;
+      color: #94a3b8;
+      text-align: left;
+      padding: 4px 6px;
+      border: 1px solid #334155;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+    }}
+    .detail-track-table td {{
+      padding: 5px 6px;
+      border: 1px solid #334155;
+      color: #f1f5f9;
+    }}
+    .detail-track-table tr:nth-child(even) td {{
+      background: rgba(30, 41, 59, 0.5);
+    }}
+
     /* ========================================= */
     /* ALIASES & LINKING STYLES (TASK 2)         */
     /* ========================================= */
@@ -2444,9 +2499,14 @@ def build_map_html(locations, bundels):
           <div class="detail-item-label">Moederbundel (Infrabel)</div>
           <div id="detailMoederbundel" class="detail-item-val">-</div>
         </div>
-        <div class="detail-item">
-          <div class="detail-item-label">Bedieningssporen & Lengte</div>
-          <div id="detailSporen" class="detail-item-val">-</div>
+        <div class="detail-item" id="detailTrackOverviewSection">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <div class="detail-item-label" style="margin-bottom:0;">📐 Spooroverzicht & Hellingsgraad</div>
+            <span id="detailGradientBadge" class="gradient-badge badge-gradient-ok">0-1 mm/m (vlak)</span>
+          </div>
+          <div id="detailHellingAlert" class="detail-helling-alert" style="display:none;"></div>
+          <div id="detailSporen" class="detail-item-val" style="margin-bottom:6px;">-</div>
+          <div id="detailTrackMiniContainer"></div>
         </div>
         <div class="detail-item">
           <div class="detail-item-label">Adres & Toegangsweg</div>
@@ -3412,6 +3472,63 @@ def build_map_html(locations, bundels):
       document.getElementById('detailSubtitle').textContent = `${{target.zone_name}} • ${{target.zone}} • ${{target.type}}`;
       document.getElementById('detailMoederbundel').textContent = target.moederbundel || 'N.v.t.';
       document.getElementById('detailSporen').textContent = target.sporen || 'N.v.t.';
+
+      // Track Overview and Gradient in Detail Overlay
+      const hBadge = document.getElementById('detailGradientBadge');
+      const hAlert = document.getElementById('detailHellingAlert');
+      const miniContainer = document.getElementById('detailTrackMiniContainer');
+
+      const resolvedObj = (typeof rawResolvedBIs !== 'undefined' && rawResolvedBIs[target.id]) ? rawResolvedBIs[target.id] : null;
+      const helling = target.helling || (resolvedObj && resolvedObj.installaties && resolvedObj.installaties.terminal && resolvedObj.installaties.terminal.hellingsgraad) || '0-1 mm/m (vlak)';
+      const isSteep = helling.includes('Sterke') || helling.includes('daling') || helling.includes('schaats');
+
+      if (hBadge) {{
+        hBadge.textContent = helling;
+        hBadge.className = isSteep ? 'gradient-badge badge-gradient-warn' : 'gradient-badge badge-gradient-ok';
+      }}
+
+      const warnText = target.helling_waarschuwing || (resolvedObj && resolvedObj.installaties && resolvedObj.installaties.terminal && resolvedObj.installaties.terminal.helling_waarschuwing);
+      if (hAlert) {{
+        if (warnText) {{
+          hAlert.style.display = 'block';
+          hAlert.textContent = warnText;
+        }} else {{
+          hAlert.style.display = 'none';
+        }}
+      }}
+
+      // Render mini track table if available
+      const tracks = target.spoor_details || (resolvedObj && resolvedObj.installaties && resolvedObj.installaties.terminal && resolvedObj.installaties.terminal.spooroverzicht) || [];
+      if (miniContainer) {{
+        if (tracks && tracks.length > 0) {{
+          miniContainer.innerHTML = `
+            <table class="detail-track-table">
+              <thead>
+                <tr>
+                  <th>Spoor</th>
+                  <th>LOL</th>
+                  <th>Helling</th>
+                  <th>Dood</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${{tracks.slice(0, 8).map(t => `
+                  <tr>
+                    <td><strong>${{t.spoor}}</strong></td>
+                    <td style="font-family:Consolas,monospace; font-weight:700;">${{t.lol || t.ltl || '-'}}</td>
+                    <td>${{t.helling || helling}}</td>
+                    <td>${{t.doodspoor || 'Ja'}}</td>
+                  </tr>
+                `).join('')}}
+              </tbody>
+            </table>
+          `;
+          miniContainer.style.display = 'block';
+        }} else {{
+          miniContainer.innerHTML = '';
+          miniContainer.style.display = 'none';
+        }}
+      }}
       document.getElementById('detailAdres').textContent = target.adres || 'N.v.t.';
       document.getElementById('detailBeveiliging').textContent = target.beveiliging || 'Geen specifieke sloten vermeld';
       document.getElementById('detailPpgi').textContent = target.ppgi_ref || 'PPGI West-Vlaanderen';

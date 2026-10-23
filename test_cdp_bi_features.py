@@ -195,12 +195,82 @@ async def run_cdp_tests():
             assert not plass_info['hasZeebrugge'], "Plassendale (Oostende) MUST NOT contain references to Zeebrugge!"
             assert plass_info['hasOostende'], "Plassendale MUST reference Zone Oostende!"
 
+            # Test 14: Spooroverzicht Moederbundel (4.2) and Terminal (4.3.1) in CRO Brittaniadok
+            spoor_info = await eval_js("""
+                (function() {
+                    onBiTerminalSelected('cro_brit');
+                    const mbTable = document.querySelector('#sec4_2 table.bi-word-table');
+                    const termTable = document.querySelector('#sec4_3_1 table.bi-word-table');
+                    const mbHeaders = mbTable ? Array.from(mbTable.querySelectorAll('th')).map(th => th.innerText) : [];
+                    const termHeaders = termTable ? Array.from(termTable.querySelectorAll('th')).map(th => th.innerText) : [];
+                    const mbRows = mbTable ? mbTable.querySelectorAll('tbody tr').length : 0;
+                    const termRows = termTable ? termTable.querySelectorAll('tbody tr').length : 0;
+                    const hasStormNote = document.querySelector('#sec4_3_1')?.innerText.includes('6 ‰');
+
+                    return {
+                        hasMbTable: !!mbTable,
+                        hasTermTable: !!termTable,
+                        mbHeaders,
+                        termHeaders,
+                        mbRows,
+                        termRows,
+                        hasStormNote
+                    };
+                })()
+            """)
+            print(f"[TEST 14] Spooroverzicht CRO: MB Sporen={spoor_info['mbRows']} (expected 21), Term Sporen={spoor_info['termRows']} (expected 8), StormNote={spoor_info['hasStormNote']}")
+            assert spoor_info['hasMbTable'], "Moederbundel Spooroverzicht table (4.2) must exist!"
+            assert spoor_info['hasTermTable'], "Terminal Spooroverzicht table (4.3.1) must exist!"
+            assert spoor_info['mbRows'] >= 15, f"Expected at least 15 tracks in Ramskapelle, got {spoor_info['mbRows']}"
+            assert spoor_info['termRows'] == 8, f"Expected 8 tracks for CRO Brittaniadok, got {spoor_info['termRows']}"
+            assert spoor_info['hasStormNote'], "Infrabel 6 ‰ storm immobilisatie note must be present!"
+
+            # Test 15: Alstom Hellingsgraad & Schaatsverplichting Callout
+            alstom_slope = await eval_js("""
+                (function() {
+                    onBiTerminalSelected('alstom');
+                    const termTableText = document.querySelector('#sec4_3_1')?.innerText || '';
+                    const hasCallout = !!document.querySelector('#sec4_3_1 .bi-callout-warning');
+                    return {
+                        hasCallout,
+                        containsSchaats: termTableText.includes('schaats') || termTableText.includes('Schaats'),
+                        containsDaling: termTableText.includes('daling') || termTableText.includes('afhellend')
+                    };
+                })()
+            """)
+            print(f"[TEST 15] Alstom Gradient Warning: Callout={alstom_slope['hasCallout']}, Schaats={alstom_slope['containsSchaats']}, Daling={alstom_slope['containsDaling']}")
+            assert alstom_slope['hasCallout'], "Alstom MUST have a gradient warning callout!"
+            assert alstom_slope['containsSchaats'], "Alstom gradient instructions MUST require a skate ('schaats')!"
+
+            # Test 16: Interactive Map Detail Card - Track Overview & Gradient Section
+            map_track_info = await eval_js("""
+                (function() {
+                    switchMainTab('map');
+                    selectLocation('cro_brit');
+                    const section = document.getElementById('detailTrackOverviewSection');
+                    const badge = document.getElementById('detailGradientBadge');
+                    const table = document.querySelector('#detailTrackMiniContainer table');
+                    return {
+                        hasSection: !!section,
+                        badgeText: badge ? badge.innerText : '',
+                        tableRows: table ? table.querySelectorAll('tbody tr').length : 0
+                    };
+                })()
+            """)
+            print(f"[TEST 16] Map Detail Overlay Tracks: Section={map_track_info['hasSection']}, GradientBadge='{map_track_info['badgeText']}', MiniRows={map_track_info['tableRows']}")
+            assert map_track_info['hasSection'], "Detail overlay must have track overview section!"
+            assert map_track_info['tableRows'] > 0, "Detail overlay must display mini track table!"
+
             print("\n=======================================================")
-            print("SUCCESS! ALL 13 TESTS PASSED:")
+            print("SUCCESS! ALL 16 TESTS PASSED:")
             print("1. Scrolling works all the way to Chapter 8 (no clipping)")
             print("2. Layout is IDENTICAL to Word/PDF template")
             print("3. Print / PDF CSS spans all pages properly")
             print("4. Complete zonal isolation: NO Zeebrugge bleeding into other zones!")
+            print("5. Spooroverzicht Moederbundel (4.2) with LTL, LOL, Hellingsgraad, Doodspoor")
+            print("6. Spooroverzicht Aansluiting (4.3.1) with track purposes, lengths & badges")
+            print("7. Specific slope safety callout (Alstom schaatsverplichting & 6‰ storm rule)")
+            print("8. Interactive Map Detail Card displays track table and gradient badge!")
             print("=======================================================")
 
     finally:
