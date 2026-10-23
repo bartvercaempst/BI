@@ -21,8 +21,7 @@ LEVEL_1_OPERATOR = {
     "doel": "Het beschrijven van een uniforme en veilige werkwijze voor bedieningen van private spooraansluitingen en bundels.",
     "gebruikersgroep": "Alle medewerkers buitendienst (Treinbestuurders & Rangeerders/Schouwers + omkadering + hulpondernemingen) die de bediening uitvoeren.",
     "contacten": [
-        {"dienst": "NOC Shiftleader", "rol": "Real-time Operations", "telefoon": "+32 3 545 02 33"},
-        {"dienst": "NOC Dispatch Zeebrugge", "rol": "Lokale Shunting Dispatcher", "telefoon": "+32 50 33 03 25"}
+        {"dienst": "NOC Shiftleader (Centraal Beheer)", "rol": "Real-time Operations 24/7", "telefoon": "+32 3 545 02 33"}
     ],
     "noodcontacten": [
         {"dienst": "Hulpdiensten (Calamiteiten)", "rol": "Algemeen noodnummer", "telefoon": "112"},
@@ -46,7 +45,7 @@ LEVEL_2_REGIO = {
         "infrabel_district": "Infrabel Operations Area North-West",
         "permanentie_ito": "+32 50 30 22 23",
         "traffic_officer_nw": "+32 9 241 28 68",
-        "ssp_zone": "Zone Brugge / Kust"
+        "ssp_zone": "Zone Brugge / Kust / Kortrijk"
     }
 }
 
@@ -56,11 +55,12 @@ LEVEL_3_ZONES = {
         "regio_id": "west_vlaanderen",
         "naam": "Haven Zeebrugge",
         "centraal_seinhuis": "Infrabel Blok 7 Zeebrugge",
+        "local_dispatch": {"dienst": "NOC Dispatch Zeebrugge", "rol": "Lokale Rangeer Dispatcher", "telefoon": "+32 50 33 03 25"},
         "seinhuis_contacten": [
             {"dienst": "Traffic Controller (Blok 7)", "rol": "Trein- en rangeerdienst", "telefoon": "+32 50 30 25 11"},
             {"dienst": "Safety Controller (Blok 7)", "rol": "Veiligheid & Buitendienst", "telefoon": "+32 50 30 25 09"},
             {"dienst": "Safety Supervisor (Blok 7)", "rol": "Supervisie Zeebrugge", "telefoon": "+32 50 30 25 00"},
-            {"dienst": "Traffic Officer (Blok 6)", "rol": "Bovenlokaal beheer NW", "telefoon": "+32 9 241 28 68"},
+            {"dienst": "Traffic Officer (Blok 6)", "rol": "Bovenlokaal beheer Area NW", "telefoon": "+32 9 241 28 68"},
             {"dienst": "Mailbox Blok 7 Infrabel", "rol": "Schriftelijke overdrachten", "telefoon": "rdc.nw.blok7@infrabel.be"}
         ],
         "havenautoriteit": {
@@ -82,14 +82,20 @@ LEVEL_3_ZONES = {
     "brugge": {
         "id": "brugge",
         "regio_id": "west_vlaanderen",
-        "naam": "Zone Brugge",
+        "naam": "Zone Brugge & Midden-WVL",
         "centraal_seinhuis": "Seinzaal Brugge (FR/B)",
+        "local_dispatch": {"dienst": "NOC Dispatch Brugge / Kust", "rol": "Lokale Dispatcher", "telefoon": "+32 50 30 24 11"},
         "seinhuis_contacten": [
-            {"dienst": "Traffic Controller Brugge", "rol": "Treindienst", "telefoon": "+32 50 30 24 11"},
-            {"dienst": "Safety Controller Brugge", "rol": "Rangeerdienst", "telefoon": "+32 50 30 24 09"}
+            {"dienst": "Traffic Controller Brugge (FR/B)", "rol": "Treindienst L50A / L51 / L66", "telefoon": "+32 50 30 24 11"},
+            {"dienst": "Safety Controller Brugge", "rol": "Rangeerdienst & Spoorbezettingsbeheer", "telefoon": "+32 50 30 24 09"},
+            {"dienst": "Traffic Officer Area NW", "rol": "Bovenlokaal beheer Area NW", "telefoon": "+32 9 241 28 68"},
+            {"dienst": "Mailbox Seinzaal Brugge", "rol": "Schriftelijke overdrachten", "telefoon": "rdc.nw.brugge@infrabel.be"}
         ],
         "havenautoriteit": None,
-        "zone_risicos": ["Druk reizigers- en goederenverkeer op hoofdlijn L50A / L51"],
+        "zone_risicos": [
+            "Druk reizigers- en goederenverkeer op hoofdlijnen L50A, L51 en L66.",
+            "Handwisselbediening en spoorbezetting op verspreide industrieterreinen."
+        ],
         "zone_snelheden": {
             "havenlijnen": "Max 20 km/u op bundelsporen",
             "aansluitingen": "Max 10 km/u op aansluitingen",
@@ -101,11 +107,18 @@ LEVEL_3_ZONES = {
         "regio_id": "west_vlaanderen",
         "naam": "Zone Oostende",
         "centraal_seinhuis": "Seinzaal Oostende (Blok 4)",
+        "local_dispatch": {"dienst": "NOC Dispatch Oostende / Kust", "rol": "Lokale Dispatcher", "telefoon": "+32 59 56 24 11"},
         "seinhuis_contacten": [
-            {"dienst": "Traffic Controller Oostende", "rol": "Treinverkeer", "telefoon": "+32 59 56 24 11"}
+            {"dienst": "Traffic Controller Oostende (Blok 4)", "rol": "Treinverkeer L50A Kust", "telefoon": "+32 59 56 24 11"},
+            {"dienst": "Safety Controller Oostende", "rol": "Rangeer- en Bundeldienst", "telefoon": "+32 59 56 24 09"},
+            {"dienst": "Traffic Officer Area NW", "rol": "Bovenlokaal beheer Area NW", "telefoon": "+32 9 241 28 68"},
+            {"dienst": "Mailbox Seinzaal Oostende", "rol": "Schriftelijke overdrachten", "telefoon": "rdc.nw.oostende@infrabel.be"}
         ],
         "havenautoriteit": None,
-        "zone_risicos": ["Kustwind en zoutafzetting op contactleiding"],
+        "zone_risicos": [
+            "Kustwind en zoutafzetting op contactleiding en spoorinfrastructuur.",
+            "Wegovergangen en havenbedieningen langs openbare wegen."
+        ],
         "zone_snelheden": {
             "havenlijnen": "Max 20 km/u op bundelsporen",
             "aansluitingen": "Max 10 km/u op aansluitingen",
@@ -115,13 +128,21 @@ LEVEL_3_ZONES = {
     "kortrijk": {
         "id": "kortrijk",
         "regio_id": "west_vlaanderen",
-        "naam": "Zone Kortrijk",
+        "naam": "Zone Kortrijk & Zuidwest-WVL",
         "centraal_seinhuis": "Seinzaal Kortrijk (FR/D)",
+        "local_dispatch": {"dienst": "NOC Dispatch Kortrijk (Area Gent/Kortrijk)", "rol": "Lokale Dispatcher", "telefoon": "+32 56 24 24 11"},
         "seinhuis_contacten": [
-            {"dienst": "Traffic Controller Kortrijk", "rol": "Rangeer- en goederendienst", "telefoon": "+32 56 24 24 11"}
+            {"dienst": "Traffic Controller Kortrijk (FR/D)", "rol": "Treindienst L75 / L69", "telefoon": "+32 56 24 24 11"},
+            {"dienst": "Safety Controller Kortrijk", "rol": "Rangeer- en Veiligheidsdienst", "telefoon": "+32 56 24 24 09"},
+            {"dienst": "Traffic Officer Area NW", "rol": "Bovenlokaal beheer Area NW", "telefoon": "+32 9 241 28 68"},
+            {"dienst": "Mailbox Seinzaal Kortrijk", "rol": "Schriftelijke overdrachten", "telefoon": "rdc.nw.kortrijk@infrabel.be"}
         ],
         "havenautoriteit": None,
-        "zone_risicos": ["Grensregio verkeer L75"],
+        "zone_risicos": [
+            "Grensregio verkeer L75 & exploitatie enkelsporig baanvak L69.",
+            "Verhoogde waakzaamheid bij handwissels en stootblokken op goederensporen.",
+            "Overwegen op enkelsporige baanvakken zonder automatische aankondiging bij rangeren."
+        ],
         "zone_snelheden": {
             "havenlijnen": "Max 20 km/u op bundelsporen",
             "aansluitingen": "Max 10 km/u op aansluitingen",
@@ -275,16 +296,99 @@ LEVEL_4_MOEDERBUNDELS = {
     "kortrijk_vorming": {
         "id": "kortrijk_vorming",
         "zone_id": "kortrijk",
-        "naam": "Bundels Kortrijk (Vorming & Goederen)",
+        "naam": "Bundels Kortrijk (Vorming, Goederen & Lauwe)",
         "ppgi_referentie": "PPGI_1_FR_D_Kortrijk (Versie 2.0 - 18/09/2026)",
         "ssp_referentie": "SSP Kortrijk",
         "beseind": True,
         "seinen_info": "Seinzaal Kortrijk.",
         "bovenleiding_info": "Geëlektrificeerd L75.",
         "tankinstallatie": "Kortrijk.",
-        "parkeergelegenheid": ["Kortrijk Goederenkoer"],
+        "parkeergelegenheid": ["Kortrijk Goederenkoer / Stationsomgeving"],
         "cameras": "Infrabel toezicht.",
         "schuifrangering": "Rangeerregels Kortrijk.",
+        "bundel_sporen": [],
+        "overwegen_tracé": []
+    },
+    "lijn69_poperinge": {
+        "id": "lijn69_poperinge",
+        "zone_id": "kortrijk",
+        "naam": "Lijn 69 (Kortrijk – Ieper – Poperinge)",
+        "ppgi_referentie": "PPGI_1_FR_D (Spoorlijn 69, Blz. 30 & 38)",
+        "ssp_referentie": "SSP Zone Kortrijk / Lijn 69",
+        "beseind": False,
+        "seinen_info": "Enkelsporig baanvak met goederensporen te Poperinge.",
+        "bovenleiding_info": "Volledig geëlektrificeerd (3kV DC).",
+        "tankinstallatie": "Kortrijk Vorming.",
+        "parkeergelegenheid": ["Europalaan / Stationsomgeving Poperinge"],
+        "cameras": "Toezicht Infrabel / NMBS.",
+        "schuifrangering": "Bedieningsbeweging op spoor 4 & 5 mits toelating Seinzaal Kortrijk (FR/D).",
+        "bundel_sporen": [
+            {"spoor": "Spoor 4 (654)", "type": "Goederenspoor Poperinge", "beveiliging": "Stootblok"},
+            {"spoor": "Spoor 5 (655)", "type": "Goederenspoor Poperinge", "beveiliging": "Stootblok"}
+        ],
+        "overwegen_tracé": []
+    },
+    "roeselare_bundel": {
+        "id": "roeselare_bundel",
+        "zone_id": "brugge",
+        "naam": "Bundels Roeselare & Lichtervelde (L66)",
+        "ppgi_referentie": "PPGI_1_FR_B (Lijn 66 / L73)",
+        "ssp_referentie": "SSP Midden-West-Vlaanderen",
+        "beseind": True,
+        "seinen_info": "Seinzaal Brugge (FR/B).",
+        "bovenleiding_info": "Geëlektrificeerd L66.",
+        "tankinstallatie": "Brugge Vorming.",
+        "parkeergelegenheid": ["Goederenkoer Roeselare"],
+        "cameras": "Infrabel cameratoezicht.",
+        "schuifrangering": "Conform Seinzaal Brugge.",
+        "bundel_sporen": [],
+        "overwegen_tracé": []
+    },
+    "kust_bundels": {
+        "id": "kust_bundels",
+        "zone_id": "brugge",
+        "naam": "Bundels Blankenberge & De Panne",
+        "ppgi_referentie": "PPGI_1_FR_B (Lijn 51 & Lijn 73)",
+        "ssp_referentie": "SSP Zone Kust",
+        "beseind": True,
+        "seinen_info": "Seinzaal Brugge (FR/B).",
+        "bovenleiding_info": "Geëlektrificeerd (L51) / Deels diesel (L73).",
+        "tankinstallatie": "Brugge Vorming.",
+        "parkeergelegenheid": ["Stationsomgeving"],
+        "cameras": "Infrabel toezicht.",
+        "schuifrangering": "Conform Seinzaal Brugge.",
+        "bundel_sporen": [],
+        "overwegen_tracé": []
+    },
+    "oostende_vorming": {
+        "id": "oostende_vorming",
+        "zone_id": "oostende",
+        "naam": "Bundels Oostende (Vorming, Handelsdok & Tractie)",
+        "ppgi_referentie": "PP-341-Brugge (Actiezone Oostende, Versie 25.0)",
+        "ssp_referentie": "SSP Zone Oostende",
+        "beseind": True,
+        "seinen_info": "Seinzaal Oostende (Blok 4).",
+        "bovenleiding_info": "Geëlektrificeerd L50A.",
+        "tankinstallatie": "Aanwezig te Oostende Tractie.",
+        "parkeergelegenheid": ["Oostende Spoorwegcomplex"],
+        "cameras": "Infrabel cameratoezicht.",
+        "schuifrangering": "Rangeerbewegingen via Seinzaal Oostende.",
+        "bundel_sporen": [],
+        "overwegen_tracé": []
+    },
+    "zeebrugge_kaai": {
+        "id": "zeebrugge_kaai",
+        "zone_id": "zeebrugge",
+        "naam": "Bundels Zeebrugge Kaai (Voorhaven & CHZ)",
+        "ppgi_referentie": "PP-311-Brugge (Actiezone Zeebrugge Voorhaven)",
+        "ssp_referentie": "SSP Zeebrugge",
+        "beseind": True,
+        "seinen_info": "Blok 7 Zeebrugge.",
+        "bovenleiding_info": "Grotendeels geëlektrificeerd.",
+        "tankinstallatie": "Ramskapelle G&V.",
+        "parkeergelegenheid": ["Zeebrugge Kaaiweg / CHZ"],
+        "cameras": "Haven- en Infrabel camera's.",
+        "schuifrangering": "Kleine beweging.",
         "bundel_sporen": [],
         "overwegen_tracé": []
     }
@@ -504,26 +608,41 @@ def get_all_terminal_summaries():
     terminals = []
     for loc in locs_data["locations"]:
         lid = loc["id"]
-        # Determine mother bundle key
+        zone_code = loc.get("zone", "")
+        cluster = (loc.get("cluster") or "").lower()
         mb_name = (loc.get("moederbundel") or "").lower()
-        if "ramskapelle" in mb_name:
-            mb_key = "ramskapelle"
-        elif "pelikaan" in mb_name:
-            mb_key = "pelikaan"
-        elif "zwankendamme" in mb_name:
-            mb_key = "zwankendamme"
-        elif "voorhaven" in mb_name:
-            mb_key = "voorhaven_west"
-        elif "nid" in mb_name:
-            mb_key = "nid"
-        elif "plassendale" in mb_name or "oostende" in mb_name:
-            mb_key = "plassendale"
-        elif "brugge" in mb_name or loc.get("zone") == "FR/B":
-            mb_key = "brugge_vorming"
-        elif "kortrijk" in mb_name or loc.get("zone") == "FR/D":
-            mb_key = "kortrijk_vorming"
-        else:
-            mb_key = "zwankendamme"
+
+        # Strict zonal and mother bundle classification
+        if zone_code == "FR/D" or cluster in ["kortrijk", "zuidwest"]:
+            if "poperinge" in lid or "69" in mb_name:
+                mb_key = "lijn69_poperinge"
+            else:
+                mb_key = "kortrijk_vorming"
+        elif zone_code == "FR/B" or cluster in ["brugge", "centraal", "kust"]:
+            if "roeselare" in mb_name or "lichtervelde" in mb_name:
+                mb_key = "roeselare_bundel"
+            elif "blankenberge" in mb_name or "panne" in mb_name:
+                mb_key = "kust_bundels"
+            else:
+                mb_key = "brugge_vorming"
+        elif zone_code == "PP-341" or cluster == "oostende":
+            if "plassendale" in mb_name:
+                mb_key = "plassendale"
+            else:
+                mb_key = "oostende_vorming"
+        else: # Zeebrugge PP-321 and PP-311
+            if "ramskapelle" in mb_name:
+                mb_key = "ramskapelle"
+            elif "pelikaan" in mb_name:
+                mb_key = "pelikaan"
+            elif "voorhaven" in mb_name:
+                mb_key = "voorhaven_west"
+            elif "nid" in mb_name:
+                mb_key = "nid"
+            elif "kaai" in mb_name or "chz" in mb_name:
+                mb_key = "zeebrugge_kaai"
+            else:
+                mb_key = "zwankendamme"
 
         terminals.append({
             "id": lid,
@@ -586,25 +705,30 @@ def resolve_bi(terminal_id):
                 "auto": loc.get("toegang_weg") or loc.get("adres")
             },
             "contacten_klant": [
-                {"dienst": f"Terminal Planning {loc['naam']}", "rol": "Kaaiverantwoordelijke", "telefoon": "+32 50 xx xx xx"}
+                {"dienst": f"Verantwoordelijke {loc['naam']}", "rol": "Operationeel toezicht", "telefoon": "Ter plaatse / via Dispatcher"}
             ],
             "infrastructuur": {
                 "toegangsspoor": f"Toegangsspoor vanaf {moederbundel.get('naam')}",
                 "terminal_sporen": loc.get("sporen") or "Bedieningssporen",
-                "beveiliging_infrabel": loc.get("beveiliging") or "Stuitklamp / Handwissel",
+                "beveiliging_infrabel": loc.get("beveiliging") or "Handbediende wissels en/of stootblokken",
                 "laadkade": "Bedienings- en laadsporen",
-                "richting_lading": "Conform planning van dispatcher."
+                "richting_lading": "Conform planning van rangeerploeg / dispatcher."
             },
             "specifieke_risicos": [
-                f"Beveiliging: {loc.get('beveiliging') or 'Stuitklamp / wissel controleren vóór berijden.'}",
-                "Profielruimte: Let op obstakels en laadkaden langs de sporen."
+                f"Beveiliging: {loc.get('beveiliging') or 'Wissels en beveiliging controleren vóór berijden.'}",
+                "Profielruimte: Let op obstakels en laadkaden langs de bedieningssporen."
             ],
             "bedieningstijden": "Op aanvraag van de klant.",
             "procedures": {
                 "procedure_1_toegang": [
-                    {"stap": 1, "titel": "Rit aanvragen", "beschrijving": f"Rit aanvragen bij {zone.get('centraal_seinhuis')} naar de aansluiting."},
-                    {"stap": 2, "titel": "Beveiliging ontgrendelen", "beschrijving": f"Beveiliging ({loc.get('beveiliging')}) ontgrendelen en poort openen."},
-                    {"stap": 3, "titel": "Plaatsen wagens", "beschrijving": "Wagens plaatsen op aangewezen spoor, afkoppelen en immobiliseren."}
+                    {"stap": 1, "titel": "Rit aanvragen", "beschrijving": f"Rit aanvragen bij {zone.get('centraal_seinhuis')} naar de bedieningssporen van {loc['naam']}."},
+                    {"stap": 2, "titel": "Beveiliging verifiëren", "beschrijving": f"Beveiliging ({loc.get('beveiliging') or 'wisselligging en stopblokken'}) verifiëren en spoor controleren op vrije profielruimte."},
+                    {"stap": 3, "titel": "Plaatsen wagens", "beschrijving": "Wagens plaatsen op aangewezen spoor, afkoppelen en immobiliseren met schroefremmen/spieën."}
+                ],
+                "procedure_3_verlaten": [
+                    {"stap": 1, "titel": "Koppelen & Beveiliging", "beschrijving": "Wagens controleren, koppelen en alle immobilisatiemiddelen verwijderen."},
+                    {"stap": 2, "titel": "Toelating vertrek", "beschrijving": f"Toelating voor de terugrit aanvragen bij {zone.get('centraal_seinhuis')}."},
+                    {"stap": 3, "titel": "Vertrek naar bundel", "beschrijving": f"De beweging rijdt via het toegangsspoor terug naar {moederbundel.get('naam')}."}
                 ]
             }
         }
@@ -614,7 +738,10 @@ def resolve_bi(terminal_id):
     # Level 1: Operator
     for c in operator.get("contacten", []):
         all_realtime_contacts.append({**c, "niveau": "Niveau 1: Operator (DB Cargo)"})
-    # Level 3: Seinhuis
+    # Level 3: Lokale Dispatch voor DEZE zone
+    if zone.get("local_dispatch"):
+        all_realtime_contacts.append({**zone["local_dispatch"], "niveau": f"Niveau 3: Lokale Dispatch ({zone.get('naam')})"})
+    # Level 3: Seinhuis voor DEZE zone
     for c in zone.get("seinhuis_contacten", []):
         all_realtime_contacts.append({**c, "niveau": f"Niveau 3: Seinhuis ({zone.get('centraal_seinhuis')})"})
     # Level 3: Havenautoriteit
@@ -701,6 +828,7 @@ def resolve_bi(terminal_id):
             "immobilisatie": "Minimum 6 ‰ hellingswaarde hanteren bij aangekondigd stormweer. Voertuigen onderling gekoppeld.",
             "remproeven": "Volledige remproef na samenstelling, vereenvoudigde remproef na afhaling/aangroei."
         },
+        "infrastructuur": terminal.get("infrastructuur", {}),
         "procedures": terminal.get("procedures", {})
     }
     return assembled_bi

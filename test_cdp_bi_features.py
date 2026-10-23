@@ -141,11 +141,66 @@ async def run_cdp_tests():
             print(f"[TEST 10] Complete Document Height: {card_height}px (Spans ~10-15 A4 pages!)")
             assert card_height > 3000, f"Expected full document height > 3000px, got {card_height}"
 
+            # Test 11: Poperinge Goederen Zonal Isolation (No Zeebrugge / Ramskapelle bleed)
+            pop_info = await eval_js("""
+                (function() {
+                    onBiTerminalSelected('poperinge');
+                    const text = document.getElementById('biDocumentCard').innerText;
+                    return {
+                        hasZeebrugge: text.includes('Zeebrugge'),
+                        hasRamskapelle: text.includes('Ramskapelle'),
+                        hasKortrijk: text.includes('Kortrijk'),
+                        hasLijn69: text.includes('Lijn 69'),
+                        seinhuisKortrijk: text.includes('Seinzaal Kortrijk (FR/D)'),
+                        sec7_4_1: document.querySelector('#sec7_4_1')?.innerText || ''
+                    };
+                })()
+            """)
+            print(f"[TEST 11] Poperinge Isolation: Zeebrugge={pop_info['hasZeebrugge']}, Ramskapelle={pop_info['hasRamskapelle']}, Kortrijk={pop_info['hasKortrijk']}, Lijn69={pop_info['hasLijn69']}")
+            assert not pop_info['hasZeebrugge'], "Poperinge MUST NOT contain references to Zeebrugge!"
+            assert not pop_info['hasRamskapelle'], "Poperinge MUST NOT contain references to Ramskapelle!"
+            assert pop_info['hasKortrijk'], "Poperinge MUST contain references to Zone Kortrijk!"
+            assert pop_info['hasLijn69'], "Poperinge MUST contain references to Lijn 69!"
+            assert pop_info['seinhuisKortrijk'], "Poperinge MUST reference Seinzaal Kortrijk (FR/D)!"
+
+            # Test 12: Brugge (Alstom) Zonal Isolation
+            alstom_info = await eval_js("""
+                (function() {
+                    onBiTerminalSelected('alstom');
+                    const text = document.getElementById('biDocumentCard').innerText;
+                    return {
+                        hasZeebrugge: text.includes('Zeebrugge'),
+                        hasBrugge: text.includes('Brugge'),
+                        hasSeinzaalBrugge: text.includes('Seinzaal Brugge (FR/B)')
+                    };
+                })()
+            """)
+            print(f"[TEST 12] Alstom Isolation: Zeebrugge={alstom_info['hasZeebrugge']}, Brugge={alstom_info['hasBrugge']}, Seinhuis={alstom_info['hasSeinzaalBrugge']}")
+            assert not alstom_info['hasZeebrugge'], "Alstom (Brugge) MUST NOT contain references to Zeebrugge!"
+            assert alstom_info['hasBrugge'], "Alstom MUST reference Zone Brugge!"
+
+            # Test 13: Oostende (Plassendale) Zonal Isolation
+            plass_info = await eval_js("""
+                (function() {
+                    onBiTerminalSelected('plassendale');
+                    const text = document.getElementById('biDocumentCard').innerText;
+                    return {
+                        hasZeebrugge: text.includes('Zeebrugge'),
+                        hasOostende: text.includes('Oostende'),
+                        hasSeinzaalOostende: text.includes('Seinzaal Oostende (Blok 4)')
+                    };
+                })()
+            """)
+            print(f"[TEST 13] Plassendale Isolation: Zeebrugge={plass_info['hasZeebrugge']}, Oostende={plass_info['hasOostende']}, Seinhuis={plass_info['hasSeinzaalOostende']}")
+            assert not plass_info['hasZeebrugge'], "Plassendale (Oostende) MUST NOT contain references to Zeebrugge!"
+            assert plass_info['hasOostende'], "Plassendale MUST reference Zone Oostende!"
+
             print("\n=======================================================")
-            print("SUCCESS! ALL 10 TESTS PASSED:")
+            print("SUCCESS! ALL 13 TESTS PASSED:")
             print("1. Scrolling works all the way to Chapter 8 (no clipping)")
             print("2. Layout is IDENTICAL to Word/PDF template")
             print("3. Print / PDF CSS spans all pages properly")
+            print("4. Complete zonal isolation: NO Zeebrugge bleeding into other zones!")
             print("=======================================================")
 
     finally:

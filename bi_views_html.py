@@ -1246,7 +1246,7 @@ def get_bi_javascript():
               }});
             }}
           }}
-          if (prop.id === 'PROP-2026-004') {{
+          if (prop.id === 'PROP-2026-004' && bi.hierarchie_levels.level_3_zone.code === 'zeebrugge') {{
             if (!bi.contactpersonen.realtime.some(c => c.dienst.includes('Mailbox Blok 7'))) {{
               bi.contactpersonen.realtime.push({{
                 "dienst": "Mailbox Blok 7 Infrabel",
@@ -1264,8 +1264,10 @@ def get_bi_javascript():
 
     // Render BI Document (IDENTIEK AAN WORD / PDF MET VOLLEDIGE INHOUD)
     function renderBiDocument(termId) {{
+      const terminalId = termId;
       const bi = getResolvedBiForTerminal(termId);
       if (!bi) return;
+      const infra = bi.infrastructuur || (bi.installaties && bi.installaties.terminal) || {{}};
 
       const container = document.getElementById('biDocumentCard');
       const breadcrumbs = document.getElementById('biBreadcrumbsContainer');
@@ -1380,67 +1382,50 @@ def get_bi_javascript():
         </table>
       `;
 
-      // Table 4: Contactpersonen Real-time (with DB Cargo red, Infrabel blue, Klant grey)
+      // Table 4: Contactpersonen Real-time (Hierarchically filtered and dynamically rendered)
+      const opContacts = (bi.contactpersonen.realtime || []).filter(c => c.niveau && c.niveau.includes('Operator'));
+      const zoneContacts = (bi.contactpersonen.realtime || []).filter(c => c.niveau && (c.niveau.includes('Seinhuis') || c.niveau.includes('Dispatch') || c.niveau.includes('Haven')));
+      const termContacts = (bi.contactpersonen.realtime || []).filter(c => c.niveau && c.niveau.includes('Terminal'));
+
       const table4Html = `
         <table class="bi-word-table">
           <tbody>
             <tr>
-              <td colspan="3" class="header-group">DB Cargo Belgium</td>
+              <td colspan="3" class="header-group">DB Cargo Belgium (Operator)</td>
             </tr>
-            <tr>
-              <td class="bi-bar-red"></td>
-              <td style="width: 45%;">NOC Zeebrugge (Lokale Rangeer Dispatcher)</td>
-              <td><strong>+32 5 033 03 25</strong></td>
-            </tr>
-            <tr>
-              <td class="bi-bar-red"></td>
-              <td>NOC Shiftleader (Centraal Beheer)</td>
-              <td><strong>+32 3 545 02 33</strong></td>
-            </tr>
-
-            <tr>
-              <td colspan="3" class="header-group">Infrabel Seinhuis (${{bi.hierarchie_levels.level_3_zone.seinhuis || 'Blok 7'}})</td>
-            </tr>
-            <tr>
-              <td class="bi-bar-blue"></td>
-              <td>Traffic Officer (Area North-West)</td>
-              <td>+32 9 241 28 68</td>
-            </tr>
-            <tr>
-              <td class="bi-bar-blue"></td>
-              <td>Safety Controller (Rangeer- en Veiligheidsdienst)</td>
-              <td>+32 5 030 25 09</td>
-            </tr>
-            <tr>
-              <td class="bi-bar-blue"></td>
-              <td>Safety Supervisor</td>
-              <td>+32 5 030 25 00</td>
-            </tr>
-            <tr>
-              <td class="bi-bar-blue"></td>
-              <td>Traffic Controller (Treindienst Zeebrugge)</td>
-              <td>+32 5 030 25 11</td>
-            </tr>
-            <tr>
-              <td class="bi-bar-blue"></td>
-              <td>Mailbox Blok 7 Infrabel (Schriftelijke wagenoverdrachten)</td>
-              <td>rdc.nw.blok7@infrabel.be</td>
-            </tr>
-
-            <tr>
-              <td colspan="3" class="header-group">${{bi.metadata.terminal_naam}}</td>
-            </tr>
-            ${{(bi.contactpersonen.realtime.filter(c => c.niveau && c.niveau.includes('Terminal'))).map(c => `
+            ${{opContacts.map(c => `
               <tr>
-                <td class="bi-bar-grey"></td>
-                <td>${{c.dienst}} (${{c.rol}})</td>
+                <td class="bi-bar-red"></td>
+                <td style="width: 45%;">${{c.dienst}} ${{c.rol ? `(${{c.rol}})` : ''}}</td>
                 <td><strong>${{c.telefoon}}</strong></td>
               </tr>
-            `).join('') || `
+            `).join('')}}
+
+            <tr>
+              <td colspan="3" class="header-group">Infrabel Seinhuis & Lokale Opvolging (${{bi.hierarchie_levels.level_3_zone.seinhuis || bi.hierarchie_levels.level_3_zone.naam}})</td>
+            </tr>
+            ${{zoneContacts.map(c => `
+              <tr>
+                <td class="bi-bar-blue"></td>
+                <td style="width: 45%;">${{c.dienst}} ${{c.rol ? `(${{c.rol}})` : ''}}</td>
+                <td>${{c.telefoon && c.telefoon.includes('@') ? c.telefoon : `<strong>${{c.telefoon}}</strong>`}}</td>
+              </tr>
+            `).join('')}}
+
+            <tr>
+              <td colspan="3" class="header-group">${{bi.metadata.terminal_naam}} (Terminal / Klant)</td>
+            </tr>
+            ${{termContacts.length > 0 ? termContacts.map(c => `
               <tr>
                 <td class="bi-bar-grey"></td>
-                <td>Security / Kaaiverantwoordelijke</td>
-                <td>+32 50 55 78 35</td>
+                <td style="width: 45%;">${{c.dienst}} ${{c.rol ? `(${{c.rol}})` : ''}}</td>
+                <td><strong>${{c.telefoon}}</strong></td>
+              </tr>
+            `).join('') : `
+              <tr>
+                <td class="bi-bar-grey"></td>
+                <td style="width: 45%;">Operationeel Toezicht / Klant</td>
+                <td>Ter plaatse / via Dispatcher</td>
               </tr>
             `}}
           </tbody>
@@ -1759,26 +1744,31 @@ def get_bi_javascript():
               <h4 class="bi-h3">4.1.2  Parkeergelegenheid & toegang</h4>
               <p class="bi-p">Aan bundel ${{bi.installaties.moederbundel.naam}} is er voldoende gelegenheid tot parkeren:</p>
               <ul style="padding-left: 22px; font-size: 10pt; line-height: 1.5; margin-bottom: 12px;">
-                ${{(bi.installaties.moederbundel.parkeergelegenheid || ['Aan de tankinstallatie G&V', 'Aan de Alfred Ronsestraat', 'Aan het voormalig kantoor van Lineas', 'Langs de bundel']).map(p => `<li>${{p}}</li>`).join('')}}
+                ${{(bi.installaties.moederbundel.parkeergelegenheid || ['Parkeergelegenheid langs de bundel / spoorzone', 'Toegankelijk via openbare weg']).map(p => `<li>${{p}}</li>`).join('')}}
               </ul>
             </div>
           </div>
 
           <div id="sec4_2">
-            <h3 class="bi-h2">4.2  Bundel ${{bi.installaties.moederbundel.naam}}</h3>
+            <h3 class="bi-h2">4.2  ${{bi.installaties.moederbundel.naam}}</h3>
             <p class="bi-p"><strong>Beschrijving van de installaties:</strong></p>
             <ul style="padding-left: 22px; font-size: 10pt; line-height: 1.5; margin-bottom: 10px;">
-              <li>Is een beseinde bundel uitgerust met seinen (${{bi.installaties.moederbundel.seinen_info || 'seininrichting Infrabel'}});</li>
+              <li>${{bi.installaties.moederbundel.beseind ? 'Is een beseinde bundel uitgerust met seinen' : 'Niet-beseinde bundel / exploitatie goederensporen'}} (${{bi.installaties.moederbundel.seinen_info || 'seininrichting Infrabel'}});</li>
               <li>Bevat sporen met bovenleiding (${{bi.installaties.moederbundel.bovenleiding_info || 'Geëlektrificeerd'}});</li>
               <li>Is voorzien van tankinstallatie: ${{bi.installaties.moederbundel.tankinstallatie || 'Geen eigen installatie'}};</li>
-              <li>Is uitgerust met 24/7 camerabewaking beheerd door Infrabel.</li>
+              <li>Camerabewaking & toezicht: ${{bi.installaties.moederbundel.cameras || 'Toezicht Infrabel'}}.</li>
             </ul>
 
-            <p class="bi-p"><strong>Weetje lengte sporen:</strong></p>
-            <p class="bi-p">Bundel ${{bi.installaties.moederbundel.naam}} bestaat uit 8 lange sporen (881 t.e.m. 888) en 7 korte sporen (889 t.e.m. 895) om treinen te ontvangen en af te stellen.</p>
+            ${{terminalId === 'cro_brit' ? `
+              <p class="bi-p"><strong>Weetje lengte sporen:</strong></p>
+              <p class="bi-p">Bundel Ramskapelle bestaat uit 8 lange sporen (881 t.e.m. 888) en 7 korte sporen (889 t.e.m. 895) om treinen te ontvangen en af te stellen.</p>
 
-            <p class="bi-p"><strong>Schuifrangering kant Brugge:</strong></p>
-            <p class="bi-p">Op lijn 202B is de mogelijkheid voorzien tot een schuifrangering tussen de sporen 857 en 858. Deze schuifrangering maakt het mogelijk om bij een rangering met terugrit naar de bundel met een stel langer dan 150m (locomotief inbegrepen) het sein KC-R.7 open te zetten, zodat de reisweg tussen de bundel en sein IC-R.7 kan worden vrijgemaakt.</p>
+              <p class="bi-p"><strong>Schuifrangering kant Brugge:</strong></p>
+              <p class="bi-p">Op lijn 202B is de mogelijkheid voorzien tot een schuifrangering tussen de sporen 857 en 858. Deze schuifrangering maakt het mogelijk om bij een rangering met terugrit naar de bundel met een stel langer dan 150m (locomotief inbegrepen) het sein KC-R.7 open te zetten, zodat de reisweg tussen de bundel en sein IC-R.7 kan worden vrijgemaakt.</p>
+            ` : `
+              <p class="bi-p"><strong>Schuif- en rangeerbewegingen:</strong></p>
+              <p class="bi-p">${{bi.installaties.moederbundel.schuifrangering || `Rangeringen conform instructies van ${{bi.hierarchie_levels.level_3_zone.seinhuis}}.`}}</p>
+            `}}
           </div>
 
           <div id="sec4_3">
@@ -1786,31 +1776,50 @@ def get_bi_javascript():
             
             <div id="sec4_3_1">
               <h4 class="bi-h3">4.3.1  Sporen op de aansluiting</h4>
-              <p class="bi-p">Er bevinden zich 8 operationele sporen op de aansluiting (genummerd van links naar rechts bij binnenrijden):</p>
-              <ul style="padding-left: 22px; font-size: 10pt; line-height: 1.5; margin-bottom: 10px;">
-                <li>Spoor 1 & 2: voorzien voor containers (lengte 520m)</li>
-                <li>Spoor 3 & 4: voorzien voor containers (lengte 565m)</li>
-                <li>Spoor 5 & 6: voorzien voor automotive / auto's (lengte 315m)</li>
-                <li>Spoor 7: voorzien voor automotive (lengte 372m)</li>
-                <li>Spoor 8: voorzien voor automotive (lengte 424m)</li>
-              </ul>
+              ${{terminalId === 'cro_brit' ? `
+                <p class="bi-p">Er bevinden zich 8 operationele sporen op de aansluiting (genummerd van links naar rechts bij binnenrijden):</p>
+                <ul style="padding-left: 22px; font-size: 10pt; line-height: 1.5; margin-bottom: 10px;">
+                  <li>Spoor 1 & 2: voorzien voor containers (lengte 520m)</li>
+                  <li>Spoor 3 & 4: voorzien voor containers (lengte 565m)</li>
+                  <li>Spoor 5 & 6: voorzien voor automotive / auto's (lengte 315m)</li>
+                  <li>Spoor 7: voorzien voor automotive (lengte 372m)</li>
+                  <li>Spoor 8: voorzien voor automotive (lengte 424m)</li>
+                </ul>
+              ` : `
+                <p class="bi-p"><strong>Toegangsspoor:</strong> ${{infra.toegangsspoor || `Toegang vanaf ${{bi.installaties.moederbundel.naam}}`}}</p>
+                <p class="bi-p"><strong>Bedieningssporen:</strong> ${{infra.terminal_sporen || 'Bedienings- en laadsporen ter plaatse'}}</p>
+                <p class="bi-p"><strong>Laad- en loskade:</strong> ${{infra.laadkade || 'Bedieningssporen'}}</p>
+              `}}
             </div>
 
-            <div id="sec4_3_2">
-              <h4 class="bi-h3">4.3.2  Richting van de auto’s op de trein</h4>
-              <div class="bi-word-callout">
-                <strong>RICHTING LADING:</strong> De neuzen van de auto’s op de trein dienen steeds gericht te zijn naar de <strong>ZEE (kust)</strong>. De koffers dienen steeds kant <strong>BRUGGE</strong> gericht te zijn bij binnenrijden/plaatsing.
+            ${{terminalId === 'cro_brit' ? `
+              <div id="sec4_3_2">
+                <h4 class="bi-h3">4.3.2  Richting van de auto’s op de trein</h4>
+                <div class="bi-word-callout">
+                  <strong>RICHTING LADING:</strong> De neuzen van de auto’s op de trein dienen steeds gericht te zijn naar de <strong>ZEE (kust)</strong>. De koffers dienen steeds kant <strong>BRUGGE</strong> gericht te zijn bij binnenrijden/plaatsing.
+                </div>
               </div>
-            </div>
+            ` : (infra.richting_lading && infra.richting_lading !== 'NVT' && !infra.richting_lading.includes('dispatcher') ? `
+              <div id="sec4_3_2">
+                <h4 class="bi-h3">4.3.2  Richting van de lading</h4>
+                <div class="bi-word-callout">
+                  <strong>RICHTING LADING:</strong> ${{infra.richting_lading}}
+                </div>
+              </div>
+            ` : '')}}
 
             <div id="sec4_3_3">
               <h4 class="bi-h3">4.3.3  Beveiliging van de aansluiting</h4>
-              <p class="bi-p">De aansluiting is beveiligd met een geslotteerde stuitklamp (stuitklamp 321) en een automatische spoorpoort. De sleutel (321) bevindt zich in de Siemensslotkast die is opgesteld nabij overweg 17 (afgesloten met Wilka G* sleutel).</p>
+              ${{terminalId === 'cro_brit' ? `
+                <p class="bi-p">De aansluiting is beveiligd met een geslotteerde stuitklamp (stuitklamp 321) en een automatische spoorpoort. De sleutel (321) bevindt zich in de Siemensslotkast die is opgesteld nabij overweg 17 (afgesloten met Wilka G* sleutel).</p>
+              ` : `
+                <p class="bi-p">De aansluiting is beveiligd met: <strong>${{infra.beveiliging_infrabel || 'Handbediende wissels en/of stootjukken'}}</strong>.</p>
+              `}}
             </div>
 
             <div id="sec4_3_4">
               <h4 class="bi-h3">4.3.4  SSP Referentie</h4>
-              <p class="bi-p">De SSP is raadpleegbaar in ${{bi.installaties.moederbundel.ssp_referentie || 'SSP Zone Brugge'}}.</p>
+              <p class="bi-p">De SSP is raadpleegbaar in <strong>${{bi.installaties.moederbundel.ssp_referentie || bi.metadata.bron_referentie}}</strong>.</p>
             </div>
           </div>
         </div>
@@ -1822,31 +1831,45 @@ def get_bi_javascript():
         <!-- HOOFDSTUK 5 -->
         <div id="sec5">
           <h2 class="bi-h1">5  Risico’s op deze site</h2>
-          
-          <div id="sec5_1">
-            <h3 class="bi-h2">5.1  Spoor 844 lijn 202B is maar gedeeltelijk uitgerust met een bovenleiding</h3>
-            <p class="bi-p">Het spoor 844 lijn 202B is maar over een lengte van 55m voorbij het terugritsein KD-R.7 uitgerust met een bovenleiding. Na aankomst van een trein in de bundel Ramskapelle wordt de elektrische locomotief via deze reisweg verspoord. Let strikt op het einde-bovenleidingsbord!</p>
-          </div>
+          ${{terminalId === 'cro_brit' ? `
+            <div id="sec5_1">
+              <h3 class="bi-h2">5.1  Spoor 844 lijn 202B is maar gedeeltelijk uitgerust met een bovenleiding</h3>
+              <p class="bi-p">Het spoor 844 lijn 202B is maar over een lengte van 55m voorbij het terugritsein KD-R.7 uitgerust met een bovenleiding. Na aankomst van een trein in de bundel Ramskapelle wordt de elektrische locomotief via deze reisweg verspoord. Let strikt op het einde-bovenleidingsbord!</p>
+            </div>
 
-          <div id="sec5_2">
-            <h3 class="bi-h2">5.2  Overwegen op het traject bundel Ramskapelle – CRO Brittaniadok</h3>
-            <p class="bi-p">Er bevinden zich meerdere overwegen op het traject (o.a. OW15 en OW17). Het wegverkeer houdt niet altijd rekening met de lichtsignalisatie. De overweg 17, pal aan de poort van SEA-RO Brittaniadok, wordt intens gebruikt door vrachtwagens, fietsers en voetgangers; wees hier extra alert voor!</p>
-          </div>
+            <div id="sec5_2">
+              <h3 class="bi-h2">5.2  Overwegen op het traject bundel Ramskapelle – CRO Brittaniadok</h3>
+              <p class="bi-p">Er bevinden zich meerdere overwegen op het traject (o.a. OW15 en OW17). Het wegverkeer houdt niet altijd rekening met de lichtsignalisatie. De overweg 17, pal aan de poort van SEA-RO Brittaniadok, wordt intens gebruikt door vrachtwagens, fietsers en voetgangers; wees hier extra alert voor!</p>
+            </div>
 
-          <div id="sec5_3">
-            <h3 class="bi-h2">5.3  Stuitklamp ter beveiliging van de aansluiting</h3>
-            <p class="bi-p">De aansluiting wordt beveiligd door stuitklamp 321. Vergewis u er zich steeds van dat deze open ligt vóór elke overschrijding, onder elke omstandigheid.</p>
-          </div>
+            <div id="sec5_3">
+              <h3 class="bi-h2">5.3  Stuitklamp ter beveiliging van de aansluiting</h3>
+              <p class="bi-p">De aansluiting wordt beveiligd door stuitklamp 321. Vergewis u er zich steeds van dat deze open ligt vóór elke overschrijding, onder elke omstandigheid.</p>
+            </div>
 
-          <div id="sec5_4">
-            <h3 class="bi-h2">5.4  Aanwezigheid andere Spoorwegondernemingen (SO)</h3>
-            <p class="bi-p">Op de site kunnen andere spoorwegondernemingen actief zijn. Deze kunnen onterecht een rangeerbeweging uitvoeren. Maximale waakzaamheid en radiocontact houden is verplicht.</p>
-          </div>
+            <div id="sec5_4">
+              <h3 class="bi-h2">5.4  Aanwezigheid andere Spoorwegondernemingen (SO)</h3>
+              <p class="bi-p">Op de site kunnen andere spoorwegondernemingen actief zijn. Deze kunnen onterecht een rangeerbeweging uitvoeren. Maximale waakzaamheid en radiocontact houden is verplicht.</p>
+            </div>
+          ` : `
+            ${{(bi.veiligheid_en_risicos || []).filter(r => r.type !== 'Bedrijfsvoorschrift').map((r, idx) => `
+              <div id="sec5_${{idx+1}}">
+                <h3 class="bi-h2">5.${{idx+1}}  ${{r.type}}: ${{r.omschrijving.split(':')[0]}}</h3>
+                <p class="bi-p">${{r.omschrijving.includes(':') ? r.omschrijving.split(':').slice(1).join(':').trim() : r.omschrijving}}</p>
+                <p class="bi-p-small"><em>Geverifieerde bron: ${{r.bron}}</em></p>
+              </div>
+            `).join('') || `
+              <div id="sec5_1">
+                <h3 class="bi-h2">5.1  Specifieke risico's</h3>
+                <p class="bi-p">Waakzaamheid geboden voor wisselbediening, spoorbezetting en stootjukken conform de plaatselijke instructies.</p>
+              </div>
+            `}}
+          `}}
         </div>
 
         <div id="sec6" style="margin-top:20px;">
           <h2 class="bi-h1">6  Bijzonderheden</h2>
-          <p class="bi-p">Lijnkennis van L202B en havenlijnen Zeebrugge is te allen tijde vereist.</p>
+          <p class="bi-p">${{terminalId === 'cro_brit' ? 'Lijnkennis van L202B en havenlijnen Zeebrugge is te allen tijde vereist.' : `Lijnkennis van ${{bi.installaties.moederbundel.naam}} en actiezone ${{bi.hierarchie_levels.level_3_zone.naam}} is te allen tijde vereist.`}}</p>
         </div>
 
         <div class="bi-page-break"></div>
@@ -1866,7 +1889,7 @@ def get_bi_javascript():
               <li>Kennis van deze bediening en deze bedieningsinstructie;</li>
               <li>PBM’s: Veiligheidshelm, handschoenen, gele fluo veiligheidskledij, gehoorbescherming en veiligheidsschoenen S3;</li>
               <li>De nodige lijnkennis vermeld op het aanvullend bevoegdheidsbewijs;</li>
-              <li>Certificaat “Zeebrugge – Bundel Ramskapelle – C.RO Brittania” in RailCube.</li>
+              <li>Certificaat “${{bi.hierarchie_levels.level_3_zone.naam}} – ${{bi.metadata.terminal_naam}}” in RailCube.</li>
             </ul>
 
             <p class="bi-p"><strong>Schouwer / Rangeerder:</strong></p>
@@ -1874,7 +1897,7 @@ def get_bi_javascript():
               <li>Geldig attest DB Cargo Belgium;</li>
               <li>Kennis van deze bediening en bedieningsinstructie;</li>
               <li>PBM’s: Veiligheidshelm, handschoenen, gele fluo veiligheidskledij, gehoorbescherming & veiligheidsschoenen S3;</li>
-              <li>Certificaat “Zeebrugge – Bundel Ramskapelle – C.RO Brittania” in RailCube.</li>
+              <li>Certificaat “${{bi.hierarchie_levels.level_3_zone.naam}} – ${{bi.metadata.terminal_naam}}” in RailCube.</li>
             </ul>
 
             <p class="bi-p"><strong>Hulponderneming:</strong></p>
@@ -1921,36 +1944,48 @@ def get_bi_javascript():
             <h3 class="bi-h2">7.4  Bedienen van ${{bi.metadata.terminal_naam}}</h3>
 
             <div id="sec7_4_1">
-              <h4 class="bi-h3">7.4.1  Een rit aanvragen van bundel Ramskapelle naar CRO (spoor 872)</h4>
-              <p class="bi-p">De rit naar CRO Brittaniadok dient aangevraagd te worden bij Infrabel Blok 7. Om een beweging vanuit bundel Ramskapelle naar CRO te kunnen toelaten:</p>
-              <ul style="padding-left: 22px; font-size: 9.5pt; line-height: 1.45; margin-bottom: 6px;">
-                <li>Dienen ze te beschikken over het slot 321FR;</li>
-                <li>Mogen er geen rangeringen meer plaatsvinden op het spoor 872;</li>
-                <li>Tijdens rangeringen zijn ritten naar Ramskapelle strikt verboden!</li>
-              </ul>
-              <p class="bi-p">Dit om te vermijden dat er treinen kop-aan-kop komen te staan t.h.v. de seinen MD-R.7 en ND-R.7.</p>
+              <h4 class="bi-h3">7.4.1  Een rit aanvragen van ${{bi.metadata.moederbundel_naam}} naar ${{bi.metadata.terminal_naam}}</h4>
+              ${{terminalId === 'cro_brit' ? `
+                <p class="bi-p">De rit naar CRO Brittaniadok dient aangevraagd te worden bij Infrabel Blok 7. Om een beweging vanuit bundel Ramskapelle naar CRO te kunnen toelaten:</p>
+                <ul style="padding-left: 22px; font-size: 9.5pt; line-height: 1.45; margin-bottom: 6px;">
+                  <li>Dienen ze te beschikken over het slot 321FR;</li>
+                  <li>Mogen er geen rangeringen meer plaatsvinden op het spoor 872;</li>
+                  <li>Tijdens rangeringen zijn ritten naar Ramskapelle strikt verboden!</li>
+                </ul>
+                <p class="bi-p">Dit om te vermijden dat er treinen kop-aan-kop komen te staan t.h.v. de seinen MD-R.7 en ND-R.7.</p>
+              ` : `
+                <p class="bi-p">De bedieningsrit naar ${{bi.metadata.terminal_naam}} dient te worden aangevraagd bij <strong>${{bi.hierarchie_levels.level_3_zone.seinhuis}}</strong>. Vergewis je van de toelating, de actuele spoorbezetting en de reisweg alvorens de beweging aan te vatten.</p>
+              `}}
             </div>
 
             <div id="sec7_4_2">
-              <h4 class="bi-h3">7.4.2  Rit naar CRO Brittaniadok (Aanvoer / Toegang)</h4>
+              <h4 class="bi-h3">7.4.2  Rit naar ${{bi.metadata.terminal_naam}} (Aanvoer / Toegang)</h4>
               ${{stepTable12Html}}
             </div>
 
             <div id="sec7_4_3">
-              <h4 class="bi-h3">7.4.3  Plaatsen wagens op CRO Brittaniadok</h4>
-              <p class="bi-p">Het plaatsen van wagens gebeurt als opduwen van bundel Ramskapelle naar de bediening CRO. Controleer stand autolichten (kant kust).</p>
+              <h4 class="bi-h3">7.4.3  Plaatsen wagens op ${{bi.metadata.terminal_naam}}</h4>
+              ${{terminalId === 'cro_brit' ? `
+                <p class="bi-p">Het plaatsen van wagens gebeurt als opduwen van bundel Ramskapelle naar de bediening CRO. Controleer stand autolichten (kant kust).</p>
+              ` : `
+                <p class="bi-p">Het plaatsen van de wagens gebeurt als bedieningsbeweging vanuit ${{bi.metadata.moederbundel_naam}} naar de bedieningssporen van ${{bi.metadata.terminal_naam}}. Controleer steeds de immobilisatie (schroefremmen/spieën) en het vrijsignalisatiepunt.</p>
+              `}}
             </div>
 
             ${{stepTableProc2Html ? `
               <div id="sec7_4_2b" style="margin-top:14px;">
-                <h4 class="bi-h3">7.4.3b  Rangeringen van/naar C-RO tot op spoor 872 (Conform Infrabel PPGI v37.0)</h4>
+                <h4 class="bi-h3">7.4.3b  Rangeringen van/naar de Terminal tot op spoor 872</h4>
                 ${{stepTableProc2Html}}
               </div>
             ` : ''}}
 
             <div id="sec7_4_4" style="margin-top:14px;">
-              <h4 class="bi-h3">7.4.4  Uithalen wagens of verlaten CRO Brittaniadok (Afvoer)</h4>
-              <p class="bi-p">Let bij het uithalen van een trein op volgende zaken: aangebrachte ketting aan het stootjuk; vaste handremmen losmaken.</p>
+              <h4 class="bi-h3">7.4.4  Uithalen wagens of verlaten van ${{bi.metadata.terminal_naam}} (Afvoer)</h4>
+              ${{terminalId === 'cro_brit' ? `
+                <p class="bi-p">Let bij het uithalen van een trein op volgende zaken: aangebrachte ketting aan het stootjuk; vaste handremmen losmaken.</p>
+              ` : `
+                <p class="bi-p">Controleer vóór vertrek of alle immobilisatiemiddelen verwijderd zijn, de koppeling en remleiding in orde zijn en vraag de vertrektoelating aan bij <strong>${{bi.hierarchie_levels.level_3_zone.seinhuis}}</strong>.</p>
+              `}}
               ${{stepTable13Html}}
             </div>
           </div>
