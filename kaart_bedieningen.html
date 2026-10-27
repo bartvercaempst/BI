@@ -884,6 +884,66 @@
     }
 
     /* ========================================= */
+    /* ADMIN & EDIT COLLAPSIBLE ACCORDION        */
+    /* ========================================= */
+    .admin-edit-accordion {
+      margin-top: 10px;
+      border: 1.5px dashed #334155;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .admin-edit-accordion[open] {
+      border-style: solid;
+      border-color: #0284c7;
+      background: rgba(15, 23, 42, 0.95);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+    .admin-edit-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      cursor: pointer;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #94a3b8;
+      user-select: none;
+      transition: color 0.15s, background 0.15s;
+      list-style: none;
+    }
+    .admin-edit-summary:hover {
+      color: #38bdf8;
+      background: rgba(30, 41, 59, 0.6);
+    }
+    .admin-edit-summary::-webkit-details-marker,
+    .admin-edit-summary::marker {
+      display: none !important;
+    }
+    .admin-edit-summary-left {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .admin-edit-arrow {
+      font-size: 10px;
+      color: #64748b;
+      transition: transform 0.2s ease;
+    }
+    .admin-edit-accordion[open] .admin-edit-arrow {
+      transform: rotate(180deg);
+      color: #38bdf8;
+    }
+    .admin-edit-body {
+      padding: 10px 10px 12px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 1px solid #1e293b;
+    }
+
+    /* ========================================= */
     /* ALIASES & LINKING STYLES (TASK 2)         */
     /* ========================================= */
     .alias-section {
@@ -3410,67 +3470,6 @@
       </div>
 
       <div class="detail-grid">
-        
-        <!-- SECTION: Gekoppelde Benamingen & Aliassen (TASK 2) -->
-        <div class="detail-item alias-section" id="detailAliasSection">
-          <div class="alias-section-header">
-            <div class="detail-item-label">🔗 Gekoppelde Benamingen (1 BI voor allen)</div>
-            <span class="alias-count-tag" id="detailAliasCount">0 synoniemen</span>
-          </div>
-          <div id="detailAliasesContainer" class="alias-chips-wrap">
-            <!-- Chips rendered dynamically -->
-          </div>
-          <div class="alias-controls-box">
-            <div class="alias-add-row">
-              <input type="text" id="newAliasInput" class="alias-input" placeholder="Voeg synoniem toe (bijv. SA ECS 1)..." onkeydown="if(event.key==='Enter') addCurrentAlias()" />
-              <button class="btn-alias-add" onclick="addCurrentAlias()">+ Voeg toe</button>
-            </div>
-            <div class="alias-merge-row">
-              <select id="mergeLocationSelect" class="merge-select">
-                <option value="">-- Koppel met andere bediening --</option>
-              </select>
-              <button class="btn-alias-merge" onclick="mergeSelectedLocation()">🔗 Koppel</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Editable GPS Coordinates Box -->
-        <div class="edit-coord-box">
-          <div class="edit-coord-title">
-            <span>📍 GPS Coördinaten (Aanpasbaar)</span>
-            <span id="coordCustomBadge" class="badge-custom-coord" style="display:none;">HANDMATIG AANGEPAST</span>
-          </div>
-          
-          <div class="coord-inputs-row">
-            <div class="coord-field">
-              <label>Breedtegraad (Lat):</label>
-              <input type="number" step="0.000001" id="editLat" class="coord-input" onchange="onManualCoordInputChange()" />
-            </div>
-            <div class="coord-field">
-              <label>Lengtegraad (Lng):</label>
-              <input type="number" step="0.000001" id="editLng" class="coord-input" onchange="onManualCoordInputChange()" />
-            </div>
-          </div>
-
-          <div class="coord-tools-row">
-            <button id="btnDragMarker" class="btn-coord-tool" onclick="toggleDragCurrentMarker()">
-              <span>🎯</span> <span id="btnDragText">Marker Verslepen</span>
-            </button>
-            <button id="btnPickPoint" class="btn-coord-tool" onclick="togglePickPoint()">
-              <span>📍</span> <span id="btnPickText">Prikken op Kaart</span>
-            </button>
-          </div>
-
-          <div class="coord-save-row">
-            <button class="btn-coord-save" onclick="saveCurrentCoords()">
-              <span>💾</span> Positie Opslaan
-            </button>
-            <button id="btnResetCoords" class="btn-coord-reset" onclick="resetCurrentCoords()" title="Herstel de fabrieksinstelling van dit item">
-              Herstel Origineel
-            </button>
-          </div>
-        </div>
-
         <div class="detail-item">
           <div class="detail-item-label">Moederbundel (Infrabel)</div>
           <div id="detailMoederbundel" class="detail-item-val">-</div>
@@ -3507,6 +3506,78 @@
           Open in Google Maps Satelliet
         </a>
       </div>
+
+      <!-- GEAVANCEERD BEHEER: BI'S KOPPELEN & GPS AANPASSEN (STANDAARD VERBORGEN ONDERAAN) -->
+      <details class="admin-edit-accordion" id="adminEditAccordion">
+        <summary class="admin-edit-summary">
+          <div class="admin-edit-summary-left">
+            <span>⚙️</span>
+            <span>Geavanceerd: BI koppelen & GPS positie</span>
+          </div>
+          <span class="admin-edit-arrow">▾</span>
+        </summary>
+        <div class="admin-edit-body">
+          <!-- SECTION: Gekoppelde Benamingen & Aliassen -->
+          <div class="detail-item alias-section" id="detailAliasSection">
+            <div class="alias-section-header">
+              <div class="detail-item-label">🔗 Gekoppelde Benamingen (1 BI voor allen)</div>
+              <span class="alias-count-tag" id="detailAliasCount">0 synoniemen</span>
+            </div>
+            <div id="detailAliasesContainer" class="alias-chips-wrap">
+              <!-- Chips rendered dynamically -->
+            </div>
+            <div class="alias-controls-box">
+              <div class="alias-add-row">
+                <input type="text" id="newAliasInput" class="alias-input" placeholder="Voeg synoniem toe (bijv. SA ECS 1)..." onkeydown="if(event.key==='Enter') addCurrentAlias()" />
+                <button class="btn-alias-add" onclick="addCurrentAlias()">+ Voeg toe</button>
+              </div>
+              <div class="alias-merge-row">
+                <select id="mergeLocationSelect" class="merge-select">
+                  <option value="">-- Koppel met andere bediening --</option>
+                </select>
+                <button class="btn-alias-merge" onclick="mergeSelectedLocation()">🔗 Koppel</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Editable GPS Coordinates Box -->
+          <div class="edit-coord-box">
+            <div class="edit-coord-title">
+              <span>📍 GPS Coördinaten (Aanpasbaar)</span>
+              <span id="coordCustomBadge" class="badge-custom-coord" style="display:none;">HANDMATIG AANGEPAST</span>
+            </div>
+            
+            <div class="coord-inputs-row">
+              <div class="coord-field">
+                <label>Breedtegraad (Lat):</label>
+                <input type="number" step="0.000001" id="editLat" class="coord-input" onchange="onManualCoordInputChange()" />
+              </div>
+              <div class="coord-field">
+                <label>Lengtegraad (Lng):</label>
+                <input type="number" step="0.000001" id="editLng" class="coord-input" onchange="onManualCoordInputChange()" />
+              </div>
+            </div>
+
+            <div class="coord-tools-row">
+              <button id="btnDragMarker" class="btn-coord-tool" onclick="toggleDragCurrentMarker()">
+                <span>🎯</span> <span id="btnDragText">Marker Verslepen</span>
+              </button>
+              <button id="btnPickPoint" class="btn-coord-tool" onclick="togglePickPoint()">
+                <span>📍</span> <span id="btnPickText">Prikken op Kaart</span>
+              </button>
+            </div>
+
+            <div class="coord-save-row">
+              <button class="btn-coord-save" onclick="saveCurrentCoords()">
+                <span>💾</span> Positie Opslaan
+              </button>
+              <button id="btnResetCoords" class="btn-coord-reset" onclick="resetCurrentCoords()" title="Herstel de fabrieksinstelling van dit item">
+                Herstel Origineel
+              </button>
+            </div>
+          </div>
+        </div>
+      </details>
     </div>
 
     </div><!-- End #mapView -->
@@ -4662,6 +4733,11 @@
       // Google maps link
       document.getElementById('detailNavBtn').href = `https://www.google.com/maps/@?api=1&map_action=map&center=${target.lat},${target.lng}&zoom=18&basemap=satellite`;
 
+            // Reset admin accordion to closed by default
+      const adminAcc = document.getElementById('adminEditAccordion');
+      if (adminAcc && !isPickPointActive && !isDraggingActive) {
+        adminAcc.open = false;
+      }
       overlay.classList.add('active');
     }
 
@@ -4879,6 +4955,8 @@
       } else {
         disableDrag();
         overlay.classList.add('active');
+        const acc = document.getElementById('adminEditAccordion');
+        if (acc) acc.open = true;
       }
     }
 

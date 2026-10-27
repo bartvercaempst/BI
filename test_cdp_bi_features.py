@@ -70,7 +70,13 @@ async def run_cdp_tests():
 
             await ws.send(json.dumps({"id": msg_id, "method": "Runtime.enable"}))
             msg_id += 1
-            await asyncio.sleep(1)
+            
+            # Wait for document to be ready
+            for _ in range(20):
+                ready = await eval_js("document.readyState")
+                if ready == 'complete':
+                    break
+                await asyncio.sleep(0.3)
 
             # Test 1: Switch to BI Tab
             await eval_js("switchMainTab('bi')")
@@ -261,8 +267,55 @@ async def run_cdp_tests():
             assert map_track_info['hasSection'], "Detail overlay must have track overview section!"
             assert map_track_info['tableRows'] > 0, "Detail overlay must display mini track table!"
 
+            # Test 17: Admin Edit Accordion (BI Koppelen & GPS Coördinaten) - Hidden/Collapsed by Default at Bottom
+            admin_accordion_info = await eval_js("""
+                (function() {
+                    selectLocation('wal_can');
+                    const acc = document.getElementById('adminEditAccordion');
+                    const summary = acc ? acc.querySelector('summary') : null;
+                    const actions = document.querySelector('.detail-actions');
+                    const aliasSec = acc ? acc.querySelector('#detailAliasSection') : null;
+                    const coordBox = acc ? acc.querySelector('.edit-coord-box') : null;
+
+                    // Check that accordion is located after .detail-actions in DOM order
+                    const isAfterActions = (actions && acc) ? (actions.compareDocumentPosition(acc) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0 : false;
+
+                    return {
+                        hasAccordion: !!acc,
+                        isOpenByDefault: acc ? acc.open : null,
+                        summaryText: summary ? summary.innerText : '',
+                        isAfterActions,
+                        hasAliasSecInside: !!aliasSec,
+                        hasCoordBoxInside: !!coordBox
+                    };
+                })()
+            """)
+            print(f"[TEST 17] Admin Accordion: Exists={admin_accordion_info['hasAccordion']}, DefaultOpen={admin_accordion_info['isOpenByDefault']}, AfterActions={admin_accordion_info['isAfterActions']}")
+            assert admin_accordion_info['hasAccordion'], "adminEditAccordion must exist in detail overlay!"
+            assert not admin_accordion_info['isOpenByDefault'], "adminEditAccordion must be COLLAPSED (open=false) by default!"
+            assert admin_accordion_info['isAfterActions'], "adminEditAccordion must be placed at the BOTTOM, after .detail-actions!"
+            assert admin_accordion_info['hasAliasSecInside'], "Alias linking section must be inside the accordion!"
+            assert admin_accordion_info['hasCoordBoxInside'], "GPS edit box must be inside the accordion!"
+
+            # Test 18: Admin Edit Accordion expands when toggled
+            expand_info = await eval_js("""
+                (function() {
+                    const acc = document.getElementById('adminEditAccordion');
+                    acc.open = true;
+                    return {
+                        isOpen: acc.open,
+                        aliasDisplay: window.getComputedStyle(document.getElementById('detailAliasSection')).display,
+                        coordDisplay: window.getComputedStyle(document.querySelector('.edit-coord-box')).display
+                    };
+                })()
+            """)
+            print(f"[TEST 18] Admin Accordion Expand: IsOpen={expand_info['isOpen']}, AliasDisplay={expand_info['aliasDisplay']}, CoordDisplay={expand_info['coordDisplay']}")
+            assert expand_info['isOpen'], "Accordion should be expandable!"
+            assert expand_info['aliasDisplay'] != 'none', "Alias section should be visible when expanded!"
+            assert expand_info['coordDisplay'] != 'none', "Coord box should be visible when expanded!"
+
             print("\n=======================================================")
-            print("SUCCESS! ALL 16 TESTS PASSED:")
+            print("SUCCESS! ALL 18 TESTS PASSED:")
             print("1. Scrolling works all the way to Chapter 8 (no clipping)")
             print("2. Layout is IDENTICAL to Word/PDF template")
             print("3. Print / PDF CSS spans all pages properly")
@@ -271,6 +324,8 @@ async def run_cdp_tests():
             print("6. Spooroverzicht Aansluiting (4.3.1) with track purposes, lengths & badges")
             print("7. Specific slope safety callout (Alstom schaatsverplichting & 6‰ storm rule)")
             print("8. Interactive Map Detail Card displays track table and gradient badge!")
+            print("9. Admin Edit Controls (BI Koppelen & GPS aanpassen) positioned at BOTTOM")
+            print("10. Admin Edit Controls collapsed/hidden by default to avoid clutter!")
             print("=======================================================")
 
     finally:
