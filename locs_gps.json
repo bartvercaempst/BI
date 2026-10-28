@@ -1661,7 +1661,7 @@
       "spoor_details": [
         {
           "bundel": "Bundel A (Kopsporen)",
-          "spoor": "Spoor 357 (Bundel A)",
+          "spoor": "Spoor 357",
           "bestemming": "Kopspoor Bundel A",
           "bovenleiding": "Nee",
           "ltl": "541 m",
@@ -1673,7 +1673,7 @@
         },
         {
           "bundel": "Bundel A (Kopsporen)",
-          "spoor": "Spoor 358 (Bundel A)",
+          "spoor": "Spoor 358",
           "bestemming": "Kopspoor Bundel A",
           "bovenleiding": "Nee",
           "ltl": "475 m",
@@ -1685,7 +1685,7 @@
         },
         {
           "bundel": "Bundel A (Kopsporen)",
-          "spoor": "Spoor 359 (Bundel A)",
+          "spoor": "Spoor 359",
           "bestemming": "Kopspoor Bundel A",
           "bovenleiding": "Ja",
           "ltl": "460 m",
@@ -1697,7 +1697,7 @@
         },
         {
           "bundel": "Bundel A (Kopsporen)",
-          "spoor": "Spoor 360 (Bundel A)",
+          "spoor": "Spoor 360",
           "bestemming": "Kopspoor Bundel A",
           "bovenleiding": "Nee",
           "ltl": "604 m",
@@ -1709,7 +1709,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 227 (Bundel B)",
+          "spoor": "Spoor 227",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "566 m",
@@ -1721,7 +1721,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 228 (Bundel B)",
+          "spoor": "Spoor 228",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "527 m",
@@ -1733,7 +1733,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 229 (Bundel B)",
+          "spoor": "Spoor 229",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "469 m",
@@ -1745,7 +1745,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 230 (Bundel B)",
+          "spoor": "Spoor 230",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "469 m",
@@ -1757,7 +1757,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 231 (Bundel B)",
+          "spoor": "Spoor 231",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "672 m",
@@ -1769,7 +1769,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 232 (Bundel B)",
+          "spoor": "Spoor 232",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "672 m",
@@ -1781,7 +1781,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 233 (Bundel B)",
+          "spoor": "Spoor 233",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "611 m",
@@ -1793,7 +1793,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 234 (Bundel B)",
+          "spoor": "Spoor 234",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "548 m",
@@ -1805,7 +1805,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 235 (Bundel B)",
+          "spoor": "Spoor 235",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "546 m",
@@ -1817,7 +1817,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 236 (Bundel B)",
+          "spoor": "Spoor 236",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "594 m",
@@ -1829,7 +1829,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 237 (Bundel B)",
+          "spoor": "Spoor 237",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Nee",
           "ltl": "604 m",
@@ -1841,7 +1841,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 238 (Bundel B)",
+          "spoor": "Spoor 238",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Nee",
           "ltl": "492 m",
@@ -1853,7 +1853,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 239 (Bundel B)",
+          "spoor": "Spoor 239",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Nee",
           "ltl": "491 m",
@@ -1865,7 +1865,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 379 (Bundel B)",
+          "spoor": "Spoor 379",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "85 m",
@@ -1877,7 +1877,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 380 (Bundel B)",
+          "spoor": "Spoor 380",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "166 m",
@@ -1889,7 +1889,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 221 WART (Bundel C)",
+          "spoor": "Spoor 221 WART",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Nee",
           "ltl": "420 m",
@@ -1901,7 +1901,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 222 (Bundel C)",
+          "spoor": "Spoor 222",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Ja",
           "ltl": "724 m",
@@ -1913,7 +1913,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 223 (Bundel C)",
+          "spoor": "Spoor 223",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Ja",
           "ltl": "679 m",
@@ -1925,7 +1925,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 224 (Bundel C)",
+          "spoor": "Spoor 224",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Ja",
           "ltl": "500 m",
@@ -1937,7 +1937,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 225 (Bundel C)",
+          "spoor": "Spoor 225",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Ja",
           "ltl": "465 m",
@@ -1949,7 +1949,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 226 (Bundel C)",
+          "spoor": "Spoor 226",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Ja",
           "ltl": "505 m",
@@ -1961,7 +1961,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 356 (Bundel C)",
+          "spoor": "Spoor 356",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Ja",
           "ltl": "491 m",
@@ -1973,7 +1973,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 242 (Bundel D)",
+          "spoor": "Spoor 242",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "843 m",
@@ -1985,7 +1985,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 246 (Bundel D)",
+          "spoor": "Spoor 246",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "417 m",
@@ -1997,7 +1997,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 247 (Bundel D)",
+          "spoor": "Spoor 247",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "447 m",
@@ -2009,7 +2009,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 248 (Bundel D)",
+          "spoor": "Spoor 248",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "405 m",
@@ -2021,7 +2021,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 249 (Bundel D)",
+          "spoor": "Spoor 249",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "405 m",
@@ -2033,7 +2033,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 250 (Bundel D)",
+          "spoor": "Spoor 250",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "144 m",
@@ -2045,7 +2045,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 251 (Bundel D)",
+          "spoor": "Spoor 251",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "286 m",
@@ -2057,7 +2057,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 252 (Bundel D)",
+          "spoor": "Spoor 252",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "276 m",
@@ -2069,7 +2069,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 253 (Bundel D)",
+          "spoor": "Spoor 253",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "348 m",
@@ -2081,7 +2081,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 254 (Bundel D)",
+          "spoor": "Spoor 254",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "325 m",
@@ -2093,7 +2093,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 255 (Bundel D)",
+          "spoor": "Spoor 255",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "335 m",
@@ -2105,7 +2105,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 256 (Bundel D)",
+          "spoor": "Spoor 256",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "355 m",
@@ -2117,7 +2117,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 257 (Bundel D)",
+          "spoor": "Spoor 257",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "344 m",
@@ -2129,7 +2129,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 258 (Bundel D)",
+          "spoor": "Spoor 258",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "364 m",
@@ -2141,7 +2141,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 259 (Bundel D)",
+          "spoor": "Spoor 259",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "330 m",
@@ -2153,7 +2153,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 260 (Bundel D)",
+          "spoor": "Spoor 260",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "330 m",
@@ -2332,7 +2332,7 @@
       "spoor_details": [
         {
           "bundel": "Bundel A (Kopsporen)",
-          "spoor": "Spoor 357 (Bundel A)",
+          "spoor": "Spoor 357",
           "bestemming": "Kopspoor Bundel A",
           "bovenleiding": "Nee",
           "ltl": "541 m",
@@ -2344,7 +2344,7 @@
         },
         {
           "bundel": "Bundel A (Kopsporen)",
-          "spoor": "Spoor 358 (Bundel A)",
+          "spoor": "Spoor 358",
           "bestemming": "Kopspoor Bundel A",
           "bovenleiding": "Nee",
           "ltl": "475 m",
@@ -2356,7 +2356,7 @@
         },
         {
           "bundel": "Bundel A (Kopsporen)",
-          "spoor": "Spoor 359 (Bundel A)",
+          "spoor": "Spoor 359",
           "bestemming": "Kopspoor Bundel A",
           "bovenleiding": "Ja",
           "ltl": "460 m",
@@ -2368,7 +2368,7 @@
         },
         {
           "bundel": "Bundel A (Kopsporen)",
-          "spoor": "Spoor 360 (Bundel A)",
+          "spoor": "Spoor 360",
           "bestemming": "Kopspoor Bundel A",
           "bovenleiding": "Nee",
           "ltl": "604 m",
@@ -2380,7 +2380,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 227 (Bundel B)",
+          "spoor": "Spoor 227",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "566 m",
@@ -2392,7 +2392,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 228 (Bundel B)",
+          "spoor": "Spoor 228",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "527 m",
@@ -2404,7 +2404,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 229 (Bundel B)",
+          "spoor": "Spoor 229",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "469 m",
@@ -2416,7 +2416,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 230 (Bundel B)",
+          "spoor": "Spoor 230",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "469 m",
@@ -2428,7 +2428,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 231 (Bundel B)",
+          "spoor": "Spoor 231",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "672 m",
@@ -2440,7 +2440,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 232 (Bundel B)",
+          "spoor": "Spoor 232",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "672 m",
@@ -2452,7 +2452,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 233 (Bundel B)",
+          "spoor": "Spoor 233",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "611 m",
@@ -2464,7 +2464,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 234 (Bundel B)",
+          "spoor": "Spoor 234",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "548 m",
@@ -2476,7 +2476,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 235 (Bundel B)",
+          "spoor": "Spoor 235",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "546 m",
@@ -2488,7 +2488,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 236 (Bundel B)",
+          "spoor": "Spoor 236",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "594 m",
@@ -2500,7 +2500,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 237 (Bundel B)",
+          "spoor": "Spoor 237",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Nee",
           "ltl": "604 m",
@@ -2512,7 +2512,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 238 (Bundel B)",
+          "spoor": "Spoor 238",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Nee",
           "ltl": "492 m",
@@ -2524,7 +2524,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 239 (Bundel B)",
+          "spoor": "Spoor 239",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Nee",
           "ltl": "491 m",
@@ -2536,7 +2536,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 379 (Bundel B)",
+          "spoor": "Spoor 379",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "85 m",
@@ -2548,7 +2548,7 @@
         },
         {
           "bundel": "Bundel B (Vormingssporen)",
-          "spoor": "Spoor 380 (Bundel B)",
+          "spoor": "Spoor 380",
           "bestemming": "Vormingsspoor Bundel B",
           "bovenleiding": "Ja",
           "ltl": "166 m",
@@ -2560,7 +2560,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 221 WART (Bundel C)",
+          "spoor": "Spoor 221 WART",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Nee",
           "ltl": "420 m",
@@ -2572,7 +2572,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 222 (Bundel C)",
+          "spoor": "Spoor 222",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Ja",
           "ltl": "724 m",
@@ -2584,7 +2584,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 223 (Bundel C)",
+          "spoor": "Spoor 223",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Ja",
           "ltl": "679 m",
@@ -2596,7 +2596,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 224 (Bundel C)",
+          "spoor": "Spoor 224",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Ja",
           "ltl": "500 m",
@@ -2608,7 +2608,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 225 (Bundel C)",
+          "spoor": "Spoor 225",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Ja",
           "ltl": "465 m",
@@ -2620,7 +2620,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 226 (Bundel C)",
+          "spoor": "Spoor 226",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Ja",
           "ltl": "505 m",
@@ -2632,7 +2632,7 @@
         },
         {
           "bundel": "Bundel C (Lange Vormingssporen)",
-          "spoor": "Spoor 356 (Bundel C)",
+          "spoor": "Spoor 356",
           "bestemming": "Vormingsspoor Bundel C",
           "bovenleiding": "Ja",
           "ltl": "491 m",
@@ -2644,7 +2644,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 242 (Bundel D)",
+          "spoor": "Spoor 242",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "843 m",
@@ -2656,7 +2656,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 246 (Bundel D)",
+          "spoor": "Spoor 246",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "417 m",
@@ -2668,7 +2668,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 247 (Bundel D)",
+          "spoor": "Spoor 247",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "447 m",
@@ -2680,7 +2680,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 248 (Bundel D)",
+          "spoor": "Spoor 248",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "405 m",
@@ -2692,7 +2692,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 249 (Bundel D)",
+          "spoor": "Spoor 249",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "405 m",
@@ -2704,7 +2704,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 250 (Bundel D)",
+          "spoor": "Spoor 250",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "144 m",
@@ -2716,7 +2716,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 251 (Bundel D)",
+          "spoor": "Spoor 251",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "286 m",
@@ -2728,7 +2728,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 252 (Bundel D)",
+          "spoor": "Spoor 252",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "276 m",
@@ -2740,7 +2740,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 253 (Bundel D)",
+          "spoor": "Spoor 253",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "348 m",
@@ -2752,7 +2752,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 254 (Bundel D)",
+          "spoor": "Spoor 254",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "325 m",
@@ -2764,7 +2764,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 255 (Bundel D)",
+          "spoor": "Spoor 255",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "335 m",
@@ -2776,7 +2776,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 256 (Bundel D)",
+          "spoor": "Spoor 256",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "355 m",
@@ -2788,7 +2788,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 257 (Bundel D)",
+          "spoor": "Spoor 257",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "344 m",
@@ -2800,7 +2800,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 258 (Bundel D)",
+          "spoor": "Spoor 258",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "364 m",
@@ -2812,7 +2812,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 259 (Bundel D)",
+          "spoor": "Spoor 259",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "330 m",
@@ -2824,7 +2824,7 @@
         },
         {
           "bundel": "Bundel D (NMBS-Technics)",
-          "spoor": "Spoor 260 (Bundel D)",
+          "spoor": "Spoor 260",
           "bestemming": "Bundelspoor NMBS-Technics",
           "bovenleiding": "Ja",
           "ltl": "330 m",

@@ -1705,7 +1705,7 @@ def get_bi_javascript():
               <tbody>
                 ${{mbTracks.map(t => `
                   <tr>
-                    <td><strong>${{t.spoor}}</strong></td>
+                    <td><strong>${{(t.spoor || '').replace(/\\s*\\([Bb]undel[^)]*\\)/g, '').trim()}}</strong></td>
                     <td style="text-align:center;">
                       <span class="${{(t.bovenleiding || '').includes('Ja') ? 'spoor-badge-elec-yes' : ((t.bovenleiding || '').includes('Deels') ? 'spoor-badge-elec-part' : 'spoor-badge-elec-no')}}">
                         ${{t.bovenleiding || 'Nee'}}
@@ -1762,7 +1762,7 @@ def get_bi_javascript():
                     }}
                     return headerRow + `
                       <tr>
-                        <td><strong>${{t.spoor}}</strong></td>
+                        <td><strong>${{(t.spoor || '').replace(/\\s*\\([Bb]undel[^)]*\\)/g, '').trim()}}</strong></td>
                         <td>${{t.bestemming || '-'}}</td>
                         <td style="text-align:center;">
                           <span class="${{(t.bovenleiding || '').includes('Ja') ? 'spoor-badge-elec-yes' : 'spoor-badge-elec-no'}}">

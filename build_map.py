@@ -3586,7 +3586,7 @@ def build_map_html(locations, bundels):
             }}
             return headerRow + `
               <tr>
-                <td><strong>${{t.spoor}}</strong></td>
+                <td><strong>${{(t.spoor || '').replace(/\\s*\\([Bb]undel[^)]*\\)/g, '').trim()}}</strong></td>
                 <td style="font-family:Consolas,monospace; font-weight:700; color:#38bdf8;">${{t.lol || t.ltl || '-'}}</td>
                 <td>${{t.helling || helling}}</td>
                 <td>${{t.doodspoor || 'Ja'}}</td>

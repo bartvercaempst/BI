@@ -385,8 +385,33 @@ async def run_cdp_tests():
             assert kv_loc_info['hasBundelD'], "Bundel D tracks (251-260) with lengths must be present!"
             assert kv_loc_info['numRows'] >= 30, f"Expected at least 30 track rows, got {kv_loc_info['numRows']}"
 
+            # Test 21: Verify Table 4.3.1 does NOT repeat bundel name in first column (no bladvulling)
+            col1_check = await eval_js(r"""
+                (function() {
+                    switchMainTab('bi');
+                    renderBiDocument('kortrijk_vorming');
+                    
+                    // Check Table 4.3.1 rows
+                    const rows = Array.from(document.querySelectorAll('.bi-word-table tbody tr'));
+                    const spoorCells = rows.map(r => r.cells[0]?.innerText.trim()).filter(Boolean);
+                    
+                    // First cell should be 'Spoor 357', NOT 'Spoor 357 (Bundel A)'
+                    const spoor357Cell = spoorCells.find(t => t.includes('357'));
+                    const hasRedundantBundel = spoorCells.some(t => /\(Bundel [ABCD]\)/i.test(t));
+                    
+                    return {
+                        spoor357Text: spoor357Cell,
+                        hasRedundantBundel: hasRedundantBundel,
+                        totalCellsChecked: spoorCells.length
+                    };
+                })()
+            """)
+            print(f"[TEST 21] Table 4.3.1 Clean Spoor Names: 357='{col1_check['spoor357Text']}', HasRedundantBundel={col1_check['hasRedundantBundel']}")
+            assert col1_check['spoor357Text'] == 'Spoor 357', f"Expected 'Spoor 357' without (Bundel A), got '{col1_check['spoor357Text']}'"
+            assert not col1_check['hasRedundantBundel'], "No cell in column 1 should contain redundant '(Bundel X)'!"
+
             print("\n=======================================================")
-            print("SUCCESS! ALL 20 TESTS PASSED:")
+            print("SUCCESS! ALL 21 TESTS PASSED:")
             print("1. Scrolling works all the way to Chapter 8 (no clipping)")
             print("2. Layout is IDENTICAL to Word/PDF template")
             print("3. Print / PDF CSS spans all pages properly")
@@ -399,6 +424,7 @@ async def run_cdp_tests():
             print("10. Admin Edit Controls collapsed/hidden by default to avoid clutter!")
             print("11. Mother Bundel Kortrijk Vorming navigates directly to Kortrijk BI (NOT Zeebrugge/Sea-Ro)!")
             print("12. Kortrijk Goederen / Vorming displays all tracks for Bundels A, B, C, and D with lengths!")
+            print("13. Table 4.3.1 Column 1 contains clean track names without redundant (Bundel X) bladvulling!")
             print("=======================================================")
 
     finally:
