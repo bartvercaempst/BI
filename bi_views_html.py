@@ -1247,6 +1247,10 @@ def get_bi_javascript():
         setTimeout(() => {{ if (typeof map !== 'undefined' && map.invalidateSize) map.invalidateSize(); }}, 150);
       }} else if (tab === 'bi') {{
         populateBiSelectDropdown();
+        const sel = document.getElementById('biTerminalSelect');
+        if (sel && currentSelectedBiTerminalId) {{
+          sel.value = currentSelectedBiTerminalId;
+        }}
         renderBiDocument(currentSelectedBiTerminalId);
       }} else if (tab === 'ppgi') {{
         renderPpgiProposals();
@@ -1290,11 +1294,38 @@ def get_bi_javascript():
       renderBiDocument(termId);
     }}
 
+    var BUNDEL_TO_TERMINAL_MAP = window.BUNDEL_TO_TERMINAL_MAP || {{
+      'bundel_0': 'cro_brit',
+      'bundel_1': 'wal_can',
+      'bundel_2': 'cdmz',
+      'bundel_3': 'psa_zb',
+      'bundel_4': 'nid_ico',
+      'bundel_5': 'csp_term',
+      'bundel_6': 'oostende_vorming',
+      'bundel_7': 'lci_brugge',
+      'bundel_8': 'kortrijk_vorming',
+      'bundel_kortrijk_vorming': 'kortrijk_vorming',
+      'bundel_kortrijk': 'kortrijk_vorming'
+    }};
+
     // Resolve BI Document (combines pre-resolved data, custom versions, and applied proposals)
     function getResolvedBiForTerminal(termId) {{
-      let baseBi = rawResolvedBIs[termId];
+      let resolvedId = termId;
+      if (typeof BUNDEL_TO_TERMINAL_MAP !== 'undefined' && BUNDEL_TO_TERMINAL_MAP[termId]) {{
+        resolvedId = BUNDEL_TO_TERMINAL_MAP[termId];
+      }}
+      let baseBi = rawResolvedBIs[resolvedId];
       if (!baseBi) {{
-        baseBi = rawResolvedBIs['cro_brit'];
+        // Safe zonal resolution: Never bleed Zeebrugge into Kortrijk, Brugge, or Oostende!
+        if (typeof termId === 'string' && (termId.includes('kortrijk') || termId.includes('lauwe') || termId.includes('poperinge'))) {{
+          baseBi = rawResolvedBIs['kortrijk_vorming'];
+        }} else if (typeof termId === 'string' && (termId.includes('oostende') || termId.includes('plassendale'))) {{
+          baseBi = rawResolvedBIs['oostende_vorming'];
+        }} else if (typeof termId === 'string' && (termId.includes('brugge') || termId.includes('alstom') || termId.includes('otwd') || termId.includes('lci_brugge'))) {{
+          baseBi = rawResolvedBIs['lci_brugge'] || rawResolvedBIs['alstom'];
+        }} else {{
+          baseBi = rawResolvedBIs[termId] || rawResolvedBIs['kortrijk_vorming'] || rawResolvedBIs['cro_brit'];
+        }}
       }}
       let bi = JSON.parse(JSON.stringify(baseBi));
 
@@ -1346,9 +1377,15 @@ def get_bi_javascript():
 
     // Render BI Document (IDENTIEK AAN WORD / PDF MET VOLLEDIGE INHOUD)
     function renderBiDocument(termId) {{
-      const terminalId = termId;
       const bi = getResolvedBiForTerminal(termId);
       if (!bi) return;
+      const terminalId = bi.terminal_id || termId;
+      currentSelectedBiTerminalId = terminalId;
+
+      const sel = document.getElementById('biTerminalSelect');
+      if (sel && sel.value !== terminalId) {{
+        sel.value = terminalId;
+      }}
       const infra = bi.infrastructuur || (bi.installaties && bi.installaties.terminal) || {{}};
 
       const container = document.getElementById('biDocumentCard');
@@ -1715,29 +1752,39 @@ def get_bi_javascript():
                 </tr>
               </thead>
               <tbody>
-                ${{termTracks.map(t => `
-                  <tr>
-                    <td><strong>${{t.spoor}}</strong></td>
-                    <td>${{t.bestemming || '-'}}</td>
-                    <td style="text-align:center;">
-                      <span class="${{(t.bovenleiding || '').includes('Ja') ? 'spoor-badge-elec-yes' : 'spoor-badge-elec-no'}}">
-                        ${{t.bovenleiding || 'Nee'}}
-                      </span>
-                    </td>
-                    <td style="text-align:right; font-family:Consolas,monospace; font-weight:bold;">${{t.lol || t.ltl || '-'}}</td>
-                    <td style="text-align:center;">
-                      <span class="${{((t.helling || '').includes('Sterke') || (t.helling || '').includes('daling')) ? 'spoor-badge-helling-warn' : 'spoor-badge-helling-ok'}}">
-                        ${{t.helling || infra.hellingsgraad || '0-1 mm/m'}}
-                      </span>
-                    </td>
-                    <td style="text-align:center;">
-                      <span class="${{t.doodspoor === 'Ja' ? 'spoor-badge-deadend-yes' : 'spoor-badge-deadend-no'}}">
-                        ${{t.doodspoor || 'Ja'}}
-                      </span>
-                    </td>
-                    <td>${{t.opmerkingen || '-'}}</td>
-                  </tr>
-                `).join('')}}
+                ${{(() => {{
+                  let curB = '';
+                  return termTracks.map(t => {{
+                    let headerRow = '';
+                    if (t.bundel && t.bundel !== curB) {{
+                      curB = t.bundel;
+                      headerRow = `<tr style="background:#e0f2fe; color:#0369a1; font-weight:800; font-size:12px;"><td colspan="7" style="padding:6px 10px; border:1px solid #94a3b8;">📁 ${{t.bundel}}</td></tr>`;
+                    }}
+                    return headerRow + `
+                      <tr>
+                        <td><strong>${{t.spoor}}</strong></td>
+                        <td>${{t.bestemming || '-'}}</td>
+                        <td style="text-align:center;">
+                          <span class="${{(t.bovenleiding || '').includes('Ja') ? 'spoor-badge-elec-yes' : 'spoor-badge-elec-no'}}">
+                            ${{t.bovenleiding || 'Nee'}}
+                          </span>
+                        </td>
+                        <td style="text-align:right; font-family:Consolas,monospace; font-weight:bold;">${{t.lol || t.ltl || '-'}}</td>
+                        <td style="text-align:center;">
+                          <span class="${{((t.helling || '').includes('Sterke') || (t.helling || '').includes('daling') || (t.helling || '').includes('5,1') || (t.helling || '').includes('1,7')) ? 'spoor-badge-helling-warn' : 'spoor-badge-helling-ok'}}">
+                            ${{t.helling || infra.hellingsgraad || '0-1 mm/m'}}
+                          </span>
+                        </td>
+                        <td style="text-align:center;">
+                          <span class="${{t.doodspoor === 'Ja' ? 'spoor-badge-deadend-yes' : 'spoor-badge-deadend-no'}}">
+                            ${{t.doodspoor || 'Ja'}}
+                          </span>
+                        </td>
+                        <td>${{t.opmerkingen || '-'}}</td>
+                      </tr>
+                    `;
+                  }}).join('');
+                }})()}}
               </tbody>
             </table>
           </div>

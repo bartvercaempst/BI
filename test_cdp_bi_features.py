@@ -314,8 +314,79 @@ async def run_cdp_tests():
             assert expand_info['aliasDisplay'] != 'none', "Alias section should be visible when expanded!"
             assert expand_info['coordDisplay'] != 'none', "Coord box should be visible when expanded!"
 
+            # Test 19: Clicking Mother Bundel "Kortrijk Vorming" navigates to Kortrijk BI (NOT Sea-Ro Zeebrugge!)
+            kv_bundel_info = await eval_js("""
+                (function() {
+                    switchMainTab('map');
+                    const kvBundel = allItems.find(x => x.name === 'Kortrijk Vorming' && x.is_bundel);
+                    if (!kvBundel) return { error: 'Kortrijk Vorming bundel not found' };
+                    selectLocation(kvBundel.id, false);
+                    const title = document.getElementById('detailTitle').textContent;
+                    const pill = document.getElementById('detailStatusPill').textContent;
+                    const trackRows = document.querySelectorAll('#detailTrackMiniContainer tr').length;
+                    
+                    // Click open BI from detail
+                    openBiForActiveLocation();
+                    
+                    const activeTab = currentMainTab;
+                    const selectedTermId = currentSelectedBiTerminalId;
+                    const dropdownVal = document.getElementById('biTerminalSelect')?.value;
+                    const biDocTitle = document.querySelector('.bi-cover-center h2')?.textContent;
+                    const biZone = document.querySelector('.bi-crumb-card:nth-child(5) .bi-crumb-name')?.textContent;
+
+                    return {
+                        bundelTitle: title,
+                        bundelPill: pill,
+                        trackRows: trackRows,
+                        activeTab: activeTab,
+                        selectedTermId: selectedTermId,
+                        dropdownVal: dropdownVal,
+                        biDocTitle: biDocTitle,
+                        biZone: biZone
+                    };
+                })()
+            """)
+            print(f"[TEST 19] Kortrijk Vorming Bundel: Title='{kv_bundel_info.get('bundelTitle')}', Target='{kv_bundel_info.get('selectedTermId')}', DocTitle='{kv_bundel_info.get('biDocTitle')}'")
+            assert "Kortrijk" in kv_bundel_info.get('bundelTitle', '')
+            assert kv_bundel_info.get('activeTab') == 'bi'
+            assert kv_bundel_info.get('selectedTermId') == 'kortrijk_vorming'
+            assert "Kortrijk" in kv_bundel_info.get('biDocTitle', '')
+            assert "Sea-Ro" not in kv_bundel_info.get('biDocTitle', '')
+            assert "Brittaniadok" not in kv_bundel_info.get('biDocTitle', '')
+
+            # Test 20: Kortrijk Goederen / Vorming (red location icon) displays complete Bundel A, B, C, D track overviews with lengths!
+            kv_loc_info = await eval_js("""
+                (function() {
+                    switchMainTab('map');
+                    selectLocation('kortrijk_vorming', false);
+                    const pill = document.getElementById('detailStatusPill').textContent;
+                    const tracksContainerText = document.getElementById('detailTrackMiniContainer').innerText;
+                    const rows = Array.from(document.querySelectorAll('#detailTrackMiniContainer tbody tr')).map(r => r.innerText);
+                    
+                    const hasBundelA = tracksContainerText.includes('Bundel A') && tracksContainerText.includes('357') && tracksContainerText.includes('521 m');
+                    const hasBundelB = tracksContainerText.includes('Bundel B') && tracksContainerText.includes('227') && tracksContainerText.includes('546 m');
+                    const hasBundelC = tracksContainerText.includes('Bundel C') && tracksContainerText.includes('222') && tracksContainerText.includes('704 m');
+                    const hasBundelD = tracksContainerText.includes('Bundel D') && tracksContainerText.includes('242') && tracksContainerText.includes('823 m');
+
+                    return {
+                        pill: pill,
+                        numRows: rows.length,
+                        hasBundelA: hasBundelA,
+                        hasBundelB: hasBundelB,
+                        hasBundelC: hasBundelC,
+                        hasBundelD: hasBundelD
+                    };
+                })()
+            """)
+            print(f"[TEST 20] Kortrijk Location Tracks: Rows={kv_loc_info['numRows']}, BundelA={kv_loc_info['hasBundelA']}, BundelB={kv_loc_info['hasBundelB']}, BundelC={kv_loc_info['hasBundelC']}, BundelD={kv_loc_info['hasBundelD']}")
+            assert kv_loc_info['hasBundelA'], "Bundel A tracks (357-360) with lengths must be present!"
+            assert kv_loc_info['hasBundelB'], "Bundel B tracks (227-239) with lengths must be present!"
+            assert kv_loc_info['hasBundelC'], "Bundel C tracks (221-226) with lengths must be present!"
+            assert kv_loc_info['hasBundelD'], "Bundel D tracks (251-260) with lengths must be present!"
+            assert kv_loc_info['numRows'] >= 30, f"Expected at least 30 track rows, got {kv_loc_info['numRows']}"
+
             print("\n=======================================================")
-            print("SUCCESS! ALL 18 TESTS PASSED:")
+            print("SUCCESS! ALL 20 TESTS PASSED:")
             print("1. Scrolling works all the way to Chapter 8 (no clipping)")
             print("2. Layout is IDENTICAL to Word/PDF template")
             print("3. Print / PDF CSS spans all pages properly")
@@ -326,6 +397,8 @@ async def run_cdp_tests():
             print("8. Interactive Map Detail Card displays track table and gradient badge!")
             print("9. Admin Edit Controls (BI Koppelen & GPS aanpassen) positioned at BOTTOM")
             print("10. Admin Edit Controls collapsed/hidden by default to avoid clutter!")
+            print("11. Mother Bundel Kortrijk Vorming navigates directly to Kortrijk BI (NOT Zeebrugge/Sea-Ro)!")
+            print("12. Kortrijk Goederen / Vorming displays all tracks for Bundels A, B, C, and D with lengths!")
             print("=======================================================")
 
     finally:

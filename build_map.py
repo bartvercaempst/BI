@@ -3307,9 +3307,11 @@ def build_map_html(locations, bundels):
       const hasCustom = persistedCoords[bundelId] !== undefined;
       const lat = hasCustom ? persistedCoords[bundelId].lat : b.lat;
       const lng = hasCustom ? persistedCoords[bundelId].lng : b.lng;
+      const targetTermId = b.target_terminal_id || (typeof BUNDEL_TO_TERMINAL_MAP !== 'undefined' ? BUNDEL_TO_TERMINAL_MAP[bundelId] : null);
 
       allItems.push({{
         id: bundelId,
+        target_terminal_id: targetTermId,
         name: b.name,
         type: 'Infrabel Moederbundel / Rangeerstation',
         cluster: 'bundel',
@@ -3318,6 +3320,7 @@ def build_map_html(locations, bundels):
         has_bi: false,
         moederbundel: 'Hoofdspoor Infrabel',
         sporen: b.info || 'Rangeersporen',
+        spoor_details: b.spoor_details || [],
         adres: b.name + ', West-Vlaanderen',
         toegang_weg: 'Spoorwegtoegang Infrabel',
         beveiliging: 'Bediend seinwezen / Centrale Blokpost',
@@ -3549,9 +3552,10 @@ def build_map_html(locations, bundels):
       const hAlert = document.getElementById('detailHellingAlert');
       const miniContainer = document.getElementById('detailTrackMiniContainer');
 
-      const resolvedObj = (typeof rawResolvedBIs !== 'undefined' && rawResolvedBIs[target.id]) ? rawResolvedBIs[target.id] : null;
+      const effectiveTermId = target.is_bundel ? (target.target_terminal_id || (typeof BUNDEL_TO_TERMINAL_MAP !== 'undefined' ? BUNDEL_TO_TERMINAL_MAP[target.id] : null) || target.id) : target.id;
+      const resolvedObj = (typeof rawResolvedBIs !== 'undefined' && effectiveTermId && rawResolvedBIs[effectiveTermId]) ? rawResolvedBIs[effectiveTermId] : null;
       const helling = target.helling || (resolvedObj && resolvedObj.installaties && resolvedObj.installaties.terminal && resolvedObj.installaties.terminal.hellingsgraad) || '0-1 mm/m (vlak)';
-      const isSteep = helling.includes('Sterke') || helling.includes('daling') || helling.includes('schaats');
+      const isSteep = helling.includes('Sterke') || helling.includes('daling') || helling.includes('schaats') || helling.includes('5,1') || helling.includes('1,7');
 
       if (hBadge) {{
         hBadge.textContent = helling;
@@ -3568,31 +3572,45 @@ def build_map_html(locations, bundels):
         }}
       }}
 
-      // Render mini track table if available
-      const tracks = target.spoor_details || (resolvedObj && resolvedObj.installaties && resolvedObj.installaties.terminal && resolvedObj.installaties.terminal.spooroverzicht) || [];
+      // Render track table
+      const tracks = (target.spoor_details && target.spoor_details.length > 0) ? target.spoor_details : ((resolvedObj && resolvedObj.infrastructuur && resolvedObj.infrastructuur.spooroverzicht) || (resolvedObj && resolvedObj.installaties && resolvedObj.installaties.terminal && resolvedObj.installaties.terminal.spooroverzicht) || (resolvedObj && resolvedObj.installaties && resolvedObj.installaties.moederbundel && resolvedObj.installaties.moederbundel.spooroverzicht) || []);
       if (miniContainer) {{
         if (tracks && tracks.length > 0) {{
+          let currentGroup = '';
+          const rowsHtml = tracks.map(t => {{
+            let headerRow = '';
+            const bName = t.bundel || '';
+            if (bName && bName !== currentGroup) {{
+              currentGroup = bName;
+              headerRow = `<tr class="track-group-row"><td colspan="4" style="background:#1e3a5f; color:#93c5fd; font-weight:800; font-size:10px; padding:4px 6px; letter-spacing:0.5px; border-top:1px solid #3b82f6;">📁 ${{bName}}</td></tr>`;
+            }}
+            return headerRow + `
+              <tr>
+                <td><strong>${{t.spoor}}</strong></td>
+                <td style="font-family:Consolas,monospace; font-weight:700; color:#38bdf8;">${{t.lol || t.ltl || '-'}}</td>
+                <td>${{t.helling || helling}}</td>
+                <td>${{t.doodspoor || 'Ja'}}</td>
+              </tr>
+            `;
+          }}).join('');
+
           miniContainer.innerHTML = `
-            <table class="detail-track-table">
-              <thead>
-                <tr>
-                  <th>Spoor</th>
-                  <th>LOL</th>
-                  <th>Helling</th>
-                  <th>Dood</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${{tracks.slice(0, 8).map(t => `
+            ${{tracks.length > 4 ? `<div style="font-size:10px; color:#94a3b8; margin:2px 0 4px 0; font-weight:600;">Overzicht van alle ${{tracks.length}} sporen (scrolbaar):</div>` : ''}}
+            <div style="max-height:220px; overflow-y:auto; border:1px solid #334155; border-radius:4px;">
+              <table class="detail-track-table" style="margin-top:0;">
+                <thead style="position:sticky; top:0; z-index:2; background:#1e293b;">
                   <tr>
-                    <td><strong>${{t.spoor}}</strong></td>
-                    <td style="font-family:Consolas,monospace; font-weight:700;">${{t.lol || t.ltl || '-'}}</td>
-                    <td>${{t.helling || helling}}</td>
-                    <td>${{t.doodspoor || 'Ja'}}</td>
+                    <th>Spoor</th>
+                    <th>LOL</th>
+                    <th>Helling</th>
+                    <th>Dood</th>
                   </tr>
-                `).join('')}}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  ${{rowsHtml}}
+                </tbody>
+              </table>
+            </div>
           `;
           miniContainer.style.display = 'block';
         }} else {{
@@ -4390,10 +4408,37 @@ def build_map_html(locations, bundels):
         f"const rawDetailedTerminals = {json.dumps(detailed_terminals, ensure_ascii=False)};\n"
     )
     js_helper = """
+    var BUNDEL_TO_TERMINAL_MAP = window.BUNDEL_TO_TERMINAL_MAP || {
+      'bundel_0': 'cro_brit',
+      'bundel_1': 'wal_can',
+      'bundel_2': 'cdmz',
+      'bundel_3': 'psa_zb',
+      'bundel_4': 'nid_ico',
+      'bundel_5': 'csp_term',
+      'bundel_6': 'oostende_vorming',
+      'bundel_7': 'lci_brugge',
+      'bundel_8': 'kortrijk_vorming',
+      'bundel_kortrijk_vorming': 'kortrijk_vorming',
+      'bundel_kortrijk': 'kortrijk_vorming'
+    };
+
     function openBiForActiveLocation() {
-      if (activeMarkerId) {
-        currentSelectedBiTerminalId = activeMarkerId;
-        switchMainTab('bi');
+      if (!activeMarkerId) return;
+      let targetId = activeMarkerId;
+      const item = (typeof allItems !== 'undefined') ? allItems.find(x => x.id === activeMarkerId) : null;
+      if (item && item.is_bundel) {
+        targetId = item.target_terminal_id || BUNDEL_TO_TERMINAL_MAP[activeMarkerId] || 'kortrijk_vorming';
+      } else if (BUNDEL_TO_TERMINAL_MAP[activeMarkerId]) {
+        targetId = BUNDEL_TO_TERMINAL_MAP[activeMarkerId];
+      }
+      currentSelectedBiTerminalId = targetId;
+      switchMainTab('bi');
+      const sel = document.getElementById('biTerminalSelect');
+      if (sel) {
+        sel.value = targetId;
+      }
+      if (typeof renderBiDocument === 'function') {
+        renderBiDocument(targetId);
       }
     }
     """
