@@ -613,6 +613,297 @@
       background: #0b1120;
     }
 
+    /* ========================================= */
+    /* GPS LOCATIE & BUNDEL DETECTIE STYLING     */
+    /* ========================================= */
+    .btn-map-gps {
+      position: absolute;
+      bottom: 85px;
+      right: 12px;
+      z-index: 800;
+      background: #0f172a;
+      border: 2px solid #3b82f6;
+      color: #60a5fa;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6), 0 0 10px rgba(59, 130, 246, 0.3);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 20px;
+    }
+    .btn-map-gps:hover {
+      background: #1e293b;
+      color: #93c5fd;
+      border-color: #60a5fa;
+      transform: scale(1.08);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7), 0 0 16px rgba(59, 130, 246, 0.5);
+    }
+    .btn-map-gps.locating {
+      border-color: #f59e0b;
+      color: #fbbf24;
+      animation: pulse-gps-btn 1.2s infinite;
+    }
+    .btn-map-gps.active {
+      background: #1d4ed8;
+      color: #ffffff;
+      border-color: #93c5fd;
+      box-shadow: 0 0 14px rgba(37, 99, 235, 0.8);
+    }
+    @keyframes pulse-gps-btn {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6); }
+      70% { transform: scale(1.08); box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+    }
+
+    /* Hub & Filter GPS Buttons */
+    .hub-btn.hub-btn-gps {
+      background: rgba(37, 99, 235, 0.25);
+      border-color: #3b82f6;
+      color: #93c5fd;
+      font-weight: 800;
+    }
+    .hub-btn.hub-btn-gps:hover, .hub-btn.hub-btn-gps.active {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #60a5fa;
+    }
+    .filter-chip.chip-gps {
+      border-color: #3b82f6;
+      color: #60a5fa;
+    }
+    .filter-chip.chip-gps.active {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #60a5fa;
+    }
+
+    /* Distance Badges in Sidebar Loc Cards */
+    .loc-card-distance {
+      font-size: 10px;
+      font-weight: 800;
+      font-family: Consolas, monospace;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 1px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .loc-card-distance.closest {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border-color: #10b981;
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
+    }
+
+    /* User GPS Marker on Map */
+    .user-gps-marker {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .user-gps-pulse {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.4);
+      animation: gpsPulse 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+    }
+    .user-gps-dot {
+      position: relative;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #2563eb;
+      border: 2.5px solid #ffffff;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.9), 0 2px 4px rgba(0,0,0,0.4);
+      z-index: 2;
+    }
+    @keyframes gpsPulse {
+      0% { transform: scale(0.5); opacity: 1; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+
+    /* Floating Nearby Bundels & Bedieningen Card */
+    .gps-nearby-card {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 850;
+      width: calc(100% - 32px);
+      max-width: 540px;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid #3b82f6;
+      border-radius: 12px;
+      padding: 12px 14px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 20px rgba(59, 130, 246, 0.25);
+      animation: slideDownFade 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes slideDownFade {
+      from { opacity: 0; transform: translate(-50%, -15px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+    .gps-nearby-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .gps-nearby-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 13px;
+      color: #f8fafc;
+    }
+    .gps-live-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: blinkDot 1.5s infinite;
+    }
+    @keyframes blinkDot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .gps-accuracy-badge {
+      font-size: 10px;
+      font-weight: 700;
+      background: rgba(59, 130, 246, 0.2);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      padding: 2px 6px;
+      border-radius: 10px;
+    }
+    .gps-nearby-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .gps-btn-icon {
+      background: rgba(51, 65, 85, 0.6);
+      border: 1px solid #475569;
+      color: #cbd5e1;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.15s;
+    }
+    .gps-btn-icon:hover {
+      background: #334155;
+      color: white;
+      border-color: #94a3b8;
+    }
+    .gps-nearby-sub {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-bottom: 8px;
+    }
+    .gps-nearby-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 8px;
+    }
+    .gps-nearby-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(30, 41, 59, 0.85);
+      border: 1.5px solid #334155;
+      padding: 8px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .gps-nearby-item:hover {
+      background: rgba(51, 65, 85, 0.95);
+      border-color: #3b82f6;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    .gps-nearby-item.is-bundel {
+      border-left: 3px solid #fbbf24;
+    }
+    .gps-nearby-item.has-bi {
+      border-left: 3px solid #10b981;
+    }
+    .gps-nearby-icon {
+      font-size: 14px;
+    }
+    .gps-nearby-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .gps-nearby-name {
+      display: block;
+      font-weight: 800;
+      font-size: 12px;
+      color: #f1f5f9;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .gps-nearby-type {
+      display: block;
+      font-size: 10px;
+      color: #94a3b8;
+    }
+    .gps-nearby-dist {
+      font-family: Consolas, monospace;
+      font-weight: 800;
+      font-size: 12px;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 3px 6px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    /* Simulator / Fallback Modal */
+    .gps-quick-pick-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .gps-pick-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      color: #f1f5f9;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .gps-pick-btn:hover {
+      background: #273549;
+      border-color: #3b82f6;
+      transform: translateX(3px);
+    }
+    .gps-pick-btn span {
+      font-size: 20px;
+    }
+
     /* Sidebar Toggle Button */
     .sidebar-toggle {
       position: absolute;
@@ -3182,6 +3473,7 @@
 
     <!-- Quick Hub Jump Buttons -->
     <div class="header-center">
+      <button class="hub-btn hub-btn-gps" id="headerGpsBtn" onclick="locateUserPosition()" title="Detecteer mijn GPS-positie en vind direct de dichtstbijzijnde bundels">🎯 Mijn Locatie</button>
       <button class="hub-btn active" data-hub="wvl" onclick="zoomToHub('wvl', this)">🌐 Alles</button>
       <button class="hub-btn" data-hub="zeebrugge" onclick="zoomToHub('zeebrugge', this)">⚓ Zeebrugge</button>
       <button class="hub-btn" data-hub="oostende" onclick="zoomToHub('oostende', this)">🚢 Oostende</button>
@@ -3223,6 +3515,7 @@
 
   <!-- Mobile Hub Jump Bar (fallback) -->
   <div class="mobile-hub-bar" id="mobileHubBar">
+    <button class="hub-btn hub-btn-gps" onclick="locateUserPosition()">🎯 Mijn Locatie</button>
     <button class="hub-btn active" onclick="zoomToHub('wvl', this)">🌐 Alles</button>
     <button class="hub-btn" onclick="zoomToHub('zeebrugge', this)">⚓ Zeebrugge</button>
     <button class="hub-btn" onclick="zoomToHub('oostende', this)">🚢 Oostende</button>
@@ -3316,6 +3609,16 @@
       <!-- Sectie 3: Beheer & Functies -->
       <div class="drawer-section">
         <div class="drawer-section-title">BEHEER & FUNCTIES</div>
+        <button class="drawer-action-row" onclick="closeMobileMenu(); locateUserPosition();" style="border-left: 3px solid #3b82f6;">
+          <div class="drawer-action-left">
+            <span class="drawer-action-icon" style="background:#1d4ed8; color:white; border-radius:6px;">🎯</span>
+            <div class="drawer-action-text">
+              <span class="drawer-action-title">Mijn GPS-locatie bepalen</span>
+              <span class="drawer-action-sub">Toon direct de dichtstbijzijnde bundels</span>
+            </div>
+          </div>
+          <span class="drawer-chevron">›</span>
+        </button>
         <button class="drawer-action-row" onclick="closeMobileMenu(); openExportModal();">
           <div class="drawer-action-left">
             <span class="drawer-action-icon">💾</span>
@@ -3412,6 +3715,7 @@
           <button class="filter-chip chip-green" id="filterBiYes" onclick="setFilter('bi-yes', this)">🟢 Reeds BI</button>
           <button class="filter-chip chip-red" id="filterBiNo" onclick="setFilter('bi-no', this)">🔴 Nog geen BI</button>
           <button class="filter-chip chip-gold" id="filterBundels" onclick="setFilter('bundel', this)">🟡 Bundels</button>
+          <button class="filter-chip chip-gps" id="filterGps" onclick="toggleGpsSort(this)" title="Sorteer locaties op afstand vanaf jouw GPS-positie">🎯 Dichtbij</button>
         </div>
       </div>
 
@@ -3429,6 +3733,28 @@
     <button class="sidebar-toggle" onclick="toggleSidebar()" title="Toggle lijst">
       <svg id="toggleIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
     </button>
+
+    <!-- Floating GPS Locate Button on Map -->
+    <button class="btn-map-gps" id="btnMapGps" onclick="locateUserPosition()" title="Mijn GPS-locatie bepalen (vind direct de bundels op jouw locatie)" aria-label="Mijn GPS-locatie">
+      <span class="gps-icon">🎯</span>
+    </button>
+
+    <!-- Floating Nearby Bundels & Bedieningen Card -->
+    <div class="gps-nearby-card" id="gpsNearbyCard" style="display:none;">
+      <div class="gps-nearby-header">
+        <div class="gps-nearby-title">
+          <span class="gps-live-dot"></span>
+          <span id="gpsNearbyTitleText">GPS-locatie actief</span>
+          <span class="gps-accuracy-badge" id="gpsAccuracyBadge">±15m</span>
+        </div>
+        <div class="gps-nearby-actions">
+          <button class="gps-btn-icon" onclick="locateUserPosition()" title="GPS positie verversen">🔄</button>
+          <button class="gps-btn-icon" onclick="closeGpsNearbyCard()" title="Sluiten">&times;</button>
+        </div>
+      </div>
+      <div class="gps-nearby-sub">Dichtstbijzijnde Infrabel bundels & bedieningen op jouw locatie:</div>
+      <div class="gps-nearby-list" id="gpsNearbyList"></div>
+    </div>
 
     <!-- Leaflet Map Container -->
     <div id="map"></div>
@@ -3847,6 +4173,46 @@
         <button class="btn-modal-action" onclick="closeInstallModal()">
           Begrepen / Sluiten
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: GPS Fallback / Simulator -->
+  <div class="modal-backdrop" id="gpsFallbackModal">
+    <div class="modal-box" style="width: 480px;">
+      <h2>
+        <span>🎯 GPS-locatie bepalen / simuleren</span>
+        <button class="modal-close" onclick="closeGpsModal()">&times;</button>
+      </h2>
+      <div class="modal-body" style="padding:16px;">
+        <p style="font-size:13px; color:#cbd5e1; margin-bottom:14px; line-height:1.5;">
+          Er kon geen live GPS-signaal van de browser ontvangen worden (bijvoorbeeld door browserpermissies of desktop-pc). Kies hieronder een rangeerstation of bundel om de GPS-detectie direct te testen:
+        </p>
+        <div class="gps-quick-pick-grid">
+          <button class="gps-pick-btn" onclick="simulateGpsPosition(50.823, 3.264, 'Kortrijk Vorming (L75)')">
+            <span>🏭</span>
+            <div><strong>Kortrijk Vorming</strong><br/><small style="color:#94a3b8;">Lijn 75 • Bundels A, B, C, D</small></div>
+          </button>
+          <button class="gps-pick-btn" onclick="simulateGpsPosition(51.3125, 3.2255, 'Zeebrugge Ramskapelle')">
+            <span>⚓</span>
+            <div><strong>Zeebrugge Ramskapelle</strong><br/><small style="color:#94a3b8;">Sporen 881-897 (Zuidelijk Insteekdok)</small></div>
+          </button>
+          <button class="gps-pick-btn" onclick="simulateGpsPosition(51.2926, 3.2285, 'Zeebrugge Pelikaan')">
+            <span>🚢</span>
+            <div><strong>Zeebrugge Pelikaan</strong><br/><small style="color:#94a3b8;">Sporen 861-875 (Zuidelijk Insteekdok)</small></div>
+          </button>
+          <button class="gps-pick-btn" onclick="simulateGpsPosition(51.194, 3.221, 'Station Brugge / Bundel U')">
+            <span>🏰</span>
+            <div><strong>Station Brugge / Bundel U</strong><br/><small style="color:#94a3b8;">Centrale as L50A/L66</small></div>
+          </button>
+          <button class="gps-pick-btn" onclick="simulateGpsPosition(51.222, 2.946, 'Oostende Vorming')">
+            <span>🌊</span>
+            <div><strong>Oostende Vorming</strong><br/><small style="color:#94a3b8;">Achterhaven Oostende</small></div>
+          </button>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-modal-action" onclick="closeGpsModal()">Sluiten</button>
       </div>
     </div>
   </div>
@@ -4317,6 +4683,223 @@
       }
     }
 
+    // Haversine Distance Formula in Meters
+    function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
+      const R = 6371000;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return Math.round(R * c);
+    }
+
+    function formatDistance(meters) {
+      if (meters < 1000) {
+        return meters + ' m';
+      }
+      return (meters / 1000).toFixed(1) + ' km';
+    }
+
+    // GPS State
+    let userGpsPosition = null;
+    let userGpsMarker = null;
+    let userGpsAccuracyCircle = null;
+    let userGpsLine = null;
+    let isGpsSorted = false;
+
+    function locateUserPosition() {
+      const btn = document.getElementById('btnMapGps');
+      if (btn) btn.classList.add('locating');
+      showToast('📡 GPS-positie bepalen...', 'info');
+
+      if (!navigator.geolocation) {
+        if (btn) btn.classList.remove('locating');
+        showToast('⚠️ Geolocation wordt niet ondersteund door je browser.', 'warning');
+        openGpsModal();
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        function(pos) {
+          if (btn) {
+            btn.classList.remove('locating');
+            btn.classList.add('active');
+          }
+          setUserGpsPosition(pos.coords.latitude, pos.coords.longitude, Math.round(pos.coords.accuracy || 20));
+        },
+        function(err) {
+          if (btn) btn.classList.remove('locating');
+          console.warn('GPS fout:', err);
+          showToast('⚠️ Kon GPS-positie niet bepalen (' + (err.code === 1 ? 'toegang geweigerd' : 'geen signaal') + ').', 'warning');
+          openGpsModal();
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 }
+      );
+    }
+
+    function setUserGpsPosition(lat, lng, accuracy = 20, locationLabel = 'Jouw GPS-locatie') {
+      userGpsPosition = { lat, lng, accuracy, label: locationLabel };
+
+      const btn = document.getElementById('btnMapGps');
+      if (btn) btn.classList.add('active');
+
+      // Calculate distance for all items
+      allItems.forEach(item => {
+        item._distance = getDistanceFromLatLonInMeters(lat, lng, item.lat, item.lng);
+        item._distanceText = formatDistance(item._distance);
+      });
+
+      // Find nearest bundels and terminals
+      const sortedBundels = allItems.filter(x => x.is_bundel).sort((a,b) => a._distance - b._distance);
+      const sortedTerminals = allItems.filter(x => !x.is_bundel).sort((a,b) => a._distance - b._distance);
+      const closestBundel = sortedBundels[0];
+
+      // Update or create User Marker on Map
+      if (userGpsMarker) {
+        map.removeLayer(userGpsMarker);
+      }
+      if (userGpsAccuracyCircle) {
+        map.removeLayer(userGpsAccuracyCircle);
+      }
+      if (userGpsLine) {
+        map.removeLayer(userGpsLine);
+      }
+
+      const userIcon = L.divIcon({
+        className: 'user-gps-marker',
+        html: `
+          <div class="user-gps-pulse"></div>
+          <div class="user-gps-dot"></div>
+        `,
+        iconSize: [34, 34],
+        iconAnchor: [17, 17]
+      });
+
+      userGpsMarker = L.marker([lat, lng], {
+        icon: userIcon,
+        zIndexOffset: 1000
+      }).addTo(map);
+
+      const tooltipText = `
+        <strong>🎯 ${locationLabel}</strong><br/>
+        <span style="font-size:10px; color:#93c5fd;">Nauwkeurigheid: ±${accuracy}m</span><br/>
+        ${closestBundel ? `<span style="font-size:10px; color:#fbbf24; font-weight:800;">Dichtste bundel: ${closestBundel.name} (${closestBundel._distanceText})</span>` : ''}
+      `;
+      userGpsMarker.bindTooltip(tooltipText, {
+        className: 'custom-tip',
+        direction: 'top',
+        offset: [0, -14],
+        opacity: 0.95
+      });
+
+      userGpsAccuracyCircle = L.circle([lat, lng], {
+        radius: Math.max(accuracy, 25),
+        color: '#3b82f6',
+        weight: 1.5,
+        fillColor: '#60a5fa',
+        fillOpacity: 0.12
+      }).addTo(map);
+
+      // Line of sight to closest bundel
+      if (closestBundel) {
+        userGpsLine = L.polyline([[lat, lng], [closestBundel.lat, closestBundel.lng]], {
+          color: '#fbbf24',
+          weight: 2,
+          dashArray: '5, 8',
+          opacity: 0.85
+        }).addTo(map);
+      }
+
+      // Center on user location
+      if (typeof map !== 'undefined') {
+        if (map.invalidateSize) map.invalidateSize();
+        try {
+          const sz = map.getSize();
+          if (sz && sz.x > 0 && sz.y > 0) {
+            map.flyTo([lat, lng], 15, { duration: 1.2 });
+          } else {
+            map.setView([lat, lng], 15);
+          }
+        } catch(e) {
+          map.setView([lat, lng], 15);
+        }
+      }
+
+      // Render Nearby Floating Card
+      renderGpsNearbyCard(sortedBundels, sortedTerminals, accuracy, locationLabel);
+
+      // Auto-sort list or update distances in current list
+      isGpsSorted = true;
+      const chipGps = document.getElementById('filterGps');
+      if (chipGps) chipGps.classList.add('active');
+      handleFilter();
+
+      showToast(`🎯 GPS vergrendeld: dichtste bundel is ${closestBundel ? closestBundel.name : 'onbekend'} (${closestBundel ? closestBundel._distanceText : ''})!`);
+    }
+
+    function renderGpsNearbyCard(sortedBundels, sortedTerminals, accuracy, label) {
+      const card = document.getElementById('gpsNearbyCard');
+      const titleText = document.getElementById('gpsNearbyTitleText');
+      const accBadge = document.getElementById('gpsAccuracyBadge');
+      const listEl = document.getElementById('gpsNearbyList');
+      if (!card || !listEl) return;
+
+      if (titleText) titleText.textContent = label;
+      if (accBadge) accBadge.textContent = `±${accuracy}m`;
+
+      // Pick top 2 bundels + top 2 terminals
+      const topBundels = sortedBundels.slice(0, 2);
+      const topTerms = sortedTerminals.slice(0, 2);
+      const combined = [...topBundels, ...topTerms];
+
+      listEl.innerHTML = combined.map(item => `
+        <div class="gps-nearby-item ${item.is_bundel ? 'is-bundel' : (item.has_bi ? 'has-bi' : '')}" onclick="selectLocation('${item.id}', true)">
+          <span class="gps-nearby-icon">${item.is_bundel ? '◆' : (item.has_bi ? '✓' : '!')}</span>
+          <div class="gps-nearby-info">
+            <span class="gps-nearby-name">${item.name}</span>
+            <span class="gps-nearby-type">${item.is_bundel ? 'Infrabel Moederbundel' : (item.type || item.zone_name)}</span>
+          </div>
+          <span class="gps-nearby-dist">📏 ${item._distanceText}</span>
+        </div>
+      `).join('');
+
+      card.style.display = 'block';
+    }
+
+    function closeGpsNearbyCard() {
+      const card = document.getElementById('gpsNearbyCard');
+      if (card) card.style.display = 'none';
+    }
+
+    function toggleGpsSort(btn) {
+      if (!userGpsPosition) {
+        locateUserPosition();
+        return;
+      }
+      isGpsSorted = !isGpsSorted;
+      if (btn) btn.classList.toggle('active', isGpsSorted);
+      handleFilter();
+      showToast(isGpsSorted ? '📍 Gesorteerd op afstand vanaf jouw GPS-positie' : 'Hersteld naar standaard volgorde');
+    }
+
+    function openGpsModal() {
+      const b = document.getElementById('gpsFallbackModal');
+      if (b) b.classList.add('active');
+    }
+
+    function closeGpsModal() {
+      const b = document.getElementById('gpsFallbackModal');
+      if (b) b.classList.remove('active');
+    }
+
+    function simulateGpsPosition(lat, lng, name) {
+      closeGpsModal();
+      setUserGpsPosition(lat, lng, 15, `Gesimuleerd: ${name}`);
+    }
+
     // Toast message helper
     let toastTimeout = null;
     function showToast(msg, type = 'success') {
@@ -4543,10 +5126,18 @@
           `;
         }
 
+        let distBadgeHtml = '';
+        if (item._distance !== undefined) {
+          distBadgeHtml = `<span class="loc-card-distance" title="Afstand vanaf jouw GPS-positie">📏 ${item._distanceText}</span>`;
+        }
+
         card.innerHTML = `
           <div class="loc-card-header">
             <div class="loc-card-title">${item.name}</div>
-            ${badgeHtml}
+            <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
+              ${distBadgeHtml}
+              ${badgeHtml}
+            </div>
           </div>
           <div class="loc-card-details">
             <div>📍 ${item.moederbundel || item.adres}</div>
@@ -4572,7 +5163,8 @@
       const biNoCount = allItems.filter(x => !x.is_bundel && !x.has_bi).length;
       const bundelCount = allItems.filter(x => x.is_bundel).length;
 
-      document.getElementById('resultCount').textContent = `${items.length} locaties getoond`;
+      const sortSuffix = (isGpsSorted && userGpsPosition) ? ' • 🎯 Op afstand' : '';
+      document.getElementById('resultCount').textContent = `${items.length} locaties getoond${sortSuffix}`;
       document.getElementById('filterAll').textContent = `Alle (${allItems.length})`;
       document.getElementById('filterBiYes').textContent = `🟢 Reeds BI (${biYesCount})`;
       document.getElementById('filterBiNo').textContent = `🔴 Nog geen BI (${biNoCount})`;
@@ -4601,6 +5193,10 @@
         }
         return true;
       });
+
+      if (isGpsSorted && userGpsPosition) {
+        filtered.sort((a, b) => (a._distance !== undefined ? a._distance : 9999999) - (b._distance !== undefined ? b._distance : 9999999));
+      }
 
       allItems.forEach(item => {
         if (!markersMap[item.id]) return;

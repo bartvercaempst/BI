@@ -66,7 +66,10 @@ async def run_cdp_tests():
                 while True:
                     resp = json.loads(await ws.recv())
                     if resp.get("id") == req_obj["id"]:
-                        return resp.get("result", {}).get("result", {}).get("value")
+                        res = resp.get("result", {})
+                        if "exceptionDetails" in res:
+                            print("JS EXCEPTION in eval_js:", json.dumps(res["exceptionDetails"], indent=2))
+                        return res.get("result", {}).get("value")
 
             await ws.send(json.dumps({"id": msg_id, "method": "Runtime.enable"}))
             msg_id += 1
@@ -410,8 +413,88 @@ async def run_cdp_tests():
             assert col1_check['spoor357Text'] == 'Spoor 357', f"Expected 'Spoor 357' without (Bundel A), got '{col1_check['spoor357Text']}'"
             assert not col1_check['hasRedundantBundel'], "No cell in column 1 should contain redundant '(Bundel X)'!"
 
+            # Test 22: GPS Locate Elements in UI
+            gps_ui_check = await eval_js("""
+                (function() {
+                    switchMainTab('map');
+                    const mapBtn = document.getElementById('btnMapGps');
+                    const hdrBtn = document.getElementById('headerGpsBtn');
+                    const filterChip = document.getElementById('filterGps');
+                    const nearbyCard = document.getElementById('gpsNearbyCard');
+                    
+                    return {
+                        hasMapBtn: !!mapBtn,
+                        hasHdrBtn: !!hdrBtn,
+                        hasFilterChip: !!filterChip,
+                        hasNearbyCard: !!nearbyCard
+                    };
+                })()
+            """)
+            print(f"[TEST 22] GPS UI Controls: MapBtn={gps_ui_check['hasMapBtn']}, HdrBtn={gps_ui_check['hasHdrBtn']}, FilterChip={gps_ui_check['hasFilterChip']}, NearbyCard={gps_ui_check['hasNearbyCard']}")
+            assert gps_ui_check['hasMapBtn'], "Floating GPS button on map must exist!"
+            assert gps_ui_check['hasHdrBtn'], "Header GPS button must exist!"
+            assert gps_ui_check['hasFilterChip'], "Sidebar 'Dichtbij' GPS filter chip must exist!"
+            assert gps_ui_check['hasNearbyCard'], "Floating Nearby Card container must exist!"
+
+            # Test 23: GPS Detection & Proximity calculation at Kortrijk Vorming (50.823, 3.264)
+            gps_kv_res = await eval_js("""
+                (function() {
+                    // Simulate GPS position at Kortrijk Vorming
+                    setUserGpsPosition(50.8235, 3.2642, 15, 'Test Kortrijk Vorming');
+                    
+                    const nearbyCardVisible = document.getElementById('gpsNearbyCard')?.style.display !== 'none';
+                    const nearbyItems = Array.from(document.querySelectorAll('.gps-nearby-item'));
+                    const itemTexts = nearbyItems.map(it => it.innerText);
+                    const hasKV = itemTexts.some(t => t.includes('Kortrijk') && (t.includes('m') || t.includes('km')));
+                    
+                    const hasMarker = !!userGpsMarker && map.hasLayer(userGpsMarker);
+                    const hasAccuracy = !!userGpsAccuracyCircle && map.hasLayer(userGpsAccuracyCircle);
+                    const hasLine = !!userGpsLine && map.hasLayer(userGpsLine);
+
+                    return {
+                        nearbyCardVisible: nearbyCardVisible,
+                        itemCount: nearbyItems.length,
+                        hasKV: hasKV,
+                        firstItemText: itemTexts[0] || '',
+                        hasMarker: hasMarker,
+                        hasAccuracy: hasAccuracy,
+                        hasLine: hasLine
+                    };
+                })()
+            """)
+            print(f"[TEST 23] GPS Kortrijk Vorming Proximity: Visible={gps_kv_res['nearbyCardVisible']}, Items={gps_kv_res['itemCount']}, First='{gps_kv_res['firstItemText'].encode('ascii', 'replace').decode()}', HasLine={gps_kv_res['hasLine']}")
+            assert gps_kv_res['nearbyCardVisible'], "Nearby card must become visible on GPS lock!"
+            assert gps_kv_res['hasKV'], "Nearby card must feature Kortrijk as closest bundel!"
+            assert gps_kv_res['hasMarker'] and gps_kv_res['hasAccuracy'], "User GPS marker and accuracy circle must be on map!"
+            assert gps_kv_res['hasLine'], "Guideline to closest bundel must be drawn on map!"
+
+            # Test 24: Sidebar Distance Sorting & Dynamic updates at Zeebrugge Ramskapelle
+            gps_zb_res = await eval_js("""
+                (function() {
+                    // Now simulate GPS position at Zeebrugge Ramskapelle (51.3125, 3.2255)
+                    setUserGpsPosition(51.3125, 3.2255, 12, 'Test Zeebrugge Ramskapelle');
+                    
+                    const firstCardTitle = document.querySelector('.loc-card-title')?.innerText || '';
+                    const firstCardDist = document.querySelector('.loc-card-distance')?.innerText || '';
+                    const distBadgesCount = document.querySelectorAll('.loc-card-distance').length;
+                    
+                    const nearbyItems = Array.from(document.querySelectorAll('.gps-nearby-item')).map(it => it.innerText);
+                    const closestItem = nearbyItems[0] || '';
+
+                    return {
+                        firstCardTitle: firstCardTitle,
+                        firstCardDist: firstCardDist,
+                        distBadgesCount: distBadgesCount,
+                        closestItem: closestItem
+                    };
+                })()
+            """)
+            print(f"[TEST 24] GPS Zeebrugge Ramskapelle: FirstCard='{gps_zb_res['firstCardTitle'].encode('ascii', 'replace').decode()}', Dist='{gps_zb_res['firstCardDist'].encode('ascii', 'replace').decode()}', ClosestNearby='{gps_zb_res['closestItem'].encode('ascii', 'replace').decode()}'")
+            assert "Ramskapelle" in gps_zb_res['firstCardTitle'] or "Ramskapelle" in gps_zb_res['closestItem'], "Closest bundel in Zeebrugge must be Ramskapelle!"
+            assert gps_zb_res['distBadgesCount'] > 20, "Sidebar cards must all show calculated distance badges!"
+
             print("\n=======================================================")
-            print("SUCCESS! ALL 21 TESTS PASSED:")
+            print("SUCCESS! ALL 24 TESTS PASSED:")
             print("1. Scrolling works all the way to Chapter 8 (no clipping)")
             print("2. Layout is IDENTICAL to Word/PDF template")
             print("3. Print / PDF CSS spans all pages properly")
@@ -425,6 +508,9 @@ async def run_cdp_tests():
             print("11. Mother Bundel Kortrijk Vorming navigates directly to Kortrijk BI (NOT Zeebrugge/Sea-Ro)!")
             print("12. Kortrijk Goederen / Vorming displays all tracks for Bundels A, B, C, and D with lengths!")
             print("13. Table 4.3.1 Column 1 contains clean track names without redundant (Bundel X) bladvulling!")
+            print("14. GPS Locate buttons available on map, header, mobile bar, and sidebar!")
+            print("15. Instant proximity calculation & nearby card displaying closest Infrabel bundels!")
+            print("16. Sidebar auto-sorted by distance with distance badges on every card!")
             print("=======================================================")
 
     finally:
