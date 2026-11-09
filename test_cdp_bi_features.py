@@ -493,8 +493,62 @@ async def run_cdp_tests():
             assert "Ramskapelle" in gps_zb_res['firstCardTitle'] or "Ramskapelle" in gps_zb_res['closestItem'], "Closest bundel in Zeebrugge must be Ramskapelle!"
             assert gps_zb_res['distBadgesCount'] > 20, "Sidebar cards must all show calculated distance badges!"
 
+            # Test 25: Single-line row alignment & abbreviated headers in Tabel 4.2 & Tabel 4.3.1
+            table_align_res = await eval_js(r"""
+                (function() {
+                    switchMainTab('bi');
+                    renderBiDocument('cro_brit');
+                    
+                    const docText = document.getElementById('biDocContainer')?.innerText || '';
+                    const hasDuplicateBundelWord = /Bundel\s+Bundel/i.test(docText) || /Moederbundel\s+Bundel/i.test(docText);
+                    
+                    const spoorTables = Array.from(document.querySelectorAll('.bi-spoor-table'));
+                    const headers = spoorTables.map(tb => Array.from(tb.querySelectorAll('thead th')).map(th => th.innerText.trim()));
+                    
+                    let maxRowHeight = 0;
+                    let minRowHeight = 9999;
+                    let multiLineCells = [];
+                    let allVertMiddle = true;
+                    
+                    spoorTables.forEach((tb, tIdx) => {
+                        const rows = Array.from(tb.querySelectorAll('tbody tr'));
+                        rows.forEach((r, rIdx) => {
+                            const h = r.getBoundingClientRect().height;
+                            if (h > maxRowHeight) maxRowHeight = h;
+                            if (h > 0 && h < minRowHeight) minRowHeight = h;
+                            Array.from(r.cells).forEach((td, cIdx) => {
+                                const cs = window.getComputedStyle(td);
+                                if (cs.verticalAlign !== 'middle') allVertMiddle = false;
+                                if (cs.whiteSpace !== 'nowrap') {
+                                    multiLineCells.push('T' + tIdx + 'R' + rIdx + 'C' + cIdx + ':ws=' + cs.whiteSpace);
+                                }
+                                if (h > 36) {
+                                    multiLineCells.push('T' + tIdx + 'R' + rIdx + 'C' + cIdx + ':h=' + Math.round(h) + 'px');
+                                }
+                            });
+                        });
+                    });
+
+                    return {
+                        tableCount: spoorTables.length,
+                        headers: headers,
+                        hasDuplicateBundelWord: hasDuplicateBundelWord,
+                        maxRowHeight: Math.round(maxRowHeight),
+                        minRowHeight: Math.round(minRowHeight),
+                        allVertMiddle: allVertMiddle,
+                        multiLineCells: multiLineCells
+                    };
+                })()
+            """)
+            print(f"[TEST 25] Spooroverzicht Single-Line Alignment: Tables={table_align_res['tableCount']}, Headers0={table_align_res['headers'][0] if table_align_res['headers'] else []}, MaxRowHeight={table_align_res['maxRowHeight']}px, VertMiddle={table_align_res['allVertMiddle']}, MultiLineIssues={len(table_align_res['multiLineCells'])}")
+            assert table_align_res['tableCount'] == 2, "Both Tabel 4.2 and Tabel 4.3.1 must use .bi-spoor-table!"
+            assert not table_align_res['hasDuplicateBundelWord'], "Document must not contain duplicate 'Bundel Bundel' or 'Moederbundel Bundel'!"
+            assert table_align_res['allVertMiddle'], "All table cells in Spooroverzicht must have vertical-align: middle!"
+            assert len(table_align_res['multiLineCells']) == 0, f"Found multi-line or non-nowrap cells: {table_align_res['multiLineCells']}"
+            assert table_align_res['headers'][0] == ['Spoor', 'Bovenl.', 'LTL', 'LOL', 'Helling', 'Dood', 'Functie & Bestemming']
+
             print("\n=======================================================")
-            print("SUCCESS! ALL 24 TESTS PASSED:")
+            print("SUCCESS! ALL 25 TESTS PASSED:")
             print("1. Scrolling works all the way to Chapter 8 (no clipping)")
             print("2. Layout is IDENTICAL to Word/PDF template")
             print("3. Print / PDF CSS spans all pages properly")

@@ -181,27 +181,27 @@ LEVEL_4_MOEDERBUNDELS = {
             {"spoor": "Spoor 879", "type": "Toegang Bundel Toyota", "beveiliging": "Elektrische stuitklamp"}
         ],
         "spooroverzicht": [
-            {"spoor": "881", "bovenleiding": "Ja", "ltl": "660 m", "lol": "640 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Lange bundelspoor • Ontvangst & vertrek"},
-            {"spoor": "882", "bovenleiding": "Ja", "ltl": "660 m", "lol": "640 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Lange bundelspoor • Ontvangst & vertrek"},
-            {"spoor": "883", "bovenleiding": "Ja", "ltl": "719 m", "lol": "709 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Lange bundelspoor • Ontvangst & vertrek"},
-            {"spoor": "884", "bovenleiding": "Ja", "ltl": "719 m", "lol": "709 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Lange bundelspoor • Ontvangst & vertrek"},
-            {"spoor": "885", "bovenleiding": "Ja", "ltl": "724 m", "lol": "704 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Lange bundelspoor • Ontvangst & vertrek"},
-            {"spoor": "886", "bovenleiding": "Ja", "ltl": "724 m", "lol": "704 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Lange bundelspoor • Ontvangst & vertrek"},
-            {"spoor": "887", "bovenleiding": "Ja", "ltl": "724 m", "lol": "704 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Lange bundelspoor • Ontvangst & vertrek"},
-            {"spoor": "888", "bovenleiding": "Ja", "ltl": "746 m", "lol": "726 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Lange bundelspoor • Maximale lengte"},
-            {"spoor": "889", "bovenleiding": "Ja", "ltl": "463 m", "lol": "443 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Kort bundelspoor • Opstellen wagens"},
-            {"spoor": "890", "bovenleiding": "Ja", "ltl": "425 m", "lol": "405 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Kort bundelspoor • Opstellen wagens"},
-            {"spoor": "891", "bovenleiding": "Ja", "ltl": "466 m", "lol": "446 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Kort bundelspoor • Opstellen wagens"},
-            {"spoor": "892", "bovenleiding": "Ja", "ltl": "477 m", "lol": "457 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Kort bundelspoor • Opstellen wagens"},
-            {"spoor": "893", "bovenleiding": "Ja", "ltl": "442 m", "lol": "422 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Kort bundelspoor • Opstellen wagens"},
-            {"spoor": "894", "bovenleiding": "Ja", "ltl": "469 m", "lol": "449 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Kort bundelspoor • Opstellen wagens"},
-            {"spoor": "895", "bovenleiding": "Ja", "ltl": "519 m", "lol": "499 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Kort bundelspoor • Opstellen wagens"},
-            {"spoor": "896", "bovenleiding": "Nee", "ltl": "164 m", "lol": "144 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Niet-geëlektrificeerd rangeerspoor"},
+            {"spoor": "881", "bovenleiding": "Ja", "ltl": "660 m", "lol": "640 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Ontvangst- & vertrekspoor"},
+            {"spoor": "882", "bovenleiding": "Ja", "ltl": "660 m", "lol": "640 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Ontvangst- & vertrekspoor"},
+            {"spoor": "883", "bovenleiding": "Ja", "ltl": "719 m", "lol": "709 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Ontvangst- & vertrekspoor"},
+            {"spoor": "884", "bovenleiding": "Ja", "ltl": "719 m", "lol": "709 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Ontvangst- & vertrekspoor"},
+            {"spoor": "885", "bovenleiding": "Ja", "ltl": "724 m", "lol": "704 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Ontvangst- & vertrekspoor"},
+            {"spoor": "886", "bovenleiding": "Ja", "ltl": "724 m", "lol": "704 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Ontvangst- & vertrekspoor"},
+            {"spoor": "887", "bovenleiding": "Ja", "ltl": "724 m", "lol": "704 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Ontvangst- & vertrekspoor"},
+            {"spoor": "888", "bovenleiding": "Ja", "ltl": "746 m", "lol": "726 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Ontvangst- & vertrekspoor (max. lengte)"},
+            {"spoor": "889", "bovenleiding": "Ja", "ltl": "463 m", "lol": "443 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Opstelspoor wagens"},
+            {"spoor": "890", "bovenleiding": "Ja", "ltl": "425 m", "lol": "405 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Opstelspoor wagens"},
+            {"spoor": "891", "bovenleiding": "Ja", "ltl": "466 m", "lol": "446 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Opstelspoor wagens"},
+            {"spoor": "892", "bovenleiding": "Ja", "ltl": "477 m", "lol": "457 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Opstelspoor wagens"},
+            {"spoor": "893", "bovenleiding": "Ja", "ltl": "442 m", "lol": "422 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Opstelspoor wagens"},
+            {"spoor": "894", "bovenleiding": "Ja", "ltl": "469 m", "lol": "449 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Opstelspoor wagens"},
+            {"spoor": "895", "bovenleiding": "Ja", "ltl": "519 m", "lol": "499 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Opstelspoor wagens"},
+            {"spoor": "896", "bovenleiding": "Nee", "ltl": "164 m", "lol": "144 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Rangeerspoor (zonder BL)"},
             {"spoor": "897", "bovenleiding": "Nee", "ltl": "255 m", "lol": "235 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Uitwijkspoor beschadigde wagens"},
-            {"spoor": "880", "bovenleiding": "Ja", "ltl": "105 m", "lol": "85 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "functie": "Doodspoor schuifrangering kant Brugge"},
+            {"spoor": "880", "bovenleiding": "Ja", "ltl": "105 m", "lol": "85 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "functie": "Schuifrangering kant Brugge"},
             {"spoor": "842", "bovenleiding": "Nee", "ltl": "41 m", "lol": "21 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Kort verbindingsspoor L202B"},
-            {"spoor": "844", "bovenleiding": "Deels (55m)", "ltl": "897 m", "lol": "877 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Baanvakspoor L202B naar CRO (let op bovenleidingsgrens!)"},
-            {"spoor": "899", "bovenleiding": "Nee", "ltl": "130 m", "lol": "110 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "functie": "G&V Spoorfuelinstallatie (ontspoortong 91AR)"}
+            {"spoor": "844", "bovenleiding": "Deels (55m)", "ltl": "897 m", "lol": "877 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "functie": "L202B n. CRO (let op BL-grens!)"},
+            {"spoor": "899", "bovenleiding": "Nee", "ltl": "130 m", "lol": "110 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "functie": "Tankspoor G&V (ontspoortong 91AR)"}
         ],
         "overwegen_tracé": [
             {"naam": "Overweg 15", "lijn": "L202B", "type": "Automatische overweg", "beveiliging": "Ontspoortong 10R opwaarts"},
@@ -229,8 +229,8 @@ LEVEL_4_MOEDERBUNDELS = {
             {"spoor": "Wissel 551 & 552", "type": "Aansluiting SA Efico & SA NDQ", "beveiliging": "Stuitklamp"}
         ],
         "spooroverzicht": [
-            {"spoor": "861", "bovenleiding": "390m binnenland", "ltl": "980 m", "lol": "960 m", "helling": "0-1 ‰ (vlak)", "doodspoor": "Nee", "functie": "Bundelspoor Pelikaan (lengte 960m)"},
-            {"spoor": "862", "bovenleiding": "333m binnenland", "ltl": "822 m", "lol": "802 m", "helling": "0-1 ‰ (vlak)", "doodspoor": "Nee", "functie": "Bundelspoor Pelikaan (lengte 802m)"},
+            {"spoor": "861", "bovenleiding": "Deels (390m)", "ltl": "980 m", "lol": "960 m", "helling": "0-1 ‰ (vlak)", "doodspoor": "Nee", "functie": "Bundelspoor Pelikaan (lengte 960m)"},
+            {"spoor": "862", "bovenleiding": "Deels (333m)", "ltl": "822 m", "lol": "802 m", "helling": "0-1 ‰ (vlak)", "doodspoor": "Nee", "functie": "Bundelspoor Pelikaan (lengte 802m)"},
             {"spoor": "863", "bovenleiding": "Ja", "ltl": "435 m", "lol": "415 m", "helling": "0-1 ‰ (vlak)", "doodspoor": "Nee", "functie": "Bundelspoor Pelikaan"},
             {"spoor": "864", "bovenleiding": "Ja", "ltl": "502 m", "lol": "482 m", "helling": "0-1 ‰ (vlak)", "doodspoor": "Nee", "functie": "Bundelspoor Pelikaan"},
             {"spoor": "865", "bovenleiding": "Ja", "ltl": "870 m", "lol": "850 m", "helling": "0-1 ‰ (vlak)", "doodspoor": "Nee", "functie": "Verlengd bundelspoor v36.0"},
@@ -240,7 +240,7 @@ LEVEL_4_MOEDERBUNDELS = {
             {"spoor": "869", "bovenleiding": "Ja", "ltl": "825 m", "lol": "805 m", "helling": "0-1 ‰ (vlak)", "doodspoor": "Nee", "functie": "Verlengd bundelspoor v36.0"},
             {"spoor": "870", "bovenleiding": "Ja", "ltl": "852 m", "lol": "832 m", "helling": "0-1 ‰ (vlak)", "doodspoor": "Nee", "functie": "Verlengd bundelspoor v36.0"},
             {"spoor": "871", "bovenleiding": "Ja", "ltl": "500 m", "lol": "480 m", "helling": "0-1 ‰ (vlak)", "doodspoor": "Nee", "functie": "Bundelspoor Pelikaan"},
-            {"spoor": "875", "bovenleiding": "Ja", "ltl": "883 m", "lol": "863 m", "helling": "0-1 ‰ (vlak)", "doodspoor": "Ja", "functie": "Doodspoor (toegang via wissel 521 linkerstand)"}
+            {"spoor": "875", "bovenleiding": "Ja", "ltl": "883 m", "lol": "863 m", "helling": "0-1 ‰ (vlak)", "doodspoor": "Ja", "functie": "Doodspoor (via wissel 521L)"}
         ],
         "overwegen_tracé": []
     },
@@ -267,7 +267,7 @@ LEVEL_4_MOEDERBUNDELS = {
             {"spoor": "526", "bovenleiding": "Nee", "ltl": "320 m", "lol": "300 m", "helling": "<1 mm/m (vlak)", "doodspoor": "Ja", "functie": "Doodspoor Bundel A"},
             {"spoor": "527", "bovenleiding": "Nee", "ltl": "320 m", "lol": "300 m", "helling": "<1 mm/m (vlak)", "doodspoor": "Ja", "functie": "Doodspoor Bundel A"},
             {"spoor": "101-110", "bovenleiding": "Ja", "ltl": "680-740 m", "lol": "660-720 m", "helling": "<1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Vormings- en vertreksporen Zwankendamme"},
-            {"spoor": "135", "bovenleiding": "Nee", "ltl": "360 m", "lol": "340 m", "helling": "<1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Sasspoor naar 2XL Blauwe Loods (ontspoortong 96G)"}
+            {"spoor": "135", "bovenleiding": "Nee", "ltl": "360 m", "lol": "340 m", "helling": "<1 mm/m (vlak)", "doodspoor": "Nee", "functie": "Sasspoor Blauwe Loods (ontsp. 96G)"}
         ],
         "overwegen_tracé": []
     },
@@ -762,10 +762,10 @@ LEVEL_5_TERMINAL_TRACK_OVERVIEWS = {
             {"spoor": "Spoor 2", "bestemming": "Containers SEA-RO", "bovenleiding": "Nee (diesel)", "ltl": "540 m", "lol": "520 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "opmerkingen": "Stootjuk aan kadezijde"},
             {"spoor": "Spoor 3", "bestemming": "Containers SEA-RO", "bovenleiding": "Nee (diesel)", "ltl": "585 m", "lol": "565 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "opmerkingen": "Stootjuk aan kadezijde"},
             {"spoor": "Spoor 4", "bestemming": "Containers SEA-RO", "bovenleiding": "Nee (diesel)", "ltl": "585 m", "lol": "565 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "opmerkingen": "Stootjuk aan kadezijde"},
-            {"spoor": "Spoor 5", "bestemming": "Automotive (Auto's)", "bovenleiding": "Nee (diesel)", "ltl": "335 m", "lol": "315 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "opmerkingen": "Neuzen gericht naar zee (kust) bij plaatsing"},
-            {"spoor": "Spoor 6", "bestemming": "Automotive (Auto's)", "bovenleiding": "Nee (diesel)", "ltl": "335 m", "lol": "315 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "opmerkingen": "Neuzen gericht naar zee (kust) bij plaatsing"},
-            {"spoor": "Spoor 7", "bestemming": "Automotive (Auto's)", "bovenleiding": "Nee (diesel)", "ltl": "392 m", "lol": "372 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "opmerkingen": "Neuzen gericht naar zee (kust) bij plaatsing"},
-            {"spoor": "Spoor 8", "bestemming": "Automotive (Auto's)", "bovenleiding": "Nee (diesel)", "ltl": "444 m", "lol": "424 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "opmerkingen": "Neuzen gericht naar zee (kust) bij plaatsing"}
+            {"spoor": "Spoor 5", "bestemming": "Automotive (Auto's)", "bovenleiding": "Nee (diesel)", "ltl": "335 m", "lol": "315 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "opmerkingen": "Neuzen kant zee bij plaatsing"},
+            {"spoor": "Spoor 6", "bestemming": "Automotive (Auto's)", "bovenleiding": "Nee (diesel)", "ltl": "335 m", "lol": "315 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "opmerkingen": "Neuzen kant zee bij plaatsing"},
+            {"spoor": "Spoor 7", "bestemming": "Automotive (Auto's)", "bovenleiding": "Nee (diesel)", "ltl": "392 m", "lol": "372 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "opmerkingen": "Neuzen kant zee bij plaatsing"},
+            {"spoor": "Spoor 8", "bestemming": "Automotive (Auto's)", "bovenleiding": "Nee (diesel)", "ltl": "444 m", "lol": "424 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "opmerkingen": "Neuzen kant zee bij plaatsing"}
         ]
     },
     "wal_can": {
@@ -884,7 +884,7 @@ LEVEL_5_TERMINAL_TRACK_OVERVIEWS = {
         "hellingsgraad": "Sterke daling naar station Brugge (ca. 4-5 mm/m)",
         "helling_waarschuwing": "⚠️ KRITIEK VEILIGHEIDSVOORSCHRIFT: De aansluitingssporen van Alstom hellen sterk af in de richting van het reizigersstation Brugge! Bij het ontkoppelen en plaatsen van spoorvoertuigen moeten de schroefremmen krachtig worden aangedraaid én is het plaatsen van een wielblockschaats (schaats) aan de afwaartse zijde WETTELIJK VERPLICHT om ontlopen van materieel te verhinderen!",
         "sporen": [
-            {"spoor": "Spoor 675", "bestemming": "SA Alstom Fabrieksspoor", "bovenleiding": "Nee", "ltl": "ca. 200 m", "lol": "ca. 180 m", "helling": "Sterke daling naar station Brugge", "doodspoor": "Ja", "opmerkingen": "Schaats en handremmen verplicht tegen ontlopen!"},
+            {"spoor": "Spoor 675", "bestemming": "SA Alstom Fabrieksspoor", "bovenleiding": "Nee", "ltl": "ca. 200 m", "lol": "ca. 180 m", "helling": "Sterke daling naar station Brugge", "doodspoor": "Ja", "opmerkingen": "Schaats & handremmen verplicht!"},
             {"spoor": "Spoor 676", "bestemming": "SA Alstom Testspoor", "bovenleiding": "Nee", "ltl": "ca. 180 m", "lol": "ca. 160 m", "helling": "Sterke daling naar station Brugge", "doodspoor": "Ja", "opmerkingen": "Schaats verplicht"}
         ]
     },
@@ -983,18 +983,18 @@ LEVEL_5_TERMINAL_TRACK_OVERVIEWS = {
             {"bundel": "Bundel B (Vormingssporen)", "spoor": "Spoor 379", "bestemming": "Vormingsspoor Bundel B", "bovenleiding": "Ja", "ltl": "85 m", "lol": "65 m", "helling": "0,8 mm/m (r. Kortrijk)", "doodspoor": "Ja", "opmerkingen": "Wachtspoor Bundel B"},
             {"bundel": "Bundel B (Vormingssporen)", "spoor": "Spoor 380", "bestemming": "Vormingsspoor Bundel B", "bovenleiding": "Ja", "ltl": "166 m", "lol": "146 m", "helling": "0,8 mm/m (r. Kortrijk)", "doodspoor": "Ja", "opmerkingen": "Wachtspoor Bundel B"},
             {"bundel": "Bundel C (Lange Vormingssporen)", "spoor": "Spoor 221 WART", "bestemming": "Vormingsspoor Bundel C", "bovenleiding": "Nee", "ltl": "420 m", "lol": "400 m", "helling": "1,7 mm/m (r. Kortrijk)", "doodspoor": "Ja", "opmerkingen": "Stuitklamp / WART spoor"},
-            {"bundel": "Bundel C (Lange Vormingssporen)", "spoor": "Spoor 222", "bestemming": "Vormingsspoor Bundel C", "bovenleiding": "Ja", "ltl": "724 m", "lol": "704 m", "helling": "1,7 mm/m (r. Kortrijk)", "doodspoor": "Nee", "opmerkingen": "Langste vormingsspoor Bundel C (704m)"},
+            {"bundel": "Bundel C (Lange Vormingssporen)", "spoor": "Spoor 222", "bestemming": "Vormingsspoor Bundel C", "bovenleiding": "Ja", "ltl": "724 m", "lol": "704 m", "helling": "1,7 mm/m (r. Kortrijk)", "doodspoor": "Nee", "opmerkingen": "Langste spoor Bundel C (704m)"},
             {"bundel": "Bundel C (Lange Vormingssporen)", "spoor": "Spoor 223", "bestemming": "Vormingsspoor Bundel C", "bovenleiding": "Ja", "ltl": "679 m", "lol": "659 m", "helling": "1,7 mm/m (r. Kortrijk)", "doodspoor": "Nee", "opmerkingen": "Vormingsspoor Bundel C"},
             {"bundel": "Bundel C (Lange Vormingssporen)", "spoor": "Spoor 224", "bestemming": "Vormingsspoor Bundel C", "bovenleiding": "Ja", "ltl": "500 m", "lol": "480 m", "helling": "1,7 mm/m (r. Kortrijk)", "doodspoor": "Nee", "opmerkingen": "Vormingsspoor Bundel C"},
             {"bundel": "Bundel C (Lange Vormingssporen)", "spoor": "Spoor 225", "bestemming": "Vormingsspoor Bundel C", "bovenleiding": "Ja", "ltl": "465 m", "lol": "445 m", "helling": "1,7 mm/m (r. Kortrijk)", "doodspoor": "Nee", "opmerkingen": "Vormingsspoor Bundel C"},
             {"bundel": "Bundel C (Lange Vormingssporen)", "spoor": "Spoor 226", "bestemming": "Vormingsspoor Bundel C", "bovenleiding": "Ja", "ltl": "505 m", "lol": "485 m", "helling": "1,7 mm/m (r. Kortrijk)", "doodspoor": "Nee", "opmerkingen": "Vormingsspoor Bundel C"},
             {"bundel": "Bundel C (Lange Vormingssporen)", "spoor": "Spoor 356", "bestemming": "Vormingsspoor Bundel C", "bovenleiding": "Ja", "ltl": "491 m", "lol": "471 m", "helling": "5,1 mm/m (r. Kortrijk)", "doodspoor": "Ja", "opmerkingen": "Kopspoor Bundel C"},
-            {"bundel": "Bundel D (NMBS-Technics)", "spoor": "Spoor 242", "bestemming": "Bundelspoor NMBS-Technics", "bovenleiding": "Ja", "ltl": "843 m", "lol": "823 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "opmerkingen": "Doorgangsspoor / Carwash wasinstallatie (823m)"},
+            {"bundel": "Bundel D (NMBS-Technics)", "spoor": "Spoor 242", "bestemming": "Bundelspoor NMBS-Technics", "bovenleiding": "Ja", "ltl": "843 m", "lol": "823 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "opmerkingen": "Doorgangsspoor / Carwash (823m)"},
             {"bundel": "Bundel D (NMBS-Technics)", "spoor": "Spoor 246", "bestemming": "Bundelspoor NMBS-Technics", "bovenleiding": "Ja", "ltl": "417 m", "lol": "397 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "opmerkingen": "Reinigingsplatform 246.1-246.4"},
             {"bundel": "Bundel D (NMBS-Technics)", "spoor": "Spoor 247", "bestemming": "Bundelspoor NMBS-Technics", "bovenleiding": "Ja", "ltl": "447 m", "lol": "427 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "opmerkingen": "Reinigingsplatform 247"},
             {"bundel": "Bundel D (NMBS-Technics)", "spoor": "Spoor 248", "bestemming": "Bundelspoor NMBS-Technics", "bovenleiding": "Ja", "ltl": "405 m", "lol": "385 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "opmerkingen": "Reinigingsplatform 248"},
             {"bundel": "Bundel D (NMBS-Technics)", "spoor": "Spoor 249", "bestemming": "Bundelspoor NMBS-Technics", "bovenleiding": "Ja", "ltl": "405 m", "lol": "385 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "opmerkingen": "Reinigingsplatform 249"},
-            {"bundel": "Bundel D (NMBS-Technics)", "spoor": "Spoor 250", "bestemming": "Bundelspoor NMBS-Technics", "bovenleiding": "Ja", "ltl": "144 m", "lol": "124 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "opmerkingen": "Reinigings- en onderhoudsspoor (stuitklamp)"},
+            {"bundel": "Bundel D (NMBS-Technics)", "spoor": "Spoor 250", "bestemming": "Bundelspoor NMBS-Technics", "bovenleiding": "Ja", "ltl": "144 m", "lol": "124 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Ja", "opmerkingen": "Reinigingsspoor (stuitklamp)"},
             {"bundel": "Bundel D (NMBS-Technics)", "spoor": "Spoor 251", "bestemming": "Bundelspoor NMBS-Technics", "bovenleiding": "Ja", "ltl": "286 m", "lol": "266 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "opmerkingen": "Schouwput NMBS-Technics (slot 251)"},
             {"bundel": "Bundel D (NMBS-Technics)", "spoor": "Spoor 252", "bestemming": "Bundelspoor NMBS-Technics", "bovenleiding": "Ja", "ltl": "276 m", "lol": "256 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "opmerkingen": "Werkplaats NMBS-Technics"},
             {"bundel": "Bundel D (NMBS-Technics)", "spoor": "Spoor 253", "bestemming": "Bundelspoor NMBS-Technics", "bovenleiding": "Ja", "ltl": "348 m", "lol": "328 m", "helling": "0-1 mm/m (vlak)", "doodspoor": "Nee", "opmerkingen": "Werkplaats NMBS-Technics"},

@@ -506,7 +506,7 @@ def get_bi_styles():
     .bi-word-table td {
       border: 1px solid #475569 !important;
       padding: 7px 10px !important;
-      vertical-align: top;
+      vertical-align: middle;
       color: #000000;
     }
     .bi-word-table .bg-grey {
@@ -553,76 +553,110 @@ def get_bi_styles():
       padding: 0 !important;
     }
 
+    /* Spooroverzicht Tabel (Strakke 1-regel uitlijning zonder wrapping) */
+    .bi-spoor-table {
+      table-layout: fixed;
+      width: 100%;
+    }
+    .bi-spoor-table th {
+      padding: 6px 8px !important;
+      font-size: 9pt !important;
+      white-space: nowrap !important;
+      vertical-align: middle !important;
+    }
+    .bi-spoor-table td {
+      padding: 5px 8px !important;
+      font-size: 9pt !important;
+      white-space: nowrap !important;
+      vertical-align: middle !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     /* Spooroverzicht Badges (Word & PDF High Contrast) */
     .spoor-badge-elec-yes {
       background-color: #dcfce7 !important;
       color: #14532d !important;
       border: 1px solid #86efac !important;
-      padding: 2px 7px;
+      padding: 2px 6px;
       border-radius: 4px;
       font-weight: 800;
       font-size: 8.5pt;
       display: inline-block;
+      white-space: nowrap;
+      line-height: 1.2;
     }
     .spoor-badge-elec-no {
       background-color: #f1f5f9 !important;
       color: #334155 !important;
       border: 1px solid #cbd5e1 !important;
-      padding: 2px 7px;
+      padding: 2px 6px;
       border-radius: 4px;
       font-weight: 700;
       font-size: 8.5pt;
       display: inline-block;
+      white-space: nowrap;
+      line-height: 1.2;
     }
     .spoor-badge-elec-part {
       background-color: #fef3c7 !important;
       color: #78350f !important;
       border: 1px solid #fcd34d !important;
-      padding: 2px 7px;
+      padding: 2px 6px;
       border-radius: 4px;
       font-weight: 800;
       font-size: 8.5pt;
       display: inline-block;
+      white-space: nowrap;
+      line-height: 1.2;
     }
     .spoor-badge-helling-ok {
       background-color: #f0f9ff !important;
       color: #0369a1 !important;
       border: 1px solid #bae6fd !important;
-      padding: 2px 7px;
+      padding: 2px 6px;
       border-radius: 4px;
       font-weight: 700;
       font-size: 8.5pt;
       display: inline-block;
+      white-space: nowrap;
+      line-height: 1.2;
     }
     .spoor-badge-helling-warn {
       background-color: #fee2e2 !important;
       color: #991b1b !important;
       border: 1.5px solid #dc2626 !important;
-      padding: 2px 7px;
+      padding: 2px 6px;
       border-radius: 4px;
       font-weight: 900;
       font-size: 8.5pt;
       display: inline-block;
+      white-space: nowrap;
+      line-height: 1.2;
     }
     .spoor-badge-deadend-yes {
       background-color: #fef2f2 !important;
       color: #991b1b !important;
       border: 1px solid #fecaca !important;
-      padding: 2px 7px;
+      padding: 2px 6px;
       border-radius: 4px;
       font-weight: 800;
       font-size: 8.5pt;
       display: inline-block;
+      white-space: nowrap;
+      line-height: 1.2;
     }
     .spoor-badge-deadend-no {
       background-color: #f0fdf4 !important;
       color: #166534 !important;
       border: 1px solid #bbf7d0 !important;
-      padding: 2px 7px;
+      padding: 2px 6px;
       border-radius: 4px;
       font-weight: 700;
       font-size: 8.5pt;
       display: inline-block;
+      white-space: nowrap;
+      line-height: 1.2;
     }
 
 
@@ -1683,39 +1717,69 @@ def get_bi_javascript():
 
       // Inhoudstafel HTML
       
+      // Helpers voor beknopte 1-regel weergave in Spooroverzicht tabellen
+      const formatShortHelling = (h) => {{
+        if (!h) return '0-1 mm/m';
+        let s = String(h).trim();
+        if (/sterke\s*daling/i.test(s)) return 'Sterke daling';
+        s = s.replace(/\s*\(vlak\)/gi, '')
+             .replace(/\s*\(r\.\s*Kortrijk\)/gi, '')
+             .replace(/\s*\(naar het midden[^)]*\)/gi, '')
+             .replace(/\s*\(afhankelijk[^)]*\)/gi, '')
+             .replace(/\s*naar\s+Gent/gi, '')
+             .trim();
+        return s || '0-1 mm/m';
+      }};
+      const formatShortElec = (b) => {{
+        if (!b) return 'Nee';
+        let s = String(b).trim();
+        s = s.replace(/\s*\(diesel\)/gi, '')
+             .replace(/\s*\(3kV\)/gi, '')
+             .replace(/^(\d+m)\s*binnenland$/i, 'Deels ($1)');
+        return s || 'Nee';
+      }};
+      const rawMbNaam = (bi.installaties && bi.installaties.moederbundel && bi.installaties.moederbundel.naam) || '';
+      const mbTitleNaam = /^(bundel|lijn)/i.test(rawMbNaam) ? rawMbNaam : `Bundel ${{rawMbNaam}}`;
+      const mbCleanNaam = rawMbNaam.replace(/^Bundels?\s+/i, '').trim() || rawMbNaam;
+
       // Spooroverzicht Moederbundel Table (4.2)
       const mbTracks = (bi.installaties && bi.installaties.moederbundel && bi.installaties.moederbundel.spooroverzicht) || [];
       let mbSpoorTableHtml = '';
       if (mbTracks.length > 0) {{
         mbSpoorTableHtml = `
           <div style="margin: 14px 0 18px 0;">
-            <p class="bi-p" style="margin-bottom: 6px;"><strong>Tabel 4.2: Spooroverzicht Moederbundel ${{bi.installaties.moederbundel.naam}}</strong></p>
-            <table class="bi-word-table">
+            <p class="bi-p" style="margin-bottom: 6px;"><strong>Tabel 4.2: Spooroverzicht Moederbundel ${{mbCleanNaam}}</strong></p>
+            <table class="bi-word-table bi-spoor-table">
               <thead>
                 <tr>
-                  <th style="width: 14%;">Spoor</th>
-                  <th style="width: 15%; text-align:center;">Bovenleiding</th>
-                  <th style="width: 13%; text-align:right;">LTL (Technisch)</th>
-                  <th style="width: 13%; text-align:right;">LOL (Nuttig)</th>
-                  <th style="width: 17%; text-align:center;">Hellingsgraad</th>
-                  <th style="width: 11%; text-align:center;">Doodspoor</th>
-                  <th>Functie & Bestemming</th>
+                  <th style="width: 11%;">Spoor</th>
+                  <th style="width: 11%; text-align:center;">Bovenl.</th>
+                  <th style="width: 10%; text-align:right;">LTL</th>
+                  <th style="width: 10%; text-align:right;">LOL</th>
+                  <th style="width: 13%; text-align:center;">Helling</th>
+                  <th style="width: 8%; text-align:center;">Dood</th>
+                  <th style="width: 37%;">Functie & Bestemming</th>
                 </tr>
               </thead>
               <tbody>
-                ${{mbTracks.map(t => `
+                ${{mbTracks.map(t => {{
+                  const elecText = formatShortElec(t.bovenleiding);
+                  const hellingRaw = t.helling || '0-1 mm/m';
+                  const hellingText = formatShortHelling(hellingRaw);
+                  const isWarnHelling = hellingRaw.includes('Sterke') || hellingRaw.includes('schaats') || hellingRaw.includes('5,1') || hellingRaw.includes('1,7');
+                  return `
                   <tr>
                     <td><strong>${{(t.spoor || '').replace(/\\s*\\([Bb]undel[^)]*\\)/g, '').trim()}}</strong></td>
                     <td style="text-align:center;">
-                      <span class="${{(t.bovenleiding || '').includes('Ja') ? 'spoor-badge-elec-yes' : ((t.bovenleiding || '').includes('Deels') ? 'spoor-badge-elec-part' : 'spoor-badge-elec-no')}}">
-                        ${{t.bovenleiding || 'Nee'}}
+                      <span class="${{elecText.includes('Ja') ? 'spoor-badge-elec-yes' : (elecText.includes('Deels') ? 'spoor-badge-elec-part' : 'spoor-badge-elec-no')}}">
+                        ${{elecText}}
                       </span>
                     </td>
                     <td style="text-align:right; font-family:Consolas,monospace;">${{t.ltl || '-'}}</td>
                     <td style="text-align:right; font-family:Consolas,monospace; font-weight:bold; color:#0f172a;">${{t.lol || '-'}}</td>
                     <td style="text-align:center;">
-                      <span class="${{((t.helling || '').includes('Sterke') || (t.helling || '').includes('schaats')) ? 'spoor-badge-helling-warn' : 'spoor-badge-helling-ok'}}">
-                        ${{t.helling || '0-1 mm/m'}}
+                      <span class="${{isWarnHelling ? 'spoor-badge-helling-warn' : 'spoor-badge-helling-ok'}}">
+                        ${{hellingText}}
                       </span>
                     </td>
                     <td style="text-align:center;">
@@ -1723,9 +1787,10 @@ def get_bi_javascript():
                         ${{t.doodspoor || 'Nee'}}
                       </span>
                     </td>
-                    <td>${{t.functie || '-'}}</td>
+                    <td title="${{(t.functie || '').replace(/"/g, '&quot;')}}">${{t.functie || '-'}}</td>
                   </tr>
-                `).join('')}}
+                `;
+                }}).join('')}}
               </tbody>
             </table>
           </div>
@@ -1739,16 +1804,16 @@ def get_bi_javascript():
         termSpoorTableHtml = `
           <div style="margin: 14px 0 18px 0;">
             <p class="bi-p" style="margin-bottom: 6px;"><strong>Tabel 4.3.1: Spooroverzicht & Lengtes Aansluiting ${{bi.metadata.terminal_naam}}</strong></p>
-            <table class="bi-word-table">
+            <table class="bi-word-table bi-spoor-table">
               <thead>
                 <tr>
-                  <th style="width: 15%;">Spoor</th>
-                  <th style="width: 25%;">Bestemming / Lading</th>
-                  <th style="width: 14%; text-align:center;">Bovenleiding</th>
-                  <th style="width: 15%; text-align:right;">Lengte (LOL / LTL)</th>
-                  <th style="width: 16%; text-align:center;">Hellingsgraad</th>
-                  <th style="width: 10%; text-align:center;">Doodspoor</th>
-                  <th>Beveiliging & Opmerkingen</th>
+                  <th style="width: 12%;">Spoor</th>
+                  <th style="width: 24%;">Bestemming</th>
+                  <th style="width: 10%; text-align:center;">Bovenl.</th>
+                  <th style="width: 11%; text-align:right;">LOL / LTL</th>
+                  <th style="width: 13%; text-align:center;">Helling</th>
+                  <th style="width: 8%; text-align:center;">Dood</th>
+                  <th style="width: 22%;">Opmerkingen</th>
                 </tr>
               </thead>
               <tbody>
@@ -1760,19 +1825,23 @@ def get_bi_javascript():
                       curB = t.bundel;
                       headerRow = `<tr style="background:#e0f2fe; color:#0369a1; font-weight:800; font-size:12px;"><td colspan="7" style="padding:6px 10px; border:1px solid #94a3b8;">📁 ${{t.bundel}}</td></tr>`;
                     }}
+                    const elecText = formatShortElec(t.bovenleiding);
+                    const hellingRaw = t.helling || infra.hellingsgraad || '0-1 mm/m';
+                    const hellingText = formatShortHelling(hellingRaw);
+                    const isWarnHelling = hellingRaw.includes('Sterke') || hellingRaw.includes('daling') || hellingRaw.includes('5,1') || hellingRaw.includes('1,7');
                     return headerRow + `
                       <tr>
                         <td><strong>${{(t.spoor || '').replace(/\\s*\\([Bb]undel[^)]*\\)/g, '').trim()}}</strong></td>
-                        <td>${{t.bestemming || '-'}}</td>
+                        <td title="${{(t.bestemming || '').replace(/"/g, '&quot;')}}">${{t.bestemming || '-'}}</td>
                         <td style="text-align:center;">
-                          <span class="${{(t.bovenleiding || '').includes('Ja') ? 'spoor-badge-elec-yes' : 'spoor-badge-elec-no'}}">
-                            ${{t.bovenleiding || 'Nee'}}
+                          <span class="${{elecText.includes('Ja') ? 'spoor-badge-elec-yes' : (elecText.includes('Deels') ? 'spoor-badge-elec-part' : 'spoor-badge-elec-no')}}">
+                            ${{elecText}}
                           </span>
                         </td>
                         <td style="text-align:right; font-family:Consolas,monospace; font-weight:bold;">${{t.lol || t.ltl || '-'}}</td>
                         <td style="text-align:center;">
-                          <span class="${{((t.helling || '').includes('Sterke') || (t.helling || '').includes('daling') || (t.helling || '').includes('5,1') || (t.helling || '').includes('1,7')) ? 'spoor-badge-helling-warn' : 'spoor-badge-helling-ok'}}">
-                            ${{t.helling || infra.hellingsgraad || '0-1 mm/m'}}
+                          <span class="${{isWarnHelling ? 'spoor-badge-helling-warn' : 'spoor-badge-helling-ok'}}">
+                            ${{hellingText}}
                           </span>
                         </td>
                         <td style="text-align:center;">
@@ -1780,7 +1849,7 @@ def get_bi_javascript():
                             ${{t.doodspoor || 'Ja'}}
                           </span>
                         </td>
-                        <td>${{t.opmerkingen || '-'}}</td>
+                        <td title="${{(t.opmerkingen || '').replace(/"/g, '&quot;')}}">${{t.opmerkingen || '-'}}</td>
                       </tr>
                     `;
                   }}).join('');
@@ -1814,7 +1883,7 @@ def get_bi_javascript():
           <a class="bi-toc-item level-2" href="#sec4_1"><span>4.1  Situering van de aansluiting "${{bi.metadata.terminal_naam}}"</span><span>7</span></a>
           <a class="bi-toc-item level-3" href="#sec4_1_1"><span>4.1.1  Overzicht</span><span>7</span></a>
           <a class="bi-toc-item level-3" href="#sec4_1_2"><span>4.1.2  Parkeergelegenheid & toegang</span><span>7</span></a>
-          <a class="bi-toc-item level-2" href="#sec4_2"><span>4.2  Bundel ${{bi.installaties.moederbundel.naam}}</span><span>8</span></a>
+          <a class="bi-toc-item level-2" href="#sec4_2"><span>4.2  ${{mbTitleNaam}}</span><span>8</span></a>
           <a class="bi-toc-item level-2" href="#sec4_3"><span>4.3  Aansluiting ${{bi.metadata.terminal_naam}}</span><span>12</span></a>
           <a class="bi-toc-item level-3" href="#sec4_3_1"><span>4.3.1  Sporen, Lengtes en Hellingsgraad op de aansluiting</span><span>12</span></a>
           <a class="bi-toc-item level-3" href="#sec4_3_2"><span>4.3.2  Richting van de auto’s op de trein</span><span>12</span></a>
@@ -1959,7 +2028,7 @@ def get_bi_javascript():
             <h3 class="bi-h2">4.1  Situering van de aansluiting "${{bi.metadata.terminal_naam}}"</h3>
             <div id="sec4_1_1">
               <h4 class="bi-h3">4.1.1  Overzicht</h4>
-              <p class="bi-p">Het toepassingsgebied van deze instructie omvat de spoorlijnen rond ${{bi.hierarchie_levels.level_3_zone.naam}}, bundel ${{bi.installaties.moederbundel.naam}} en de private aansluiting ${{bi.metadata.terminal_naam}}.</p>
+              <p class="bi-p">Het toepassingsgebied van deze instructie omvat de spoorlijnen rond ${{bi.hierarchie_levels.level_3_zone.naam}}, ${{mbTitleNaam}} en de private aansluiting ${{bi.metadata.terminal_naam}}.</p>
               <table class="bi-word-table">
                 <tbody>
                   <tr>
@@ -1976,7 +2045,7 @@ def get_bi_javascript():
 
             <div id="sec4_1_2">
               <h4 class="bi-h3">4.1.2  Parkeergelegenheid & toegang</h4>
-              <p class="bi-p">Aan bundel ${{bi.installaties.moederbundel.naam}} is er voldoende gelegenheid tot parkeren:</p>
+              <p class="bi-p">Aan ${{mbTitleNaam}} is er voldoende gelegenheid tot parkeren:</p>
               <ul style="padding-left: 22px; font-size: 10pt; line-height: 1.5; margin-bottom: 12px;">
                 ${{(bi.installaties.moederbundel.parkeergelegenheid || ['Parkeergelegenheid langs de bundel / spoorzone', 'Toegankelijk via openbare weg']).map(p => `<li>${{p}}</li>`).join('')}}
               </ul>
@@ -1984,7 +2053,7 @@ def get_bi_javascript():
           </div>
 
           <div id="sec4_2">
-            <h3 class="bi-h2">4.2  Bundel ${{bi.installaties.moederbundel.naam}} (incl. Spooroverzicht & Lengtes)</h3>
+            <h3 class="bi-h2">4.2  ${{mbTitleNaam}} (incl. Spooroverzicht & Lengtes)</h3>
             <p class="bi-p"><strong>Beschrijving van de installaties:</strong></p>
             <ul style="padding-left: 22px; font-size: 10pt; line-height: 1.5; margin-bottom: 10px;">
               <li>${{bi.installaties.moederbundel.beseind ? 'Is een beseinde bundel uitgerust met seinen' : 'Niet-beseinde bundel / exploitatie goederensporen'}} (${{bi.installaties.moederbundel.seinen_info || 'seininrichting Infrabel'}});</li>

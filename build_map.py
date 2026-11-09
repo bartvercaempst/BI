@@ -1186,11 +1186,15 @@ def build_map_html(locations, bundels):
       font-weight: 700;
       font-size: 10px;
       text-transform: uppercase;
+      white-space: nowrap;
+      vertical-align: middle;
     }}
     .detail-track-table td {{
       padding: 5px 6px;
       border: 1px solid #334155;
       color: #f1f5f9;
+      white-space: nowrap;
+      vertical-align: middle;
     }}
     .detail-track-table tr:nth-child(even) td {{
       background: rgba(30, 41, 59, 0.5);
@@ -4184,7 +4188,7 @@ def build_map_html(locations, bundels):
               <tr>
                 <td><strong>${{(t.spoor || '').replace(/\\s*\\([Bb]undel[^)]*\\)/g, '').trim()}}</strong></td>
                 <td style="font-family:Consolas,monospace; font-weight:700; color:#38bdf8;">${{t.lol || t.ltl || '-'}}</td>
-                <td>${{t.helling || helling}}</td>
+                <td>${{String(t.helling || helling).replace(/\s*\(vlak\)/gi, '').replace(/\s*\(r\.\s*Kortrijk\)/gi, '').trim()}}</td>
                 <td>${{t.doodspoor || 'Ja'}}</td>
               </tr>
             `;
